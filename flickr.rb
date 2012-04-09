@@ -1,89 +1,49 @@
 require 'faraday_stack'
-require 'securerandom'
-require 'active_support/notifications'
-require 'active_support/cache'
-
-ActiveSupport::Notifications.subscribe('request.faraday') do |name, start_time, end_time, _, env|
-  url = env[:url]
-  http_method = env[:method].to_s.upcase
-  duration = end_time - start_time
-  $stderr.puts '[%s] %s %s (%.3f s)' % [url.host, http_method, url.request_uri, duration]
-end
 
 module Flickr
-  def self.client
-    @client ||= begin
-      client = FaradayStack::build Client,
-        url: 'http://api.flickr.com/services/rest/',
-        params: {
-          format: 'json',
-          nojsoncallback: '1',
-          api_key: ENV["FLICKR_API_KEY"]
+  class << self
+    attr_accessor :api_key
+
+    def client
+      @client ||= FaradayStack::build Client,
+        :url => 'http://api.flickr.com/services/rest/',
+        :params => {
+          :format => 'json',
+          :nojsoncallback => '1',
+          :api_key => self.api_key
         },
         request: {
-          open_timeout: 2,
-          timeout: 3
+          :open_timeout => 2,
+          :timeout => 3
         }
-
-      cache = ActiveSupport::Cache::FileStore.new File.join(ENV['TMPDIR'], 'juris-cache'),
-          namespace: 'juris', expires_in: 60 * 60 * 24 * 7
-
-      client.builder.insert_before FaradayStack::ResponseJSON, FaradayStack::Caching,
-          cache, strip_params: %w[ api_key format nojsoncallback ]
-
-      client.builder.insert_before FaradayStack::ResponseJSON, FaradayStack::Instrumentation
-      client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
-      client
     end
-  end
 
-  def self.photos_from_set(set_id)
-    response = client.photos_from_set(set_id)
-    response.body['photoset']['photo'].map do |hash|
-      Photo.new(hash)
+    def photos_from_set(set_id)
+      response = client.photos_from_set(set_id)
+      response.body['photoset']['photo'].map do |hash|
+        Photo.new(hash)
+      end
     end
-  end
-
-  def self.find_photo(photo_id)
-    response_sizes = client.photo_sizes(photo_id)
-    response_info = client.photo_info(photo_id)
-    id = response_info.body['photo']['id']
-    title = response_info.body['photo']['title']['_content']
-    Photo.from_sizes response_sizes.body['sizes']['size'], title, id
   end
 
   class Photo
-    SIZES = %w[ o l z m s t sq ]
-    SIZE_NAMES = {
-      'square'    => 'sq',
-      'thumbnail' => 't',
-      'small'     => 's',
-      'medium500' => 'm',
-      'medium640' => 'z',
-      'large'     => 'l',
-      'original'  => 'o'
+    SIZES = {
+      'Square 75'  => 'sq',
+      'Square 150' => 'q',
+      'Thumbnail'  => 't',
+      'Small 240'  => 's',
+      'Small 320'  => 'n',
+      'Medium 500' => 'm',
+      'Medium 640' => 'z',
+      'Medium 800' => 'c',
+      'Large 1024' => 'l',
+      'Original'   => 'o'
     }
 
-    def self.from_sizes(sizes, title, id)
-      new sizes.each_with_object({}) { |data, hash|
-        label = data['label']
-        label = 'Medium 500' if data['label'] == 'Medium'
-        size = SIZE_NAMES[label.downcase.delete(' ')]
-        hash["url_#{size}"] = data['source']
-        hash["width_#{size}"] = data['width']
-        hash["height_#{size}"] = data['height']
-        hash['title'] = title
-        hash['id'] = id
-      }
-    end
-
-    def initialize(hash, size = nil)
-      @hash = hash
-      @size = size || detect_largest_size
-    end
+    attr_reader :size
 
     def id
-      @hash['id']
+      @hash['id'].to_i
     end
 
     def title
@@ -91,52 +51,62 @@ module Flickr
     end
 
     def available_sizes
-      SIZES.reverse.take(@hash.count {|key, value| key =~ /url/}).map {|size| SIZE_NAMES.key(size)}
+      SIZES.select { |_, size_abbr| @hash["url_#{size_abbr}"] }.keys
     end
 
-    def size
-      SIZE_NAMES.key @size
-    end
-
-    def largest_size
-      SIZE_NAMES.key(detect_largest_size)
-    end
-
-    SIZE_NAMES.each do |name, size|
-      define_method(name) do
-        photo = Photo.new(@hash, size)
-        photo.url ? photo : nil
+    SIZES.keys.each do |size|
+      define_method(size.downcase.delete(' ')) do
+        Photo.new(@hash, size)
       end
     end
 
     def largest
-      Photo.new(@hash)
+      Photo.new(@hash, largest_size)
     end
 
     def width
-      Integer(@hash["width_#{@size}"])
+      @hash["width_#{size_abbr}"].to_i
     end
 
     def height
-      Integer(@hash["height_#{@size}"])
+      @hash["height_#{size_abbr}"].to_i
     end
 
     def url
-      @hash["url_#{@size}"]
+      @hash["url_#{size_abbr}"]
     end
 
     def to_s
       url
     end
 
-    def medium640_or_less
-      medium640 || medium500 || small || thumbnail || square
+    def inspect
+      attributes = %w[size url width height].inject({}) do |hash, attr|
+        hash.update(attr => send(attr))
+      end
+      %(#<Photo: #{attributes.map { |k, v| %(#{k}="#{v}") }.join(", ")}>)
+    end
+
+    class InvalidSize < ArgumentError
     end
 
     private
 
-    def detect_largest_size
-      SIZES.detect {|s| @hash["url_#{s}"] }
+    def initialize(hash, size = nil)
+      @hash = hash
+      @size = size || largest_size
+
+      if not available_sizes.include?(@size)
+        raise InvalidSize, "size \"#{@size}\" isn't available"
+      end
+    end
+
+    def size_abbr
+      SIZES[@size]
+    end
+
+    def largest_size
+      available_sizes.last
     end
   end
 
@@ -159,62 +129,21 @@ module Flickr
       end
     end
 
-    # {
-    #   "user": {
-    #     "id": "67131352@N04",
-    #     "nsid": "67131352@N04",
-    #     "username": {
-    #       "_content": "Janko Marohnić"
-    #     }
-    #   },
-    #   "stat": "ok"
-    # }
     def find_person_by_email(email)
-      get 'flickr.people.findByEmail', find_email: email
+      get 'flickr.people.findByEmail', :find_email => email
     end
 
-    def photos_from_set(set_id)
-      get 'flickr.photosets.getPhotos', photoset_id: set_id.to_s,
-        extras: 'url_sq,url_t,url_s,url_m,url_z,url_l,url_o'
+    def photos_from_set(photoset_id)
+      get 'flickr.photosets.getPhotos', :photoset_id => photoset_id,
+        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o'
     end
 
     def photo_sizes(photo_id)
-      get 'flickr.photos.getSizes', photo_id: photo_id.to_s
+      get 'flickr.photos.getSizes', :photo_id => photo_id
     end
 
     def photo_info(photo_id)
-      get 'flickr.photos.getInfo', photo_id: photo_id.to_s
+      get 'flickr.photos.getInfo', :photo_id => photo_id
     end
   end
 end
-
-__END__
-photoset_id=72157627460265059
-
-{"photoset"=>
-  {"id"=>"72157627460265059",
-   "primary"=>"6109216253",
-   "owner"=>"67131352@N04",
-   "ownername"=>"Janko Marohnić",
-   "photo"=>
-    [{"id"=>"6109212429",
-      "secret"=>"8bbec8c624",
-      "server"=>"6208",
-      "farm"=>7,
-      "title"=>"1",
-      "isprimary"=>"0",
-      "url_sq"=>
-       "http://farm7.static.flickr.com/6208/6109212429_8bbec8c624_s.jpg",
-      "height_sq"=>75,
-      "width_sq"=>75,
-      "url_t"=>
-       "http://farm7.static.flickr.com/6208/6109212429_8bbec8c624_t.jpg",
-      "height_t"=>"67",
-      "width_t"=>"100",
-      "url_s"=>
-       "http://farm7.static.flickr.com/6208/6109212429_8bbec8c624_m.jpg",
-      "height_s"=>"161",
-      "width_s"=>"240",
-      "url_m"=>"http://farm7.static.flickr.com/6208/6109212429_8bbec8c624.jpg",
-      "height_m"=>"335",
-      "width_m"=>"500"}
