@@ -29,7 +29,7 @@ module Flickr
 
     SIZES.keys.each do |size|
       define_method(size.downcase.delete(' ')) do
-        Photo.new(@hash, size)
+        Photo.new(@hash, size) rescue nil
       end
     end
 
@@ -69,8 +69,8 @@ module Flickr
       @hash = hash
       @size = size || largest_size
 
-      if not available_sizes.include?(@size)
-        raise InvalidSize, "size \"#{@size}\" isn't available"
+      unless available_sizes.include?(@size)
+        raise InvalidSize, "size \"#{@size}\" isn't available for this photo"
       end
     end
 

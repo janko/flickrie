@@ -2,6 +2,10 @@ require 'faraday_stack'
 require 'flickr/photo'
 
 module Flickr
+  class << self
+    attr_accessor :api_key
+  end
+
   def self.client
     @client ||= begin
       client = FaradayStack.build Client,
