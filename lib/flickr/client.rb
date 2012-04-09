@@ -1,22 +1,23 @@
-module Flickr
-  class << self
-    def client
-      @client ||= begin
-        client = FaradayStack.build Client,
-          :url => 'http://api.flickr.com/services/rest/',
-          :params => {
-            :format => 'json',
-            :nojsoncallback => '1',
-            :api_key => self.api_key
-          },
-          request: {
-            :open_timeout => 2,
-            :timeout => 3
-          }
+require 'faraday_stack'
+require 'flickr/photo'
 
-        client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
-        client
-      end
+module Flickr
+  def self.client
+    @client ||= begin
+      client = FaradayStack.build Client,
+        :url => 'http://api.flickr.com/services/rest/',
+        :params => {
+          :format => 'json',
+          :nojsoncallback => '1',
+          :api_key => self.api_key
+        },
+        request: {
+          :open_timeout => 2,
+          :timeout => 3
+        }
+
+      client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
+      client
     end
   end
 
@@ -41,7 +42,7 @@ module Flickr
 
     def photos_from_set(photoset_id)
       get 'flickr.photosets.getPhotos', :photoset_id => photoset_id,
-        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o'
+        :extras => Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
     end
   end
 end
