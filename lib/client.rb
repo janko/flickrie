@@ -14,7 +14,7 @@ module Flickr
           :nojsoncallback => '1',
           :api_key => self.api_key
         },
-        request: {
+        :request => {
           :open_timeout => 2,
           :timeout => 3
         }
