@@ -39,7 +39,7 @@ module Flickr
     def get(method, params)
       super() do |req|
         req.params[:method] = method.to_s
-        req.params.update params
+        req.params.update(params)
       end
     end
 
