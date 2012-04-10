@@ -52,5 +52,13 @@ module Flickr
     def photosets_from_user(nsid)
       get 'flickr.photosets.getList', :user_id => nsid
     end
+
+    def find_user_by_email(email)
+      get 'flickr.people.findByEmail', :find_email => email
+    end
+
+    def get_user_info(nsid)
+      get 'flickr.people.getInfo', :user_id => nsid
+    end
   end
 end
