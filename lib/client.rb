@@ -1,5 +1,5 @@
 require 'faraday_stack'
-require 'flickr/photo'
+require 'photo'
 
 module Flickr
   class << self
@@ -44,7 +44,7 @@ module Flickr
       end
     end
 
-    def photos_from_set(photoset_id)
+    def photos_from_photoset(photoset_id)
       get 'flickr.photosets.getPhotos', :photoset_id => photoset_id,
         :extras => Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
     end

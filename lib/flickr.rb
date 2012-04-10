@@ -1,5 +1,5 @@
-require 'flickr/client'
-require 'flickr/photo'
+require 'client'
+require 'objects'
 
 module Flickr
   class << self
