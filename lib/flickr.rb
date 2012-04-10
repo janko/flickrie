@@ -1,5 +1,5 @@
-require 'client'
 require 'objects'
+require 'client'
 
 module Flickr
   class << self
@@ -16,7 +16,7 @@ module Flickr
     def find_user_by_email(email)
       response = client.find_user_by_email(email)
       response = client.get_user_info(response.body['user']['nsid'])
-      User.new(response.body['user'])
+      User.new(response.body['person'])
     end
 
     def get_user_info(nsid)

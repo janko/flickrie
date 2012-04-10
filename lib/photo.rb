@@ -1,5 +1,3 @@
-require 'object'
-
 module Flickr
   class Photo < Flickr::Object
     SIZES = {
