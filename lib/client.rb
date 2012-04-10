@@ -68,6 +68,10 @@ module Flickr
     def get_user_info(user_id)
       get 'flickr.people.getInfo', :user_id => user_id
     end
+
+    def get_photoset_info(photoset_id)
+      get 'flickr.photosets.getInfo', :photoset_id => photoset_id
+    end
     end
   end
 end
