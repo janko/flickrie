@@ -38,7 +38,7 @@ module Flickr
   class Client < Faraday::Connection
     def get(method, params)
       super() do |req|
-        req.params[:method] = method.to_s
+        req.params[:method] = method
         req.params.update(params)
       end
     end
