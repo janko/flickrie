@@ -34,10 +34,9 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_attributes
-    attributes = [:id, :nsid, :username, :real_name, :location,
-                  :description, :profile_url, :mobile_url, :pro?,
-                  :photos_url, :photos_count, :first_photo_taken,
-                  :flickr_hash]
+    attributes = [:id, :username, :real_name, :location, :description,
+                  :profile_url, :mobile_url, :pro?, :photos_url,
+                  :photos_count, :first_photo_taken, :flickr_hash]
     user = User.public_new(@hash)
     assert_nothing_raised do
       attributes.each do |attribute|

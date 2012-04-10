@@ -52,8 +52,8 @@ module Flickr
       get 'flickr.photosets.getPhotos', params.update(user_params)
     end
 
-    def photosets_from_user(nsid, user_params = {})
-      params = { :user_id => nsid }
+    def photosets_from_user(user_id, user_params = {})
+      params = { :user_id => user_id }
       get 'flickr.photosets.getList', params.update(user_params)
     end
 
@@ -65,8 +65,9 @@ module Flickr
       get 'flickr.people.findByUsername', :username => username
     end
 
-    def get_user_info(nsid)
-      get 'flickr.people.getInfo', :user_id => nsid
+    def get_user_info(user_id)
+      get 'flickr.people.getInfo', :user_id => user_id
+    end
     end
   end
 end

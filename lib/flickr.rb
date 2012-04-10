@@ -8,8 +8,8 @@ module Flickr
       Photo.new_collection(response.body['photoset']['photo'])
     end
 
-    def photosets_from_user(nsid, user_params = {})
-      response = client.photosets_from_user(nsid)
+    def photosets_from_user(user_id, user_params = {})
+      response = client.photosets_from_user(user_id)
       Photoset.new_collection(response.body['photosets']['photoset'])
     end
 
@@ -25,8 +25,8 @@ module Flickr
       user.new(response.body['person'])
     end
 
-    def get_user_info(nsid)
-      response = client.get_user_info(nsid)
+    def get_user_info(user_id)
+      response = client.get_user_info(user_id)
       User.new(response.body['user'])
     end
   end

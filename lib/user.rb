@@ -6,10 +6,6 @@ module Flickr
       @hash['id']
     end
 
-    def nsid
-      @hash['nsid']
-    end
-
     def username
       @hash['username']['_content']
     end
