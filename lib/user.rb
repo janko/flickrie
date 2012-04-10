@@ -58,3 +58,26 @@ module Flickr
     end
   end
 end
+
+__END__
+
+{
+  'id' => '67131352@N04',
+  'nsid' => '67131352@N04',
+  'ispro' => 0,
+  'iconserver' => '0',
+  'iconfarm' => 0,
+  'path_alias' => nil,
+  'username' => {'_content' => 'Janko Marohnić'},
+  'realname' => {'_content' => ''},
+  'location' => {'_content' => ''},
+  'description' => {'_content' => ''},
+  'photosurl' => {'_content' => 'http://www.flickr.com/photos/67131352@N04/'},
+  'profileurl' => {'_content' => 'http://www.flickr.com/people/67131352@N04/'},
+  'mobileurl' => {'_content' => 'http://m.flickr.com/photostream.gne?id=67099213'},
+  'photos' => {
+    'firstdatetaken' => {'_content' => '2011-06-21 21:43:09'},
+    'firstdate' => {'_content' => '1333954416'},
+    'count' => {'_content' => 2}
+  }
+}
