@@ -1,4 +1,5 @@
 require 'faraday_stack'
+require 'photo'
 
 module Flickr
   class << self
@@ -46,7 +47,7 @@ module Flickr
     def photos_from_photoset(photoset_id, user_params = {})
       params = {
         :photoset_id => photoset_id,
-        :extras => %w[sq q t s n m z c l o].collect { |s| "url_#{s}" }.join(',')
+        :extras => Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
       }
       get 'flickr.photosets.getPhotos', params.update(user_params)
     end

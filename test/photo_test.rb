@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'flickr/photo'
+require 'photo'
 
 class PhotoTest < Test::Unit::TestCase
   include Flickr

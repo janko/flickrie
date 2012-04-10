@@ -1,3 +1,5 @@
+require 'object'
+
 module Flickr
   class User < Flickr::Object
     def id

@@ -1,3 +1,5 @@
+require 'object'
+
 module Flickr
   class Photoset < Flickr::Object
     def initialize(hash)
