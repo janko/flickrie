@@ -48,5 +48,9 @@ module Flickr
       get 'flickr.photosets.getPhotos', :photoset_id => photoset_id,
         :extras => Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
     end
+
+    def photosets_from_user(nsid)
+      get 'flickr.photosets.getList', :user_id => nsid
+    end
   end
 end

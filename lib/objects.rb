@@ -7,3 +7,4 @@ module Flickr
 end
 
 require 'photo'
+require 'photoset'

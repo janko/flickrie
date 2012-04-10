@@ -8,6 +8,11 @@ module Flickr
       response.body['photoset']['photo'].map do |hash|
         Photo.new(hash)
       end
+
+    def photosets_from_user(nsid)
+      response = client.photosets_from_user(nsid)
+      Photoset.new_collection(response.body['photosets']['photoset'])
+    end
     end
   end
 end
