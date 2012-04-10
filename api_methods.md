@@ -94,10 +94,10 @@
 
 # people
 
-- flickr.people.findByEmail
+- ~~flickr.people.findByEmail~~
 - flickr.people.findByUsername
 - flickr.people.getGroups
-- flickr.people.getInfo
+- ~~flickr.people.getInfo~~
 - flickr.people.getLimits
 - flickr.people.getPhotos
 - flickr.people.getPhotosOf
