@@ -25,9 +25,10 @@ module Flickr
       User.new(response.body['person'])
     end
 
-    def get_user_info(user_id)
+    def find_user_by_id(user_id)
       response = client.get_user_info(user_id)
-      User.new(response.body['user'])
+      User.new(response.body['person'])
+    end
 
     def find_photoset_by_id(photoset_id)
       response = client.get_photoset_info(photoset_id)

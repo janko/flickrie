@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test/unit'
 require 'flickr'
 
@@ -12,7 +13,8 @@ class FlickrTest < Test::Unit::TestCase
       Flickr.photosets_from_user('67131352@N04')
       Flickr.find_user_by_email('janko.marohnic@gmail.com')
       Flickr.find_user_by_username('Janko Marohnić')
-      Flickr.get_user_info('67131352@N04')
+      Flickr.find_user_by_id('67131352@N04')
+      Flickr.find_photoset_by_id(Flickr.photosets_from_user('67131352@N04').first.id)
     end
   end
 end

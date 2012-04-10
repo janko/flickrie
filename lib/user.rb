@@ -1,4 +1,5 @@
 require 'object'
+require 'date'
 
 module Flickr
   class User < Flickr::Object
@@ -42,8 +43,8 @@ module Flickr
       @hash['photos']['count']['_content']
     end
 
-    def first_photo_taken
-      @hash['photos']['firstdatetaken']['_content']
+    def first_photo_upload
+      DateTime.parse(@hash['photos']['firstdatetaken']['_content']).to_time
     end
 
     def flickr_hash
