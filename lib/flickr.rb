@@ -19,6 +19,12 @@ module Flickr
       User.new(response.body['person'])
     end
 
+    def find_user_by_username(username)
+      response = client.find_user_by_username(email)
+      response = client.get_user_info(response.body['user']['nsid'])
+      user.new(response.body['person'])
+    end
+
     def get_user_info(nsid)
       response = client.get_user_info(nsid)
       User.new(response.body['user'])

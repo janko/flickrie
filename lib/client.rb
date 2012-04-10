@@ -61,6 +61,10 @@ module Flickr
       get 'flickr.people.findByEmail', :find_email => email
     end
 
+    def find_user_by_username(username)
+      get 'flickr.people.findByUsername', :username => username
+    end
+
     def get_user_info(nsid)
       get 'flickr.people.getInfo', :user_id => nsid
     end

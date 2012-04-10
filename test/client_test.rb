@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test/unit'
 require 'client'
 
@@ -17,5 +18,6 @@ class ClientTest < Test::Unit::TestCase
 
     assert_equal photoset_id, Flickr.client.photos_from_photoset(photoset_id).body['photoset']['id']
     assert Flickr.client.photos_from_photoset(photoset_id).body['photoset']['photo'].is_a?(Array)
+      client.find_user_by_username('Janko Marohnić')
   end
 end
