@@ -198,8 +198,8 @@
 - flickr.photosets.editPhotos
 - flickr.photosets.getContext
 - flickr.photosets.getInfo
-- flickr.photosets.getList
-- flickr.photosets.getPhotos
+- ~~flickr.photosets.getList~~
+- ~~flickr.photosets.getPhotos~~
 - flickr.photosets.orderSets
 - flickr.photosets.removePhoto
 - flickr.photosets.removePhotos

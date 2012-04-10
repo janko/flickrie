@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'flickr/client'
+require 'client'
 
 class ClientTest < Test::Unit::TestCase
   def setup
@@ -12,8 +12,10 @@ class ClientTest < Test::Unit::TestCase
 
   def test_photos_from_set
     photoset_id = '72157629409394888'
-    assert_nothing_raised { Flickr.client.photos_from_set(photoset_id.to_i).body['photoset']['id'] }
-    assert_equal photoset_id, Flickr.client.photos_from_set(photoset_id).body['photoset']['id']
-    assert Flickr.client.photos_from_set(photoset_id).body['photoset']['photo'].is_a?(Array)
+
+    assert_nothing_raised { Flickr.client.photos_from_photoset(photoset_id.to_i).body['photoset']['id'] }
+
+    assert_equal photoset_id, Flickr.client.photos_from_photoset(photoset_id).body['photoset']['id']
+    assert Flickr.client.photos_from_photoset(photoset_id).body['photoset']['photo'].is_a?(Array)
   end
 end
