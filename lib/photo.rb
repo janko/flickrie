@@ -29,10 +29,28 @@ module Flickr
       SIZES.select { |_, size_abbr| @hash["url_#{size_abbr}"] }.keys
     end
 
-    SIZES.keys.each do |size|
-      define_method(size.downcase.delete(' ')) do
-        Photo.new(@hash, size) rescue nil
-      end
+    def square(number)
+      Photo.new(@hash, "Square #{number}")
+    end
+
+    def thumbnail
+      Photo.new(@hash, "Thumbnail")
+    end
+
+    def small(number)
+      Photo.new(@hash, "Small #{number}")
+    end
+
+    def medium(number)
+      Photo.new(@hash, "Medium #{number}")
+    end
+
+    def large(number)
+      Photo.new(@hash, "Large #{number}")
+    end
+
+    def original
+      Photo.new(@hash, "Original")
     end
 
     def largest
