@@ -3,50 +3,41 @@ require 'flickr'
 
 module Flickr
   class Photoset < Flickr::Object
-    def title
-      @hash['title']['_content']
-    end
-
-    def description
-      @hash['description']['_content']
-    end
-
-    def id
-      @hash['id'].to_i
-    end
-
-    def owner_id
-      @hash['owner']
-    end
+    attr_reader :id, :owner_id, :primary_photo_id, :secret,
+      :url, :items_count, :photos_count, :views_count,
+      :comments_count, :videos_count, :title, :description,
+      :created_at, :updated_at
 
     def owner
-      @owner ||= Flickr.find_user_by_id(owner_id)
+      @owner ||= Flickr.find_user_by_id(@owner_id)
     end
 
-    def photos_count
-      @hash['photos'].to_i
+    def primary_photo
+      @primary_photo ||= Flickr.find_photo_by_id(@primary_photo_id)
     end
 
-    def comments_count
-      @hash['count_comments'].to_i
-    end
-
-    def created_at
-      Time.at(@hash['date_create'].to_i)
-    end
-
-    def updated_at
-      Time.at(@hash['date_update'].to_i)
-    end
-
-    def flickr_hash
-      @hash
+    def can_comment?
+      @can_comment
     end
 
     private
 
-    def initialize(hash)
-      @hash = hash
+    def initialize(info)
+      @id = info['id']
+      @owner_id = info['owner']
+      @primary_photo_id = info['primary']
+      @secret = info['secret']
+      @url = "http://www.flickr.com/photos/#{@owner_id}/sets/#{@id}"
+      @items_count = info['photos'].to_i
+      @photos_count = info['count_photos'].to_i
+      @views_count = info['count_views'].to_i
+      @comments_count = info['count_comments'].to_i
+      @videos_count = info['count_videos'].to_i
+      @title = info['title']['_content']
+      @description = info['description']['_content']
+      @can_comment = (info['can_comment'].to_i == 1)
+      @created_at = Time.at(info['date_create'])
+      @updated_at = Time.at(info['date_update'])
     end
   end
 end

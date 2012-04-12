@@ -3,58 +3,37 @@ require 'date'
 
 module Flickr
   class User < Flickr::Object
-    def id
-      @hash['id']
-    end
-
-    def username
-      @hash['username']['_content']
-    end
-
-    def real_name
-      @hash['realname']['_content']
-    end
-
-    def location
-      @hash['location']['_content']
-    end
-
-    def description
-      @hash['description']['_content']
-    end
-
-    def profile_url
-      @hash['profileurl']['_content']
-    end
-
-    def mobile_url
-      @hash['mobileurl']['_content']
-    end
+    attr_reader :id, :nsid, :username, :real_name, :location,
+      :description, :profile_url, :mobile_url, :photos_url,
+      :photos_count, :first_photo_upload, :path_alias, :buddy_icon_url
 
     def pro?
-      @hash['ispro'].to_i == 1
-    end
-
-    def photos_url
-      @hash['photosurl']['_content']
-    end
-
-    def photos_count
-      @hash['photos']['count']['_content']
-    end
-
-    def first_photo_upload
-      DateTime.parse(@hash['photos']['firstdatetaken']['_content']).to_time
-    end
-
-    def flickr_hash
-      @hash
+      @pro
     end
 
     private
 
-    def initialize(hash)
-      @hash = hash
+    def initialize(info)
+      @id = info['id']
+      @nsid = info['nsid']
+      @username = info['username']['_content']
+      @real_name = info['realname']['_content']
+      @location = info['location']['_content']
+      @description = info['description']['_content']
+      @profile_url = info['profileurl']['_content']
+      @mobile_url = info['mobileurl']['_content']
+      @photos_url = info['photosurl']['_content']
+      @photos_count = info['photos']['count']['_content'].to_i
+      @first_photo_upload = DateTime.parse(@info['photos']['firstdatetaken']['_content']).to_time
+      @pro = (info['ispro'].to_i == 1)
+      @path_alias = info['path_alias']
+      @buddy_icon_url =
+        if info['iconserver'].to_i > 0
+          icon_farm, icon_server = info['iconfarm'], info['iconserver']
+          "http://farm{#{icon_farm}}.staticflickr.com/{#{icon_server}}/buddyicons/#{@nsid}.jpg"
+        else
+          "http://www.flickr.com/images/buddyicon.jpg"
+        end
     end
   end
 end
