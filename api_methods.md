@@ -156,7 +156,7 @@
 
 # photos.licenses
 
-- flickr.photos.licenses.getInfo
+- ~~flickr.photos.licenses.getInfo~~
 - flickr.photos.licenses.setLicense
 
 # photos.notes
