@@ -6,7 +6,7 @@ module Flickr
     def id;           @info['id']                   end
     def nsid;         @info['nsid']                 end
     def username;     @info['username']             end
-    def realname;     @info['realname']             end
+    def real_name;    @info['realname']             end
     def location;     @info['location']             end
     def description;  @info['description']          end
     def profile_url;  @info['profileurl']           end

@@ -3,7 +3,7 @@ require 'flickr/user'
 module Flickr
   class Set
     def id; @info['id'].to_i end
-    def secret; @info['secret'].to_i end
+    def secret; @info['secret'] end
     def server; @info['server'].to_i end
     def farm; @info['farm'].to_i end
     def title; @info['title'] end

@@ -61,7 +61,7 @@ class VideoTest < Test::Unit::TestCase
       assert_instance_of Flickr::User, video.owner
       assert_equal "67131352@N04", video.owner.nsid
       assert_equal "Janko Marohnić", video.owner.username
-      assert video.owner.realname.empty?
+      assert video.owner.real_name.empty?
       assert video.owner.location.empty?
       refute video.owner.buddy_icon_url.empty?
       refute video.url.empty?

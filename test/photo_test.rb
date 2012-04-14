@@ -24,7 +24,7 @@ class PhotoTest < Test::Unit::TestCase
       assert_equal 5279, photo.server
       assert_equal 6, photo.farm
       assert_instance_of Time, photo.uploaded_at
-      refute photo.favorite?
+      assert_equal false, photo.favorite?
     end
 
     info_hash.update \
@@ -43,7 +43,7 @@ class PhotoTest < Test::Unit::TestCase
       "description" => {"_content" => ""}
     tests << ->(photo) do
       assert_equal 0, photo.safety_level
-      assert photo.safe?
+      assert_equal true, photo.safe?
       assert_equal 0, photo.rotation
       assert_equal "David Belle - Canon commercial", photo.title
       assert_equal "", photo.description
@@ -63,7 +63,7 @@ class PhotoTest < Test::Unit::TestCase
       assert_instance_of Flickr::User, photo.owner
       assert_equal "67131352@N04", photo.owner.nsid
       assert_equal "Janko Marohnić", photo.owner.username
-      assert photo.owner.realname.empty?
+      assert photo.owner.real_name.empty?
       assert photo.owner.location.empty?
       refute photo.owner.buddy_icon_url.empty?
       refute photo.url.empty?
@@ -77,16 +77,16 @@ class PhotoTest < Test::Unit::TestCase
       "people"            => {"haspeople" => 1}
     tests << ->(photo) do
       assert_instance_of Flickr::Media::Visibility, photo.visibility
-      assert photo.visibility.public?
-      refute photo.can_comment?
-      refute photo.can_add_meta?
-      assert photo.can_everyone_comment?
-      refute photo.can_everyone_add_meta?
-      assert photo.can_download?
-      refute photo.can_blog?
-      refute photo.can_print?
-      refute photo.can_share?
-      assert photo.has_people?
+      assert_equal true, photo.visibility.public?
+      assert_equal false, photo.can_comment?
+      assert_equal false, photo.can_add_meta?
+      assert_equal true, photo.can_everyone_comment?
+      assert_equal false, photo.can_everyone_add_meta?
+      assert_equal true, photo.can_download?
+      assert_equal false, photo.can_blog?
+      assert_equal false, photo.can_print?
+      assert_equal false, photo.can_share?
+      assert_equal true, photo.has_people?
     end
 
     info_hash.update \
@@ -225,7 +225,7 @@ class PhotoTest < Test::Unit::TestCase
       assert_equal "23512022", location.woeid
 
       assert_instance_of Flickr::Media::Visibility, photo.geo_permissions
-      assert photo.geo_permissions.public?
+      assert_equal true, photo.geo_permissions.public?
     end
 
     photo = Flickr::Photo.from_info(info_hash)
@@ -305,7 +305,7 @@ class PhotoTest < Test::Unit::TestCase
     assert_equal 7130, photo.server
     assert_equal 8, photo.farm
     assert_equal "6913664138_61ffb9c0d7_b", photo.title
-    assert photo.primary?
+    assert_equal true, photo.primary?
 
     # Extras
     assert_instance_of Flickr::License, photo.license

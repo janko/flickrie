@@ -23,7 +23,7 @@ module Flickr
     end
 
     def find_video_by_id(video_id)
-      response = client.get_media_info(photo_id)
+      response = client.get_media_info(video_id)
       Video.from_info(response.body['photo'])
     end
 

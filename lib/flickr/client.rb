@@ -58,7 +58,7 @@ module Flickr
 
     def photos_from_set(set_id)
       media_from_set set_id, :media => 'photos',
-        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o'
+        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o,media'
     end
 
     def videos_from_set(set_id)

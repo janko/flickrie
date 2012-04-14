@@ -150,16 +150,25 @@ module Flickr
           info['dates']['taken'] = info.delete('datetaken')
           info['dates']['takengranularity'] = info.delete('datetakengranularity')
 
-          if info['media'] == 'photo'
-            Photo.new(info)
-          else
-            Video.new(info)
-          end
+          new(info)
         end
       end
 
       def from_info(hash)
         new('id' => hash['id']).get_info(hash)
+      end
+    end
+
+    extend(ClassMethods)
+
+    def self.new(info)
+      require 'flickr/photo'
+      require 'flickr/video'
+
+      if info['media'] == 'photo'
+        Photo.new(info)
+      else
+        Video.new(info)
       end
     end
 

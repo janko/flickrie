@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'test/unit'
-require 'client'
+require 'flickr/client'
 
 class ClientTest < Test::Unit::TestCase
   def setup
