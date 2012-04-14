@@ -23,6 +23,10 @@ module Flickr
 
     def can_comment?; @info['can_comment'].to_i == 1 end
 
+    # TODO: Figure out what this is
+    def needs_interstitial?; @info['needs_interstitial'].to_i == 1 end
+    def visibility_can_see_set?; @info['visibility_can_see_set'].to_i == 1 end
+
     def created_at; Time.at(@info['date_create'].to_i) end
     def updated_at; Time.at(@info['date_update'].to_i) end
 
@@ -43,20 +47,20 @@ end
 __END__
 
 {
-  'id' => '72157629409394888',
-  'owner' => '67131352@N04',
-  'primary' => '6913663366',
-  'secret' => '0c9fb32336',
-  'server' => '5240',
-  'farm' => 6,
-  'photos' => 2,
-  'count_views' => '0',
-  'count_comments' => '0',
-  'count_photos' => '2',
-  'count_videos' => 0,
-  'title' => {'_content' => 'rođendan'},
-  'description' => {'_content' => ''},
-  'can_comment' => 0,
-  'date_create' => '1333954490',
-  'date_update' => '1333956652'
+  "id"=>"72157629443464020",
+  "primary"=>"6913731566",
+  "secret"=>"23879c079a",
+  "server"=>"7130",
+  "farm"=>8,
+  "photos"=>"1",
+  "videos"=>0,
+  "title"=>{"_content"=>"Bla"},
+  "description"=>{"_content"=>""},
+  "needs_interstitial"=>0,
+  "visibility_can_see_set"=>1,
+  "count_views"=>"0",
+  "count_comments"=>"0",
+  "can_comment"=>0,
+  "date_create"=>"1334331151",
+  "date_update"=>"1334331155
 }
