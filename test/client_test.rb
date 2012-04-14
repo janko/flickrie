@@ -14,8 +14,8 @@ class ClientTest < Test::Unit::TestCase
   def test_methods_not_raising_an_exception
     assert_nothing_raised(Flickr::Error) do
       client = Flickr.client
-      client.photos_from_photoset('72157629409394888')
-      client.photosets_from_user('67131352@N04')
+      client.photos_from_set('72157629409394888')
+      client.sets_from_user('67131352@N04')
       client.find_user_by_email('janko.marohnic@gmail.com')
       client.find_user_by_username('Janko Marohnić')
       client.get_user_info('67131352@N04')

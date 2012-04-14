@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr/photo'
+require 'flickr/video'
 
-class PhotoTest < Test::Unit::TestCase
+class VideoTest < Test::Unit::TestCase
   def setup
     Flickr.api_key = ENV['FLICKR_API_KEY']
   end
@@ -18,35 +18,33 @@ class PhotoTest < Test::Unit::TestCase
       "farm" => 6,
       "dateuploaded" => "1334189525",
       "isfavorite" => 0
-    tests << ->(photo) do
-      assert_equal 6923154272, photo.id
-      assert_equal '5519fab554', photo.secret
-      assert_equal 5279, photo.server
-      assert_equal 6, photo.farm
-      assert_instance_of Time, photo.uploaded_at
-      refute photo.favorite?
+    tests << ->(video) do
+      assert_equal 6923154272, video.id
+      assert_equal '5519fab554', video.secret
+      assert_equal 5279, video.server
+      assert_equal 6, video.farm
+      assert_instance_of Time, video.uploaded_at
+      refute video.favorite?
     end
 
     info_hash.update \
       "license" => "0"
-    tests << ->(photo) do
-      assert_instance_of Flickr::License, photo.license
-      assert_equal 0, photo.license.id
-      assert_instance_of String, photo.license.name
-      assert_instance_of String, photo.license.url
+    tests << ->(video) do
+      assert_instance_of Flickr::License, video.license
+      assert_equal 0, video.license.id
+      assert_instance_of String, video.license.name
+      assert_instance_of String, video.license.url
     end
 
     info_hash.update \
       "safety_level" => "0",
-      "rotation" => 0,
       "title" => {"_content" => "David Belle - Canon commercial"},
       "description" => {"_content" => ""}
-    tests << ->(photo) do
-      assert_equal 0, photo.safety_level
-      assert photo.safe?
-      assert_equal 0, photo.rotation
-      assert_equal "David Belle - Canon commercial", photo.title
-      assert_equal "", photo.description
+    tests << ->(video) do
+      assert_equal 0, video.safety_level
+      assert video.safe?
+      assert_equal "David Belle - Canon commercial", video.title
+      assert_equal "", video.description
     end
 
     info_hash.update \
@@ -59,14 +57,14 @@ class PhotoTest < Test::Unit::TestCase
         "iconserver" => "0",
         "iconfarm" => 0
       }
-    tests << ->(photo) do
-      assert_instance_of Flickr::User, photo.owner
-      assert_equal "67131352@N04", photo.owner.nsid
-      assert_equal "Janko Marohnić", photo.owner.username
-      assert photo.owner.realname.empty?
-      assert photo.owner.location.empty?
-      refute photo.owner.buddy_icon_url.empty?
-      refute photo.url.empty?
+    tests << ->(video) do
+      assert_instance_of Flickr::User, video.owner
+      assert_equal "67131352@N04", video.owner.nsid
+      assert_equal "Janko Marohnić", video.owner.username
+      assert video.owner.realname.empty?
+      assert video.owner.location.empty?
+      refute video.owner.buddy_icon_url.empty?
+      refute video.url.empty?
     end
 
     info_hash.update \
@@ -75,18 +73,18 @@ class PhotoTest < Test::Unit::TestCase
       "publiceditability" => {"cancomment" => 1, "canaddmeta" => 0},
       "usage"             => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
       "people"            => {"haspeople" => 1}
-    tests << ->(photo) do
-      assert_instance_of Flickr::Media::Visibility, photo.visibility
-      assert photo.visibility.public?
-      refute photo.can_comment?
-      refute photo.can_add_meta?
-      assert photo.can_everyone_comment?
-      refute photo.can_everyone_add_meta?
-      assert photo.can_download?
-      refute photo.can_blog?
-      refute photo.can_print?
-      refute photo.can_share?
-      assert photo.has_people?
+    tests << ->(video) do
+      assert_instance_of Flickr::Media::Visibility, video.visibility
+      assert video.visibility.public?
+      refute video.can_comment?
+      refute video.can_add_meta?
+      assert video.can_everyone_comment?
+      refute video.can_everyone_add_meta?
+      assert video.can_download?
+      refute video.can_blog?
+      refute video.can_print?
+      refute video.can_share?
+      assert video.has_people?
     end
 
     info_hash.update \
@@ -96,19 +94,19 @@ class PhotoTest < Test::Unit::TestCase
         "takengranularity" => "0",
         "lastupdate" => "1334259651"
       }
-    tests << ->(photo) do
-      assert_instance_of Time, photo.posted_at
-      assert_instance_of Time, photo.taken_at
-      assert_instance_of Time, photo.updated_at
-      assert_equal 0, photo.taken_at_granularity
+    tests << ->(video) do
+      assert_instance_of Time, video.posted_at
+      assert_instance_of Time, video.taken_at
+      assert_instance_of Time, video.updated_at
+      assert_equal 0, video.taken_at_granularity
     end
 
     info_hash.update \
       "views" => "1",
       "comments" => {"_content" => "3"}
-    tests << ->(photo) do
-      assert_equal 1, photo.views_count
-      assert_equal 3, photo.comments_count
+    tests << ->(video) do
+      assert_equal 1, video.views_count
+      assert_equal 3, video.comments_count
     end
 
     info_hash.update \
@@ -126,8 +124,8 @@ class PhotoTest < Test::Unit::TestCase
           }
         ]
       }
-    tests << ->(photo) do
-      note = photo.notes.first
+    tests << ->(video) do
+      note = video.notes.first
       assert_instance_of Flickr::Media::Note, note
       assert_equal 72157629434940218, note.id
       assert_instance_of Flickr::User, note.author
@@ -157,9 +155,9 @@ class PhotoTest < Test::Unit::TestCase
           }
         ]
       }
-    tests << ->(photo) do
-      assert_equal "david belle", photo.tags
-      assert_equal "", photo.machine_tags
+    tests << ->(video) do
+      assert_equal "david belle", video.tags
+      assert_equal "", video.machine_tags
     end
 
     info_hash.update \
@@ -197,8 +195,8 @@ class PhotoTest < Test::Unit::TestCase
         "woeid" => "23512022"
       },
       "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0}
-    tests << ->(photo) do
-      location = photo.location
+    tests << ->(video) do
+      location = video.location
       assert_instance_of Flickr::Location, location
       assert_equal 37.792608, location.latitude
       assert_equal -122.402672, location.longitude
@@ -224,12 +222,12 @@ class PhotoTest < Test::Unit::TestCase
       assert_equal "GddgqTpTUb8LgT93hw", location.id
       assert_equal "23512022", location.woeid
 
-      assert_instance_of Flickr::Media::Visibility, photo.geo_permissions
-      assert photo.geo_permissions.public?
+      assert_instance_of Flickr::Media::Visibility, video.geo_permissions
+      assert video.geo_permissions.public?
     end
 
-    photo = Flickr::Photo.from_info(info_hash)
-    tests.each { |test| test.call(photo) }
+    video = Flickr::Video.from_info(info_hash)
+    tests.each { |test| test.call(video) }
   end
 
   def test_from_set
@@ -260,7 +258,7 @@ class PhotoTest < Test::Unit::TestCase
          "tags" => "zakon",
          "machine_tags" => "",
          "views" => "1",
-         "media" => "photo",
+         "media" => "video",
          "media_status" => "ready",
          "pathalias" => nil,
          "url_sq" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_s.jpg",
@@ -292,36 +290,21 @@ class PhotoTest < Test::Unit::TestCase
          "width_l" => "768"}
       ]
     }
-    photo = Flickr::Photo.from_set(set_hash).first
-    assert_equal "Large 1024", photo.size
-    assert photo.primary?
-    assert_equal Flickr::Photo::SIZES.keys[0..-2], photo.available_sizes
-    photo.thumbnail!
-    assert_equal "Large 1024", photo.largest!.size
-    assert_equal [768, 1024], [photo.width, photo.height]
-    assert_instance_of Flickr::User, photo.owner
-    assert_equal 6913731566, photo.id
-    assert_equal "23879c079a", photo.secret
-    assert_equal 7130, photo.server
-    assert_equal 8, photo.farm
-    assert_equal "6913664138_61ffb9c0d7_b", photo.title
-    assert photo.primary?
+    video = Flickr::Video.from_set(set_hash).first
+    assert_instance_of Flickr::License, video.license
+    assert_instance_of Time, video.uploaded_at
+    assert_instance_of Time, video.taken_at
+    assert_instance_of Time, video.updated_at
+    assert_equal 0, video.taken_at_granularity
+    refute video.owner.buddy_icon_url.empty?
+    assert_instance_of Flickr::Location, video.location
+    assert_equal "zakon", video.tags
+    assert_instance_of String, video.machine_tags
+    assert_equal 1, video.views_count
+    assert_equal "ready", video.media_status
+    assert video.path_alias.nil?
 
-    # Extras
-    assert_instance_of Flickr::License, photo.license
-    assert_instance_of Time, photo.uploaded_at
-    assert_instance_of Time, photo.taken_at
-    assert_instance_of Time, photo.updated_at
-    assert_equal 0, photo.taken_at_granularity
-    refute photo.owner.buddy_icon_url.empty?
-    assert_instance_of Flickr::Location, photo.location
-    assert_equal "zakon", photo.tags
-    assert_instance_of String, photo.machine_tags
-    assert_equal 1, photo.views_count
-    assert_equal "ready", photo.media_status
-    assert photo.path_alias.nil?
-
-    photo.get_info
+    video.get_info
     test_from_info
   end
 end
