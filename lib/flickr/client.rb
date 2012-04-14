@@ -1,5 +1,4 @@
 require 'faraday_stack'
-require 'photo'
 
 module Flickr
   class << self
@@ -25,31 +24,48 @@ module Flickr
     end
   end
 
+  def self.reset_client
+    @client = nil
+  end
+
   class Error < StandardError
   end
 
   class StatusCheck < Faraday::Response::Middleware
     def on_complete(env)
-      unless env[:body]['stat'] == 'ok'
+      if env[:body]['stat'] != 'ok'
+        Flickr.reset_client if env[:body]['message'] =~ /Invalid API key/i
         raise Error, env[:body]['message']
       end
     end
   end
 
   class Client < Faraday::Connection
-    def get(method, params)
+    def get(method, params = {})
       super() do |req|
         req.params[:method] = method
         req.params.update(params)
       end
     end
 
-    def photos_from_photoset(photoset_id)
-      get 'flickr.photosets.getPhotos', :photoset_id => photoset_id,
-        :extras => Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
+    def media_from_set(set_id, params = {})
+      default_params = {
+        :photoset_id => set_id,
+        :extras => 'media'
+      }
+      get 'flickr.photosets.getPhotos', default_params.merge(params)
     end
 
-    def photosets_from_user(user_id)
+    def photos_from_set(set_id)
+      media_from_set set_id, :media => 'photos',
+        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o'
+    end
+
+    def videos_from_set(set_id)
+      media_from_set set_id, :media => 'videos'
+    end
+
+    def sets_from_user(user_id)
       get 'flickr.photosets.getList', :user_id => user_id
     end
 
@@ -65,12 +81,16 @@ module Flickr
       get 'flickr.people.getInfo', :user_id => user_id
     end
 
-    def get_photoset_info(photoset_id)
-      get 'flickr.photosets.getInfo', :photoset_id => photoset_id
+    def get_set_info(set_id)
+      get 'flickr.photosets.getInfo', :photoset_id => set_id
     end
 
-    def get_photo_info(photo_id)
-      get 'flickr.photos.getInfo', :photo_id => photo_id
+    def get_media_info(media_id)
+      get 'flickr.photos.getInfo', :photo_id => media_id
+    end
+
+    def get_licenses
+      get 'flickr.photos.licenses.getInfo'
     end
   end
 end
