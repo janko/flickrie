@@ -46,10 +46,6 @@ module Flickr
 
     def rotation; @info['rotation'].to_i end
 
-    def inspect
-      %(#<Photo: url="#{url}", size=#{size}>)
-    end
-
     private
 
     def initialize(hash, size = nil)
