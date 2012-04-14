@@ -32,6 +32,11 @@ module Flickr
       Media.from_set(response.body['photoset'])
     end
 
+    def find_item_by_id(item_id)
+      response = client.get_media_info(item_id)
+      Media.from_info(response.body['photo'])
+    end
+
     def sets_from_user(user_id)
       response = client.sets_from_user(user_id)
       hashes = response.body['photosets']['photoset']
