@@ -116,7 +116,7 @@
 - flickr.photos.getCounts
 - flickr.photos.getExif
 - flickr.photos.getFavorites
-- flickr.photos.getInfo
+- ~~flickr.photos.getInfo~~
 - flickr.photos.getNotInSet
 - flickr.photos.getPerms
 - flickr.photos.getRecent

@@ -108,21 +108,21 @@ module Flickr
     end
 
     def get_info(info = nil)
-      info ||= Flickr.client.get_media_info(id).body['photo']
-      @info.update(info)
+      info ||= Flickr.client.get_item_info(id).body['photo']
 
       # Fixes
-      @info['title'] = @info['title']['_content']
-      @info['description'] = @info['description']['_content']
-      @info['comments_count'] = @info.delete('comments')['_content']
-      @info['dates']['uploaded'] = @info.delete('dateuploaded')
-      @info['machine_tags'] = @info['tags']['tag'].
+      info['title'] = info['title']['_content']
+      info['description'] = info['description']['_content']
+      info['comments_count'] = info.delete('comments')['_content']
+      info['dates']['uploaded'] = info.delete('dateuploaded')
+      info['machine_tags'] = info['tags']['tag'].
         select { |tag| tag['machine_tag'].to_i == 1 }.
         map { |tag| tag['_content']}.join(' ')
-      @info['tags'] = @info['tags']['tag'].
+      info['tags'] = info['tags']['tag'].
         select { |tag| tag['machine_tag'].to_i == 0 }.
         map { |tag| tag['_content']}.join(' ')
 
+      @info.update(info)
       self
     end
 
@@ -154,8 +154,8 @@ module Flickr
         end
       end
 
-      def from_info(hash)
-        new('id' => hash['id']).get_info(hash)
+      def from_info(info)
+        new('media' => info['media']).get_info(info)
       end
 
       def from_user(info)

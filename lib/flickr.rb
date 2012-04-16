@@ -12,9 +12,6 @@ module Flickr
       Photo.from_set(response.body['photoset'])
     end
 
-    def find_photo_by_id(photo_id)
-      response = client.get_media_info(photo_id)
-      Photo.from_info(response.body['photo'])
     end
 
     def videos_from_set(set_id)
@@ -22,10 +19,12 @@ module Flickr
       Video.from_set(response.body['photoset'])
     end
 
-    def find_video_by_id(video_id)
-      response = client.get_media_info(video_id)
-      Video.from_info(response.body['photo'])
+    def get_item_info(item_id)
+      response = client.get_item_info(item_id)
+      Media.from_info(response.body['photo'])
     end
+    alias get_photo_info get_item_info
+    alias get_video_info get_item_info
 
     def items_from_set(set_id)
       response = client.media_from_set(set_id)
@@ -35,9 +34,6 @@ module Flickr
       response.body['photos']['photo'].map { |info| Media.from_user(info) }
     end
 
-    def find_item_by_id(item_id)
-      response = client.get_media_info(item_id)
-      Media.from_info(response.body['photo'])
     def public_photos_from_user(user_nsid, params = {})
       params = {:extras => SIZES}.merge(params)
       public_items_from_user(user_nsid, params).select do |item|
