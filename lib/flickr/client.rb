@@ -63,6 +63,10 @@ module Flickr
 
     def videos_from_set(set_id)
       media_from_set set_id, :media => 'videos'
+    def public_items_from_user(user_nsid, params = {})
+      params = {:user_id => user_nsid}.merge(params)
+      params[:extras] = [params[:extras], 'media'].compact.join(',')
+      get 'flickr.people.getPublicPhotos', params
     end
 
     def sets_from_user(user_id)

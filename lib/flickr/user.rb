@@ -43,6 +43,8 @@ module Flickr
       end
     end
 
+    def public_photos; Flickr.public_photos_from_user(nsid) end
+
     def pro?
       @info['ispro'].to_i == 1 if @info['ispro']
     end

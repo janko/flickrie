@@ -25,12 +25,17 @@ class FlickrTest < Test::Unit::TestCase
   def test_finding_items_by_id
     photo_id = 6913731566
     video_id = 6923154272
+  def test_items_from_user
+    item = Flickr.public_items_from_user(@user_nsid).first
+    assert item.title.is_a?(String) && !item.title.empty?
 
     photo = Flickr.find_photo_by_id(photo_id)
+    photo = Flickr.public_photos_from_user(@user_nsid).first
     assert_instance_of Flickr::Photo, photo
     assert photo.title.is_a?(String) && !photo.title.empty?
 
     video = Flickr.find_video_by_id(video_id)
+    video = Flickr.public_videos_from_user(@user_nsid).first
     assert_instance_of Flickr::Video, video
     assert video.title.is_a?(String) && !video.title.empty?
 

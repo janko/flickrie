@@ -102,7 +102,7 @@
 - flickr.people.getPhotos
 - flickr.people.getPhotosOf
 - flickr.people.getPublicGroups
-- flickr.people.getPublicPhotos
+- ~~flickr.people.getPublicPhotos~~
 - flickr.people.getUploadStatus
 
 # photos

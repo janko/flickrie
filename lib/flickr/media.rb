@@ -157,8 +157,19 @@ module Flickr
       def from_info(hash)
         new('id' => hash['id']).get_info(hash)
       end
-    end
 
+      def from_user(info)
+        info['owner'] = {'nsid' => info['owner']}
+        info['visibility'] = {
+          'ispublic' => info['ispublic'],
+          'isfriend' => info['isfriend'],
+          'isfamily' => info['isfamily']
+        }
+        info['usage'] = {}
+
+        new(info)
+      end
+    end
     extend(ClassMethods)
 
     def self.new(info)

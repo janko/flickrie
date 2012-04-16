@@ -30,17 +30,29 @@ module Flickr
     def items_from_set(set_id)
       response = client.media_from_set(set_id)
       Media.from_set(response.body['photoset'])
+    def public_items_from_user(user_nsid, params = {})
+      response = client.public_items_from_user(user_nsid, params)
+      response.body['photos']['photo'].map { |info| Media.from_user(info) }
     end
 
     def find_item_by_id(item_id)
       response = client.get_media_info(item_id)
       Media.from_info(response.body['photo'])
+    def public_photos_from_user(user_nsid, params = {})
+      params = {:extras => SIZES}.merge(params)
+      public_items_from_user(user_nsid, params).select do |item|
+        item.is_a?(Photo)
+      end
     end
 
     def sets_from_user(user_id)
       response = client.sets_from_user(user_id)
       hashes = response.body['photosets']['photoset']
       hashes.map { |hash| Set.new(hash) }
+    def public_videos_from_user(user_nsid, params = {})
+      public_items_from_user(user_nsid, params).select do |item|
+        item.is_a?(Video)
+      end
     end
 
     def find_user_by_nsid(user_nsid)
