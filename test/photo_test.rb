@@ -11,49 +11,18 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_from_info
-    info_hash = {}
-    tests = []
-
-    info_hash.update \
+    info_hash = {
       "id" => "6923154272",
       "secret" => "5519fab554",
       "server" => "5279",
       "farm" => 6,
       "dateuploaded" => "1334189525",
-      "isfavorite" => 0
-    tests << ->(photo) do
-      assert_equal 6923154272, photo.id
-      assert_equal '5519fab554', photo.secret
-      assert_equal 5279, photo.server
-      assert_equal 6, photo.farm
-      assert_instance_of Time, photo.uploaded_at
-      assert_equal false, photo.favorite?
-    end
-
-    info_hash.update \
-      "license" => "0"
-    tests << ->(photo) do
-      assert_instance_of Flickr::License, photo.license
-      assert_equal 0, photo.license.id
-      assert_instance_of String, photo.license.name
-      assert_instance_of String, photo.license.url
-    end
-
-    info_hash.update \
+      "isfavorite" => 0,
+      "license" => "0",
       "safety_level" => "0",
       "rotation" => 0,
       "title" => {"_content" => "David Belle - Canon commercial"},
-      "description" => {"_content" => ""}
-    tests << ->(photo) do
-      assert_equal 0, photo.safety_level
-      assert_equal true, photo.safe?
-      assert_equal 0, photo.rotation
-      assert_equal "David Belle - Canon commercial", photo.title
-      assert_equal "", photo.description
-    end
-
-    info_hash.update \
-      "id" => "6923154272",
+      "description" => {"_content" => ""},
       "owner" => {
         "nsid" => "67131352@N04",
         "username" => "Janko Marohnić",
@@ -61,60 +30,20 @@ class PhotoTest < Test::Unit::TestCase
         "location" => "",
         "iconserver" => "0",
         "iconfarm" => 0
-      }
-    tests << ->(photo) do
-      assert_instance_of Flickr::User, photo.owner
-      assert_equal "67131352@N04", photo.owner.nsid
-      assert_equal "Janko Marohnić", photo.owner.username
-      assert photo.owner.real_name.empty?
-      assert photo.owner.location.empty?
-      refute photo.owner.buddy_icon_url.empty?
-      refute photo.url.empty?
-    end
-
-    info_hash.update \
-      "visibility"        => {"ispublic" => 1, "isfriend" => 0, "isfamily" => 0},
-      "editability"       => {"cancomment" => 0, "canaddmeta" => 0},
+      },
+      "visibility" => {"ispublic" => 1, "isfriend" => 0, "isfamily" => 0},
+      "editability" => {"cancomment" => 0, "canaddmeta" => 0},
       "publiceditability" => {"cancomment" => 1, "canaddmeta" => 0},
-      "usage"             => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
-      "people"            => {"haspeople" => 1}
-    tests << ->(photo) do
-      assert_instance_of Flickr::Media::Visibility, photo.visibility
-      assert_equal true, photo.visibility.public?
-      assert_equal false, photo.can_comment?
-      assert_equal false, photo.can_add_meta?
-      assert_equal true, photo.can_everyone_comment?
-      assert_equal false, photo.can_everyone_add_meta?
-      assert_equal true, photo.can_download?
-      assert_equal false, photo.can_blog?
-      assert_equal false, photo.can_print?
-      assert_equal false, photo.can_share?
-      assert_equal true, photo.has_people?
-    end
-
-    info_hash.update \
+      "usage" => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
+      "people" => {"haspeople" => 1},
       "dates" => {
         "posted" => "1334189525",
         "taken" => "2012-04-11 17:12:05",
         "takengranularity" => "0",
         "lastupdate" => "1334259651"
-      }
-    tests << ->(photo) do
-      assert_instance_of Time, photo.posted_at
-      assert_instance_of Time, photo.taken_at
-      assert_instance_of Time, photo.updated_at
-      assert_equal 0, photo.taken_at_granularity
-    end
-
-    info_hash.update \
+      },
       "views" => "1",
-      "comments" => {"_content" => "3"}
-    tests << ->(photo) do
-      assert_equal 1, photo.views_count
-      assert_equal 3, photo.comments_count
-    end
-
-    info_hash.update \
+      "comments" => {"_content" => "3"},
       "notes" => {"note" =>
         [
           {
@@ -128,20 +57,7 @@ class PhotoTest < Test::Unit::TestCase
             "_content" => "Headashgfsdg"
           }
         ]
-      }
-    tests << ->(photo) do
-      note = photo.notes.first
-      assert_instance_of Flickr::Media::Note, note
-      assert_equal 72157629434940218, note.id
-      assert_instance_of Flickr::User, note.author
-      assert_equal '67131352@N04', note.author.nsid
-      assert_equal "Janko Marohnić", note.author.username
-      assert_equal [16, 16], note.coordinates.bottom_left
-      assert_equal [31, 31], note.coordinates.top_right
-      assert_equal "Headashgfsdg", note.content
-    end
-
-    info_hash.update \
+      },
       "tags" => {"tag" =>
         [
           {
@@ -159,13 +75,7 @@ class PhotoTest < Test::Unit::TestCase
             "machine_tag" => 0
           }
         ]
-      }
-    tests << ->(photo) do
-      assert_equal "david belle", photo.tags
-      assert_equal "", photo.machine_tags
-    end
-
-    info_hash.update \
+      },
       "location" => {
         "latitude" => 37.792608,
         "longitude" => -122.402672,

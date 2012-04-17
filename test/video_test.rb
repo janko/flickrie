@@ -11,47 +11,18 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_from_info
-    info_hash = {}
-    tests = []
-
-    info_hash.update \
+    info_hash = {
       "id" => "6923154272",
       "secret" => "5519fab554",
       "server" => "5279",
       "farm" => 6,
       "dateuploaded" => "1334189525",
-      "isfavorite" => 0
-    tests << ->(video) do
-      assert_equal 6923154272, video.id
-      assert_equal '5519fab554', video.secret
-      assert_equal 5279, video.server
-      assert_equal 6, video.farm
-      assert_instance_of Time, video.uploaded_at
-      refute video.favorite?
-    end
-
-    info_hash.update \
-      "license" => "0"
-    tests << ->(video) do
-      assert_instance_of Flickr::License, video.license
-      assert_equal 0, video.license.id
-      assert_instance_of String, video.license.name
-      assert_instance_of String, video.license.url
-    end
-
-    info_hash.update \
+      "isfavorite" => 0,
+      "license" => "0",
       "safety_level" => "0",
+      "rotation" => 0,
       "title" => {"_content" => "David Belle - Canon commercial"},
-      "description" => {"_content" => ""}
-    tests << ->(video) do
-      assert_equal 0, video.safety_level
-      assert video.safe?
-      assert_equal "David Belle - Canon commercial", video.title
-      assert_equal "", video.description
-    end
-
-    info_hash.update \
-      "id" => "6923154272",
+      "description" => {"_content" => ""},
       "owner" => {
         "nsid" => "67131352@N04",
         "username" => "Janko Marohnić",
@@ -59,60 +30,20 @@ class VideoTest < Test::Unit::TestCase
         "location" => "",
         "iconserver" => "0",
         "iconfarm" => 0
-      }
-    tests << ->(video) do
-      assert_instance_of Flickr::User, video.owner
-      assert_equal "67131352@N04", video.owner.nsid
-      assert_equal "Janko Marohnić", video.owner.username
-      assert video.owner.real_name.empty?
-      assert video.owner.location.empty?
-      refute video.owner.buddy_icon_url.empty?
-      refute video.url.empty?
-    end
-
-    info_hash.update \
-      "visibility"        => {"ispublic" => 1, "isfriend" => 0, "isfamily" => 0},
-      "editability"       => {"cancomment" => 0, "canaddmeta" => 0},
+      },
+      "visibility" => {"ispublic" => 1, "isfriend" => 0, "isfamily" => 0},
+      "editability" => {"cancomment" => 0, "canaddmeta" => 0},
       "publiceditability" => {"cancomment" => 1, "canaddmeta" => 0},
-      "usage"             => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
-      "people"            => {"haspeople" => 1}
-    tests << ->(video) do
-      assert_instance_of Flickr::Media::Visibility, video.visibility
-      assert video.visibility.public?
-      refute video.can_comment?
-      refute video.can_add_meta?
-      assert video.can_everyone_comment?
-      refute video.can_everyone_add_meta?
-      assert video.can_download?
-      refute video.can_blog?
-      refute video.can_print?
-      refute video.can_share?
-      assert video.has_people?
-    end
-
-    info_hash.update \
+      "usage" => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
+      "people" => {"haspeople" => 1},
       "dates" => {
         "posted" => "1334189525",
         "taken" => "2012-04-11 17:12:05",
         "takengranularity" => "0",
         "lastupdate" => "1334259651"
-      }
-    tests << ->(video) do
-      assert_instance_of Time, video.posted_at
-      assert_instance_of Time, video.taken_at
-      assert_instance_of Time, video.updated_at
-      assert_equal 0, video.taken_at_granularity
-    end
-
-    info_hash.update \
+      },
       "views" => "1",
-      "comments" => {"_content" => "3"}
-    tests << ->(video) do
-      assert_equal 1, video.views_count
-      assert_equal 3, video.comments_count
-    end
-
-    info_hash.update \
+      "comments" => {"_content" => "3"},
       "notes" => {"note" =>
         [
           {
@@ -126,20 +57,7 @@ class VideoTest < Test::Unit::TestCase
             "_content" => "Headashgfsdg"
           }
         ]
-      }
-    tests << ->(video) do
-      note = video.notes.first
-      assert_instance_of Flickr::Media::Note, note
-      assert_equal 72157629434940218, note.id
-      assert_instance_of Flickr::User, note.author
-      assert_equal '67131352@N04', note.author.nsid
-      assert_equal "Janko Marohnić", note.author.username
-      assert_equal [16, 16], note.coordinates.bottom_left
-      assert_equal [31, 31], note.coordinates.top_right
-      assert_equal "Headashgfsdg", note.content
-    end
-
-    info_hash.update \
+      },
       "tags" => {"tag" =>
         [
           {
@@ -157,13 +75,7 @@ class VideoTest < Test::Unit::TestCase
             "machine_tag" => 0
           }
         ]
-      }
-    tests << ->(video) do
-      assert_equal "david belle", video.tags
-      assert_equal "", video.machine_tags
-    end
-
-    info_hash.update \
+      },
       "location" => {
         "latitude" => 37.792608,
         "longitude" => -122.402672,
