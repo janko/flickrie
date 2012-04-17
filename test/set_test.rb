@@ -13,6 +13,10 @@ class SetTest < Test::Unit::TestCase
     end
   end
 
+  def setup
+    Flickr.api_key = ENV['FLICKR_API_KEY']
+  end
+
   def test_attributes
     info_hash = {
       'id' => '72157629409394888',
