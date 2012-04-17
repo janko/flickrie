@@ -46,11 +46,46 @@ module Flickr
 
     def rotation; @info['rotation'].to_i end
 
+    def get_sizes(info = nil)
+      info ||= Flickr.client.get_photo_sizes(id).body['sizes']
+      unless @info['usage']
+        @info['usage'] = {
+          'canblog'     => info['canblog'],
+          'canprint'    => info['canprint'],
+          'candownload' => info['candownload']
+        }
+      end
+      flickr_sizes = {
+        'Square' => 'sq',
+        'Large Square' => 'q',
+        'Thumbnail' => 't',
+        'Small' => 's',
+        'Small 320' => 'n',
+        'Medium' => 'm',
+        'Medium 640' => 'z',
+        'Medium 800' => 'c',
+        'Large' => 'l',
+        'Original' => 'o'
+      }
+      info['size'].each do |size_info|
+        size_abbr = flickr_sizes[size_info['label']]
+        @info["width_#{size_abbr}"] = size_info['width']
+        @info["height_#{size_abbr}"] = size_info['height']
+        @info["url_#{size_abbr}"] = size_info['source']
+      end
+
+      self
+    end
+
     private
 
     def initialize(hash, size = nil)
       super(hash)
       @size = size || largest_size
+    end
+
+    def self.from_sizes(info)
+      new.get_sizes(info)
     end
 
     def largest_size

@@ -73,6 +73,8 @@ module Flickr
 
     def sets_from_user(user_id)
       get 'flickr.photosets.getList', :user_id => user_id
+    def get_item_sizes(item_id)
+      get 'flickr.photos.getSizes', :photo_id => item_id
     end
 
     def find_user_by_email(email)

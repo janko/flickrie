@@ -120,7 +120,7 @@
 - flickr.photos.getNotInSet
 - flickr.photos.getPerms
 - flickr.photos.getRecent
-- flickr.photos.getSizes
+- ~~flickr.photos.getSizes~~
 - flickr.photos.getUntagged
 - flickr.photos.getWithGeoData
 - flickr.photos.getWithoutGeoData

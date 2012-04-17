@@ -29,6 +29,14 @@ class FlickrTest < Test::Unit::TestCase
 
     photo_id = 6913731566
     video_id = 6923154272
+  def test_getting_sizes
+    photo = Flickr.get_photo_sizes(@photo_id)
+    refute photo.square75.source_url.empty?
+
+    video = Flickr.get_video_sizes(@video_id)
+    refute video.download_url.empty?
+  end
+
   def test_items_from_user
     item = Flickr.public_items_from_user(@user_nsid).first
     assert item.title.is_a?(String) && !item.title.empty?

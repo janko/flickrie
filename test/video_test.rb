@@ -226,8 +226,77 @@ class VideoTest < Test::Unit::TestCase
       assert video.geo_permissions.public?
     end
 
+<<<<<<< HEAD
     video = Flickr::Video.from_info(info_hash)
     tests.each { |test| test.call(video) }
+=======
+    assert_instance_of Flickr::Media::Visibility, video.visibility
+    assert_equal true, video.visibility.public?
+    assert_equal false, video.can_comment?
+    assert_equal false, video.can_add_meta?
+    assert_equal true, video.can_everyone_comment?
+    assert_equal false, video.can_everyone_add_meta?
+    assert_equal true, video.can_download?
+    assert_equal false, video.can_blog?
+    assert_equal false, video.can_print?
+    assert_equal false, video.can_share?
+    assert_equal true, video.has_people?
+
+    assert_instance_of Time, video.posted_at
+    assert_instance_of Time, video.taken_at
+    assert_instance_of Time, video.updated_at
+    assert_equal 0, video.taken_at_granularity
+
+    assert_equal 1, video.views_count
+    assert_equal 3, video.comments_count
+
+    note = video.notes.first
+    assert_instance_of Flickr::Media::Note, note
+    assert_equal 72157629434940218, note.id
+    assert_instance_of Flickr::User, note.author
+    assert_equal '67131352@N04', note.author.nsid
+    assert_equal "Janko Marohnić", note.author.username
+    assert_equal [16, 16], note.coordinates.bottom_left
+    assert_equal [31, 31], note.coordinates.top_right
+    assert_equal "Headashgfsdg", note.content
+
+    assert_equal "david belle", video.tags
+    assert_equal "", video.machine_tags
+
+    location = video.location
+    assert_instance_of Flickr::Location, location
+    assert_equal 37.792608, location.latitude
+    assert_equal -122.402672, location.longitude
+    assert_equal "14", location.accuracy
+    assert_equal "0", location.context
+
+    assert_equal "Financial District", location.neighbourhood.name
+    assert_equal "GddgqTpTUb8LgT93hw", location.neighbourhood.id
+    assert_equal "23512022",           location.neighbourhood.woeid
+    assert_equal "San Francisco",      location.locality.name
+    assert_equal "7.MJR8tTVrIO1EgB",   location.locality.id
+    assert_equal "2487956",            location.locality.woeid
+    assert_equal "San Francisco",      location.county.name
+    assert_equal ".7sOmlRQUL9nK.kMzA", location.county.id
+    assert_equal "12587707",           location.county.woeid
+    assert_equal "California",         location.region.name
+    assert_equal "NsbUWfBTUb4mbyVu",   location.region.id
+    assert_equal "2347563",            location.region.woeid
+    assert_equal "United States",      location.country.name
+    assert_equal "nz.gsghTUb4c2WAecA", location.country.id
+    assert_equal "23424977",           location.country.woeid
+
+    assert_equal "GddgqTpTUb8LgT93hw", location.id
+    assert_equal "23512022", location.woeid
+
+    assert_instance_of Flickr::Media::Visibility, video.geo_permissions
+    assert_equal true, video.geo_permissions.public?
+
+    video.get_sizes
+    refute video.source_url.empty?
+    refute video.download_url.empty?
+    refute video.mobile_download_url.empty?
+>>>>>>> 565c834... fixup! 3d7fba8
   end
 
   def test_from_set
