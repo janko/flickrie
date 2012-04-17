@@ -109,42 +109,36 @@ class VideoTest < Test::Unit::TestCase
         "place_id" => "GddgqTpTUb8LgT93hw",
         "woeid" => "23512022"
       },
-      "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0}
-    tests << ->(video) do
-      location = video.location
-      assert_instance_of Flickr::Location, location
-      assert_equal 37.792608, location.latitude
-      assert_equal -122.402672, location.longitude
-      assert_equal "14", location.accuracy
-      assert_equal "0", location.context
+      "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0},
+    }
 
-      assert_equal "Financial District", location.neighbourhood.name
-      assert_equal "GddgqTpTUb8LgT93hw", location.neighbourhood.id
-      assert_equal "23512022",           location.neighbourhood.woeid
-      assert_equal "San Francisco",      location.locality.name
-      assert_equal "7.MJR8tTVrIO1EgB",   location.locality.id
-      assert_equal "2487956",            location.locality.woeid
-      assert_equal "San Francisco",      location.county.name
-      assert_equal ".7sOmlRQUL9nK.kMzA", location.county.id
-      assert_equal "12587707",           location.county.woeid
-      assert_equal "California",         location.region.name
-      assert_equal "NsbUWfBTUb4mbyVu",   location.region.id
-      assert_equal "2347563",            location.region.woeid
-      assert_equal "United States",      location.country.name
-      assert_equal "nz.gsghTUb4c2WAecA", location.country.id
-      assert_equal "23424977",           location.country.woeid
-
-      assert_equal "GddgqTpTUb8LgT93hw", location.id
-      assert_equal "23512022", location.woeid
-
-      assert_instance_of Flickr::Media::Visibility, video.geo_permissions
-      assert video.geo_permissions.public?
-    end
-
-<<<<<<< HEAD
     video = Flickr::Video.from_info(info_hash)
-    tests.each { |test| test.call(video) }
-=======
+
+    assert_equal 6923154272, video.id
+    assert_equal '5519fab554', video.secret
+    assert_equal 5279, video.server
+    assert_equal 6, video.farm
+    assert_instance_of Time, video.uploaded_at
+    assert_equal false, video.favorite?
+
+    assert_instance_of Flickr::License, video.license
+    assert_equal 0, video.license.id
+    assert_instance_of String, video.license.name
+    assert_instance_of String, video.license.url
+
+    assert_equal 0, video.safety_level
+    assert_equal true, video.safe?
+    assert_equal "David Belle - Canon commercial", video.title
+    assert_equal "", video.description
+
+    assert_instance_of Flickr::User, video.owner
+    assert_equal "67131352@N04", video.owner.nsid
+    assert_equal "Janko Marohnić", video.owner.username
+    assert video.owner.real_name.empty?
+    assert video.owner.location.empty?
+    refute video.owner.buddy_icon_url.empty?
+    refute video.url.empty?
+
     assert_instance_of Flickr::Media::Visibility, video.visibility
     assert_equal true, video.visibility.public?
     assert_equal false, video.can_comment?
@@ -211,68 +205,61 @@ class VideoTest < Test::Unit::TestCase
     refute video.source_url.empty?
     refute video.download_url.empty?
     refute video.mobile_download_url.empty?
->>>>>>> 565c834... fixup! 3d7fba8
   end
 
   def test_from_set
     set_hash = {
-      "id" => "72157629443464020",
-      "primary" => "6913731566",
-      "owner" => "67131352@N04",
+      "id" => "6913731566",
+      "secret" => "23879c079a",
+      "server" => "7130",
+      "farm" => 8,
+      "title" => "6913664138_61ffb9c0d7_b",
+      "isprimary" => "1",
+      "license" => "0",
+      "dateupload" => "1333956611",
+      "datetaken" => "2012-04-09 00:30:11",
+      "datetakengranularity" => "0",
       "ownername" => "Janko Marohnić",
-      "photo" => [
-        {"id" => "6913731566",
-         "secret" => "23879c079a",
-         "server" => "7130",
-         "farm" => 8,
-         "title" => "6913664138_61ffb9c0d7_b",
-         "isprimary" => "1",
-         "license" => "0",
-         "dateupload" => "1333956611",
-         "datetaken" => "2012-04-09 00:30:11",
-         "datetakengranularity" => "0",
-         "ownername" => "Janko Marohnić",
-         "iconserver" => "0",
-         "iconfarm" => 0,
-         "lastupdate" => "1334347067",
-         "latitude" => 0,
-         "longitude" => 0,
-         "accuracy" => 0,
-         "context" => 0,
-         "tags" => "zakon",
-         "machine_tags" => "",
-         "views" => "1",
-         "media" => "video",
-         "media_status" => "ready",
-         "pathalias" => nil,
-         "url_sq" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_s.jpg",
-         "height_sq" => 75,
-         "width_sq" => 75,
-         "url_q" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_q.jpg",
-         "height_q" => "150",
-         "width_q" => "150",
-         "url_t" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_t.jpg",
-         "height_t" => "100",
-         "width_t" => "75",
-         "url_s" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_m.jpg",
-         "height_s" => "240",
-         "width_s" => "180",
-         "url_n" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_n.jpg",
-         "height_n" => "320",
-         "width_n" => 240,
-         "url_m" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a.jpg",
-         "height_m" => "500",
-         "width_m" => "375",
-         "url_z" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_z.jpg",
-         "height_z" => "640",
-         "width_z" => "480",
-         "url_c" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_c.jpg",
-         "height_c" => "800",
-         "width_c" => 600,
-         "url_l" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_b.jpg",
-         "height_l" => "1024",
-         "width_l" => "768"}
-      ]
+      "iconserver" => "0",
+      "iconfarm" => 0,
+      "lastupdate" => "1334347067",
+      "latitude" => 0,
+      "longitude" => 0,
+      "accuracy" => 0,
+      "context" => 0,
+      "tags" => "zakon",
+      "machine_tags" => "",
+      "views" => "1",
+      "media" => "video",
+      "media_status" => "ready",
+      "pathalias" => nil,
+      "url_sq" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_s.jpg",
+      "height_sq" => 75,
+      "width_sq" => 75,
+      "url_q" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_q.jpg",
+      "height_q" => "150",
+      "width_q" => "150",
+      "url_t" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_t.jpg",
+      "height_t" => "100",
+      "width_t" => "75",
+      "url_s" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_m.jpg",
+      "height_s" => "240",
+      "width_s" => "180",
+      "url_n" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_n.jpg",
+      "height_n" => "320",
+      "width_n" => 240,
+      "url_m" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a.jpg",
+      "height_m" => "500",
+      "width_m" => "375",
+      "url_z" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_z.jpg",
+      "height_z" => "640",
+      "width_z" => "480",
+      "url_c" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_c.jpg",
+      "height_c" => "800",
+      "width_c" => 600,
+      "url_l" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_b.jpg",
+      "height_l" => "1024",
+      "width_l" => "768"
     }
     video = Flickr::Video.from_set(set_hash)
     assert_instance_of Flickr::License, video.license
