@@ -110,6 +110,13 @@ class VideoTest < Test::Unit::TestCase
         "woeid" => "23512022"
       },
       "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0},
+      "video" => {
+        "ready" => 1,
+        "failed" => 0,
+        "pending" => 0,
+        "duration" => "34",
+        "width" => "480",
+        "height" => "360"}
     }
 
     video = Flickr::Video.from_info(info_hash)
@@ -200,6 +207,13 @@ class VideoTest < Test::Unit::TestCase
 
     assert_instance_of Flickr::Media::Visibility, video.geo_permissions
     assert_equal true, video.geo_permissions.public?
+
+    assert video.ready?
+    refute video.failed?
+    refute video.pending?
+    assert_equal 34, video.duration
+    assert_equal 480, video.width
+    assert_equal 360, video.height
 
     video.get_sizes
     refute video.source_url.empty?
