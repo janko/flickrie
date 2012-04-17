@@ -78,14 +78,14 @@ module Flickr
       get 'flickr.people.findByUsername', :username => username
     end
 
-    def get_user_info(user_id)
-      get 'flickr.people.getInfo', :user_id => user_id
+    def get_user_info(user_nsid)
+      get 'flickr.people.getInfo', :user_id => user_nsid
+    end
+
     end
 
     def get_set_info(set_id)
       get 'flickr.photosets.getInfo', :photoset_id => set_id
-    end
-
     end
 
     def get_licenses

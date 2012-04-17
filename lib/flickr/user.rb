@@ -71,7 +71,12 @@ module Flickr
     end
 
     def self.from_info(info)
-      new('nsid' => info['nsid']).get_info(info)
+      new.get_info(info)
+    end
+
+    def self.from_find(info)
+      info['username'] = info['username']['_content']
+      new(info)
     end
   end
 end

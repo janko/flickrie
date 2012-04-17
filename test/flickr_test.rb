@@ -63,7 +63,7 @@ class FlickrTest < Test::Unit::TestCase
     assert sets.all? { |set| set.is_a?(Flickr::Set) }
     assert sets.first.title.is_a?(String) && !sets.first.title.empty?
 
-    set = Flickr.find_set_by_id(set_id)
+    set = Flickr.get_set_info(@set_id)
     assert_instance_of Flickr::Set, set
     assert set.title.is_a?(String) && !set.title.empty?
   end
@@ -75,8 +75,8 @@ class FlickrTest < Test::Unit::TestCase
   end
 
   def test_user
-    assert_equal '67131352@N04', Flickr.get_user_nsid(:username => 'Janko Marohnić')
-    assert_equal '67131352@N04', Flickr.get_user_nsid(:email => 'janko.marohnic@gmail.com')
-    assert_instance_of Flickr::User, Flickr.find_user_by_nsid('67131352@N04')
+    assert_equal @user_nsid, Flickr.find_user_by_username('Janko Marohnić').nsid
+    assert_equal @user_nsid, Flickr.find_user_by_email('janko.marohnic@gmail.com').nsid
+    assert_equal @user_nsid, Flickr.get_user_info(@user_nsid).nsid
   end
 end

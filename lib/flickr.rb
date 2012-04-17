@@ -56,36 +56,40 @@ module Flickr
       end
     end
 
-    def find_user_by_nsid(user_nsid)
-      response = client.get_user_info(user_nsid)
-      User.from_info(response.body['person'])
     def get_photo_sizes(photo_id)
       response = client.get_item_sizes(photo_id)
       Photo.from_sizes(response.body['sizes'])
     end
 
-    def get_user_nsid(options)
-      if options[:email].nil? and options[:username].nil?
-        raise ArgumentError, "'email' or 'username' must be present"
-      end
     def get_video_sizes(video_id)
       response = client.get_item_sizes(video_id)
       Video.from_sizes(response.body['sizes'])
     end
 
-      if options[:email]
-        response = client.find_user_by_email(options[:email])
-      else
-        response = client.find_user_by_username(options[:username])
-      end
 
-      response.body['user']['nsid']
     end
 
-    def find_set_by_id(set_id)
+    def get_set_info(set_id)
       response = client.get_set_info(set_id)
       Set.new(response.body['photoset'])
     end
+
+
+    def get_user_info(user_nsid)
+      response = client.get_user_info(user_nsid)
+      User.from_info(response.body['person'])
+    end
+
+    def find_user_by_email(email)
+      response = client.find_user_by_email(email)
+      User.from_find(response.body['user'])
+    end
+
+    def find_user_by_username(username)
+      response = client.find_user_by_username(username)
+      User.from_find(response.body['user'])
+    end
+
 
     def get_licenses
       response = client.get_licenses
