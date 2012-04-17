@@ -46,10 +46,6 @@ module Flickr
       end
     end
 
-    def sets_from_user(user_id)
-      response = client.sets_from_user(user_id)
-      hashes = response.body['photosets']['photoset']
-      hashes.map { |hash| Set.new(hash) }
     def public_videos_from_user(user_nsid, params = {})
       public_items_from_user(user_nsid, params).select do |item|
         item.is_a?(Video)
@@ -67,6 +63,9 @@ module Flickr
     end
 
 
+    def sets_from_user(user_nsid)
+      response = client.sets_from_user(user_nsid)
+      response.body['photosets']['photoset'].map { |info| Set.new(info) }
     end
 
     def get_set_info(set_id)

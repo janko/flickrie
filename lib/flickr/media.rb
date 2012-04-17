@@ -5,10 +5,10 @@ require 'date'
 
 module Flickr
   module Media
-    def id;             @info['id'].to_i      end
+    def id;             @info['id']           end
     def secret;         @info['secret']       end
-    def server;         @info['server'].to_i  end
-    def farm;           @info['farm'].to_i    end
+    def server;         @info['server']       end
+    def farm;           @info['farm']         end
     def title;          @info['title']        end
     def description;    @info['description']  end
     def tags;           @info['tags']         end
@@ -52,7 +52,7 @@ module Flickr
     end
 
     def owner
-      User.new(@info['owner'])
+      User.new(@info['owner']) if @info['owner']
     end
 
     def safety_level; @info['safety_level'].to_i if @info['safety_level'] end
@@ -62,7 +62,9 @@ module Flickr
     def restricted?; safety_level == 3 if safety_level end
 
     def url
-      "http://www.flickr.com/photos/#{owner.nsid}/#{id}"
+      if owner and id
+        "http://www.flickr.com/photos/#{owner.nsid}/#{id}"
+      end
     end
 
     def visibility
@@ -89,19 +91,15 @@ module Flickr
       @info['publiceditability']['canaddmeta'].to_i == 1 if @info['publiceditability']
     end
 
-    def can_download?; @info['usage']['candownload'].to_i == 1 if @info['usage'] end
-    def can_blog?;     @info['usage']['canblog'].to_i == 1     if @info['usage'] end
-    def can_print?;    @info['usage']['canprint'].to_i == 1    if @info['usage'] end
-    def can_share?;    @info['usage']['canshare'].to_i == 1    if @info['usage'] end
+    def can_download?; @info['usage']['candownload'].to_i == 1 if @info['usage']['candownload'] end
+    def can_blog?;     @info['usage']['canblog'].to_i == 1     if @info['usage']['canblog']     end
+    def can_print?;    @info['usage']['canprint'].to_i == 1    if @info['usage']['canprint']    end
+    def can_share?;    @info['usage']['canshare'].to_i == 1    if @info['usage']['canshare']    end
 
     def has_people?; @info['people']['haspeople'].to_i == 1 if @info['people'] end
 
     def notes
       @info['notes']['note'].map { |hash| Note.new(hash) } if @info['notes']
-    end
-
-    def initialize(info = {})
-      @info = info
     end
 
     def get_info(info = nil)
@@ -165,19 +163,12 @@ module Flickr
     end
     extend(ClassMethods)
 
-    def self.new(info)
-      require 'flickr/photo'
-      require 'flickr/video'
-
-      if info['media'] == 'photo'
-        Photo.new(info)
-      else
-        Video.new(info)
-      end
-    end
-
     def self.included(klass)
       klass.extend(ClassMethods)
+    end
+
+    def self.new(info)
+      eval(info['media'].capitalize).new(info)
     end
   end
 end

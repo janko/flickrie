@@ -34,9 +34,9 @@ class SetTest < Test::Unit::TestCase
     }
     set = Flickr::Set.public_new(info_hash)
 
-    assert_equal 72157629409394888, set.id
+    assert_equal '72157629409394888', set.id
     assert_equal '67131352@N04', set.owner.nsid
-    assert_equal 6913663366, set.primary_item_id
+    assert_equal '6913663366', set.primary_item_id
     assert_equal '0c9fb32336', set.secret
     assert_equal 6, set.farm
     assert_equal 'rođendan', set.title

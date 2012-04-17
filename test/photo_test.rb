@@ -303,9 +303,9 @@ class PhotoTest < Test::Unit::TestCase
     assert_equal "Large 1024", photo.largest!.size
     assert_equal [768, 1024], [photo.width, photo.height]
     assert_instance_of Flickr::User, photo.owner
-    assert_equal 6913731566, photo.id
+    assert_equal '6913731566', photo.id
     assert_equal "23879c079a", photo.secret
-    assert_equal 7130, photo.server
+    assert_equal '7130', photo.server
     assert_equal 8, photo.farm
     assert_equal "6913664138_61ffb9c0d7_b", photo.title
     assert_equal true, photo.primary?

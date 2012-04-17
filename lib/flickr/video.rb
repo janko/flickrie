@@ -39,9 +39,10 @@ module Flickr
 
     private
 
-    def initialize(hash)
-      super
-      @video = @info['video']
+    def initialize(info = {})
+      @info = info
+      @video = @info['video'] || {}
+    end
 
     def self.from_sizes(info)
       new.get_sizes(info)

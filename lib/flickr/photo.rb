@@ -19,13 +19,6 @@ module Flickr
       'Original'   => 'o'
     }
 
-    def square(number); self.class.new(@info, "Square #{number}") end
-    def thumbnail;      self.class.new(@info, "Thumbnail")        end
-    def small(number);  self.class.new(@info, "Small #{number}")  end
-    def medium(number); self.class.new(@info, "Medium #{number}") end
-    def large(number);  self.class.new(@info, "Large #{number}")  end
-    def original;       self.class.new(@info, "Original")         end
-
     def square!(number); @size = "Square #{number}"; self end
     def thumbnail!;      @size = "Thumbnail";        self end
     def small!(number);  @size = "Small #{number}";  self end
@@ -33,8 +26,15 @@ module Flickr
     def large!(number);  @size = "Large #{number}";  self end
     def original!;       @size = "Original";         self end
 
-    def largest; self.class.new(@info, largest_size) end
+    def square(number); self.class.new(@info).square!(number) end
+    def thumbnail;      self.class.new(@info).thumbnail!      end
+    def small(number);  self.class.new(@info).small!(number)  end
+    def medium(number); self.class.new(@info).medium!(number) end
+    def large(number);  self.class.new(@info).large!(number)  end
+    def original;       self.class.new(@info).original!       end
+
     def largest!; @size = largest_size; self end
+    def largest; self.class.new(@info).largest! end
 
     def available_sizes
       SIZES.select { |_, s| @info["url_#{s}"] }.keys
@@ -79,8 +79,8 @@ module Flickr
 
     private
 
-    def initialize(hash, size = nil)
-      super(hash)
+    def initialize(info = {}, size = nil)
+      @info = info
       @size = size || largest_size
     end
 

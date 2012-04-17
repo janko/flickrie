@@ -5,10 +5,13 @@ require 'flickr'
 class FlickrTest < Test::Unit::TestCase
   def setup
     Flickr.api_key = ENV["FLICKR_API_KEY"]
+    @set_id = 72157629409394888
+    @photo_id = 6913731566
+    @video_id = 6923154272
+    @user_nsid = "67131352@N04"
   end
 
   def test_items_from_set
-    set_id = 72157629409394888
     photo = Flickr.photos_from_set(@set_id).first
     assert_instance_of Flickr::Photo, photo
     assert photo.title.is_a?(String) && !photo.title.empty?
@@ -34,8 +37,6 @@ class FlickrTest < Test::Unit::TestCase
     assert_instance_of Flickr::Video, item
   end
 
-    photo_id = 6913731566
-    video_id = 6923154272
   def test_getting_sizes
     photo = Flickr.get_photo_sizes(@photo_id)
     refute photo.square75.source_url.empty?
@@ -58,8 +59,7 @@ class FlickrTest < Test::Unit::TestCase
   end
 
   def test_sets
-    set_id = 72157629409394888
-    sets = Flickr.sets_from_user('67131352@N04')
+    sets = Flickr.sets_from_user(@user_nsid)
     assert sets.all? { |set| set.is_a?(Flickr::Set) }
     assert sets.first.title.is_a?(String) && !sets.first.title.empty?
 

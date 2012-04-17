@@ -2,30 +2,31 @@ require 'faraday_stack'
 
 module Flickr
   class << self
-    attr_accessor :api_key
-  end
+    attr_reader :api_key
 
-  def self.client
-    @client ||= begin
-      client = FaradayStack.build Client,
-        :url => 'http://api.flickr.com/services/rest/',
-        :params => {
-          :format => 'json',
-          :nojsoncallback => '1',
-          :api_key => self.api_key
-        },
-        :request => {
-          :open_timeout => 2,
-          :timeout => 3
-        }
-
-      client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
-      client
+    def api_key=(api_key)
+      @api_key = api_key
+      @client = nil
     end
-  end
 
-  def self.reset_client
-    @client = nil
+    def client
+      @client ||= begin
+        client = FaradayStack.build Client,
+          :url => 'http://api.flickr.com/services/rest/',
+          :params => {
+            :format => 'json',
+            :nojsoncallback => '1',
+            :api_key => self.api_key
+          },
+          :request => {
+            :open_timeout => 5,
+            :timeout => 5
+          }
+
+        client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
+        client
+      end
+    end
   end
 
   class Error < StandardError
@@ -34,7 +35,6 @@ module Flickr
   class StatusCheck < Faraday::Response::Middleware
     def on_complete(env)
       if env[:body]['stat'] != 'ok'
-        Flickr.reset_client if env[:body]['message'] =~ /Invalid API key/i
         raise Error, env[:body]['message']
       end
     end
@@ -64,8 +64,6 @@ module Flickr
       get 'flickr.people.getPublicPhotos', params
     end
 
-    def sets_from_user(user_id)
-      get 'flickr.photosets.getList', :user_id => user_id
     def get_item_sizes(item_id)
       get 'flickr.photos.getSizes', :photo_id => item_id
     end
@@ -82,6 +80,8 @@ module Flickr
       get 'flickr.people.getInfo', :user_id => user_nsid
     end
 
+    def sets_from_user(user_nsid)
+      get 'flickr.photosets.getList', :user_id => user_nsid
     end
 
     def get_set_info(set_id)
