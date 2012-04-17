@@ -6,8 +6,6 @@ require 'flickr/photo'
 require 'flickr/video'
 require 'flickr/set'
 
-SIZES = Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
-
 module Flickr
   class << self
     def items_from_set(set_id, params = {})
@@ -18,7 +16,7 @@ module Flickr
     end
 
     def photos_from_set(set_id, params = {})
-      params = {:media => 'photos', :extras => SIZES}.merge(params)
+      params = {:media => 'photos', :extras => sizes}.merge(params)
       items_from_set(set_id, params)
     end
 
@@ -40,7 +38,7 @@ module Flickr
     end
 
     def public_photos_from_user(user_nsid, params = {})
-      params = {:extras => SIZES}.merge(params)
+      params = {:extras => sizes}.merge(params)
       public_items_from_user(user_nsid, params).select do |item|
         item.is_a?(Photo)
       end
@@ -94,6 +92,12 @@ module Flickr
       response = client.get_licenses
       hashes = response.body['licenses']['license']
       hashes.map { |hash| License.new(hash) }
+    end
+
+    private
+
+    def sizes
+      @sizes ||= Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
     end
   end
 end
