@@ -37,11 +37,18 @@ module Flickr
       self
     end
 
+    def get_info(info = nil)
+      super
+      @video = @info['video']
+
+      self
+    end
+
     private
 
     def initialize(info = {})
       @info = info
-      @video = @info['video'] || {}
+      @video = {}
     end
 
     def self.from_sizes(info)

@@ -110,6 +110,7 @@ class VideoTest < Test::Unit::TestCase
         "woeid" => "23512022"
       },
       "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0},
+      "media" => "video",
       "video" => {
         "ready" => 1,
         "failed" => 0,
@@ -121,9 +122,9 @@ class VideoTest < Test::Unit::TestCase
 
     video = Flickr::Video.from_info(info_hash)
 
-    assert_equal 6923154272, video.id
+    assert_equal '6923154272', video.id
     assert_equal '5519fab554', video.secret
-    assert_equal 5279, video.server
+    assert_equal '5279', video.server
     assert_equal 6, video.farm
     assert_instance_of Time, video.uploaded_at
     assert_equal false, video.favorite?

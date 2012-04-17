@@ -110,12 +110,13 @@ class PhotoTest < Test::Unit::TestCase
         "woeid" => "23512022"
       },
       "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0},
+      "media" => "photo"
     }
 
     photo = Flickr::Photo.from_info(info_hash)
-    assert_equal 6923154272, photo.id
+    assert_equal '6923154272', photo.id
     assert_equal '5519fab554', photo.secret
-    assert_equal 5279, photo.server
+    assert_equal '5279', photo.server
     assert_equal 6, photo.farm
     assert_instance_of Time, photo.uploaded_at
     assert_equal false, photo.favorite?
