@@ -271,6 +271,8 @@ class PhotoTest < Test::Unit::TestCase
     assert_equal 8, photo.farm
     assert_equal "6913664138_61ffb9c0d7_b", photo.title
     assert_equal true, photo.primary?
+    assert_instance_of Flickr::Photo, photo.square75
+    assert_instance_of Flickr::Photo, photo.square75!
 
     # Extras
     assert_instance_of Flickr::License, photo.license
