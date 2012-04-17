@@ -293,4 +293,58 @@ class VideoTest < Test::Unit::TestCase
     video.get_info
     test_from_info
   end
+
+  def test_methods_returning_nil
+    video = Flickr::Video.new
+
+    assert_nil video.id
+    assert_nil video.secret
+    assert_nil video.server
+    assert_nil video.farm
+    assert_nil video.title
+    assert_nil video.description
+    assert_nil video.tags
+    assert_nil video.machine_tags
+    assert_nil video.media_status
+    assert_nil video.path_alias
+    assert_nil video.views_count
+    assert_nil video.comments_count
+    assert_nil video.location
+    assert_nil video.geo_permissions
+    assert_nil video.license
+    assert_nil video.posted_at
+    assert_nil video.uploaded_at
+    assert_nil video.updated_at
+    assert_nil video.taken_at
+    assert_nil video.taken_at_granularity
+    assert_nil video.owner
+    assert_nil video.safety_level
+    assert_nil video.safe?
+    assert_nil video.moderate?
+    assert_nil video.restricted?
+    assert_nil video.url
+    assert_nil video.visibility
+    assert_nil video.primary?
+    assert_nil video.favorite?
+    assert_nil video.can_comment?
+    assert_nil video.can_add_meta?
+    assert_nil video.can_everyone_comment?
+    assert_nil video.can_everyone_add_meta?
+    assert_nil video.can_download?
+    assert_nil video.can_blog?
+    assert_nil video.can_print?
+    assert_nil video.can_share?
+    assert_nil video.has_people?
+    assert_nil video.notes
+
+    assert_nil video.ready?
+    assert_nil video.failed?
+    assert_nil video.pending?
+    assert_nil video.duration
+    assert_nil video.width
+    assert_nil video.height
+    assert_nil video.source_url
+    assert_nil video.download_url
+    assert_nil video.mobile_download_url
+  end
 end

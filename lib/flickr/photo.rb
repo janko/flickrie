@@ -47,11 +47,12 @@ module Flickr
       SIZES.select { |_, s| @info["url_#{s}"] }.keys
     end
 
-    def width;      @info["width_#{size_abbr}"].to_i  end
-    def height;     @info["height_#{size_abbr}"].to_i end
-    def source_url; @info["url_#{size_abbr}"]         end
+    def width;      @info["width_#{size_abbr}"].to_i if @info["width_#{size_abbr}"]   end
+    def height;     @info["height_#{size_abbr}"].to_i if @info["height_#{size_abbr}"] end
 
-    def rotation; @info['rotation'].to_i end
+    def source_url; @info["url_#{size_abbr}"] end
+
+    def rotation; @info['rotation'].to_i if @info['rotation'] end
 
     def get_sizes(info = nil)
       info ||= Flickr.client.get_photo_sizes(id).body['sizes']

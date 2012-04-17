@@ -289,4 +289,53 @@ class PhotoTest < Test::Unit::TestCase
     photo.get_info
     test_from_info
   end
+
+  def test_methods_returning_nil
+    photo = Flickr::Photo.new
+
+    assert_nil photo.id
+    assert_nil photo.secret
+    assert_nil photo.server
+    assert_nil photo.farm
+    assert_nil photo.title
+    assert_nil photo.description
+    assert_nil photo.tags
+    assert_nil photo.machine_tags
+    assert_nil photo.media_status
+    assert_nil photo.path_alias
+    assert_nil photo.views_count
+    assert_nil photo.comments_count
+    assert_nil photo.location
+    assert_nil photo.geo_permissions
+    assert_nil photo.license
+    assert_nil photo.posted_at
+    assert_nil photo.uploaded_at
+    assert_nil photo.updated_at
+    assert_nil photo.taken_at
+    assert_nil photo.taken_at_granularity
+    assert_nil photo.owner
+    assert_nil photo.safety_level
+    assert_nil photo.safe?
+    assert_nil photo.moderate?
+    assert_nil photo.restricted?
+    assert_nil photo.url
+    assert_nil photo.visibility
+    assert_nil photo.primary?
+    assert_nil photo.favorite?
+    assert_nil photo.can_comment?
+    assert_nil photo.can_add_meta?
+    assert_nil photo.can_everyone_comment?
+    assert_nil photo.can_everyone_add_meta?
+    assert_nil photo.can_download?
+    assert_nil photo.can_blog?
+    assert_nil photo.can_print?
+    assert_nil photo.can_share?
+    assert_nil photo.has_people?
+    assert_nil photo.notes
+
+    assert_nil photo.width
+    assert_nil photo.height
+    assert_nil photo.source_url
+    assert_nil photo.rotation
+  end
 end
