@@ -1,6 +1,10 @@
 # encoding: utf-8
 require 'test/unit'
 require 'flickr/set'
+require 'flickr'
+require 'flickr/client'
+require 'flickr/user'
+require 'flickr/photo'
 
 class SetTest < Test::Unit::TestCase
   Flickr::Set.instance_eval do

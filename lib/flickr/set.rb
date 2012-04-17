@@ -1,5 +1,3 @@
-require 'flickr/user'
-
 module Flickr
   class Set
     def id; @info['id'].to_i end

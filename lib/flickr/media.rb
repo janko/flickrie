@@ -1,9 +1,6 @@
-require 'flickr/client'
-require 'flickr/license'
 require 'flickr/media/visibility'
 require 'flickr/media/note'
 require 'flickr/location'
-require 'flickr/user'
 require 'date'
 
 module Flickr

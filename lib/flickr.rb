@@ -1,9 +1,10 @@
 require 'flickr/client'
+require 'flickr/license'
+require 'flickr/user'
+require 'flickr/media'
 require 'flickr/photo'
 require 'flickr/video'
 require 'flickr/set'
-require 'flickr/user'
-require 'flickr/license'
 
 module Flickr
   class << self

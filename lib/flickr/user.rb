@@ -1,4 +1,3 @@
-require 'flickr/client'
 require 'date'
 
 module Flickr
