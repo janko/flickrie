@@ -47,7 +47,7 @@ module Flickr
     private
 
     def initialize(info = {})
-      @info = info
+      super
       @video = {}
     end
 

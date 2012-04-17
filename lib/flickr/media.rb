@@ -121,6 +121,12 @@ module Flickr
       self
     end
 
+    def initialize(info = {})
+      @info = info
+      @info['dates'] ||= {}
+      @info['usage'] ||= {}
+    end
+
     module ClassMethods
       def from_set(info)
         info['owner'] = {

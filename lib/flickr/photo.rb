@@ -87,7 +87,7 @@ module Flickr
     private
 
     def initialize(info = {}, size = nil)
-      @info = info
+      super(info)
       @size = size || largest_size
     end
 
