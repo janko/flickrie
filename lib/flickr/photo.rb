@@ -33,6 +33,13 @@ module Flickr
     def large(number);  self.class.new(@info).large!(number)  end
     def original;       self.class.new(@info).original!       end
 
+    # Photo#square75, Photo#medium500, ...
+    SIZES.keys.each do |size|
+      method_name = size.delete(' ').downcase
+      define_method("#{method_name}")  { self.class.new(@info, size) }
+      define_method("#{method_name}!") { @size = size }
+    end
+
     def largest!; @size = largest_size; self end
     def largest; self.class.new(@info).largest! end
 
