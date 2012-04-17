@@ -362,7 +362,7 @@ class VideoTest < Test::Unit::TestCase
          "width_l" => "768"}
       ]
     }
-    video = Flickr::Video.from_set(set_hash).first
+    video = Flickr::Video.from_set(set_hash)
     assert_instance_of Flickr::License, video.license
     assert_instance_of Time, video.uploaded_at
     assert_instance_of Time, video.taken_at

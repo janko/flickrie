@@ -19,6 +19,10 @@ module Flickr
 
     def owner; User.new('nsid' => @info['owner']) end
 
+    def photos; Flickr.photos_from_set(id) end
+    def videos; Flickr.videos_from_set(id) end
+    def items;  Flickr.items_from_set(id)  end
+
     def can_comment?; @info['can_comment'].to_i == 1 end
 
     # TODO: Figure out what this is

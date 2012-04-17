@@ -48,23 +48,16 @@ module Flickr
       end
     end
 
-    def media_from_set(set_id, params = {})
-      default_params = {
-        :photoset_id => set_id,
-        :extras => 'media'
-      }
-      get 'flickr.photosets.getPhotos', default_params.merge(params)
+    def items_from_set(set_id, params = {})
+      params = {:photoset_id => set_id}.merge(params)
+      params[:extras] = [params[:extras], 'media'].compact.join(',')
+      get 'flickr.photosets.getPhotos', params
     end
 
-    def photos_from_set(set_id)
-      media_from_set set_id, :media => 'photos',
-        :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o,media'
     def get_item_info(item_id)
       get 'flickr.photos.getInfo', :photo_id => item_id
     end
 
-    def videos_from_set(set_id)
-      media_from_set set_id, :media => 'videos'
     def public_items_from_user(user_nsid, params = {})
       params = {:user_id => user_nsid}.merge(params)
       params[:extras] = [params[:extras], 'media'].compact.join(',')

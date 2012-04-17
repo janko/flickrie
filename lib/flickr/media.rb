@@ -124,31 +124,27 @@ module Flickr
     end
 
     module ClassMethods
-      def from_set(hash)
-        hash['photo'].map do |info|
-
-          # Fixes
-          info.update 'owner' => {
-            'nsid' => hash['owner'],
-            'username' => hash['ownername'],
-            'iconserver' => info['iconserver'],
-            'iconfarm' => info['iconfarm']
-          }
-          if info['latitude']
-            geo_info = %w[latitude longitude accuracy context]
-            location = geo_info.inject({}) do |location, geo|
-              location.update(geo => info.delete(geo))
-            end
-            info.update('location' => location)
+      def from_set(info)
+        info['owner'] = {
+          'iconserver' => info.delete('iconserver'),
+          'iconfarm' => info.delete('iconfarm')
+        }
+        if info['latitude']
+          geo_info = %w[latitude longitude accuracy context]
+          location = geo_info.inject({}) do |location, geo|
+            location.update(geo => info.delete(geo))
           end
-          info['dates'] = {}
-          info['dates']['uploaded'] = info.delete('dateupload')
-          info['dates']['lastupdate'] = info.delete('lastupdate')
-          info['dates']['taken'] = info.delete('datetaken')
-          info['dates']['takengranularity'] = info.delete('datetakengranularity')
-
-          new(info)
+          info['location'] = location
         end
+        info['dates'] = {
+          'uploaded' => info.delete('dateupload'),
+          'lastupdate' => info.delete('lastupdate'),
+          'taken' => info.delete('datetaken'),
+          'takengranularity' => info.delete('datetakengranularity'),
+        }
+        info['usage'] = {}
+
+        new(info)
       end
 
       def from_info(info)

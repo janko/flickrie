@@ -6,18 +6,25 @@ require 'flickr/photo'
 require 'flickr/video'
 require 'flickr/set'
 
+SIZES = Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
+
 module Flickr
   class << self
-    def photos_from_set(set_id)
-      response = client.photos_from_set(set_id)
-      Photo.from_set(response.body['photoset'])
+    def items_from_set(set_id, params = {})
+      response = client.items_from_set(set_id, params)
+      response.body['photoset']['photo'].map do |info|
+        Media.from_set(info)
+      end
     end
 
+    def photos_from_set(set_id, params = {})
+      params = {:media => 'photos', :extras => SIZES}.merge(params)
+      items_from_set(set_id, params)
     end
 
-    def videos_from_set(set_id)
-      response = client.videos_from_set(set_id)
-      Video.from_set(response.body['photoset'])
+    def videos_from_set(set_id, params = {})
+      params = {:media => 'videos'}.merge(params)
+      items_from_set(set_id, params)
     end
 
     def get_item_info(item_id)
@@ -27,9 +34,6 @@ module Flickr
     alias get_photo_info get_item_info
     alias get_video_info get_item_info
 
-    def items_from_set(set_id)
-      response = client.media_from_set(set_id)
-      Media.from_set(response.body['photoset'])
     def public_items_from_user(user_nsid, params = {})
       response = client.public_items_from_user(user_nsid, params)
       response.body['photos']['photo'].map { |info| Media.from_user(info) }

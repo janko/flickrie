@@ -48,6 +48,8 @@ class SetTest < Test::Unit::TestCase
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
 
+    assert_instance_of Flickr::Photo, set.photos.first
+
     assert_instance_of Flickr::User, set.owner
     assert set.can_comment?
     refute set.url.empty?

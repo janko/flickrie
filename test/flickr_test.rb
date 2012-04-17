@@ -9,20 +9,27 @@ class FlickrTest < Test::Unit::TestCase
 
   def test_items_from_set
     set_id = 72157629409394888
+    photo = Flickr.photos_from_set(@set_id).first
+    assert_instance_of Flickr::Photo, photo
+    assert photo.title.is_a?(String) && !photo.title.empty?
 
-    photo = Flickr.photos_from_set(set_id).first
+    video = Flickr.videos_from_set(@set_id).first
+    assert_instance_of Flickr::Video, video
+    assert video.title.is_a?(String) && !video.title.empty?
+
+    assert Flickr.items_from_set(@set_id).any? { |item| item.is_a?(Flickr::Photo) }
+    assert Flickr.items_from_set(@set_id).any? { |item| item.is_a?(Flickr::Video) }
+  end
+
   def test_getting_info
     photo = Flickr.get_photo_info(@photo_id)
     assert_instance_of Flickr::Photo, photo
     assert photo.title.is_a?(String) && !photo.title.empty?
 
-    video = Flickr.videos_from_set(set_id).first
     video = Flickr.get_video_info(@video_id)
     assert_instance_of Flickr::Video, video
     assert video.title.is_a?(String) && !video.title.empty?
 
-    assert_instance_of Flickr::Photo, Flickr.items_from_set(set_id).first
-    assert_instance_of Flickr::Video, Flickr.items_from_set(set_id).last
     item = Flickr.get_item_info(@video_id)
     assert_instance_of Flickr::Video, item
   end

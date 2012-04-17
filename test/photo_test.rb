@@ -295,7 +295,7 @@ class PhotoTest < Test::Unit::TestCase
          "width_l" => "768"}
       ]
     }
-    photo = Flickr::Photo.from_set(set_hash).first
+    photo = Flickr::Photo.from_set(set_hash)
     assert_equal "Large 1024", photo.size
     assert photo.primary?
     assert_equal Flickr::Photo::SIZES.keys[0..-2], photo.available_sizes
