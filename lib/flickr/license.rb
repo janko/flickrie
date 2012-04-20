@@ -30,5 +30,9 @@ module Flickr
         {"id"=>"8", "name"=>"United States Government Work", "url"=>"http://www.usa.gov/copyright.shtml"}
       ]
     end
+
+    def self.from_hash(licenses_hash)
+      licenses_hash.map { |info| new(info) }
+    end
   end
 end

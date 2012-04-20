@@ -88,8 +88,7 @@ module Flickr
 
     def get_licenses
       response = client.get_licenses
-      hashes = response.body['licenses']['license']
-      hashes.map { |hash| License.new(hash) }
+      License.from_hash(response.body['licenses']['license'])
     end
 
     private
