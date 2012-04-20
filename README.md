@@ -1,20 +1,165 @@
-# Flickr
+# Flickrie
 
-This gem is a nice wrapper for the Flickr API via an intuitive interface.
+## About
+
+This gem is a nice wrapper for the Flickr API an intuitive interface.
+
+The reason why I did this gem is because the other ones either weren't
+well maintained, or they were too literal in the sense that the response from
+the API call wasn't processed almost at all. It doesn't seem too bad
+at first, but after a while you realize it's not pretty. So I wanted to
+make it pretty :)
 
 ## Examples of usage
 
 You first need to set the API key.
 
 ```ruby
-require 'flickr'
+require 'flickrie'
 Flickr.api_key = "some_api_key"
 ```
 
-Then you can search for stuff.
+Then you can search for photos.
 
 ```ruby
-Flickr.find_photo_by_id(942827) # => #<Photo: size="Medium 500", url="http://farm1.staticflickr.com/5/4896740_fd69224bd0.jpg", width="481", height="426", ...>
-Flickr.find_user_by_id("67313352@N04") # => #<User: username="jsmith", real_name="John Smith", photos_count=152, ...>
-Flickr.photos_from_set(819234) # => [#<Photo: size="Medium 500", ...>, #<Photo: size="Square 150", ...>, ...]
+photos = Flickr.photos_from_set(819234) # => [#<Photo: id="8232348", ...>, #<Photo: id="8194318", ...>, ...]
+
+photo = photos.first
+photo.id          # => "8232348"
+photo.url         # => "http://www.flickr.com/photos/67313352@N04/8232348"
+photo.title       # => "Samantha and me"
+photo.owner       # => #<User: nsid="67313352@N04", ...>
+photo.owner.nsid  # => "67313352@N04"
 ```
+
+You can also throw in some parameters to get more information about photos.  For example,
+
+```ruby
+photos = Flickr.photos_from_set(819234, :extras => 'owner_name,last_update,tags,views')
+
+photo = photos.first
+photo.tags           # => "cave cold forrest"
+photo.owner.username # => "jsmith"
+photo.updated_at     # => 2012-04-20 23:29:17 +0200
+photo.views_count    # => 24
+```
+
+On the list of available parameters you can read in the [Flickr API documentation](http://www.flickr.com/services/api/), under the corresponding API method name (in the above case it's `flickr.photosets.getPhotos`).
+
+You can also get additional info on a single photo:
+
+```ruby
+photo = Flickr.get_photo_info(8232348)
+
+photo.description           # => "In this photo, Samantha and me found a secret tunnel..."
+photo.comments_count        # => 6
+photo.visibility.public?    # => true
+photo.can_download?         # => true
+photo.owner.real_name       # => "John Smith"
+photo.location.country.name # => "United Stated"
+```
+
+You can also get this info on an existing photo:
+
+```ruby
+photo.description # => nil
+photo.get_info
+photo.description # => "In this photo Peter said something really funny..."
+```
+
+If you want to display photos from flickr in your app, this is probably the most useful part:
+
+```ruby
+photo = Flickr.photo_get_sizes(8232348)
+
+photo.medium!(800)
+photo.size       # => "Medium 800"
+photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_c.jpg"
+photo.width      # => 600
+photo.height     # => 800
+
+photo.small!(320)
+photo.size       # => "Small 320"
+photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_n.jpg"
+photo.width      # => 240
+photo.width      # => 320
+```
+
+If you want sizes to be available to photos you're fetching from a set, it's a bad idea to call `#get_info` on each photo. Instead, you should pass in these options:
+
+```ruby
+photos = Flickr.photos_from_set(1242379, :extras => 'url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o')
+photo = photos.first
+photo.medium!(640)
+photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_z.jpg"
+```
+
+These are just some of the cool things you can do. To see a full list of available methods, I encourage you to read the [wiki](https://github.com/janko-m/flickrie/wiki).
+
+## A few words
+
+Now, I covered only a few out of many Flickr's API methods using this approach, but I'll constantly update this gem with new API methods. For all of the methods I didn't cover, you can call them using `Flickr.client`, like this:
+
+```ruby
+response = Flickr.client.get("flickr.photos.getContext", :photo_id => 2842732)
+reponse.body # =>
+# {
+#   "count" => {"_content" => 99},
+#   "prevphoto" => {
+#     "id" => "6946978706",
+#     "secret" => "b38270bbd6",
+#     ...
+#   }
+#   "nextphoto" => {
+#     "id" => "6946979704",
+#     "secret" => "74513ff732",
+#     ...
+#   }
+# }
+```
+
+It's not nearly as pretty, but at least you can get to the data
+
+## Currently covered API methods
+
+### people
+- `flickr.people.findByEmail`
+- `flickr.people.findByUsername`
+- `flickr.people.getInfo`
+- `flickr.people.getPublicPhotos`
+
+### photos
+- `flickr.photos.getInfo`
+- `flickr.photos.getSizes`
+- `flickr.photos.search`
+
+### licenses
+- `flickr.photos.licenses.getInfo`
+
+### photosets
+- `flickr.photosets.getInfo`
+- `flickr.photosets.getList`
+- `flickr.photosets.getPhotos`
+
+## License
+
+Copyright (c) 2008-2012 Janko Marohnić
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
