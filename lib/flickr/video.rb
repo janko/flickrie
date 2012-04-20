@@ -30,6 +30,7 @@ module Flickr
         when 'Mobile MP4'   then @video['mobile_download_url'] = hash['source']
         end
       end
+      @info['id'] = info['id']
 
       self
     end
