@@ -11,11 +11,11 @@ module Flickr
     alias primary_photo_id primary_item_id
     alias primary_video_id primary_item_id
 
-    def items_count; @info['photos'].to_i if @info['photos'] end
     def views_count; @info['count_views'].to_i if @info['count_views'] end
     def comments_count; @info['count_comments'].to_i if @info['count_comments'] end
     def photos_count; @info['count_photos'].to_i if @info['count_photos'] end
     def videos_count; @info['count_videos'].to_i if @info['count_videos'] end
+    def items_count; photos_count + videos_count rescue nil end
 
     def owner; User.new('nsid' => @info['owner']) if @info['owner'] end
 
@@ -42,6 +42,16 @@ module Flickr
       # Fixes
       @info['title'] = @info['title']['_content']
       @info['description'] = @info['description']['_content']
+    end
+
+    def self.from_user(info, user_nsid)
+      info.map do |info|
+        info['count_photos'] = info.delete('photos')
+        info['count_videos'] = info.delete('videos')
+        info['owner'] = user_nsid
+
+        new(info)
+      end
     end
   end
 end

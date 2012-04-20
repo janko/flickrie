@@ -61,7 +61,7 @@ module Flickr
 
     def sets_from_user(user_nsid)
       response = client.sets_from_user(user_nsid)
-      response.body['photosets']['photoset'].map { |info| Set.new(info) }
+      Set.from_user(response.body['photosets']['photoset'], user_nsid)
     end
 
     def get_set_info(set_id)

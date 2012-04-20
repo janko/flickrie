@@ -1,64 +1,76 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr/set'
 require 'flickr'
-require 'flickr/client'
-require 'flickr/user'
-require 'flickr/photo'
 
 class SetTest < Test::Unit::TestCase
-  Flickr::Set.instance_eval do
-    def public_new(*args)
-      new(*args)
-    end
-  end
-
   def setup
     Flickr.api_key = ENV['FLICKR_API_KEY']
+    @set_id = 72157629851991663
+    @user_nsid = '67131352@N04'
   end
 
-  def test_attributes
-    info_hash = {
-      'id' => '72157629409394888',
-      'owner' => '67131352@N04',
-      'primary' => '6913663366',
-      'secret' => '0c9fb32336',
-      'server' => '5240',
-      'farm' => 6,
-      'photos' => 3,
-      'count_views' => '0',
-      'count_comments' => '0',
-      'count_photos' => '2',
-      'count_videos' => 1,
-      'title' => {'_content' => 'rođendan'},
-      'description' => {'_content' => ''},
-      'can_comment' => 1,
-      'date_create' => '1333954490',
-      'date_update' => '1333956652'
-    }
-    set = Flickr::Set.public_new(info_hash)
+  def test_get_set_info
+    set = Flickr.get_set_info(@set_id)
 
-    assert_equal '72157629409394888', set.id
-    assert_equal '67131352@N04', set.owner.nsid
-    assert_equal '6913663366', set.primary_item_id
-    assert_equal '0c9fb32336', set.secret
-    assert_equal 6, set.farm
-    assert_equal 'rođendan', set.title
-    assert_equal '', set.description
+    assert_equal @set_id, set.id.to_i
+    assert_equal @user_nsid, set.owner.nsid
+    assert_equal '6946979188', set.primary_item_id
+    assert_equal '25bb44852b', set.secret
+    assert_equal '7049', set.server
+    assert_equal 8, set.farm
+    assert_equal 'Speleologija', set.title
+    assert_equal 'Slike sa škole speleologije Velebit.', set.description
 
-    assert_equal 3, set.items_count
-    assert_equal 2, set.photos_count
+    assert_equal 99, set.items_count
+    assert_equal 98, set.photos_count
     assert_equal 1, set.videos_count
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
 
-    assert_instance_of Flickr::Photo, set.photos.first
+    assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
+    assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
+    assert set.items.find { |item| item.is_a?(Flickr::Photo) }
+    assert set.items.find { |item| item.is_a?(Flickr::Video) }
 
-    assert_instance_of Flickr::User, set.owner
-    assert set.can_comment?
-    refute set.url.empty?
+    assert_equal false, set.can_comment?
 
     assert_instance_of Time, set.created_at
     assert_instance_of Time, set.updated_at
+
+    refute set.url.empty?
+  end
+
+  def test_sets_from_user
+    set = Flickr.sets_from_user(@user_nsid).
+      find { |set| set.id.to_i == @set_id }
+
+    assert_equal @set_id, set.id.to_i
+    assert_equal @user_nsid, set.owner.nsid
+    assert_equal '6946979188', set.primary_item_id
+    assert_equal '25bb44852b', set.secret
+    assert_equal '7049', set.server
+    assert_equal 8, set.farm
+    assert_equal 'Speleologija', set.title
+    assert_equal 'Slike sa škole speleologije Velebit.', set.description
+
+    assert_equal 99, set.items_count
+    assert_equal 98, set.photos_count
+    assert_equal 1, set.videos_count
+    assert_equal 0, set.comments_count
+    assert_equal 0, set.views_count
+
+    assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
+    assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
+    assert set.items.find { |item| item.is_a?(Flickr::Photo) }
+    assert set.items.find { |item| item.is_a?(Flickr::Video) }
+
+    assert_equal false, set.can_comment?
+    assert_equal false, set.needs_interstitial?
+    assert_equal true, set.visibility_can_see_set?
+
+    assert_instance_of Time, set.created_at
+    assert_instance_of Time, set.updated_at
+
+    refute set.url.empty?
   end
 end
