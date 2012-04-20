@@ -1,8 +1,6 @@
 module Flickr
   class Location
-    def id; @info['place_id'] end
-
-    %w[latitude longitude accuracy context woeid].each do |attr_name|
+    %w[latitude longitude accuracy context place_id woeid].each do |attr_name|
       define_method(attr_name) do
         @info[attr_name]
       end
@@ -10,11 +8,12 @@ module Flickr
 
     %w[neighbourhood locality county region country].each do |place_name|
       define_method(place_name) do
-        place = Struct.new(:name, :id, :woeid)
-        place.new \
-          @info[place_name]['_content'],
-          @info[place_name]['place_id'],
-          @info[place_name]['woeid']
+        if @info[place_name]
+          Struct.new(:name, :place_id, :woeid).new \
+            @info[place_name]['_content'],
+            @info[place_name]['place_id'],
+            @info[place_name]['woeid']
+        end
       end
     end
 

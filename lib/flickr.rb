@@ -50,12 +50,12 @@ module Flickr
 
     def get_photo_sizes(photo_id)
       response = client.get_item_sizes(photo_id)
-      Photo.from_sizes(response.body['sizes'])
+      Photo.from_sizes(response.body['sizes'].update('id' => photo_id))
     end
 
     def get_video_sizes(video_id)
       response = client.get_item_sizes(video_id)
-      Video.from_sizes(response.body['sizes'])
+      Video.from_sizes(response.body['sizes'].update('id' => video_id))
     end
 
 

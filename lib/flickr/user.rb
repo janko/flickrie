@@ -2,21 +2,22 @@ require 'date'
 
 module Flickr
   class User
-    def id;           @info['id']                   end
-    def nsid;         @info['nsid']                 end
-    def username;     @info['username']             end
-    def real_name;    @info['realname']             end
-    def location;     @info['location']             end
-    def description;  @info['description']          end
-    def profile_url;  @info['profileurl']           end
-    def mobile_url;   @info['mobileurl']            end
-    def photos_url;   @info['photosurl']            end
-    def path_alias;   @info['path_alias']           end
+    def id;           @info['id']          end
+    def nsid;         @info['nsid']        end
+    def username;     @info['username']    end
+    def real_name;    @info['realname']    end
+    def location;     @info['location']    end
+    def description;  @info['description'] end
+    def profile_url;  @info['profileurl']  end
+    def mobile_url;   @info['mobileurl']   end
+    def photos_url;   @info['photosurl']   end
+    def path_alias;   @info['path_alias']  end
+    def icon_server;  @info['iconserver']  end
+    def icon_farm;    @info['iconfarm']    end
 
     def buddy_icon_url
-      if @info['iconserver']
-        if @info['iconserver'].to_i > 0
-          icon_farm, icon_server = info['iconfarm'], info['iconserver']
+      if icon_farm
+        if icon_server.to_i > 0
           "http://farm{#{icon_farm}}.staticflickr.com/{#{icon_server}}/buddyicons/#{nsid}.jpg"
         else
           "http://www.flickr.com/images/buddyicon.jpg"

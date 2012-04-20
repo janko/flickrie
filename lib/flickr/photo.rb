@@ -26,22 +26,32 @@ module Flickr
     def large!(number);  @size = "Large #{number}";  self end
     def original!;       @size = "Original";         self end
 
-    def square(number); self.class.new(@info).square!(number) end
-    def thumbnail;      self.class.new(@info).thumbnail!      end
-    def small(number);  self.class.new(@info).small!(number)  end
-    def medium(number); self.class.new(@info).medium!(number) end
-    def large(number);  self.class.new(@info).large!(number)  end
-    def original;       self.class.new(@info).original!       end
+    def square(number); dup.square!(number) end
+    def thumbnail;      dup.thumbnail!      end
+    def small(number);  dup.small!(number)  end
+    def medium(number); dup.medium!(number) end
+    def large(number);  dup.large!(number)  end
+    def original;       dup.original!       end
 
-    # Photo#square75, Photo#medium500, ...
-    SIZES.keys.each do |size|
-      method_name = size.delete(' ').downcase
-      define_method("#{method_name}!") { @size = size; self }
-      define_method("#{method_name}")  { self.class.new(@info).send("#{method_name}!") }
+    [75, 150].each do |n|
+      define_method("square#{n}!") { square!(n) }
+      define_method("square#{n}") { square(n) }
+    end
+    [240, 320].each do |n|
+      define_method("small#{n}!") { small!(n) }
+      define_method("small#{n}") { small(n) }
+    end
+    [500, 640, 800].each do |n|
+      define_method("medium#{n}!") { medium!(n) }
+      define_method("medium#{n}") { medium(n) }
+    end
+    [1024].each do |n|
+      define_method("large#{n}!") { large!(n) }
+      define_method("large#{n}") { large(n) }
     end
 
     def largest!; @size = largest_size; self end
-    def largest; self.class.new(@info).largest! end
+    def largest;  dup.largest! end
 
     def available_sizes
       SIZES.select { |_, s| @info["url_#{s}"] }.keys
@@ -55,14 +65,11 @@ module Flickr
     def rotation; @info['rotation'].to_i if @info['rotation'] end
 
     def get_sizes(info = nil)
-      info ||= Flickr.client.get_photo_sizes(id).body['sizes']
-      unless @info['usage']
-        @info['usage'] = {
-          'canblog'     => info['canblog'],
-          'canprint'    => info['canprint'],
-          'candownload' => info['candownload']
-        }
-      end
+      info ||= Flickr.client.get_item_sizes(id).body['sizes']
+      @info['usage'].update \
+        'canblog'     => info['canblog'],
+        'canprint'    => info['canprint'],
+        'candownload' => info['candownload']
       flickr_sizes = {
         'Square' => 'sq',
         'Large Square' => 'q',
@@ -81,7 +88,9 @@ module Flickr
         @info["height_#{size_abbr}"] = size_info['height']
         @info["url_#{size_abbr}"] = size_info['source']
       end
+      @info['id'] = info['id'].to_s
 
+      @size = largest_size
       self
     end
 
@@ -90,10 +99,6 @@ module Flickr
     def initialize(info = {}, size = nil)
       super(info)
       @size = size || largest_size
-    end
-
-    def self.from_sizes(info)
-      new.get_sizes(info)
     end
 
     def largest_size

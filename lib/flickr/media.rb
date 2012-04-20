@@ -178,7 +178,8 @@ module Flickr
         from_set(hash)
       end
 
-        new(info)
+      def from_sizes(info)
+        new.get_sizes(info)
       end
     end
     extend(ClassMethods)

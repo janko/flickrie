@@ -19,18 +19,15 @@ module Flickr
 
     def get_sizes(info = nil)
       info ||= Flickr.client.get_item_sizes(id).body['sizes']
-      unless @info['usage']
-        @info['usage'] = {
-          'canblog'     => info['canblog'],
-          'canprint'    => info['canprint'],
-          'candownload' => info['candownload']
-        }
-      end
+      @info['usage'].update \
+        'canblog'     => info['canblog'],
+        'canprint'    => info['canprint'],
+        'candownload' => info['candownload']
       info['size'].each do |hash|
         case hash['label']
         when 'Video Player' then @video['source_url'] = hash['source']
-        when 'Site MP4' then @video['download_url'] = hash['source']
-        when 'Mobile MP4' then @video['mobile_download_url'] = hash['source']
+        when 'Site MP4'     then @video['download_url'] = hash['source']
+        when 'Mobile MP4'   then @video['mobile_download_url'] = hash['source']
         end
       end
 
@@ -49,10 +46,6 @@ module Flickr
     def initialize(info = {})
       super
       @video = {}
-    end
-
-    def self.from_sizes(info)
-      new.get_sizes(info)
     end
   end
 end

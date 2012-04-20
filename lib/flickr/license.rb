@@ -6,12 +6,12 @@ module Flickr
 
     def initialize(argument)
       if argument.is_a?(Hash)
-        @id = argument['id'].to_i
+        @id = argument['id']
         @name = argument['name']
         @url = argument['url']
-      elsif argument.respond_to?(:to_i)
-        hash = self.class.response_array.find do
-          |hash| hash['id'].to_i == argument.to_i
+      elsif argument.is_a?(String)
+        hash = self.class.response_array.find do |hash|
+          hash['id'] == argument
         end
         initialize(hash)
       end
