@@ -17,7 +17,7 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_photos_from_set
-    photo = Flickr.photos_from_set(@set_id, :extras => @all_extras.join(',')).
+    photo = Flickr.photos_from_set(@set_id, :extras => @all_extras).
       find { |photo| photo.id.to_i == @photo_id }
 
     assert_sizes(photo)

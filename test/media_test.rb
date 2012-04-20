@@ -115,7 +115,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_media_from_set
-    media = Flickr.media_from_set(@set_id, :extras => @all_extras.join(',')).
+    media = Flickr.media_from_set(@set_id, :extras => @all_extras).
       find { |media| media.id.to_i == @media_id }
 
     assert_equal '6946979188', media.id
