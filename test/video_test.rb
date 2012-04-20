@@ -35,7 +35,7 @@ class VideoTest < Test::Unit::TestCase
   def test_get_video_sizes
     video = Flickr.get_video_sizes(@video_id)
 
-    assert_equal @video_id, video.id
+    assert_equal @video_id, video.id.to_i
     assert_equal true, video.can_download?
     assert_equal false, video.can_blog?
     assert_equal false, video.can_print?
