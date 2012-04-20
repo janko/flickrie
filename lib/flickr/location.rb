@@ -19,7 +19,7 @@ module Flickr
 
     private
 
-    def initialize(info)
+    def initialize(info = {})
       @info = info
     end
   end
