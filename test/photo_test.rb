@@ -23,100 +23,6 @@ class PhotoTest < Test::Unit::TestCase
   def test_get_photo_info
     photo = Flickr.get_photo_info(@photo_id)
 
-    assert_equal '6946979188', photo.id
-    assert_equal '25bb44852b', photo.secret
-    assert_equal '7049', photo.server
-    assert_equal 8, photo.farm
-    assert_equal 'IMG_0796', photo.title
-    assert_equal 'luka', photo.tags
-    assert_equal '', photo.machine_tags
-    assert_equal 1, photo.views_count
-    assert_equal 1, photo.comments_count
-    assert_equal '0', photo.license.id
-    assert_equal 0, photo.safety_level
-    assert_equal 90, photo.rotation
-    assert_equal 'Test', photo.description
-    assert_not_nil photo.url
-
-    # Time
-    assert_instance_of Time, photo.uploaded_at
-    assert_instance_of Time, photo.updated_at
-    assert_instance_of Time, photo.taken_at
-    assert_equal 0, photo.taken_at_granularity
-    assert_instance_of Time, photo.posted_at
-
-    # Owner
-    assert_equal '67131352@N04', photo.owner.nsid
-    assert_equal 'Janko Marohnić', photo.owner.username
-    assert_equal 'Janko Marohnić', photo.owner.real_name
-    assert_equal 'Zagreb, Croatia', photo.owner.location
-    assert_equal '5464', photo.owner.icon_server
-    assert_equal 6, photo.owner.icon_farm
-    refute photo.owner.buddy_icon_url.empty?
-
-    # Predicates
-    assert_equal true, photo.visibility.public?
-    assert_equal false, photo.visibility.friends?
-    assert_equal false, photo.visibility.family?
-    assert_equal nil, photo.visibility.contacts?
-
-    assert_equal false, photo.can_comment?
-    assert_equal false, photo.can_add_meta?
-    assert_equal true, photo.can_everyone_comment?
-    assert_equal false, photo.can_everyone_add_meta?
-
-    assert_equal true, photo.can_download?
-    assert_equal false, photo.can_blog?
-    assert_equal false, photo.can_print?
-    assert_equal false, photo.can_share?
-
-    assert_equal false, photo.has_people?
-
-    assert_equal true, photo.safe?
-    assert_equal false, photo.moderate?
-    assert_equal false, photo.restricted?
-
-    assert_equal false, photo.favorite?
-
-    assert_equal true, photo.geo_permissions.public?
-    assert_equal false, photo.geo_permissions.contacts?
-    assert_equal false, photo.geo_permissions.friends?
-    assert_equal false, photo.geo_permissions.family?
-
-    # Notes
-    note = photo.notes.first
-    assert_equal '72157629487842968', note.id
-    assert_equal '67131352@N04', note.author.nsid
-    assert_equal 'Janko Marohnić', note.author.username
-    assert_equal [316, 0], note.coordinates
-    assert_equal [59, 50], [note.width, note.height]
-    assert_equal 'Test', note.content
-
-    # Location
-    location = photo.location
-
-    assert_equal 45.807258, location.latitude
-    assert_equal 15.967599, location.longitude
-    assert_equal '11', location.accuracy
-    assert_equal '0', location.context
-
-    assert_equal nil, location.neighbourhood
-    assert_equal 'Zagreb', location.locality.name
-    assert_equal '00j4IylZV7scWik', location.locality.place_id
-    assert_equal '851128', location.locality.woeid
-    assert_equal 'Zagreb', location.county.name
-    assert_equal '306dHrhQV7o6jm.ZUQ', location.county.place_id
-    assert_equal '15022257', location.county.woeid
-    assert_equal 'Grad Zagreb', location.region.name
-    assert_equal 'Js1DU.pTUrpBCIKhVw', location.region.place_id
-    assert_equal '20070170', location.region.woeid
-    assert_equal 'Croatia', location.country.name
-    assert_equal 'FunRCI5TUb6a6soTyw', location.country.place_id
-    assert_equal '23424843', location.country.woeid
-
-    assert_equal '00j4IylZV7scWik', location.place_id
-    assert_equal '851128', location.woeid
-
     # Attributes that are supposed to be blank
     assert_equal [], photo.available_sizes
     assert_equal nil, photo.size
@@ -160,93 +66,12 @@ class PhotoTest < Test::Unit::TestCase
     photo = Flickr.photos_from_set(@set_id, :extras => @all_extras.join(',')).
       find { |photo| photo.id.to_i == @photo_id }
 
-    assert_equal '6946979188', photo.id
-    assert_equal '25bb44852b', photo.secret
-    assert_equal '7049', photo.server
-    assert_equal 8, photo.farm
-    assert_equal 'IMG_0796', photo.title
-    assert_equal 'luka', photo.tags
-    assert_equal '', photo.machine_tags
-    assert_equal 1, photo.views_count
-    assert_equal '0', photo.license.id
-    assert_equal true, photo.primary?
-    assert_not_nil photo.url
-    assert_equal 'ready', photo.media_status
-
-    # Time
-    assert_instance_of Time, photo.uploaded_at
-    assert_instance_of Time, photo.updated_at
-    assert_instance_of Time, photo.taken_at
-    assert_equal 0, photo.taken_at_granularity
-
-    # Location
-    assert_equal 45.807258, photo.location.latitude
-    assert_equal 15.967599, photo.location.longitude
-    assert_equal '11', photo.location.accuracy
-    assert_equal '0', photo.location.context.to_s
-    assert_equal '00j4IylZV7scWik', photo.location.place_id
-    assert_equal '851128', photo.location.woeid
-    assert_equal true, photo.geo_permissions.public?
-    assert_equal false, photo.geo_permissions.contacts?
-    assert_equal false, photo.geo_permissions.friends?
-    assert_equal false, photo.geo_permissions.family?
-
-    # Owner
-    assert_equal '67131352@N04', photo.owner.nsid
-    assert_equal 'Janko Marohnić', photo.owner.username
-    assert_equal '5464', photo.owner.icon_server
-    assert_equal 6, photo.owner.icon_farm
-    refute photo.owner.buddy_icon_url.empty?
-
     assert_sizes(photo)
   end
 
   def test_public_photos_from_user
     photo = Flickr.public_photos_from_user(@user_nsid, :extras => @all_extras).
       find { |photo| photo.id.to_i == @photo_id }
-
-    assert_equal '6946979188', photo.id
-    assert_equal '25bb44852b', photo.secret
-    assert_equal '7049', photo.server
-    assert_equal 8, photo.farm
-    assert_equal 'IMG_0796', photo.title
-    assert_equal 'luka', photo.tags
-    assert_equal '', photo.machine_tags
-    assert_equal 1, photo.views_count
-    assert_equal '0', photo.license.id
-    assert_not_nil photo.url
-    assert_equal 'ready', photo.media_status
-
-    # Time
-    assert_instance_of Time, photo.uploaded_at
-    assert_instance_of Time, photo.updated_at
-    assert_instance_of Time, photo.taken_at
-    assert_equal 0, photo.taken_at_granularity
-
-    # Location
-    assert_equal 45.807258, photo.location.latitude
-    assert_equal 15.967599, photo.location.longitude
-    assert_equal '11', photo.location.accuracy
-    assert_equal '0', photo.location.context.to_s
-    assert_equal '00j4IylZV7scWik', photo.location.place_id
-    assert_equal '851128', photo.location.woeid
-    assert_equal true, photo.geo_permissions.public?
-    assert_equal false, photo.geo_permissions.contacts?
-    assert_equal false, photo.geo_permissions.friends?
-    assert_equal false, photo.geo_permissions.family?
-
-    # Owner
-    assert_equal '67131352@N04', photo.owner.nsid
-    assert_equal 'Janko Marohnić', photo.owner.username
-    assert_equal '5464', photo.owner.icon_server
-    assert_equal 6, photo.owner.icon_farm
-    refute photo.owner.buddy_icon_url.empty?
-
-    # Visibility (This is the difference from Flickr.photos_from_set)
-    assert_equal true, photo.visibility.public?
-    assert_equal false, photo.visibility.friends?
-    assert_equal false, photo.visibility.family?
-    assert_equal nil, photo.visibility.contacts?
 
     assert_sizes(photo, :exclude => ['Square 150', 'Small 320', 'Medium 800'])
   end
@@ -310,47 +135,6 @@ class PhotoTest < Test::Unit::TestCase
 
   def test_methods_returning_nil
     photo = Flickr::Photo.new
-
-    assert_nil photo.id
-    assert_nil photo.secret
-    assert_nil photo.server
-    assert_nil photo.farm
-    assert_nil photo.title
-    assert_nil photo.description
-    assert_nil photo.tags
-    assert_nil photo.machine_tags
-    assert_nil photo.media_status
-    assert_nil photo.path_alias
-    assert_nil photo.views_count
-    assert_nil photo.comments_count
-    assert_nil photo.location
-    assert_nil photo.geo_permissions
-    assert_nil photo.license
-    assert_nil photo.posted_at
-    assert_nil photo.uploaded_at
-    assert_nil photo.updated_at
-    assert_nil photo.taken_at
-    assert_nil photo.taken_at_granularity
-    assert_nil photo.owner
-    assert_nil photo.safety_level
-    assert_nil photo.safe?
-    assert_nil photo.moderate?
-    assert_nil photo.restricted?
-    assert_nil photo.url
-    assert_nil photo.visibility
-    assert_nil photo.primary?
-    assert_nil photo.favorite?
-    assert_nil photo.can_comment?
-    assert_nil photo.can_add_meta?
-    assert_nil photo.can_everyone_comment?
-    assert_nil photo.can_everyone_add_meta?
-    assert_nil photo.can_download?
-    assert_nil photo.can_blog?
-    assert_nil photo.can_print?
-    assert_nil photo.can_share?
-    assert_nil photo.has_people?
-    assert_nil photo.notes
-    assert_nil photo.media_status
 
     assert_nil photo.width
     assert_nil photo.height
