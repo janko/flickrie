@@ -94,7 +94,7 @@ photo.medium!(640)
 photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_z.jpg"
 ```
 
-These are just some of the cool things you can do. To see a full list of available methods, I encourage you to read the [wiki](https://github.com/janko-m/flickrie/wiki).
+These are just some of the cool things you can do. To see a full list of available methods, I encourage you to read the [wiki](https://github.com/janko-m/flickrie/wiki). I promise, I will document the methods properly in near future :)
 
 ## A few words
 
@@ -120,6 +120,11 @@ reponse.body # =>
 
 It's not nearly as pretty, but at least you can get to the data
 
+## Issues
+
+Please, feel free to post any issues that you're having, I will try to
+help you in any way I can.
+
 ## Currently covered API methods
 
 ### people
@@ -133,7 +138,7 @@ It's not nearly as pretty, but at least you can get to the data
 - `flickr.photos.getSizes`
 - `flickr.photos.search`
 
-### licenses
+### photos.licenses
 - `flickr.photos.licenses.getInfo`
 
 ### photosets
