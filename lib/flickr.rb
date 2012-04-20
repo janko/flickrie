@@ -8,53 +8,53 @@ require 'flickr/set'
 
 module Flickr
   class << self
-    def items_from_set(set_id, params = {})
-      response = client.items_from_set(set_id, params)
+    def media_from_set(set_id, params = {})
+      response = client.media_from_set(set_id, params)
       Media.from_set(response.body['photoset'])
     end
 
     def photos_from_set(set_id, params = {})
       params = {:media => 'photos', :extras => sizes}.merge(params)
-      items_from_set(set_id, params)
+      media_from_set(set_id, params)
     end
 
     def videos_from_set(set_id, params = {})
       params = {:media => 'videos'}.merge(params)
-      items_from_set(set_id, params)
+      media_from_set(set_id, params)
     end
 
-    def get_item_info(item_id)
-      response = client.get_item_info(item_id)
+    def get_media_info(media_id)
+      response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])
     end
-    alias get_photo_info get_item_info
-    alias get_video_info get_item_info
+    alias get_photo_info get_media_info
+    alias get_video_info get_media_info
 
-    def public_items_from_user(user_nsid, params = {})
-      response = client.public_items_from_user(user_nsid, params)
+    def public_media_from_user(user_nsid, params = {})
+      response = client.public_media_from_user(user_nsid, params)
       Media.from_user(response.body['photos'])
     end
 
     def public_photos_from_user(user_nsid, params = {})
       params = {:extras => sizes}.merge(params)
-      public_items_from_user(user_nsid, params).select do |item|
-        item.is_a?(Photo)
+      public_media_from_user(user_nsid, params).select do |media|
+        media.is_a?(Photo)
       end
     end
 
     def public_videos_from_user(user_nsid, params = {})
-      public_items_from_user(user_nsid, params).select do |item|
-        item.is_a?(Video)
+      public_media_from_user(user_nsid, params).select do |media|
+        media.is_a?(Video)
       end
     end
 
     def get_photo_sizes(photo_id)
-      response = client.get_item_sizes(photo_id)
+      response = client.get_media_sizes(photo_id)
       Photo.from_sizes(response.body['sizes'], photo_id)
     end
 
     def get_video_sizes(video_id)
-      response = client.get_item_sizes(video_id)
+      response = client.get_media_sizes(video_id)
       Video.from_sizes(response.body['sizes'], video_id)
     end
 

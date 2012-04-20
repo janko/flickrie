@@ -5,7 +5,7 @@ require 'flickr'
 class MediaTest < Test::Unit::TestCase
   def setup
     Flickr.api_key = ENV['FLICKR_API_KEY']
-    @item_id = 6946979188
+    @media_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
 
@@ -17,70 +17,70 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_get_media_info
-    item = Flickr.get_item_info(@item_id)
+    media = Flickr.get_media_info(@media_id)
 
-    assert_equal '6946979188', item.id
-    assert_equal '25bb44852b', item.secret
-    assert_equal '7049', item.server
-    assert_equal 8, item.farm
-    assert_equal 'IMG_0796', item.title
-    assert_equal 'luka', item.tags
-    assert_equal '', item.machine_tags
-    assert_equal 1, item.views_count
-    assert_equal 1, item.comments_count
-    assert_equal '0', item.license.id
-    assert_equal 0, item.safety_level
-    assert_equal 90, item.rotation
-    assert_equal 'Test', item.description
-    assert_not_nil item.url
+    assert_equal '6946979188', media.id
+    assert_equal '25bb44852b', media.secret
+    assert_equal '7049', media.server
+    assert_equal 8, media.farm
+    assert_equal 'IMG_0796', media.title
+    assert_equal 'luka', media.tags
+    assert_equal '', media.machine_tags
+    assert_equal 1, media.views_count
+    assert_equal 1, media.comments_count
+    assert_equal '0', media.license.id
+    assert_equal 0, media.safety_level
+    assert_equal 90, media.rotation
+    assert_equal 'Test', media.description
+    assert_not_nil media.url
 
     # Time
-    assert_instance_of Time, item.uploaded_at
-    assert_instance_of Time, item.updated_at
-    assert_instance_of Time, item.taken_at
-    assert_equal 0, item.taken_at_granularity
-    assert_instance_of Time, item.posted_at
+    assert_instance_of Time, media.uploaded_at
+    assert_instance_of Time, media.updated_at
+    assert_instance_of Time, media.taken_at
+    assert_equal 0, media.taken_at_granularity
+    assert_instance_of Time, media.posted_at
 
     # Owner
-    assert_equal '67131352@N04', item.owner.nsid
-    assert_equal 'Janko Marohnić', item.owner.username
-    assert_equal 'Janko Marohnić', item.owner.real_name
-    assert_equal 'Zagreb, Croatia', item.owner.location
-    assert_equal '5464', item.owner.icon_server
-    assert_equal 6, item.owner.icon_farm
-    refute item.owner.buddy_icon_url.empty?
+    assert_equal '67131352@N04', media.owner.nsid
+    assert_equal 'Janko Marohnić', media.owner.username
+    assert_equal 'Janko Marohnić', media.owner.real_name
+    assert_equal 'Zagreb, Croatia', media.owner.location
+    assert_equal '5464', media.owner.icon_server
+    assert_equal 6, media.owner.icon_farm
+    refute media.owner.buddy_icon_url.empty?
 
     # Predicates
-    assert_equal true, item.visibility.public?
-    assert_equal false, item.visibility.friends?
-    assert_equal false, item.visibility.family?
-    assert_equal nil, item.visibility.contacts?
+    assert_equal true, media.visibility.public?
+    assert_equal false, media.visibility.friends?
+    assert_equal false, media.visibility.family?
+    assert_equal nil, media.visibility.contacts?
 
-    assert_equal false, item.can_comment?
-    assert_equal false, item.can_add_meta?
-    assert_equal true, item.can_everyone_comment?
-    assert_equal false, item.can_everyone_add_meta?
+    assert_equal false, media.can_comment?
+    assert_equal false, media.can_add_meta?
+    assert_equal true, media.can_everyone_comment?
+    assert_equal false, media.can_everyone_add_meta?
 
-    assert_equal true, item.can_download?
-    assert_equal false, item.can_blog?
-    assert_equal false, item.can_print?
-    assert_equal false, item.can_share?
+    assert_equal true, media.can_download?
+    assert_equal false, media.can_blog?
+    assert_equal false, media.can_print?
+    assert_equal false, media.can_share?
 
-    assert_equal false, item.has_people?
+    assert_equal false, media.has_people?
 
-    assert_equal true, item.safe?
-    assert_equal false, item.moderate?
-    assert_equal false, item.restricted?
+    assert_equal true, media.safe?
+    assert_equal false, media.moderate?
+    assert_equal false, media.restricted?
 
-    assert_equal false, item.favorite?
+    assert_equal false, media.favorite?
 
-    assert_equal true, item.geo_permissions.public?
-    assert_equal false, item.geo_permissions.contacts?
-    assert_equal false, item.geo_permissions.friends?
-    assert_equal false, item.geo_permissions.family?
+    assert_equal true, media.geo_permissions.public?
+    assert_equal false, media.geo_permissions.contacts?
+    assert_equal false, media.geo_permissions.friends?
+    assert_equal false, media.geo_permissions.family?
 
     # Notes
-    note = item.notes.first
+    note = media.notes.first
     assert_equal '72157629487842968', note.id
     assert_equal '67131352@N04', note.author.nsid
     assert_equal 'Janko Marohnić', note.author.username
@@ -89,7 +89,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 'Test', note.content
 
     # Location
-    location = item.location
+    location = media.location
 
     assert_equal 45.807258, location.latitude
     assert_equal 15.967599, location.longitude
@@ -114,139 +114,139 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '851128', location.woeid
   end
 
-  def test_items_from_set
-    item = Flickr.items_from_set(@set_id, :extras => @all_extras.join(',')).
-      find { |item| item.id.to_i == @item_id }
+  def test_media_from_set
+    media = Flickr.media_from_set(@set_id, :extras => @all_extras.join(',')).
+      find { |media| media.id.to_i == @media_id }
 
-    assert_equal '6946979188', item.id
-    assert_equal '25bb44852b', item.secret
-    assert_equal '7049', item.server
-    assert_equal 8, item.farm
-    assert_equal 'IMG_0796', item.title
-    assert_equal 'luka', item.tags
-    assert_equal '', item.machine_tags
-    assert_equal 1, item.views_count
-    assert_equal '0', item.license.id
-    assert_equal true, item.primary?
-    assert_not_nil item.url
-    assert_equal 'ready', item.media_status
+    assert_equal '6946979188', media.id
+    assert_equal '25bb44852b', media.secret
+    assert_equal '7049', media.server
+    assert_equal 8, media.farm
+    assert_equal 'IMG_0796', media.title
+    assert_equal 'luka', media.tags
+    assert_equal '', media.machine_tags
+    assert_equal 1, media.views_count
+    assert_equal '0', media.license.id
+    assert_equal true, media.primary?
+    assert_not_nil media.url
+    assert_equal 'ready', media.media_status
 
     # Time
-    assert_instance_of Time, item.uploaded_at
-    assert_instance_of Time, item.updated_at
-    assert_instance_of Time, item.taken_at
-    assert_equal 0, item.taken_at_granularity
+    assert_instance_of Time, media.uploaded_at
+    assert_instance_of Time, media.updated_at
+    assert_instance_of Time, media.taken_at
+    assert_equal 0, media.taken_at_granularity
 
     # Location
-    assert_equal 45.807258, item.location.latitude
-    assert_equal 15.967599, item.location.longitude
-    assert_equal '11', item.location.accuracy
-    assert_equal '0', item.location.context.to_s
-    assert_equal '00j4IylZV7scWik', item.location.place_id
-    assert_equal '851128', item.location.woeid
-    assert_equal true, item.geo_permissions.public?
-    assert_equal false, item.geo_permissions.contacts?
-    assert_equal false, item.geo_permissions.friends?
-    assert_equal false, item.geo_permissions.family?
+    assert_equal 45.807258, media.location.latitude
+    assert_equal 15.967599, media.location.longitude
+    assert_equal '11', media.location.accuracy
+    assert_equal '0', media.location.context.to_s
+    assert_equal '00j4IylZV7scWik', media.location.place_id
+    assert_equal '851128', media.location.woeid
+    assert_equal true, media.geo_permissions.public?
+    assert_equal false, media.geo_permissions.contacts?
+    assert_equal false, media.geo_permissions.friends?
+    assert_equal false, media.geo_permissions.family?
 
     # Owner
-    assert_equal '67131352@N04', item.owner.nsid
-    assert_equal 'Janko Marohnić', item.owner.username
-    assert_equal '5464', item.owner.icon_server
-    assert_equal 6, item.owner.icon_farm
-    refute item.owner.buddy_icon_url.empty?
+    assert_equal '67131352@N04', media.owner.nsid
+    assert_equal 'Janko Marohnić', media.owner.username
+    assert_equal '5464', media.owner.icon_server
+    assert_equal 6, media.owner.icon_farm
+    refute media.owner.buddy_icon_url.empty?
   end
 
-  def test_public_items_from_user
-    item = Flickr.public_items_from_user(@user_nsid, :extras => @all_extras).
-      find { |item| item.id.to_i == @item_id }
+  def test_public_media_from_user
+    media = Flickr.public_media_from_user(@user_nsid, :extras => @all_extras).
+      find { |media| media.id.to_i == @media_id }
 
-    assert_equal '6946979188', item.id
-    assert_equal '25bb44852b', item.secret
-    assert_equal '7049', item.server
-    assert_equal 8, item.farm
-    assert_equal 'IMG_0796', item.title
-    assert_equal 'luka', item.tags
-    assert_equal '', item.machine_tags
-    assert_equal 1, item.views_count
-    assert_equal '0', item.license.id
-    assert_not_nil item.url
-    assert_equal 'ready', item.media_status
+    assert_equal '6946979188', media.id
+    assert_equal '25bb44852b', media.secret
+    assert_equal '7049', media.server
+    assert_equal 8, media.farm
+    assert_equal 'IMG_0796', media.title
+    assert_equal 'luka', media.tags
+    assert_equal '', media.machine_tags
+    assert_equal 1, media.views_count
+    assert_equal '0', media.license.id
+    assert_not_nil media.url
+    assert_equal 'ready', media.media_status
 
     # Time
-    assert_instance_of Time, item.uploaded_at
-    assert_instance_of Time, item.updated_at
-    assert_instance_of Time, item.taken_at
-    assert_equal 0, item.taken_at_granularity
+    assert_instance_of Time, media.uploaded_at
+    assert_instance_of Time, media.updated_at
+    assert_instance_of Time, media.taken_at
+    assert_equal 0, media.taken_at_granularity
 
     # Location
-    assert_equal 45.807258, item.location.latitude
-    assert_equal 15.967599, item.location.longitude
-    assert_equal '11', item.location.accuracy
-    assert_equal '0', item.location.context.to_s
-    assert_equal '00j4IylZV7scWik', item.location.place_id
-    assert_equal '851128', item.location.woeid
-    assert_equal true, item.geo_permissions.public?
-    assert_equal false, item.geo_permissions.contacts?
-    assert_equal false, item.geo_permissions.friends?
-    assert_equal false, item.geo_permissions.family?
+    assert_equal 45.807258, media.location.latitude
+    assert_equal 15.967599, media.location.longitude
+    assert_equal '11', media.location.accuracy
+    assert_equal '0', media.location.context.to_s
+    assert_equal '00j4IylZV7scWik', media.location.place_id
+    assert_equal '851128', media.location.woeid
+    assert_equal true, media.geo_permissions.public?
+    assert_equal false, media.geo_permissions.contacts?
+    assert_equal false, media.geo_permissions.friends?
+    assert_equal false, media.geo_permissions.family?
 
     # Owner
-    assert_equal '67131352@N04', item.owner.nsid
-    assert_equal 'Janko Marohnić', item.owner.username
-    assert_equal '5464', item.owner.icon_server
-    assert_equal 6, item.owner.icon_farm
-    refute item.owner.buddy_icon_url.empty?
+    assert_equal '67131352@N04', media.owner.nsid
+    assert_equal 'Janko Marohnić', media.owner.username
+    assert_equal '5464', media.owner.icon_server
+    assert_equal 6, media.owner.icon_farm
+    refute media.owner.buddy_icon_url.empty?
 
-    # Visibility (This is the difference from Flickr.items_from_set)
-    assert_equal true, item.visibility.public?
-    assert_equal false, item.visibility.friends?
-    assert_equal false, item.visibility.family?
-    assert_equal nil, item.visibility.contacts?
+    # Visibility (This is the difference from Flickr.media_from_set)
+    assert_equal true, media.visibility.public?
+    assert_equal false, media.visibility.friends?
+    assert_equal false, media.visibility.family?
+    assert_equal nil, media.visibility.contacts?
   end
 
   def test_methods_returning_nil
-    item = Flickr::Photo.new
+    media = Flickr::Photo.new
 
-    assert_nil item.id
-    assert_nil item.secret
-    assert_nil item.server
-    assert_nil item.farm
-    assert_nil item.title
-    assert_nil item.description
-    assert_nil item.tags
-    assert_nil item.machine_tags
-    assert_nil item.media_status
-    assert_nil item.path_alias
-    assert_nil item.views_count
-    assert_nil item.comments_count
-    assert_nil item.location
-    assert_nil item.geo_permissions
-    assert_nil item.license
-    assert_nil item.posted_at
-    assert_nil item.uploaded_at
-    assert_nil item.updated_at
-    assert_nil item.taken_at
-    assert_nil item.taken_at_granularity
-    assert_nil item.owner
-    assert_nil item.safety_level
-    assert_nil item.safe?
-    assert_nil item.moderate?
-    assert_nil item.restricted?
-    assert_nil item.url
-    assert_nil item.visibility
-    assert_nil item.primary?
-    assert_nil item.favorite?
-    assert_nil item.can_comment?
-    assert_nil item.can_add_meta?
-    assert_nil item.can_everyone_comment?
-    assert_nil item.can_everyone_add_meta?
-    assert_nil item.can_download?
-    assert_nil item.can_blog?
-    assert_nil item.can_print?
-    assert_nil item.can_share?
-    assert_nil item.has_people?
-    assert_nil item.notes
-    assert_nil item.media_status
+    assert_nil media.id
+    assert_nil media.secret
+    assert_nil media.server
+    assert_nil media.farm
+    assert_nil media.title
+    assert_nil media.description
+    assert_nil media.tags
+    assert_nil media.machine_tags
+    assert_nil media.media_status
+    assert_nil media.path_alias
+    assert_nil media.views_count
+    assert_nil media.comments_count
+    assert_nil media.location
+    assert_nil media.geo_permissions
+    assert_nil media.license
+    assert_nil media.posted_at
+    assert_nil media.uploaded_at
+    assert_nil media.updated_at
+    assert_nil media.taken_at
+    assert_nil media.taken_at_granularity
+    assert_nil media.owner
+    assert_nil media.safety_level
+    assert_nil media.safe?
+    assert_nil media.moderate?
+    assert_nil media.restricted?
+    assert_nil media.url
+    assert_nil media.visibility
+    assert_nil media.primary?
+    assert_nil media.favorite?
+    assert_nil media.can_comment?
+    assert_nil media.can_add_meta?
+    assert_nil media.can_everyone_comment?
+    assert_nil media.can_everyone_add_meta?
+    assert_nil media.can_download?
+    assert_nil media.can_blog?
+    assert_nil media.can_print?
+    assert_nil media.can_share?
+    assert_nil media.has_people?
+    assert_nil media.notes
+    assert_nil media.media_status
   end
 end

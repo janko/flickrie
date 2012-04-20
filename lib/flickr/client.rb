@@ -48,24 +48,24 @@ module Flickr
       end
     end
 
-    def items_from_set(set_id, params = {})
+    def media_from_set(set_id, params = {})
       params = {:photoset_id => set_id}.merge(params)
       params[:extras] = [params[:extras], 'media'].compact.join(',')
       get 'flickr.photosets.getPhotos', params
     end
 
-    def get_item_info(item_id)
-      get 'flickr.photos.getInfo', :photo_id => item_id
+    def get_media_info(media_id)
+      get 'flickr.photos.getInfo', :photo_id => media_id
     end
 
-    def public_items_from_user(user_nsid, params = {})
+    def public_media_from_user(user_nsid, params = {})
       params = {:user_id => user_nsid}.merge(params)
       params[:extras] = [params[:extras], 'media'].compact.join(',')
       get 'flickr.people.getPublicPhotos', params
     end
 
-    def get_item_sizes(item_id)
-      get 'flickr.photos.getSizes', :photo_id => item_id
+    def get_media_sizes(media_id)
+      get 'flickr.photos.getSizes', :photo_id => media_id
     end
 
     def find_user_by_email(email)

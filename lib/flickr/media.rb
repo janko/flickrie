@@ -103,7 +103,7 @@ module Flickr
     end
 
     def get_info(info = nil)
-      info ||= Flickr.client.get_item_info(id).body['photo']
+      info ||= Flickr.client.get_media_info(id).body['photo']
 
       # Fixes
       info['title'] = info['title']['_content']

@@ -35,7 +35,7 @@ I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.
     assert_instance_of Time, user.first_taken
     assert_instance_of Time, user.first_uploaded
 
-    assert_equal 99, user.items_count
+    assert_equal 99, user.media_count
   end
 
   def test_find_user_by_username_or_email

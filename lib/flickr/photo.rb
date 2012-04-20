@@ -63,7 +63,7 @@ module Flickr
     def rotation; @info['rotation'].to_i if @info['rotation'] end
 
     def get_sizes(info = nil)
-      info ||= Flickr.client.get_item_sizes(id).body['sizes']
+      info ||= Flickr.client.get_media_sizes(id).body['sizes']
       @info['usage'].update \
         'canblog'     => info['canblog'],
         'canprint'    => info['canprint'],

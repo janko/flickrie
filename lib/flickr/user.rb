@@ -38,7 +38,7 @@ module Flickr
       end
     end
 
-    def items_count
+    def media_count
       if @info['photos'] and @info['photos']['count']
         @info['photos']['count'].to_i
       end

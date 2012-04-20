@@ -14,14 +14,14 @@ class SetTest < Test::Unit::TestCase
 
     assert_equal @set_id, set.id.to_i
     assert_equal @user_nsid, set.owner.nsid
-    assert_equal '6946979188', set.primary_item_id
+    assert_equal '6946979188', set.primary_media_id
     assert_equal '25bb44852b', set.secret
     assert_equal '7049', set.server
     assert_equal 8, set.farm
     assert_equal 'Speleologija', set.title
     assert_equal 'Slike sa škole speleologije Velebit.', set.description
 
-    assert_equal 99, set.items_count
+    assert_equal 99, set.media_count
     assert_equal 98, set.photos_count
     assert_equal 1, set.videos_count
     assert_equal 0, set.comments_count
@@ -29,8 +29,8 @@ class SetTest < Test::Unit::TestCase
 
     assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
     assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
-    assert set.items.find { |item| item.is_a?(Flickr::Photo) }
-    assert set.items.find { |item| item.is_a?(Flickr::Video) }
+    assert set.media.find { |media| media.is_a?(Flickr::Photo) }
+    assert set.media.find { |media| media.is_a?(Flickr::Video) }
 
     assert_equal false, set.can_comment?
 
@@ -46,14 +46,14 @@ class SetTest < Test::Unit::TestCase
 
     assert_equal @set_id, set.id.to_i
     assert_equal @user_nsid, set.owner.nsid
-    assert_equal '6946979188', set.primary_item_id
+    assert_equal '6946979188', set.primary_media_id
     assert_equal '25bb44852b', set.secret
     assert_equal '7049', set.server
     assert_equal 8, set.farm
     assert_equal 'Speleologija', set.title
     assert_equal 'Slike sa škole speleologije Velebit.', set.description
 
-    assert_equal 99, set.items_count
+    assert_equal 99, set.media_count
     assert_equal 98, set.photos_count
     assert_equal 1, set.videos_count
     assert_equal 0, set.comments_count
@@ -61,8 +61,8 @@ class SetTest < Test::Unit::TestCase
 
     assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
     assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
-    assert set.items.find { |item| item.is_a?(Flickr::Photo) }
-    assert set.items.find { |item| item.is_a?(Flickr::Video) }
+    assert set.media.find { |media| media.is_a?(Flickr::Photo) }
+    assert set.media.find { |media| media.is_a?(Flickr::Video) }
 
     assert_equal false, set.can_comment?
     assert_equal false, set.needs_interstitial?

@@ -7,21 +7,21 @@ module Flickr
     def title;       @info['title']       end
     def description; @info['description'] end
 
-    def primary_item_id; @info['primary'] end
-    alias primary_photo_id primary_item_id
-    alias primary_video_id primary_item_id
+    def primary_media_id; @info['primary'] end
+    alias primary_photo_id primary_media_id
+    alias primary_video_id primary_media_id
 
     def views_count; @info['count_views'].to_i if @info['count_views'] end
     def comments_count; @info['count_comments'].to_i if @info['count_comments'] end
     def photos_count; @info['count_photos'].to_i if @info['count_photos'] end
     def videos_count; @info['count_videos'].to_i if @info['count_videos'] end
-    def items_count; photos_count + videos_count rescue nil end
+    def media_count; photos_count + videos_count rescue nil end
 
     def owner; User.new('nsid' => @info['owner']) if @info['owner'] end
 
     def photos; Flickr.photos_from_set(id) end
     def videos; Flickr.videos_from_set(id) end
-    def items;  Flickr.items_from_set(id)  end
+    def media;  Flickr.media_from_set(id)  end
 
     def can_comment?; @info['can_comment'].to_i == 1 if @info['can_comment'] end
 
