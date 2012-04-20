@@ -95,7 +95,7 @@ module Flickr
     private
 
     def sizes
-      @sizes ||= Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
+      Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
     end
   end
 end
