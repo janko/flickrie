@@ -29,7 +29,6 @@ module Flickr
       Media.from_user(response.body['photos'])
     end
     def public_photos_from_user(user_nsid, params = {})
-      params = {:extras => sizes}.merge(params)
       public_media_from_user(user_nsid, params).select do |media|
         media.is_a?(Photo)
       end
@@ -50,11 +49,11 @@ module Flickr
 
     def get_photo_sizes(photo_id)
       response = client.get_media_sizes(photo_id)
-      Photo.from_sizes(response.body['sizes'], photo_id)
+      Photo.from_sizes(response.body['sizes'])
     end
     def get_video_sizes(video_id)
       response = client.get_media_sizes(video_id)
-      Video.from_sizes(response.body['sizes'], video_id)
+      Video.from_sizes(response.body['sizes'])
     end
 
     def search_media(search_params = {})
@@ -90,18 +89,10 @@ module Flickr
       Media.from_set(response.body['photoset'])
     end
     def photos_from_set(set_id, params = {})
-      params = {:media => 'photos', :extras => sizes}.merge(params)
-      media_from_set(set_id, params)
+      media_from_set(set_id, params.merge(:media => 'photos'))
     end
     def videos_from_set(set_id, params = {})
-      params = {:media => 'videos'}.merge(params)
-      media_from_set(set_id, params)
-    end
-
-    private
-
-    def sizes
-      Flickr::Photo::SIZES.values.map { |s| "url_#{s}" }.join(',')
+      media_from_set(set_id, params.merge(:media => 'videos'))
     end
   end
 end

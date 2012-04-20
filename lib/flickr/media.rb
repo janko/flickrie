@@ -178,8 +178,9 @@ module Flickr
         from_set(hash)
       end
 
-      def from_sizes(info, media_id)
-        new.get_sizes(info.update('id' => media_id))
+      def from_sizes(info)
+        new.get_sizes(info)
+      end
 
       def from_search(info)
         from_user(info)

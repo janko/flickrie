@@ -86,7 +86,6 @@ module Flickr
         @info["height_#{size_abbr}"] = size_info['height']
         @info["url_#{size_abbr}"] = size_info['source']
       end
-      @info['id'] = info['id']
 
       @size = largest_size
       self

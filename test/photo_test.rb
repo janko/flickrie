@@ -33,7 +33,6 @@ class PhotoTest < Test::Unit::TestCase
   def test_get_photo_sizes
     photo = Flickr.get_photo_sizes(@photo_id)
 
-    assert_equal @photo_id, photo.id.to_i
     assert_equal true, photo.can_download?
     assert_equal false, photo.can_blog?
     assert_equal false, photo.can_print?
