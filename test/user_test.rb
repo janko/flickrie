@@ -1,51 +1,54 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr/user'
+require 'flickr'
 
 class UserTest < Test::Unit::TestCase
-  Flickr::User.instance_eval do
-    def public_from_info(*args)
-      from_info(*args)
-    end
+  def setup
+    Flickr.api_key = ENV['FLICKR_API_KEY']
+    @user_nsid = '67131352@N04'
   end
 
-  def test_attributes
-    info_hash = {
-      'id' => '67131352@N04',
-      'nsid' => '67131352@N04',
-      'ispro' => 0,
-      'iconserver' => '0',
-      'iconfarm' => 0,
-      'path_alias' => nil,
-      'username' => {'_content' => 'Janko Marohnić'},
-      'realname' => {'_content' => ''},
-      'location' => {'_content' => ''},
-      'description' => {'_content' => ''},
-      'photosurl' => {'_content' => 'http://www.flickr.com/photos/67131352@N04/'},
-      'profileurl' => {'_content' => 'http://www.flickr.com/people/67131352@N04/'},
-      'mobileurl' => {'_content' => 'http://m.flickr.com/photostream.gne?id=67099213'},
-      'photos' => {
-        'firstdatetaken' => {'_content' => '2011-06-21 21:43:09'},
-        'firstdate' => {'_content' => '1333954416'},
-        'count' => {'_content' => 2}
-      }
-    }
-    user = Flickr::User.public_from_info(info_hash)
+  def test_get_user_info
+    user = Flickr.get_user_info(@user_nsid)
 
-    assert_equal '67131352@N04', user.id
-    assert_equal '67131352@N04', user.nsid
-    assert_equal false, user.pro?
-    assert_equal false, user.buddy_icon_url.empty?
-    assert_nil user.path_alias
+    assert_equal @user_nsid, user.id
+    assert_equal @user_nsid, user.nsid
     assert_equal 'Janko Marohnić', user.username
-    assert_equal '', user.real_name
-    assert_equal '', user.location
-    assert_equal '', user.description
-    assert_equal false, user.photos_url.empty?
-    assert_equal false, user.profile_url.empty?
-    assert_equal false, user.mobile_url.empty?
-    assert_equal 2, user.photos_count
-    assert_instance_of Time, user.first_uploaded
+    assert_equal 'Janko Marohnić', user.real_name
+    assert_equal 'Zagreb, Croatia', user.location
+    assert_equal 'Sarajevo, Skopje, Warsaw, Zagreb', user.time_zone['label']
+    assert_equal '+01:00', user.time_zone['offset']
+    assert_equal <<-DESCRIPTION.chomp, user.description
+I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.
+    DESCRIPTION
+
+    refute user.profile_url.empty?
+    refute user.mobile_url.empty?
+    refute user.photos_url.empty?
+
+    assert_equal '5464', user.icon_server
+    assert_equal 6, user.icon_farm
+    refute user.buddy_icon_url.empty?
+
+    assert_equal false, user.pro?
+
     assert_instance_of Time, user.first_taken
+    assert_instance_of Time, user.first_uploaded
+
+    assert_equal 99, user.items_count
+  end
+
+  def test_find_user_by_username_or_email
+    user = Flickr.find_user_by_username('Janko Marohnić')
+
+    assert_equal @user_nsid, user.id
+    assert_equal @user_nsid, user.nsid
+    assert_equal 'Janko Marohnić', user.username
+
+    user = Flickr.find_user_by_email('janko.marohnic@gmail.com')
+
+    assert_equal @user_nsid, user.id
+    assert_equal @user_nsid, user.nsid
+    assert_equal 'Janko Marohnić', user.username
   end
 end

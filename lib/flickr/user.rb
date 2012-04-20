@@ -7,6 +7,7 @@ module Flickr
     def username;     @info['username']    end
     def real_name;    @info['realname']    end
     def location;     @info['location']    end
+    def time_zone;    @info['timezone']    end
     def description;  @info['description'] end
     def profile_url;  @info['profileurl']  end
     def mobile_url;   @info['mobileurl']   end
@@ -37,7 +38,7 @@ module Flickr
       end
     end
 
-    def photos_count
+    def items_count
       if @info['photos'] and @info['photos']['count']
         @info['photos']['count'].to_i
       end
