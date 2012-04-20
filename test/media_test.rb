@@ -118,7 +118,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '851128', location.woeid
   end
 
-  def test_items_from_set_with_extras
+  def test_items_from_set
     item = Flickr.items_from_set(@set_id, :extras => @all_extras.join(',')).
       find { |item| item.id.to_i == @item_id }
 

@@ -20,49 +20,7 @@ class PhotoTest < Test::Unit::TestCase
       url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
   end
 
-  def test_get_photo_info
-    photo = Flickr.get_photo_info(@photo_id)
-
-    # Attributes that are supposed to be blank
-    assert_equal [], photo.available_sizes
-    assert_equal nil, photo.size
-
-    [
-      photo.square(75), photo.square(150), photo.thumbnail,
-      photo.small(240), photo.small(320), photo.medium(500),
-      photo.medium(640), photo.medium(800), photo.large(1024),
-      photo.original, photo.square75, photo.square150,
-      photo.small240, photo.small320, photo.medium500,
-      photo.medium640, photo.medium800, photo.large1024,
-      photo.largest
-    ].
-      each do |photo|
-        assert_nil photo.source_url
-        assert_nil photo.width
-        assert_nil photo.height
-      end
-
-    [
-      proc { photo.square!(75) }, proc { photo.square!(150) },
-      proc { photo.thumbnail! }, proc { photo.small!(240) },
-      proc { photo.small!(320) }, proc { photo.medium!(500) },
-      proc { photo.medium!(640) }, proc { photo.medium!(800) },
-      proc { photo.large!(1024) }, proc { photo.original! },
-      proc { photo.square75! }, proc { photo.square150! },
-      proc { photo.small240! }, proc { photo.small320! },
-      proc { photo.medium500! }, proc { photo.medium640! },
-      proc { photo.medium800! }, proc { photo.large1024! },
-      proc { photo.largest! }
-    ].
-      each do |prok|
-        prok.call
-        assert_nil photo.source_url
-        assert_nil photo.width
-        assert_nil photo.height
-      end
-  end
-
-  def test_photos_from_set_with_extras
+  def test_photos_from_set
     photo = Flickr.photos_from_set(@set_id, :extras => @all_extras.join(',')).
       find { |photo| photo.id.to_i == @photo_id }
 
@@ -79,7 +37,7 @@ class PhotoTest < Test::Unit::TestCase
   def test_get_photo_sizes
     photo = Flickr.get_photo_sizes(@photo_id)
 
-    assert_equal '6946979188', photo.id
+    assert_equal @photo_id, photo.id
     assert_equal true, photo.can_download?
     assert_equal false, photo.can_blog?
     assert_equal false, photo.can_print?
@@ -140,5 +98,41 @@ class PhotoTest < Test::Unit::TestCase
     assert_nil photo.height
     assert_nil photo.source_url
     assert_nil photo.rotation
+    assert_equal [], photo.available_sizes
+    assert_equal nil, photo.size
+
+    [
+      photo.square(75), photo.square(150), photo.thumbnail,
+      photo.small(240), photo.small(320), photo.medium(500),
+      photo.medium(640), photo.medium(800), photo.large(1024),
+      photo.original, photo.square75, photo.square150,
+      photo.small240, photo.small320, photo.medium500,
+      photo.medium640, photo.medium800, photo.large1024,
+      photo.largest
+    ].
+      each do |photo|
+        assert_nil photo.source_url
+        assert_nil photo.width
+        assert_nil photo.height
+      end
+
+    [
+      proc { photo.square!(75) }, proc { photo.square!(150) },
+      proc { photo.thumbnail! }, proc { photo.small!(240) },
+      proc { photo.small!(320) }, proc { photo.medium!(500) },
+      proc { photo.medium!(640) }, proc { photo.medium!(800) },
+      proc { photo.large!(1024) }, proc { photo.original! },
+      proc { photo.square75! }, proc { photo.square150! },
+      proc { photo.small240! }, proc { photo.small320! },
+      proc { photo.medium500! }, proc { photo.medium640! },
+      proc { photo.medium800! }, proc { photo.large1024! },
+      proc { photo.largest! }
+    ].
+      each do |prok|
+        prok.call
+        assert_nil photo.source_url
+        assert_nil photo.width
+        assert_nil photo.height
+      end
   end
 end
