@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'test/unit'
+require 'flickr'
 require 'flickr/photo'
 require 'flickr/client'
 require 'flickr/user'
@@ -8,288 +9,303 @@ require 'flickr/license'
 class PhotoTest < Test::Unit::TestCase
   def setup
     Flickr.api_key = ENV['FLICKR_API_KEY']
+    @photo_id = 6946979188
+    @set_id = 72157629851991663
+    @user_nsid = '67131352@N04'
+
+    # license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o
+    @all_extras = %w[license date_upload date_taken owner_name
+      icon_server original_format last_update geo tags machine_tags
+      o_dims views media path_alias
+      url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
   end
 
-  def test_from_info
-    info_hash = {
-      "id" => "6923154272",
-      "secret" => "5519fab554",
-      "server" => "5279",
-      "farm" => 6,
-      "dateuploaded" => "1334189525",
-      "isfavorite" => 0,
-      "license" => "0",
-      "safety_level" => "0",
-      "rotation" => 0,
-      "title" => {"_content" => "David Belle - Canon commercial"},
-      "description" => {"_content" => ""},
-      "owner" => {
-        "nsid" => "67131352@N04",
-        "username" => "Janko Marohnić",
-        "realname" => "",
-        "location" => "",
-        "iconserver" => "0",
-        "iconfarm" => 0
-      },
-      "visibility" => {"ispublic" => 1, "isfriend" => 0, "isfamily" => 0},
-      "editability" => {"cancomment" => 0, "canaddmeta" => 0},
-      "publiceditability" => {"cancomment" => 1, "canaddmeta" => 0},
-      "usage" => {"candownload" => 1, "canblog" => 0, "canprint" => 0, "canshare" => 0},
-      "people" => {"haspeople" => 1},
-      "dates" => {
-        "posted" => "1334189525",
-        "taken" => "2012-04-11 17:12:05",
-        "takengranularity" => "0",
-        "lastupdate" => "1334259651"
-      },
-      "views" => "1",
-      "comments" => {"_content" => "3"},
-      "notes" => {"note" =>
-        [
-          {
-            "id" => "72157629434940218",
-            "author" => "67131352@N04",
-            "authorname" => "Janko Marohnić",
-            "x" => "16",
-            "y" => "16",
-            "w" => "31",
-            "h" => "31",
-            "_content" => "Headashgfsdg"
-          }
-        ]
-      },
-      "tags" => {"tag" =>
-        [
-          {
-            "id" => "67099213-6923154272-471",
-            "author" => "67131352@N04",
-            "raw" => "David",
-            "_content" => "david",
-            "machine_tag" => 0
-          },
-          {
-            "id" => "67099213-6923154272-18012",
-            "author" => "67131352@N04",
-            "raw" => "Belle",
-            "_content" => "belle",
-            "machine_tag" => 0
-          }
-        ]
-      },
-      "location" => {
-        "latitude" => 37.792608,
-        "longitude" => -122.402672,
-        "accuracy" => "14",
-        "context" => "0",
-        "neighbourhood" => {
-          "_content" => "Financial District",
-          "place_id" => "GddgqTpTUb8LgT93hw",
-          "woeid" => "23512022"
-        },
-        "locality" => {
-          "_content" => "San Francisco",
-          "place_id" => "7.MJR8tTVrIO1EgB",
-          "woeid" => "2487956"
-        },
-        "county" => {
-          "_content" => "San Francisco",
-          "place_id" => ".7sOmlRQUL9nK.kMzA",
-          "woeid" => "12587707"
-        },
-        "region" => {
-          "_content" => "California",
-          "place_id" => "NsbUWfBTUb4mbyVu",
-          "woeid" => "2347563"
-        },
-        "country" => {
-          "_content" => "United States",
-          "place_id" => "nz.gsghTUb4c2WAecA",
-          "woeid" => "23424977"
-        },
-        "place_id" => "GddgqTpTUb8LgT93hw",
-        "woeid" => "23512022"
-      },
-      "geoperms" => {"ispublic" => 1, "iscontact" => 0, "isfriend" => 0, "isfamily" => 0},
-      "media" => "photo"
-    }
+  def test_get_photo_info
+    photo = Flickr.get_photo_info(@photo_id)
 
-    photo = Flickr::Photo.from_info(info_hash)
-    assert_equal '6923154272', photo.id
-    assert_equal '5519fab554', photo.secret
-    assert_equal '5279', photo.server
-    assert_equal 6, photo.farm
-    assert_instance_of Time, photo.uploaded_at
-    assert_equal false, photo.favorite?
-
-    assert_instance_of Flickr::License, photo.license
-    assert_equal 0, photo.license.id
-    assert_instance_of String, photo.license.name
-    assert_instance_of String, photo.license.url
-
+    assert_equal '6946979188', photo.id
+    assert_equal '25bb44852b', photo.secret
+    assert_equal '7049', photo.server
+    assert_equal 8, photo.farm
+    assert_equal 'IMG_0796', photo.title
+    assert_equal 'luka', photo.tags
+    assert_equal '', photo.machine_tags
+    assert_equal 1, photo.views_count
+    assert_equal 1, photo.comments_count
+    assert_equal '0', photo.license.id
     assert_equal 0, photo.safety_level
-    assert_equal true, photo.safe?
-    assert_equal 0, photo.rotation
-    assert_equal "David Belle - Canon commercial", photo.title
-    assert_equal "", photo.description
+    assert_equal 90, photo.rotation
+    assert_equal 'Test', photo.description
+    assert_not_nil photo.url
 
-    assert_instance_of Flickr::User, photo.owner
-    assert_equal "67131352@N04", photo.owner.nsid
-    assert_equal "Janko Marohnić", photo.owner.username
-    assert photo.owner.real_name.empty?
-    assert photo.owner.location.empty?
+    # Time
+    assert_instance_of Time, photo.uploaded_at
+    assert_instance_of Time, photo.updated_at
+    assert_instance_of Time, photo.taken_at
+    assert_equal 0, photo.taken_at_granularity
+    assert_instance_of Time, photo.posted_at
+
+    # Owner
+    assert_equal '67131352@N04', photo.owner.nsid
+    assert_equal 'Janko Marohnić', photo.owner.username
+    assert_equal 'Janko Marohnić', photo.owner.real_name
+    assert_equal 'Zagreb, Croatia', photo.owner.location
+    assert_equal '5464', photo.owner.icon_server
+    assert_equal 6, photo.owner.icon_farm
     refute photo.owner.buddy_icon_url.empty?
-    refute photo.url.empty?
 
-    assert_instance_of Flickr::Media::Visibility, photo.visibility
+    # Predicates
     assert_equal true, photo.visibility.public?
+    assert_equal false, photo.visibility.friends?
+    assert_equal false, photo.visibility.family?
+    assert_equal nil, photo.visibility.contacts?
+
     assert_equal false, photo.can_comment?
     assert_equal false, photo.can_add_meta?
     assert_equal true, photo.can_everyone_comment?
     assert_equal false, photo.can_everyone_add_meta?
+
     assert_equal true, photo.can_download?
     assert_equal false, photo.can_blog?
     assert_equal false, photo.can_print?
     assert_equal false, photo.can_share?
-    assert_equal true, photo.has_people?
 
-    assert_instance_of Time, photo.posted_at
-    assert_instance_of Time, photo.taken_at
-    assert_instance_of Time, photo.updated_at
-    assert_equal 0, photo.taken_at_granularity
+    assert_equal false, photo.has_people?
 
-    assert_equal 1, photo.views_count
-    assert_equal 3, photo.comments_count
+    assert_equal true, photo.safe?
+    assert_equal false, photo.moderate?
+    assert_equal false, photo.restricted?
 
-    note = photo.notes.first
-    assert_instance_of Flickr::Media::Note, note
-    assert_equal 72157629434940218, note.id
-    assert_instance_of Flickr::User, note.author
-    assert_equal '67131352@N04', note.author.nsid
-    assert_equal "Janko Marohnić", note.author.username
-    assert_equal [16, 16], note.coordinates.bottom_left
-    assert_equal [31, 31], note.coordinates.top_right
-    assert_equal "Headashgfsdg", note.content
+    assert_equal false, photo.favorite?
 
-    assert_equal "david belle", photo.tags
-    assert_equal "", photo.machine_tags
-
-    location = photo.location
-    assert_instance_of Flickr::Location, location
-    assert_equal 37.792608, location.latitude
-    assert_equal -122.402672, location.longitude
-    assert_equal "14", location.accuracy
-    assert_equal "0", location.context
-
-    assert_equal "Financial District", location.neighbourhood.name
-    assert_equal "GddgqTpTUb8LgT93hw", location.neighbourhood.id
-    assert_equal "23512022",           location.neighbourhood.woeid
-    assert_equal "San Francisco",      location.locality.name
-    assert_equal "7.MJR8tTVrIO1EgB",   location.locality.id
-    assert_equal "2487956",            location.locality.woeid
-    assert_equal "San Francisco",      location.county.name
-    assert_equal ".7sOmlRQUL9nK.kMzA", location.county.id
-    assert_equal "12587707",           location.county.woeid
-    assert_equal "California",         location.region.name
-    assert_equal "NsbUWfBTUb4mbyVu",   location.region.id
-    assert_equal "2347563",            location.region.woeid
-    assert_equal "United States",      location.country.name
-    assert_equal "nz.gsghTUb4c2WAecA", location.country.id
-    assert_equal "23424977",           location.country.woeid
-
-    assert_equal "GddgqTpTUb8LgT93hw", location.id
-    assert_equal "23512022", location.woeid
-
-    assert_instance_of Flickr::Media::Visibility, photo.geo_permissions
     assert_equal true, photo.geo_permissions.public?
+    assert_equal false, photo.geo_permissions.contacts?
+    assert_equal false, photo.geo_permissions.friends?
+    assert_equal false, photo.geo_permissions.family?
+
+    # Notes
+    note = photo.notes.first
+    assert_equal '72157629487842968', note.id
+    assert_equal '67131352@N04', note.author.nsid
+    assert_equal 'Janko Marohnić', note.author.username
+    assert_equal [316, 0], note.coordinates
+    assert_equal [59, 50], [note.width, note.height]
+    assert_equal 'Test', note.content
+
+    # Location
+    location = photo.location
+
+    assert_equal 45.807258, location.latitude
+    assert_equal 15.967599, location.longitude
+    assert_equal '11', location.accuracy
+    assert_equal '0', location.context
+
+    assert_equal nil, location.neighbourhood
+    assert_equal 'Zagreb', location.locality.name
+    assert_equal '00j4IylZV7scWik', location.locality.place_id
+    assert_equal '851128', location.locality.woeid
+    assert_equal 'Zagreb', location.county.name
+    assert_equal '306dHrhQV7o6jm.ZUQ', location.county.place_id
+    assert_equal '15022257', location.county.woeid
+    assert_equal 'Grad Zagreb', location.region.name
+    assert_equal 'Js1DU.pTUrpBCIKhVw', location.region.place_id
+    assert_equal '20070170', location.region.woeid
+    assert_equal 'Croatia', location.country.name
+    assert_equal 'FunRCI5TUb6a6soTyw', location.country.place_id
+    assert_equal '23424843', location.country.woeid
+
+    assert_equal '00j4IylZV7scWik', location.place_id
+    assert_equal '851128', location.woeid
+
+    # Attributes that are supposed to be blank
+    assert_equal [], photo.available_sizes
+    assert_equal nil, photo.size
+
+    [
+      photo.square(75), photo.square(150), photo.thumbnail,
+      photo.small(240), photo.small(320), photo.medium(500),
+      photo.medium(640), photo.medium(800), photo.large(1024),
+      photo.original, photo.square75, photo.square150,
+      photo.small240, photo.small320, photo.medium500,
+      photo.medium640, photo.medium800, photo.large1024,
+      photo.largest
+    ].
+      each do |photo|
+        assert_nil photo.source_url
+        assert_nil photo.width
+        assert_nil photo.height
+      end
+
+    [
+      proc { photo.square!(75) }, proc { photo.square!(150) },
+      proc { photo.thumbnail! }, proc { photo.small!(240) },
+      proc { photo.small!(320) }, proc { photo.medium!(500) },
+      proc { photo.medium!(640) }, proc { photo.medium!(800) },
+      proc { photo.large!(1024) }, proc { photo.original! },
+      proc { photo.square75! }, proc { photo.square150! },
+      proc { photo.small240! }, proc { photo.small320! },
+      proc { photo.medium500! }, proc { photo.medium640! },
+      proc { photo.medium800! }, proc { photo.large1024! },
+      proc { photo.largest! }
+    ].
+      each do |prok|
+        prok.call
+        assert_nil photo.source_url
+        assert_nil photo.width
+        assert_nil photo.height
+      end
   end
 
-  def test_from_set
-    set_hash = {
-      "id" => "6913731566",
-      "secret" => "23879c079a",
-      "server" => "7130",
-      "farm" => 8,
-      "title" => "6913664138_61ffb9c0d7_b",
-      "isprimary" => "1",
-      "license" => "0",
-      "dateupload" => "1333956611",
-      "datetaken" => "2012-04-09 00:30:11",
-      "datetakengranularity" => "0",
-      "ownername" => "Janko Marohnić",
-      "iconserver" => "0",
-      "iconfarm" => 0,
-      "lastupdate" => "1334347067",
-      "latitude" => 0,
-      "longitude" => 0,
-      "accuracy" => 0,
-      "context" => 0,
-      "tags" => "zakon",
-      "machine_tags" => "",
-      "views" => "1",
-      "media" => "photo",
-      "media_status" => "ready",
-      "pathalias" => nil,
-      "url_sq" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_s.jpg",
-      "height_sq" => 75,
-      "width_sq" => 75,
-      "url_q" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_q.jpg",
-      "height_q" => "150",
-      "width_q" => "150",
-      "url_t" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_t.jpg",
-      "height_t" => "100",
-      "width_t" => "75",
-      "url_s" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_m.jpg",
-      "height_s" => "240",
-      "width_s" => "180",
-      "url_n" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_n.jpg",
-      "height_n" => "320",
-      "width_n" => 240,
-      "url_m" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a.jpg",
-      "height_m" => "500",
-      "width_m" => "375",
-      "url_z" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_z.jpg",
-      "height_z" => "640",
-      "width_z" => "480",
-      "url_c" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_c.jpg",
-      "height_c" => "800",
-      "width_c" => 600,
-      "url_l" => "http://farm8.staticflickr.com/7130/6913731566_23879c079a_b.jpg",
-      "height_l" => "1024",
-      "width_l" => "768"
-    }
-    photo = Flickr::Photo.from_set(set_hash)
-    assert_equal "Large 1024", photo.size
-    assert photo.primary?
-    assert_equal Flickr::Photo::SIZES.keys[0..-2], photo.available_sizes
-    photo.thumbnail!
-    assert_equal "Large 1024", photo.largest!.size
-    assert_equal [768, 1024], [photo.width, photo.height]
-    assert_instance_of Flickr::User, photo.owner
-    assert_equal '6913731566', photo.id
-    assert_equal "23879c079a", photo.secret
-    assert_equal '7130', photo.server
+  def test_photos_from_set_with_extras
+    photo = Flickr.photos_from_set(@set_id, :extras => @all_extras.join(',')).
+      find { |photo| photo.id.to_i == @photo_id }
+
+    assert_equal '6946979188', photo.id
+    assert_equal '25bb44852b', photo.secret
+    assert_equal '7049', photo.server
     assert_equal 8, photo.farm
-    assert_equal "6913664138_61ffb9c0d7_b", photo.title
-    assert_equal true, photo.primary?
-    assert_instance_of Flickr::Photo, photo.square75
-    assert_instance_of Flickr::Photo, photo.square75!
-
-    # Extras
-    assert_instance_of Flickr::License, photo.license
-    assert_instance_of Time, photo.uploaded_at
-    assert_instance_of Time, photo.taken_at
-    assert_instance_of Time, photo.updated_at
-    assert_equal 0, photo.taken_at_granularity
-    refute photo.owner.buddy_icon_url.empty?
-    assert_instance_of Flickr::Location, photo.location
-    assert_equal "zakon", photo.tags
-    assert_instance_of String, photo.machine_tags
+    assert_equal 'IMG_0796', photo.title
+    assert_equal 'luka', photo.tags
+    assert_equal '', photo.machine_tags
     assert_equal 1, photo.views_count
-    assert_equal "ready", photo.media_status
-    assert photo.path_alias.nil?
+    assert_equal '0', photo.license.id
+    assert_equal true, photo.primary?
+    assert_not_nil photo.url
+    assert_equal 'ready', photo.media_status
 
-    photo.get_info
-    test_from_info
+    # Time
+    assert_instance_of Time, photo.uploaded_at
+    assert_instance_of Time, photo.updated_at
+    assert_instance_of Time, photo.taken_at
+    assert_equal 0, photo.taken_at_granularity
+
+    # Location
+    assert_equal 45.807258, photo.location.latitude
+    assert_equal 15.967599, photo.location.longitude
+    assert_equal '11', photo.location.accuracy
+    assert_equal '0', photo.location.context.to_s
+    assert_equal '00j4IylZV7scWik', photo.location.place_id
+    assert_equal '851128', photo.location.woeid
+    assert_equal true, photo.geo_permissions.public?
+    assert_equal false, photo.geo_permissions.contacts?
+    assert_equal false, photo.geo_permissions.friends?
+    assert_equal false, photo.geo_permissions.family?
+
+    # Owner
+    assert_equal '67131352@N04', photo.owner.nsid
+    assert_equal 'Janko Marohnić', photo.owner.username
+    assert_equal '5464', photo.owner.icon_server
+    assert_equal 6, photo.owner.icon_farm
+    refute photo.owner.buddy_icon_url.empty?
+
+    assert_sizes(photo)
+  end
+
+  def test_public_photos_from_user
+    photo = Flickr.public_photos_from_user(@user_nsid, :extras => @all_extras).
+      find { |photo| photo.id.to_i == @photo_id }
+
+    assert_equal '6946979188', photo.id
+    assert_equal '25bb44852b', photo.secret
+    assert_equal '7049', photo.server
+    assert_equal 8, photo.farm
+    assert_equal 'IMG_0796', photo.title
+    assert_equal 'luka', photo.tags
+    assert_equal '', photo.machine_tags
+    assert_equal 1, photo.views_count
+    assert_equal '0', photo.license.id
+    assert_not_nil photo.url
+    assert_equal 'ready', photo.media_status
+
+    # Time
+    assert_instance_of Time, photo.uploaded_at
+    assert_instance_of Time, photo.updated_at
+    assert_instance_of Time, photo.taken_at
+    assert_equal 0, photo.taken_at_granularity
+
+    # Location
+    assert_equal 45.807258, photo.location.latitude
+    assert_equal 15.967599, photo.location.longitude
+    assert_equal '11', photo.location.accuracy
+    assert_equal '0', photo.location.context.to_s
+    assert_equal '00j4IylZV7scWik', photo.location.place_id
+    assert_equal '851128', photo.location.woeid
+    assert_equal true, photo.geo_permissions.public?
+    assert_equal false, photo.geo_permissions.contacts?
+    assert_equal false, photo.geo_permissions.friends?
+    assert_equal false, photo.geo_permissions.family?
+
+    # Owner
+    assert_equal '67131352@N04', photo.owner.nsid
+    assert_equal 'Janko Marohnić', photo.owner.username
+    assert_equal '5464', photo.owner.icon_server
+    assert_equal 6, photo.owner.icon_farm
+    refute photo.owner.buddy_icon_url.empty?
+
+    # Visibility (This is the difference from Flickr.photos_from_set)
+    assert_equal true, photo.visibility.public?
+    assert_equal false, photo.visibility.friends?
+    assert_equal false, photo.visibility.family?
+    assert_equal nil, photo.visibility.contacts?
+
+    assert_sizes(photo, :exclude => ['Square 150', 'Small 320', 'Medium 800'])
+  end
+
+  def test_get_photo_sizes
+    photo = Flickr.get_photo_sizes(@photo_id)
+
+    assert_equal '6946979188', photo.id
+    assert_equal true, photo.can_download?
+    assert_equal false, photo.can_blog?
+    assert_equal false, photo.can_print?
+
+    assert_sizes(photo)
+  end
+
+  def assert_sizes(photo, options = {})
+    options[:exclude] ||= []
+    [
+      [[photo.square(75), photo.square75],   ['Square 75', '75x75']],
+      [[photo.thumbnail],                    ['Thumbnail', '75x100']],
+      [[photo.square(150), photo.square150], ['Square 150', '150x150']],
+      [[photo.small(240), photo.small240],   ['Small 240', '180x240']],
+      [[photo.small(320), photo.small320],   ['Small 320', '240x320']],
+      [[photo.medium(500), photo.medium500], ['Medium 500', '375x500']],
+      [[photo.medium(640), photo.medium640], ['Medium 640', '480x640']],
+      [[photo.medium(800), photo.medium800], ['Medium 800', '600x800']],
+      [[photo.large(1024), photo.large1024], ['Large 1024', '768x1024']]
+    ].
+      reject { |_, expected_values| options[:exclude].include?(expected_values.first) }.
+      each do |photos, expected_values|
+        flickr_size, size = expected_values
+        photos.each do |photo|
+          assert_equal flickr_size, photo.size
+          assert_equal size, "#{photo.width}x#{photo.height}", "Non bang versions"
+          refute photo.source_url.empty?
+        end
+      end
+
+    [
+      [[proc { photo.square!(75) }, proc { photo.square75! }],   ['Square 75', '75x75']],
+      [[proc { photo.thumbnail! }],                              ['Thumbnail', '75x100']],
+      [[proc { photo.square!(150) }, proc { photo.square150! }], ['Square 150', '150x150']],
+      [[proc { photo.small!(240) }, proc { photo.small240! }],   ['Small 240', '180x240']],
+      [[proc { photo.small!(320) }, proc { photo.small320! }],   ['Small 320', '240x320']],
+      [[proc { photo.medium!(500) }, proc { photo.medium500! }], ['Medium 500', '375x500']],
+      [[proc { photo.medium!(640) }, proc { photo.medium640! }], ['Medium 640', '480x640']],
+      [[proc { photo.medium!(800) }, proc { photo.medium800! }], ['Medium 800', '600x800']],
+      [[proc { photo.large!(1024) }, proc { photo.large1024! }], ['Large 1024', '768x1024']]
+    ].
+      reject { |_, expected_values| options[:exclude].include?(expected_values.first) }.
+      each do |proks, expected_values|
+        flickr_size, size = expected_values
+        proks.each do |prok|
+          prok.call
+          assert_equal flickr_size, photo.size
+          assert_equal size, "#{photo.width}x#{photo.height}", "Bang versions"
+          refute photo.source_url.empty?
+        end
+      end
   end
 
   def test_methods_returning_nil
@@ -334,6 +350,7 @@ class PhotoTest < Test::Unit::TestCase
     assert_nil photo.can_share?
     assert_nil photo.has_people?
     assert_nil photo.notes
+    assert_nil photo.media_status
 
     assert_nil photo.width
     assert_nil photo.height
