@@ -41,6 +41,13 @@ class PhotoTest < Test::Unit::TestCase
     assert_sizes(photo)
   end
 
+  def test_search_photos
+    photo = Flickr.search_photos(:user_id => @user_nsid, :extras => @all_extras).
+      find { |photo| photo.id.to_i == @photo_id }
+
+    assert_sizes(photo)
+  end
+
   def assert_sizes(photo, options = {})
     options[:exclude] ||= []
     [

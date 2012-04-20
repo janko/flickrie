@@ -57,6 +57,17 @@ module Flickr
       Video.from_sizes(response.body['sizes'], video_id)
     end
 
+    def search_media(search_params = {})
+      response = client.search_media(search_params)
+      Media.from_search(response.body['photos'])
+    end
+    def search_photos(search_params = {})
+      search_media(search_params.merge(:media => 'photos'))
+    end
+    def search_videos(search_params = {})
+      search_media(search_params.merge(:media => 'videos'))
+    end
+
     # licenses
     def get_licenses
       response = client.get_licenses

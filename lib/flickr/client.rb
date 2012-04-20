@@ -76,6 +76,11 @@ module Flickr
       get 'flickr.photos.getSizes', :photo_id => media_id
     end
 
+    def search_media(params = {})
+      params[:extras] = [params[:extras], 'media'].compact.join(',')
+      get 'flickr.photos.search', params
+    end
+
     # licenses
     def get_licenses
       get 'flickr.photos.licenses.getInfo'

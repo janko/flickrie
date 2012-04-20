@@ -180,6 +180,9 @@ module Flickr
 
       def from_sizes(info, media_id)
         new.get_sizes(info.update('id' => media_id))
+
+      def from_search(info)
+        from_user(info)
       end
     end
     extend(ClassMethods)

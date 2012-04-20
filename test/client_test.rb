@@ -27,6 +27,7 @@ class ClientTest < Test::Unit::TestCase
       # photos
       @client.get_media_info(@media_id)
       @client.get_media_sizes(@media_id)
+      @client.search_media(:user_id => @user_nsid)
 
       # licenses
       @client.get_licenses

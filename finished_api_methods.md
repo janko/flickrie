@@ -39,6 +39,7 @@
 
 - flickr.photos.getInfo
 - flickr.photos.getSizes
+- flickr.photos.search
 
 # photos.comments
 
