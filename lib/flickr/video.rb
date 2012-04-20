@@ -1,5 +1,3 @@
-require 'flickr/media'
-
 module Flickr
   class Video
     include Media
