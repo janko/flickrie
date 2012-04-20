@@ -10,9 +10,7 @@ module Flickr
   class << self
     def items_from_set(set_id, params = {})
       response = client.items_from_set(set_id, params)
-      response.body['photoset']['photo'].map do |info|
-        Media.from_set(info)
-      end
+      Media.from_set(response.body['photoset'])
     end
 
     def photos_from_set(set_id, params = {})
@@ -34,7 +32,7 @@ module Flickr
 
     def public_items_from_user(user_nsid, params = {})
       response = client.public_items_from_user(user_nsid, params)
-      response.body['photos']['photo'].map { |info| Media.from_user(info) }
+      Media.from_user(response.body['photos'])
     end
 
     def public_photos_from_user(user_nsid, params = {})

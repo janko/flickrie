@@ -128,41 +128,55 @@ module Flickr
     end
 
     module ClassMethods
-      def from_set(info)
-        info['owner'] = {
-          'iconserver' => info.delete('iconserver'),
-          'iconfarm' => info.delete('iconfarm')
-        }
-        if info['latitude']
-          geo_info = %w[latitude longitude accuracy context]
-          location = geo_info.inject({}) do |location, geo|
-            location.update(geo => info.delete(geo))
+      def from_set(hash)
+        hash['photo'].map do |info|
+          info['owner'] = {
+            'nsid' => hash['owner'],
+            'username' => hash['ownername'],
+            'iconserver' => info.delete('iconserver'),
+            'iconfarm' => info.delete('iconfarm')
+          }
+          if info['place_id']
+            geo_info = %w[latitude longitude accuracy context place_id woeid]
+            info['location'] = geo_info.inject({}) do |location, geo|
+              location.update(geo => info.delete(geo))
+            end
+            info['geoperms'] = {
+              'isfamily' => info['geo_is_family'],
+              'isfriend' => info['geo_is_friend'],
+              'iscontact' => info['geo_is_contact'],
+              'ispublic' => info['geo_is_public']
+            }
           end
-          info['location'] = location
-        end
-        info['dates'] = {
-          'uploaded' => info.delete('dateupload'),
-          'lastupdate' => info.delete('lastupdate'),
-          'taken' => info.delete('datetaken'),
-          'takengranularity' => info.delete('datetakengranularity'),
-        }
-        info['usage'] = {}
+          info['dates'] = {
+            'uploaded' => info.delete('dateupload'),
+            'lastupdate' => info.delete('lastupdate'),
+            'taken' => info.delete('datetaken'),
+            'takengranularity' => info.delete('datetakengranularity'),
+          }
+          info['usage'] = {}
 
-        new(info)
+          new(info)
+        end
       end
 
       def from_info(info)
         new('media' => info['media']).get_info(info)
       end
 
-      def from_user(info)
-        info['owner'] = {'nsid' => info['owner']}
-        info['visibility'] = {
-          'ispublic' => info['ispublic'],
-          'isfriend' => info['isfriend'],
-          'isfamily' => info['isfamily']
-        }
-        info['usage'] = {}
+      def from_user(hash)
+        hash['owner'] = hash['photo'].first['owner']
+        hash['ownername'] = hash['photo'].first['ownername']
+        hash['photo'].each do |info|
+          info['visibility'] = {
+            'ispublic' => info.delete('ispublic'),
+            'isfriend' => info.delete('isfriend'),
+            'isfamily' => info.delete('isfamily')
+          }
+        end
+
+        from_set(hash)
+      end
 
         new(info)
       end
