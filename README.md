@@ -2,7 +2,7 @@
 
 ## About
 
-This gem is a nice wrapper for the Flickr API an intuitive interface.
+This gem is a nice wrapper for the Flickr API with an intuitive interface.
 
 The reason why I did this gem is because the other ones either weren't
 well maintained, or they were too literal in the sense that the response from
@@ -62,7 +62,7 @@ photo.comments_count        # => 6
 photo.visibility.public?    # => true
 photo.can_download?         # => true
 photo.owner.real_name       # => "John Smith"
-photo.location.country.name # => "United Stated"
+photo.location.country.name # => "United States"
 ```
 
 You can also get this info on an existing photo:
@@ -76,7 +76,7 @@ photo.description # => "In this photo Peter said something really funny..."
 If you want to display photos from flickr in your app, this is probably the most useful part:
 
 ```ruby
-photo = Flickrie.photo_get_sizes(8232348)
+photo = Flickrie.get_photo_sizes(8232348)
 
 photo.medium!(800)
 photo.size       # => "Medium 800"
@@ -91,10 +91,10 @@ photo.width      # => 240
 photo.width      # => 320
 ```
 
-If you want sizes to be available to photos you're fetching from a set, it's a bad idea to call `#get_info` on each photo. Instead, you should pass in these options:
+If you want sizes to be available to photos you're fetching from a set, it's a bad idea to call `#get_sizes` on each photo, because that will make an HTTP request on each photo, which can be very slow. Instead, you should pass in these options:
 
 ```ruby
-photos = Flickrie.photos_from_set(1242379, :extras => 'url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o')
+photos = Flickrie.photos_from_set(1242379, :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o')
 photo = photos.first
 photo.medium!(640)
 photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_z.jpg"
@@ -124,12 +124,17 @@ reponse.body # =>
 # }
 ```
 
-It's not nearly as pretty, but at least you can get to the data
+It's not nearly as pretty, but at least you can get to the data.
 
 ## Issues
 
 Please, feel free to post any issues that you're having, I will try to
 help you in any way I can.
+
+## Cedits
+
+Special thanks to @mislav, my brother, he helped me a lot with the
+basis.
 
 ## Currently covered API methods
 
