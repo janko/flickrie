@@ -1,5 +1,8 @@
 source :rubygems
 
-gem "faraday-stack", :require => false
-gem 'activesupport'
-gem "rake"
+gemspec
+
+group :development, :test do
+  gem "rake"
+  gem "activesupport"
+end
