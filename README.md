@@ -12,6 +12,12 @@ make it pretty :)
 
 ## Examples of usage
 
+You first need to install the gem.
+
+```
+[sudo] gem install flickrie
+```
+
 You first need to set the API key.
 
 ```ruby
