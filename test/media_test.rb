@@ -2,6 +2,12 @@
 require 'test/unit'
 require 'flickrie'
 
+Flickrie::Photo.instance_eval do
+  def public_new(*args)
+    new(*args)
+  end
+end
+
 class MediaTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
@@ -17,8 +23,11 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_get_media_info
-    media = Flickrie.get_media_info(@media_id)
+    get_info_assertions(Flickrie.get_media_info(@media_id))
+    get_info_assertions(Flickrie::Photo.public_new('id' => @media_id.to_s).get_info)
+  end
 
+  def get_info_assertions(media)
     assert_equal '6946979188', media.id
     assert_equal '25bb44852b', media.secret
     assert_equal '7049', media.server

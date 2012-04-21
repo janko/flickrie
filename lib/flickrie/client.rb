@@ -19,8 +19,8 @@ module Flickrie
             :api_key => self.api_key
           },
           :request => {
-            :open_timeout => 5,
-            :timeout => 5
+            :open_timeout => 8,
+            :timeout => 8
           }
 
         client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck

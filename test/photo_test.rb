@@ -2,6 +2,12 @@
 require 'test/unit'
 require 'flickrie'
 
+Flickrie::Photo.instance_eval do
+  def public_new(*args)
+    new(*args)
+  end
+end
+
 class PhotoTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
@@ -31,8 +37,11 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_get_photo_sizes
-    photo = Flickrie.get_photo_sizes(@photo_id)
+    get_sizes_assertions(Flickrie.get_photo_sizes(@photo_id))
+    get_sizes_assertions(Flickrie::Photo.public_new('id' => @photo_id.to_s).get_sizes)
+  end
 
+  def get_sizes_assertions(photo)
     assert_equal true, photo.can_download?
     assert_equal false, photo.can_blog?
     assert_equal false, photo.can_print?

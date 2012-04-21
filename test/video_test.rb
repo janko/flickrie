@@ -2,6 +2,12 @@
 require 'test/unit'
 require 'flickrie'
 
+Flickrie::Video.instance_eval do
+  def public_new(*args)
+    new(*args)
+  end
+end
+
 class VideoTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
@@ -33,8 +39,11 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_get_video_sizes
-    video = Flickrie.get_video_sizes(@video_id)
+    get_sizes_assertions(Flickrie.get_video_sizes(@video_id))
+    get_sizes_assertions(Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes)
+  end
 
+  def get_sizes_assertions(video)
     assert_equal true, video.can_download?
     assert_equal false, video.can_blog?
     assert_equal false, video.can_print?

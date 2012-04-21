@@ -2,6 +2,12 @@
 require 'test/unit'
 require 'flickrie'
 
+Flickrie::User.instance_eval do
+  def public_new(*args)
+    new(*args)
+  end
+end
+
 class UserTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
@@ -9,8 +15,11 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_get_user_info
-    user = Flickrie.get_user_info(@user_nsid)
+    get_info_assertions(Flickrie.get_user_info(@user_nsid))
+    get_info_assertions(Flickrie::User.public_new('nsid' => @user_nsid).get_info)
+  end
 
+  def get_info_assertions(user)
     assert_equal @user_nsid, user.id
     assert_equal @user_nsid, user.nsid
     assert_equal 'Janko Marohnić', user.username

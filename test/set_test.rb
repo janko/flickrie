@@ -2,6 +2,12 @@
 require 'test/unit'
 require 'flickrie'
 
+Flickrie::Set.instance_eval do
+  def public_new(*args)
+    new(*args)
+  end
+end
+
 class SetTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
@@ -10,8 +16,11 @@ class SetTest < Test::Unit::TestCase
   end
 
   def test_get_set_info
-    set = Flickrie.get_set_info(@set_id)
+    get_info_assertions(Flickrie.get_set_info(@set_id))
+    get_info_assertions(Flickrie::Set.public_new('id' => @set_id.to_s).get_info)
+  end
 
+  def get_info_assertions(set)
     assert_equal @set_id, set.id.to_i
     assert_equal @user_nsid, set.owner.nsid
     assert_equal '6946979188', set.primary_media_id

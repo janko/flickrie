@@ -34,20 +34,31 @@ module Flickrie
 
     def url; "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}" end
 
+    def get_info(info = nil)
+      info ||= Flickrie.client.get_set_info(id).body['photoset']
+      info['title'] = info['title']['_content']
+      info['description'] = info['description']['_content']
+      @info.update(info)
+
+      self
+    end
+
     private
 
-    def initialize(info)
+    def initialize(info = {})
       @info = info
+    end
 
-      # Fixes
-      @info['title'] = @info['title']['_content']
-      @info['description'] = @info['description']['_content']
+    def self.from_info(info)
+      new.get_info(info)
     end
 
     def self.from_user(info, user_nsid)
       info.map do |info|
         info['count_photos'] = info.delete('photos')
         info['count_videos'] = info.delete('videos')
+        info['title'] = info['title']['_content']
+        info['description'] = info['description']['_content']
         info['owner'] = user_nsid
 
         new(info)

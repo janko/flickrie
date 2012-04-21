@@ -51,7 +51,7 @@ module Flickrie
     end
 
     def get_info(info = nil)
-      info ||= Flickrie.client.get_user_info(nsid).body['user']
+      info ||= Flickrie.client.get_user_info(nsid).body['person']
       @info.update(info)
 
       # Fixes

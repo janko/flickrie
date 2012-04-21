@@ -76,7 +76,7 @@ module Flickrie
     # photosets
     def get_set_info(set_id)
       response = client.get_set_info(set_id)
-      Set.new(response.body['photoset'])
+      Set.from_info(response.body['photoset'])
     end
 
     def sets_from_user(user_nsid)
