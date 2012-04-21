@@ -38,6 +38,10 @@ photo.owner       # => #<User: nsid="67313352@N04", ...>
 photo.owner.nsid  # => "67313352@N04"
 ```
 
+Note that what Flickr refers to as "photoset" in its documentation, I
+refer to as "set". This is because the word "photoset" would be wrong,
+since sets can also hold videos.
+
 You can also throw in some parameters to get more information about photos.  For example,
 
 ```ruby
@@ -126,6 +130,9 @@ reponse.body # =>
 
 It's not nearly as pretty, but at least you can get to the data.
 
+The other main thing I haven't done yet is authentication. This is the next
+thing I intend do.
+
 ## Issues
 
 Please, feel free to post any issues that you're having, I will try to
@@ -133,8 +140,9 @@ help you in any way I can.
 
 ## Cedits
 
-Special thanks to @mislav, my brother, he helped me a lot with the
-basis.
+Special thanks to @**mislav**, my brother, he helped me really a lot
+with getting started with ruby. And he also helped me with the
+basis of this gem.
 
 ## Currently covered API methods
 
