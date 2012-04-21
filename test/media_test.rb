@@ -1,10 +1,10 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
 class MediaTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @media_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -17,7 +17,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_get_media_info
-    media = Flickr.get_media_info(@media_id)
+    media = Flickrie.get_media_info(@media_id)
 
     assert_equal '6946979188', media.id
     assert_equal '25bb44852b', media.secret
@@ -115,7 +115,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_media_from_set
-    media = Flickr.media_from_set(@set_id, :extras => @all_extras).
+    media = Flickrie.media_from_set(@set_id, :extras => @all_extras).
       find { |media| media.id.to_i == @media_id }
 
     assert_equal '6946979188', media.id
@@ -158,7 +158,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_public_media_from_user
-    media = Flickr.public_media_from_user(@user_nsid, :extras => @all_extras).
+    media = Flickrie.public_media_from_user(@user_nsid, :extras => @all_extras).
       find { |media| media.id.to_i == @media_id }
 
     assert_equal '6946979188', media.id
@@ -198,7 +198,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 6, media.owner.icon_farm
     refute media.owner.buddy_icon_url.empty?
 
-    # Visibility (This is the difference from Flickr.media_from_set)
+    # Visibility (This is the difference from Flickrie.media_from_set)
     assert_equal true, media.visibility.public?
     assert_equal false, media.visibility.friends?
     assert_equal false, media.visibility.family?
@@ -206,7 +206,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_search_media
-    media = Flickr.search_media(:user_id => @user_nsid, :extras => @all_extras).
+    media = Flickrie.search_media(:user_id => @user_nsid, :extras => @all_extras).
       find { |media| media.id.to_i == @media_id }
 
     assert_equal '6946979188', media.id
@@ -246,7 +246,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 6, media.owner.icon_farm
     refute media.owner.buddy_icon_url.empty?
 
-    # Visibility (This is the difference from Flickr.media_from_set)
+    # Visibility (This is the difference from Flickrie.media_from_set)
     assert_equal true, media.visibility.public?
     assert_equal false, media.visibility.friends?
     assert_equal false, media.visibility.family?
@@ -254,7 +254,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_methods_returning_nil
-    media = Flickr::Photo.new
+    media = Flickrie::Photo.new
 
     assert_nil media.id
     assert_nil media.secret

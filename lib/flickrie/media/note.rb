@@ -1,4 +1,4 @@
-module Flickr
+module Flickrie
   module Media
     class Note
       attr_reader :id, :author, :coordinates, :content,

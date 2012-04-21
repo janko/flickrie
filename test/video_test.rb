@@ -1,10 +1,10 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
 class VideoTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @video_id = 7093038981
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -17,7 +17,7 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_get_video_info
-    video = Flickr.get_video_info(@video_id)
+    video = Flickrie.get_video_info(@video_id)
 
     assert_equal true, video.ready?
     assert_equal false, video.failed?
@@ -33,7 +33,7 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_get_video_sizes
-    video = Flickr.get_video_sizes(@video_id)
+    video = Flickrie.get_video_sizes(@video_id)
 
     assert_equal true, video.can_download?
     assert_equal false, video.can_blog?
@@ -45,7 +45,7 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_methods_returning_nil
-    video = Flickr::Video.new
+    video = Flickrie::Video.new
 
     assert_nil video.ready?
     assert_nil video.failed?

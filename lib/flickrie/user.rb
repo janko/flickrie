@@ -1,6 +1,6 @@
 require 'date'
 
-module Flickr
+module Flickrie
   class User
     def id;           @info['id']          end
     def nsid;         @info['nsid']        end
@@ -44,14 +44,14 @@ module Flickr
       end
     end
 
-    def public_photos; Flickr.public_photos_from_user(nsid) end
+    def public_photos; Flickrie.public_photos_from_user(nsid) end
 
     def pro?
       @info['ispro'].to_i == 1 if @info['ispro']
     end
 
     def get_info(info = nil)
-      info ||= Flickr.client.get_user_info(nsid)
+      info ||= Flickrie.client.get_user_info(nsid).body['user']
       @info.update(info)
 
       # Fixes

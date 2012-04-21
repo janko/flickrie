@@ -1,7 +1,7 @@
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
-Flickr::License.instance_eval do
+Flickrie::License.instance_eval do
   def public_response_array
     response_array
   end
@@ -9,17 +9,17 @@ end
 
 class LicenseTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
   end
 
   def test_licenses_staying_the_same
-    licenses_array = Flickr.client.get_licenses.body['licenses']['license']
+    licenses_array = Flickrie.client.get_licenses.body['licenses']['license']
     assert_equal licenses_array.sort_by { |hash| hash['id'] },
-      Flickr::License.public_response_array
+      Flickrie::License.public_response_array
   end
 
   def test_get_licenses
-    licenses = Flickr.get_licenses
+    licenses = Flickrie.get_licenses
 
     licenses.each do |license|
       assert_includes ('0'..'8'), license.id

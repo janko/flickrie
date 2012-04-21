@@ -1,19 +1,19 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr/client'
+require 'flickrie/client'
 
 class ClientTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
-    @client = Flickr.client
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
+    @client = Flickrie.client
     @set_id = 72157629851991663
     @media_id = 7093038981
     @user_nsid = '67131352@N04'
   end
 
   def test_internals
-    assert_equal ENV['FLICKR_API_KEY'], Flickr.api_key
-    assert_instance_of Flickr::Client, @client
+    assert_equal ENV['FLICKR_API_KEY'], Flickrie.api_key
+    assert_instance_of Flickrie::Client, @client
   end
 
   def test_api_calls

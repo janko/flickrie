@@ -1,15 +1,15 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
 class UserTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @user_nsid = '67131352@N04'
   end
 
   def test_get_user_info
-    user = Flickr.get_user_info(@user_nsid)
+    user = Flickrie.get_user_info(@user_nsid)
 
     assert_equal @user_nsid, user.id
     assert_equal @user_nsid, user.nsid
@@ -39,13 +39,13 @@ I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.
   end
 
   def test_find_user_by_username_or_email
-    user = Flickr.find_user_by_username('Janko Marohnić')
+    user = Flickrie.find_user_by_username('Janko Marohnić')
 
     assert_equal @user_nsid, user.id
     assert_equal @user_nsid, user.nsid
     assert_equal 'Janko Marohnić', user.username
 
-    user = Flickr.find_user_by_email('janko.marohnic@gmail.com')
+    user = Flickrie.find_user_by_email('janko.marohnic@gmail.com')
 
     assert_equal @user_nsid, user.id
     assert_equal @user_nsid, user.nsid

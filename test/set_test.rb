@@ -1,16 +1,16 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
 class SetTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
   end
 
   def test_get_set_info
-    set = Flickr.get_set_info(@set_id)
+    set = Flickrie.get_set_info(@set_id)
 
     assert_equal @set_id, set.id.to_i
     assert_equal @user_nsid, set.owner.nsid
@@ -27,10 +27,10 @@ class SetTest < Test::Unit::TestCase
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
 
-    assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
-    assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
-    assert set.media.find { |media| media.is_a?(Flickr::Photo) }
-    assert set.media.find { |media| media.is_a?(Flickr::Video) }
+    assert set.photos.all? { |photo| photo.is_a?(Flickrie::Photo) }
+    assert set.videos.all? { |video| video.is_a?(Flickrie::Video) }
+    assert set.media.find { |media| media.is_a?(Flickrie::Photo) }
+    assert set.media.find { |media| media.is_a?(Flickrie::Video) }
 
     assert_equal false, set.can_comment?
 
@@ -41,7 +41,7 @@ class SetTest < Test::Unit::TestCase
   end
 
   def test_sets_from_user
-    set = Flickr.sets_from_user(@user_nsid).
+    set = Flickrie.sets_from_user(@user_nsid).
       find { |set| set.id.to_i == @set_id }
 
     assert_equal @set_id, set.id.to_i
@@ -59,10 +59,10 @@ class SetTest < Test::Unit::TestCase
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
 
-    assert set.photos.all? { |photo| photo.is_a?(Flickr::Photo) }
-    assert set.videos.all? { |video| video.is_a?(Flickr::Video) }
-    assert set.media.find { |media| media.is_a?(Flickr::Photo) }
-    assert set.media.find { |media| media.is_a?(Flickr::Video) }
+    assert set.photos.all? { |photo| photo.is_a?(Flickrie::Photo) }
+    assert set.videos.all? { |video| video.is_a?(Flickrie::Video) }
+    assert set.media.find { |media| media.is_a?(Flickrie::Photo) }
+    assert set.media.find { |media| media.is_a?(Flickrie::Video) }
 
     assert_equal false, set.can_comment?
     assert_equal false, set.needs_interstitial?

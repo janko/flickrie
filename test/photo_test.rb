@@ -1,10 +1,10 @@
 # encoding: utf-8
 require 'test/unit'
-require 'flickr'
+require 'flickrie'
 
 class PhotoTest < Test::Unit::TestCase
   def setup
-    Flickr.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @photo_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -17,21 +17,21 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_photos_from_set
-    photo = Flickr.photos_from_set(@set_id, :extras => @all_extras).
+    photo = Flickrie.photos_from_set(@set_id, :extras => @all_extras).
       find { |photo| photo.id.to_i == @photo_id }
 
     assert_sizes(photo)
   end
 
   def test_public_photos_from_user
-    photo = Flickr.public_photos_from_user(@user_nsid, :extras => @all_extras).
+    photo = Flickrie.public_photos_from_user(@user_nsid, :extras => @all_extras).
       find { |photo| photo.id.to_i == @photo_id }
 
     assert_sizes(photo, :exclude => ['Square 150', 'Small 320', 'Medium 800'])
   end
 
   def test_get_photo_sizes
-    photo = Flickr.get_photo_sizes(@photo_id)
+    photo = Flickrie.get_photo_sizes(@photo_id)
 
     assert_equal true, photo.can_download?
     assert_equal false, photo.can_blog?
@@ -41,7 +41,7 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_search_photos
-    photo = Flickr.search_photos(:user_id => @user_nsid, :extras => @all_extras).
+    photo = Flickrie.search_photos(:user_id => @user_nsid, :extras => @all_extras).
       find { |photo| photo.id.to_i == @photo_id }
 
     assert_sizes(photo)
@@ -94,7 +94,7 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_methods_returning_nil
-    photo = Flickr::Photo.new
+    photo = Flickrie::Photo.new
 
     assert_nil photo.width
     assert_nil photo.height

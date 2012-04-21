@@ -1,4 +1,4 @@
-module Flickr
+module Flickrie
   class License
     attr_reader :id, :name, :url
 

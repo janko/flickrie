@@ -1,4 +1,4 @@
-module Flickr
+module Flickrie
   class Location
     %w[latitude longitude accuracy context place_id woeid].each do |attr_name|
       define_method(attr_name) do

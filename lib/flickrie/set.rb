@@ -1,4 +1,4 @@
-module Flickr
+module Flickrie
   class Set
     def id;          @info['id']          end
     def secret;      @info['secret']      end
@@ -19,9 +19,9 @@ module Flickr
 
     def owner; User.new('nsid' => @info['owner']) if @info['owner'] end
 
-    def photos; Flickr.photos_from_set(id) end
-    def videos; Flickr.videos_from_set(id) end
-    def media;  Flickr.media_from_set(id)  end
+    def photos; Flickrie.photos_from_set(id) end
+    def videos; Flickrie.videos_from_set(id) end
+    def media;  Flickrie.media_from_set(id)  end
 
     def can_comment?; @info['can_comment'].to_i == 1 if @info['can_comment'] end
 

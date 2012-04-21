@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'flickr/location'
+require 'flickrie/location'
 
 class LocationTest < Test::Unit::TestCase
   def test_attributes_returning_nil
-    location = Flickr::Location.new
+    location = Flickrie::Location.new
 
     assert_nil location.latitude
     assert_nil location.longitude

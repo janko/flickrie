@@ -1,4 +1,4 @@
-module Flickr
+module Flickrie
   module Media
     class Visibility
       def public?;   @visibility[0].to_i == 1 if @visibility[0]   end

@@ -1,9 +1,9 @@
-require 'flickr/media/visibility'
-require 'flickr/media/note'
-require 'flickr/location'
+require 'flickrie/media/visibility'
+require 'flickrie/media/note'
+require 'flickrie/location'
 require 'date'
 
-module Flickr
+module Flickrie
   module Media
     def id;             @info['id']           end
     def secret;         @info['secret']       end
@@ -103,7 +103,7 @@ module Flickr
     end
 
     def get_info(info = nil)
-      info ||= Flickr.client.get_media_info(id).body['photo']
+      info ||= Flickrie.client.get_media_info(id).body['photo']
 
       # Fixes
       info['title'] = info['title']['_content']

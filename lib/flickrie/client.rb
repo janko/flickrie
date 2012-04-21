@@ -1,6 +1,6 @@
 require 'faraday_stack'
 
-module Flickr
+module Flickrie
   class << self
     attr_reader :api_key
 
