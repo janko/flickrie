@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Flickrie::VERSION
 
   gem.add_dependency 'faraday-stack'
+  gem.add_dependency 'activesupport'
 end
