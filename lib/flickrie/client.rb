@@ -2,12 +2,11 @@ require 'faraday_stack'
 
 module Flickrie
   class << self
-    attr_reader :api_key
+    attr_reader :api_key, :timeout, :open_timeout
 
-    def api_key=(api_key)
-      @api_key = api_key
-      @client = nil
-    end
+    def api_key=(api_key);      @client = nil; @api_key = api_key      end
+    def timeout=(api_key);      @client = nil; @timeout = api_key      end
+    def open_timeout=(api_key); @client = nil; @open_timeout = api_key end
 
     def client
       @client ||= begin
@@ -19,8 +18,8 @@ module Flickrie
             :api_key => self.api_key
           },
           :request => {
-            :open_timeout => 8,
-            :timeout => 8
+            :open_timeout => self.open_timeout || 8,
+            :timeout => self.timeout || 8
           }
 
         client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
