@@ -117,7 +117,7 @@ Flickrie.shared_secret = "<your shared secret>"
 
 url = Flickrie.get_authorization_url
 puts "Visit this url to authorize: #{url}"
-puts "Then enter the code that was displayed: "
+puts "If you agreed, the code was displayed afterwards. Enter it: "
 code = gets.strip
 Flickrie.authorize!(code)
 puts "You're all done! Now go make some authenticated requests. Make me proud, son."
