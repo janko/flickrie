@@ -1,30 +1,43 @@
-require 'faraday_stack'
+require 'faraday_middleware'
+require 'simple_oauth'
 
 module Flickrie
   class << self
-    attr_reader :api_key, :timeout, :open_timeout
-
-    def api_key=(api_key);      @client = nil; @api_key = api_key      end
-    def timeout=(api_key);      @client = nil; @timeout = api_key      end
-    def open_timeout=(api_key); @client = nil; @open_timeout = api_key end
+    attr_accessor :api_key, :shared_secret, :timeout, :open_timeout,
+      :token, :token_secret
 
     def client
       @client ||= begin
-        client = FaradayStack.build Client,
-          :url => 'http://api.flickr.com/services/rest/',
-          :params => {
-            :format => 'json',
-            :nojsoncallback => '1',
-            :api_key => self.api_key
-          },
-          :request => {
-            :open_timeout => self.open_timeout || 8,
-            :timeout => self.timeout || 8
-          }
+        client = Client.new(params) do |conn|
+          conn.request :oauth,
+            :consumer_key => api_key,
+            :consumer_secret => shared_secret,
+            :token => token,
+            :token_secret => token_secret
+          conn.response :json, :content_type => /\bjson$/
+          conn.adapter Faraday.default_adapter
+        end
 
-        client.builder.insert_before FaradayStack::ResponseJSON, StatusCheck
+        client.builder.insert_before FaradayMiddleware::ParseJson, StatusCheck
         client
       end
+    end
+
+    private
+
+    def params
+      {
+        :url => 'http://api.flickr.com/services/rest/',
+        :params => {
+          :format => 'json',
+          :nojsoncallback => '1',
+          :api_key => api_key
+        },
+        :request => {
+          :open_timeout => open_timeout || 8,
+          :timeout => timeout || 8
+        }
+      }
     end
   end
 
@@ -41,6 +54,13 @@ module Flickrie
 
   class Client < Faraday::Connection
     def get(method, params = {})
+      super() do |req|
+        req.params[:method] = method
+        req.params.update(params)
+      end
+    end
+
+    def post(method, params = {})
       super() do |req|
         req.params[:method] = method
         req.params.update(params)

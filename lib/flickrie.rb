@@ -1,4 +1,5 @@
 require 'flickrie/client'
+require 'flickrie/oauth'
 require 'flickrie/license'
 require 'flickrie/user'
 require 'flickrie/media'

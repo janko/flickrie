@@ -15,5 +15,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Flickrie::VERSION
 
-  gem.add_dependency 'faraday-stack'
+  gem.add_dependency 'faraday_middleware'
+  gem.add_dependency 'simple_oauth'
 end

@@ -22,7 +22,8 @@ Then in your app you require it and set the API key.
 
 ```ruby
 require 'flickrie'
-Flickrie.api_key = "some_api_key"
+Flickrie.api_key = "<your_api_key>"
+Flickrie.shared_secret = "<your_shared_secret>"
 ```
 
 Then you can search for photos.
@@ -106,6 +107,24 @@ photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_
 
 These are just some of the cool things you can do. To see a full list of available methods, I encourage you to read the [wiki](https://github.com/janko-m/flickrie/wiki). I promise, I will document the methods properly in near future :)
 
+## Authentication
+
+```ruby
+require 'flickrie'
+
+Flickrie.api_key = "<your api key>"
+Flickrie.shared_secret = "<your shared secret>"
+
+url = Flickrie.get_authorization_url
+puts "Visit this url to authorize: #{url}"
+puts "Then enter the code that was displayed: "
+code = gets.strip
+Flickrie.authorize!(code)
+puts "You're all done! Now go make some authenticated requests. Make me proud, son."
+```
+
+When calling `Flickrie.get_authorization_url`, you can also pass in the option `:permissions => "<perms>"`, where instead of `<perms>` you write either `read`, `write` or `delete`.
+
 ## A few words
 
 Now, I covered only a few out of many Flickr's API methods using this approach, but I'll constantly update this gem with new API methods. For all of the methods I didn't cover, you can call them using `Flickrie.client`, like this:
@@ -129,9 +148,6 @@ reponse.body # =>
 ```
 
 It's not nearly as pretty, but at least you can get to the data.
-
-The other main thing I haven't done yet is authentication. This is the next
-thing I intend do.
 
 ## Issues
 
