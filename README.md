@@ -96,7 +96,7 @@ photo.width      # => 240
 photo.width      # => 320
 ```
 
-If you want sizes to be available to photos you're fetching from a set, it's a bad idea to call `#get_sizes` on each photo, because that will make an HTTP request on each photo, which can be very slow. Instead, you should pass in these options:
+If you want sizes to be available to photos you're fetching from a set, it's not a good idea to call `#get_sizes` on each photo, because that will make an HTTP request on each photo, which can be very slow. Instead, you should pass in these options:
 
 ```ruby
 photos = Flickrie.photos_from_set(1242379, :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o')
@@ -105,7 +105,7 @@ photo.medium!(640)
 photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_z.jpg"
 ```
 
-These are just some of the cool things you can do. To see a full list of available methods, I encourage you to read the [wiki](https://github.com/janko-m/flickrie/wiki). I promise, I will document the methods properly in near future :)
+To see a full list of available methods, I see the [wiki](https://github.com/janko-m/flickrie/wiki). I promise, I will document the methods properly in near future :)
 
 ## Authentication
 
