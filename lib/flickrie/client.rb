@@ -4,7 +4,7 @@ require 'simple_oauth'
 module Flickrie
   class << self
     attr_accessor :api_key, :shared_secret, :timeout, :open_timeout,
-      :token, :token_secret
+      :access_token, :access_secret
 
     def client
       @client ||= begin
@@ -12,8 +12,8 @@ module Flickrie
           conn.request :oauth,
             :consumer_key => api_key,
             :consumer_secret => shared_secret,
-            :token => token,
-            :token_secret => token_secret
+            :token => access_token,
+            :token_secret => access_secret
           conn.response :json, :content_type => /(text\/plain)|(json)$/
           conn.adapter Faraday.default_adapter
         end

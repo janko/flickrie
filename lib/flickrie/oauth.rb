@@ -1,79 +1,95 @@
+require 'faraday_middleware'
+require 'faraday_middleware/response_middleware'
+require 'simple_oauth'
+
 module Flickrie
   module OAuth
-    class RequestToken
-      attr_reader :token, :secret
+    URL = 'http://www.flickr.com/services/oauth'.freeze
+    NO_CALLBACK = 'oob'.freeze
 
-      def initialize(response_body)
-        @token = response_body[/(?<=oauth_token=)[^&]+/]
-        @secret = response_body[/(?<=oauth_token_secret=)[^&]+/]
-      end
+    def self.new_connection(additional_oauth_params = {})
+      oauth_params = {
+        :consumer_key => Flickrie.api_key,
+        :consumer_secret => Flickrie.shared_secret
+      }.merge(additional_oauth_params)
 
-      def authorization_url(options = {})
-        url = "http://www.flickr.com/services/oauth/authorize?oauth_token=#{token}"
-        permissions = options[:permissions] || options[:perms]
-        url.concat("&perms=#{permissions}") if permissions
-        url
+      Faraday.new(URL) do |connection|
+        connection.request :oauth, oauth_params
+        connection.use ParseFlickrResponse
+        connection.adapter Faraday.default_adapter
+      end.
+        tap do |connection|
+          connection.builder.insert_before ParseFlickrResponse, StatusCheck
+        end
+    end
+
+    class StatusCheck < Faraday::Response::Middleware
+      def on_complete(env)
+        if env[:status] != 200
+          raise Error, env[:body]['oauth_problem'].gsub('_', ' ').capitalize
+        end
       end
     end
 
-    class Consumer
-      def initialize(api_key, shared_secret)
-        @api_key, @shared_secret = api_key, shared_secret
-      end
-
-      def get_request_token
-        connection = Faraday.new "http://www.flickr.com/services/oauth" do |conn|
-          conn.request :oauth,
-            :consumer_key => @api_key,
-            :consumer_secret => @shared_secret
-          conn.adapter :net_http
-        end
-
-        response = connection.get("request_token") do |req|
-          req.params[:oauth_callback] = 'oob'
-        end
-
-        RequestToken.new(response.body)
-      end
-
-      def get_access_token(oauth_verifier, request_token)
-        connection = Faraday.new "http://www.flickr.com/services/oauth" do |conn|
-          conn.request :oauth,
-            :consumer_key => @api_key,
-            :consumer_secret => @shared_secret,
-            :token => request_token.token,
-            :token_secret => request_token.secret
-          conn.adapter :net_http
-        end
-
-        response = connection.get "access_token" do |req|
-          req.params[:oauth_verifier] = oauth_verifier
-        end
-
-        [
-          response.body[/(?<=oauth_token=)[^&]+/],
-          response.body[/(?<=oauth_token_secret=)[^&]+/]
-        ]
-      end
-    end
-  end
-end
-
-module Flickrie
-  class << self
-    def get_authorization_url(options = {})
-      @request_token = consumer.get_request_token
-      @request_token.authorization_url(options)
+    class Error < StandardError
     end
 
-    def authorize!(code)
-      token, token_secret = consumer.get_access_token(code, @request_token)
+    class ParseFlickrResponse < FaradayMiddleware::ResponseMiddleware
+      dependency do
+        require 'addressable/uri' unless defined?(Addressable)
+      end
+
+      define_parser do |body|
+        parser = Addressable::URI.new
+        parser.query = body
+        parser.query_values
+      end
     end
 
-    private
+    def self.get_request_token(callback = nil)
+      connection = new_connection
 
-    def consumer
-      @consumer ||= OAuth::Consumer.new(api_key, shared_secret)
+      response = connection.get "request_token" do |req|
+        req.params[:oauth_callback] = callback || NO_CALLBACK
+      end
+
+      RequestToken.from_response(response.body)
+    end
+
+    def self.get_access_token(verifier, request_token)
+      connection = new_connection \
+        :token => request_token.token,
+        :token_secret => request_token.secret
+
+      response = connection.get "access_token" do |req|
+        req.params[:oauth_verifier] = verifier
+      end
+
+      AccessToken.from_response(response.body)
+    end
+
+    module Token
+      def from_response(body)
+        new(body['oauth_token'], body['oauth_token_secret'])
+      end
+    end
+
+    class RequestToken < Struct.new(:token, :secret)
+      extend Token
+
+      def get_authorization_url(options = {})
+        url = Addressable::URI.parse(URL)
+        url.path += "/authorize"
+        url.query_values = {
+          :oauth_token => token,
+          :perms => options[:permissions] || options[:perms]
+        }
+        url.to_s
+      end
+    end
+
+    class AccessToken < Struct.new(:token, :secret)
+      extend Token
     end
   end
 end

@@ -120,25 +120,24 @@ require 'flickrie'
 Flickrie.api_key = "<your api key>"
 Flickrie.shared_secret = "<your shared secret>"
 
-url = Flickrie.get_authorization_url
-puts "Visit this url to authorize: #{url}"
-puts "If you agreed, the code was displayed afterwards. Enter it: "
+request_token = Flickrie::OAuth.get_request_token
+url = request_token.get_authorization_url
+puts "Visit this url to authenticate: #{url}"
+
+print "If you agreed, the code was displayed afterwards. Enter it: "
 code = gets.strip
-Flickrie.authorize!(code)
-puts "You're all done! Now go make some authenticated requests. Make me proud, son."
+access_token = Flickrie::OAuth.get_access_token(code)
+Flickrie.access_token = access_token.token
+Flickrie.access_secret = access_token.secret
+puts "You successfully authenticated!"
 ```
 
-When calling `Flickrie.get_authorization_url`, you can also pass in the option `:permissions => "<perms>"`, where instead of `<perms>` is either `read`, `write` or `delete`.
-
-If you already have the access token from a user, then you don't have
-to go through the authentication process. Instead you can just do
-
+When getting the authorization url, you can also call
 ```ruby
-Flickrie.access_token = "<your access token>"
-Flickrie.access_secret = "<your access secret>"
+request_token.get_authorization_url(:permissions => "read")
 ```
-
-And that's it, you can make authenticated requests now.
+to ask only for "read" permissions from the user. Available permissions
+are "read", "write" and "delete".
 
 ## A few words
 
