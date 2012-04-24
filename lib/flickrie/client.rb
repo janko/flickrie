@@ -14,7 +14,7 @@ module Flickrie
             :consumer_secret => shared_secret,
             :token => token,
             :token_secret => token_secret
-          conn.response :json, :content_type => /\bjson$/
+          conn.response :json, :content_type => /(text\/plain)|(json)$/
           conn.adapter Faraday.default_adapter
         end
 
