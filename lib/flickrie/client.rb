@@ -82,8 +82,7 @@ module Flickrie
 
     def public_media_from_user(user_nsid, params = {})
       params = {:user_id => user_nsid}.merge(params)
-      params[:extras] = [params[:extras], 'media'].compact.join(',')
-      get 'flickr.people.getPublicPhotos', params
+      get 'flickr.people.getPublicPhotos', ensure_media(params)
     end
 
     # photos
@@ -108,8 +107,7 @@ module Flickrie
     end
 
     def search_media(params = {})
-      params[:extras] = [params[:extras], 'media'].compact.join(',')
-      get 'flickr.photos.search', params
+      get 'flickr.photos.search', ensure_media(params)
     end
 
     # licenses
@@ -128,8 +126,14 @@ module Flickrie
 
     def media_from_set(set_id, params = {})
       params = {:photoset_id => set_id}.merge(params)
+      get 'flickr.photosets.getPhotos', ensure_media(params)
+    end
+
+    private
+
+    def ensure_media(params)
       params[:extras] = [params[:extras], 'media'].compact.join(',')
-      get 'flickr.photosets.getPhotos', params
+      params
     end
   end
 end
