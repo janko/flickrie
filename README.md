@@ -5,10 +5,19 @@
 This gem is a nice wrapper for the Flickr API with an intuitive interface.
 
 The reason why I did this gem is because the other ones either weren't
-well maintained, or they were too literal in the sense that the response from
-the API call wasn't processed almost at all. It doesn't seem too bad
-at first, but after a while you realize it's not pretty. So I wanted to
-make it pretty :)
+well maintained, or they were too literal in the sense that the responses from
+the API calls weren't processed almost at all. It doesn't seem too bad
+at first, but it would be great that, for example, if you're reading a time attribute,
+such as `last_update`, you actually **get** the instance of `Time`, and
+not a string representing that time (often in a timestamp (integer) format).
+That's what wrappers should be for.
+
+The method names here aren't called the same as Flickr's API methods, but they follow a pattern which
+shouldn't be too difficult to learn. Also, some attribute names that you
+get from the response are changed. So, for example, the `last_update`
+attribute is called `updated_at`, and the `candownload` attribute is
+called `can_download?`. After all, this is a **ruby** wrapper, so it
+should be written in Ruby/Rails fashion :)
 
 ## Examples of usage
 
@@ -18,18 +27,20 @@ You first need to install the gem.
 [sudo] gem install flickrie
 ```
 
-Then in your app you require it and set the API key.
+Then in your app you set the API key and secret (which you can apply
+for [here](http://www.flickr.com/services/apps/create/apply)).
 
 ```ruby
 require 'flickrie'
-Flickrie.api_key = "<your_api_key>"
-Flickrie.shared_secret = "<your_shared_secret>"
+Flickrie.api_key = "<your api key>"
+Flickrie.shared_secret = "<your shared secret>"
 ```
 
-Then you can search for photos.
+Then you can search for stuff.
 
 ```ruby
-photos = Flickrie.photos_from_set(819234) # => [#<Photo: id="8232348", ...>, #<Photo: id="8194318", ...>, ...]
+set_id = 819234
+photos = Flickrie.photos_from_set(set_id) # => [#<Photo: id="8232348", ...>, #<Photo: id="8194318", ...>, ...]
 
 photo = photos.first
 photo.id          # => "8232348"
@@ -39,11 +50,11 @@ photo.owner       # => #<User: nsid="67313352@N04", ...>
 photo.owner.nsid  # => "67313352@N04"
 ```
 
-Note that what Flickr refers to as "photoset" in its documentation, I
-refer to as "set". This is because the word "photoset" would be wrong,
-since sets can also hold videos.
+Note that, what Flickr refers to as "photoset" in its documentation, I
+refer to as "set". This is because the word "photoset" is actually
+incorrect, since sets can also hold videos.
 
-You can also throw in some parameters to get more information about photos.  For example,
+You can also throw in some parameters to `.photos_from_set` to get more information about photos. For example,
 
 ```ruby
 photos = Flickrie.photos_from_set(819234, :extras => 'owner_name,last_update,tags,views')
@@ -55,7 +66,8 @@ photo.updated_at     # => 2012-04-20 23:29:17 +0200
 photo.views_count    # => 24
 ```
 
-On the list of available parameters you can read in the [Flickr API documentation](http://www.flickr.com/services/api/), under the corresponding API method name (in the above case it's `flickr.photosets.getPhotos`).
+On the list of available parameters you can read in the [Flickr API documentation](http://www.flickr.com/services/api/),
+under the corresponding API method name (in the above case the method name would be `flickr.photosets.getPhotos`).
 
 You can also get additional info on a single photo:
 
@@ -70,7 +82,7 @@ photo.owner.real_name       # => "John Smith"
 photo.location.country.name # => "United States"
 ```
 
-You can also get this info on an existing photo:
+If you already have an existing photo, you can also get info like this:
 
 ```ruby
 photo.description # => nil
@@ -78,10 +90,11 @@ photo.get_info
 photo.description # => "In this photo Peter said something really funny..."
 ```
 
-If you want to display photos from flickr in your app, this is probably the most useful part:
+You'll also probably want to display these photos in your app.
 
 ```ruby
 photo = Flickrie.get_photo_sizes(8232348)
+# or "photo.get_sizes" on an existing photo
 
 photo.medium!(800)
 photo.size       # => "Medium 800"
@@ -96,16 +109,8 @@ photo.width      # => 240
 photo.width      # => 320
 ```
 
-If you want sizes to be available to photos you're fetching from a set, it's not a good idea to call `#get_sizes` on each photo, because that will make an HTTP request on each photo, which can be very slow. Instead, you should pass in these options:
-
-```ruby
-photos = Flickrie.photos_from_set(1242379, :extras => 'url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o')
-photo = photos.first
-photo.medium!(640)
-photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_z.jpg"
-```
-
-To see a full list of available methods, I see the [wiki](https://github.com/janko-m/flickrie/wiki). I promise, I will document the methods properly in near future :)
+You can see the full list of available methods and attributes in the
+[documentation](http://rubydoc.info/gems/flickrie/0.1.2/frames).
 
 ## Authentication
 
@@ -123,14 +128,24 @@ Flickrie.authorize!(code)
 puts "You're all done! Now go make some authenticated requests. Make me proud, son."
 ```
 
-When calling `Flickrie.get_authorization_url`, you can also pass in the option `:permissions => "<perms>"`, where instead of `<perms>` you write either `read`, `write` or `delete`.
+When calling `Flickrie.get_authorization_url`, you can also pass in the option `:permissions => "<perms>"`, where instead of `<perms>` is either `read`, `write` or `delete`.
+
+If you already have the access token from a user, then you don't have
+to go through the authentication process. Instead you can just do
+
+```ruby
+Flickrie.access_token = "<your access token>"
+Flickrie.access_secret = "<your access secret>"
+```
+
+And that's it, you can make authenticated requests now.
 
 ## A few words
 
 Now, I covered only a few out of many Flickr's API methods using this approach, but I'll constantly update this gem with new API methods. For all of the methods I didn't cover, you can call them using `Flickrie.client`, like this:
 
 ```ruby
-response = Flickrie.client.get("flickr.photos.getContext", :photo_id => 2842732)
+response = Flickrie.client.get "flickr.photos.getContext", :photo_id => 2842732
 reponse.body # =>
 # {
 #   "count" => {"_content" => 99},
@@ -151,8 +166,8 @@ It's not nearly as pretty, but at least you can get to the data.
 
 ## Issues
 
-Please, feel free to post any issues that you're having, I will try to
-help you in any way I can.
+Please, feel free to post any issues that you're having, I will be happy
+to help. I will also be happy if you let me know about any bugs.
 
 ## Cedits
 
@@ -169,8 +184,11 @@ basis of this gem.
 - `flickr.people.getPublicPhotos`
 
 ### photos
+- `flickr.photos.addTags`
+- `flickr.photos.delete`
 - `flickr.photos.getInfo`
 - `flickr.photos.getSizes`
+- `flickr.photos.removeTag`
 - `flickr.photos.search`
 
 ### photos.licenses
