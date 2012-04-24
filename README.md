@@ -32,8 +32,8 @@ for [here](http://www.flickr.com/services/apps/create/apply)).
 
 ```ruby
 require 'flickrie'
-Flickrie.api_key = "<your api key>"
-Flickrie.shared_secret = "<your shared secret>"
+Flickrie.api_key = "your api key"
+Flickrie.shared_secret = "your shared secret"
 ```
 
 Then you can search for stuff.
@@ -117,8 +117,8 @@ You can see the full list of available methods and attributes in the
 ```ruby
 require 'flickrie'
 
-Flickrie.api_key = "<your api key>"
-Flickrie.shared_secret = "<your shared secret>"
+Flickrie.api_key = "your api key"
+Flickrie.shared_secret = "your shared secret"
 
 request_token = Flickrie::OAuth.get_request_token
 url = request_token.get_authorization_url
