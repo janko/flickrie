@@ -11,6 +11,9 @@ end
 class MediaTest < Test::Unit::TestCase
   def setup
     Flickrie.api_key = ENV['FLICKR_API_KEY']
+    Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
+    Flickrie.token = ENV['FLICKR_TOKEN']
+    Flickrie.token_secret = ENV['FLICKR_TOKEN_SECRET']
     @media_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -33,8 +36,12 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '7049', media.server
     assert_equal 8, media.farm
     assert_equal 'IMG_0796', media.title
-    assert_equal 'luka', media.tags
-    assert_equal '', media.machine_tags
+
+    assert_equal 'luka', media.tags.join(' ')
+    assert_equal @user_nsid, media.tags.first.author.nsid
+    assert_equal 'luka', media.tags.first.raw
+    assert_equal false, media.tags.first.machine_tag?
+
     assert_equal 1, media.views_count
     assert_equal 1, media.comments_count
     assert_equal '0', media.license.id
@@ -65,14 +72,14 @@ class MediaTest < Test::Unit::TestCase
     assert_equal false, media.visibility.family?
     assert_equal nil, media.visibility.contacts?
 
-    assert_equal false, media.can_comment?
-    assert_equal false, media.can_add_meta?
+    assert_equal true, media.can_comment?
+    assert_equal true, media.can_add_meta?
     assert_equal true, media.can_everyone_comment?
     assert_equal false, media.can_everyone_add_meta?
 
     assert_equal true, media.can_download?
-    assert_equal false, media.can_blog?
-    assert_equal false, media.can_print?
+    assert_equal true, media.can_blog?
+    assert_equal true, media.can_print?
     assert_equal false, media.can_share?
 
     assert_equal false, media.has_people?
@@ -260,6 +267,27 @@ class MediaTest < Test::Unit::TestCase
     assert_equal false, media.visibility.friends?
     assert_equal false, media.visibility.family?
     assert_equal nil, media.visibility.contacts?
+  end
+
+  def test_add_media_tags
+    media = Flickrie.get_media_info(@media_id)
+    tags_before_change = media.tags.join(' ')
+    Flickrie.add_media_tags(@media_id, "janko")
+    media.get_info
+    assert_equal [tags_before_change, "janko"].join(' '),
+      media.tags.join(' ')
+    tag_id = media.tags.find { |tag| tag.content == "janko" }.id
+    Flickrie.remove_media_tag(tag_id)
+  end
+
+  def test_remove_media_tag
+    Flickrie.add_media_tags(@media_id, "janko")
+    media = Flickrie.get_media_info(@media_id)
+    tags_before_change = media.tags.join(' ')
+    tag_id = media.tags.find { |tag| tag.content == "janko" }.id
+    Flickrie.remove_media_tag(tag_id)
+    media.get_info
+    assert_equal media.tags.join(' '), tags_before_change.chomp("janko").rstrip
   end
 
   def test_methods_returning_nil

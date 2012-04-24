@@ -87,12 +87,20 @@ module Flickrie
     end
 
     # photos
+    def add_media_tags(media_id, tags)
+      post 'flickr.photos.addTags', :photo_id => media_id, :tags => tags
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end
 
     def get_media_sizes(media_id)
       get 'flickr.photos.getSizes', :photo_id => media_id
+    end
+
+    def remove_media_tag(tag_id)
+      post 'flickr.photos.removeTag', :tag_id => tag_id
     end
 
     def search_media(params = {})

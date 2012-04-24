@@ -1,5 +1,6 @@
 require 'flickrie/media/visibility'
 require 'flickrie/media/note'
+require 'flickrie/media/tag'
 require 'flickrie/location'
 require 'date'
 
@@ -110,12 +111,7 @@ module Flickrie
       info['description'] = info['description']['_content']
       info['comments_count'] = info.delete('comments')['_content']
       info['dates']['uploaded'] = info.delete('dateuploaded')
-      info['machine_tags'] = info['tags']['tag'].
-        select { |tag| tag['machine_tag'].to_i == 1 }.
-        map { |tag| tag['_content']}.join(' ')
-      info['tags'] = info['tags']['tag'].
-        select { |tag| tag['machine_tag'].to_i == 0 }.
-        map { |tag| tag['_content']}.join(' ')
+      info['tags'] = info['tags']['tag'].map { |info| Tag.new(info) }
 
       @info.update(info)
       self

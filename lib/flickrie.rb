@@ -41,6 +41,12 @@ module Flickrie
     end
 
     # photos
+    def add_media_tags(media_id, tags)
+      client.add_media_tags(media_id, tags)
+    end
+    alias add_photo_tags add_media_tags
+    alias add_video_tags add_media_tags
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])
@@ -56,6 +62,12 @@ module Flickrie
       response = client.get_media_sizes(video_id)
       Video.from_sizes(response.body['sizes'])
     end
+
+    def remove_media_tag(tag_id)
+      client.remove_media_tag(tag_id)
+    end
+    alias remove_photo_tag remove_media_tag
+    alias remove_video_tag remove_media_tag
 
     def search_media(search_params = {})
       response = client.search_media(search_params)

@@ -30,8 +30,8 @@ class SetTest < Test::Unit::TestCase
     assert_equal 'Speleologija', set.title
     assert_equal 'Slike sa škole speleologije Velebit.', set.description
 
-    assert_equal 99, set.media_count
-    assert_equal 98, set.photos_count
+    assert_equal 98, set.media_count
+    assert_equal 97, set.photos_count
     assert_equal 1, set.videos_count
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
@@ -62,8 +62,8 @@ class SetTest < Test::Unit::TestCase
     assert_equal 'Speleologija', set.title
     assert_equal 'Slike sa škole speleologije Velebit.', set.description
 
-    assert_equal 99, set.media_count
-    assert_equal 98, set.photos_count
+    assert_equal 98, set.media_count
+    assert_equal 97, set.photos_count
     assert_equal 1, set.videos_count
     assert_equal 0, set.comments_count
     assert_equal 0, set.views_count
