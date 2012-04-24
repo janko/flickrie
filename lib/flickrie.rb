@@ -47,6 +47,12 @@ module Flickrie
     alias add_photo_tags add_media_tags
     alias add_video_tags add_media_tags
 
+    def delete_media(media_id)
+      client.delete_media(media_id)
+    end
+    alias delete_photo delete_media
+    alias delete_video delete_media
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])

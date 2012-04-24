@@ -91,6 +91,10 @@ module Flickrie
       post 'flickr.photos.addTags', :photo_id => media_id, :tags => tags
     end
 
+    def delete_media(media_id)
+      post 'flickr.photos.delete', :photo_id => media_id
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end
