@@ -46,11 +46,11 @@ module Flickrie
       end
     end
 
-    def self.get_request_token(callback = nil)
+    def self.get_request_token(options = {})
       connection = new_connection
 
       response = connection.get "request_token" do |req|
-        req.params[:oauth_callback] = callback || NO_CALLBACK
+        req.params[:oauth_callback] = options[:callback_url] || NO_CALLBACK
       end
 
       RequestToken.from_response(response.body)
