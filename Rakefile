@@ -1,4 +1,5 @@
-#!/usr/bin/env rake
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
 CURRENT_DIR = File.expand_path(File.dirname(__FILE__))
 
