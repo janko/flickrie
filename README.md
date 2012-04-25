@@ -54,7 +54,7 @@ Note that, what Flickr refers to as "photoset" in its documentation, I
 refer to as "set". This is because the word "photoset" is actually
 incorrect, since sets can also hold videos.
 
-You can also throw in some parameters to `.photos_from_set` to get more information about photos. For example,
+You can also throw in some parameters to `Flickrie.photos_from_set` to get more information about photos. For example,
 
 ```ruby
 photos = Flickrie.photos_from_set(819234, :extras => 'owner_name,last_update,tags,views')
