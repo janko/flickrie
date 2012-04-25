@@ -110,7 +110,8 @@ photo.width      # => 320
 ```
 
 You can see the full list of available methods and attributes in the
-[documentation](http://rubydoc.info/gems/flickrie/0.1.2/frames).
+[documentation](http://rubydoc.info/gems/flickrie/0.1.2/frames). Also,
+be sure to check the [wiki](https://github.com/janko-m/flickrie/wiki) for some additional info and tips.
 
 ## Authentication
 
