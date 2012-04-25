@@ -201,14 +201,6 @@ basis of this gem.
 - `flickr.photosets.getList`
 - `flickr.photosets.getPhotos`
 
-## Changelog
-
-I will post the changelog here from now on. I apologize in advance for
-some buggy releases, I know I've been doing so lately. My excuse is that
-this is my first gem, and I just have to get a hang of it. If a release
-is buggy, please be sure to check if there is a newer version available,
-because that may be the fix. The last stable version should be 0.2.1.
-
 ## License
 
 [MIT](http://github.com/janko-m/flickrie/blob/master/LICENSE)
