@@ -139,6 +139,9 @@ request_token.get_authorization_url(:permissions => "read")
 to ask only for "read" permissions from the user. Available permissions
 are "read", "write" and "delete".
 
+To see how to make authentication in a web application, see [this](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications) wiki
+page.
+
 ## A few words
 
 Now, I covered only a few out of many Flickr's API methods using this approach, but I'll constantly update this gem with new API methods. For all of the methods I didn't cover, you can call them using `Flickrie.client`, like this:
