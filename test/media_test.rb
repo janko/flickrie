@@ -42,7 +42,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 'luka', media.tags.first.raw
     assert_equal false, media.tags.first.machine_tag?
 
-    assert_equal 1, media.views_count
+    assert_equal 2, media.views_count
     assert_equal 1, media.comments_count
     assert_equal '0', media.license.id
     assert_equal 0, media.safety_level
@@ -141,7 +141,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 'IMG_0796', media.title
     assert_equal 'luka', media.tags
     assert_equal '', media.machine_tags
-    assert_equal 1, media.views_count
+    assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_equal true, media.primary?
     assert_not_nil media.url
@@ -184,7 +184,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 'IMG_0796', media.title
     assert_equal 'luka', media.tags
     assert_equal '', media.machine_tags
-    assert_equal 1, media.views_count
+    assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_not_nil media.url
     assert_equal 'ready', media.media_status
@@ -232,7 +232,7 @@ class MediaTest < Test::Unit::TestCase
     assert_equal 'IMG_0796', media.title
     assert_equal 'luka', media.tags
     assert_equal '', media.machine_tags
-    assert_equal 1, media.views_count
+    assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_not_nil media.url
     assert_equal 'ready', media.media_status
