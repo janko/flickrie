@@ -14,11 +14,11 @@ module Flickrie
 
       Faraday.new(URL) do |connection|
         connection.request :oauth, oauth_params
-        connection.use ParseFlickrResponse
+        connection.use ParseResponseParams
         connection.adapter Faraday.default_adapter
       end.
         tap do |connection|
-          connection.builder.insert_before ParseFlickrResponse, StatusCheck
+          connection.builder.insert_before ParseResponseParams, StatusCheck
         end
     end
 
@@ -33,7 +33,7 @@ module Flickrie
     class Error < StandardError
     end
 
-    class ParseFlickrResponse < FaradayMiddleware::ResponseMiddleware
+    class ParseResponseParams < FaradayMiddleware::ResponseMiddleware
       define_parser do |body|
         params_array = body.split('&').map { |param| param.split('=') }
         Hash[*params_array.flatten]
