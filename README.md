@@ -27,8 +27,8 @@ You first need to install the gem.
 [sudo] gem install flickrie
 ```
 
-Then in your app you set the API key and secret (which you can apply
-for [here](http://www.flickr.com/services/apps/create/apply)).
+Then in your app you set the API key and secret (if you don't have them
+already, you can apply for them [here](http://www.flickr.com/services/apps/create/apply)).
 
 ```ruby
 require 'flickrie'
