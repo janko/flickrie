@@ -1,5 +1,4 @@
 require 'faraday_middleware'
-require 'simple_oauth'
 
 module Flickrie
   class << self
