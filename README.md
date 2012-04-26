@@ -140,8 +140,8 @@ request_token.get_authorization_url(:permissions => "read")
 to ask only for "read" permissions from the user. Available permissions
 are "read", "write" and "delete".
 
-To see how to make authentication in a web application, see [this](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications) wiki
-page.
+If you want to make authentication in your web application, check out my [flickr_auth](https://github.com/janko-m/flickr_auth) gem.
+Or, if you want to do it manually, check out [this wiki](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications) for instructions.
 
 ## A few words
 
