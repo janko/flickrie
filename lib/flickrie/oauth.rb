@@ -1,6 +1,5 @@
 require 'faraday_middleware'
 require 'faraday_middleware/response_middleware'
-require 'simple_oauth'
 
 module Flickrie
   module OAuth
