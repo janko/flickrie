@@ -35,14 +35,9 @@ module Flickrie
     end
 
     class ParseFlickrResponse < FaradayMiddleware::ResponseMiddleware
-      dependency do
-        require 'addressable/uri' unless defined?(Addressable)
-      end
-
       define_parser do |body|
-        parser = Addressable::URI.new
-        parser.query = body
-        parser.query_values
+        params_array = body.split('&').map { |param| param.split('=') }
+        Hash[*params_array.flatten]
       end
     end
 
@@ -78,12 +73,14 @@ module Flickrie
       extend Token
 
       def get_authorization_url(options = {})
-        url = Addressable::URI.parse(URL)
+        require 'uri'
+        url = URI.parse(URL)
         url.path += "/authorize"
-        url.query_values = {
+        params = {
           :oauth_token => token,
           :perms => options[:permissions] || options[:perms]
         }
+        url.query = params.map { |k, v| "#{k}=#{v}" }.join('&')
         url.to_s
       end
     end
