@@ -145,10 +145,20 @@ Or, if you want to do it manually, check out [this wiki](https://github.com/jank
 
 ## A few words
 
-Now, I covered only a few out of many Flickr's API methods using this approach, but I'll constantly update this gem with new API methods. For all of the methods I didn't cover, you can call them using `Flickrie.client`, like this:
+Now, I covered only a few out of many Flickr's API methods using this approach,
+but I'll constantly update this gem with new API methods. For all of the methods
+I didn't cover, you can still call them using
+
+```ruby
+Flickrie.client.get(method_name, params = {})
+Flickrie.client.post(method_name, params = {})
+```
+
+For example:
 
 ```ruby
 response = Flickrie.client.get "flickr.photos.getContext", :photo_id => 2842732
+
 reponse.body # =>
 # {
 #   "count" => {"_content" => 99},
@@ -163,9 +173,12 @@ reponse.body # =>
 #     ...
 #   }
 # }
+response.body['prevphoto']['id'] # => "6946978706"
 ```
 
-It's not nearly as pretty, but at least you can get to the data.
+It's not nearly as pretty, but at least you can get to the data for the
+time being. Notice that the `:api_key` parameter is always passed in by
+default.
 
 ## Issues
 
