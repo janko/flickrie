@@ -180,27 +180,22 @@ basis of this gem.
 
 ## Currently covered API methods
 
-### people
-- `flickr.people.findByEmail`
-- `flickr.people.findByUsername`
-- `flickr.people.getInfo`
-- `flickr.people.getPublicPhotos`
-
-### photos
-- `flickr.photos.addTags`
-- `flickr.photos.delete`
-- `flickr.photos.getInfo`
-- `flickr.photos.getSizes`
-- `flickr.photos.removeTag`
-- `flickr.photos.search`
-
-### photos.licenses
-- `flickr.photos.licenses.getInfo`
-
-### photosets
-- `flickr.photosets.getInfo`
-- `flickr.photosets.getList`
-- `flickr.photosets.getPhotos`
+|          API method              |   |         Flickrie method            |
+|----------------------------------|---|------------------------------------|
+| `flickr.people.findByEmail`      | → | `Flickrie.find_user_by_email`      |
+| `flickr.people.findByUsername`   | → | `Flickrie.find_user_by_username`   |
+| `flickr.people.getInfo`          | → | `Flickrie.get_user_info`           |
+| `flickr.people.getPublicPhotos`  | → | `Flickrie.public_photos_from_user` |
+| `flickr.photos.addTags`          | → | `Flickrie.add_photo_tags`          |
+| `flickr.photos.delete`           | → | `Flickrie.delete_photo`            |
+| `flickr.photos.getInfo`          | → | `Flickrie.get_photo_info`          |
+| `flickr.photos.getSizes`         | → | `Flickrie.get_photo_sizes`         |
+| `flickr.photos.removeTag`        | → | `Flickrie.remove_photo_tag`        |
+| `flickr.photos.search`           | → | `Flickrie.search_photos`           |
+| `flickr.photos.licenses.getInfo` | → | `Flickrie.get_licenses`            |
+| `flickr.photosets.getInfo`       | → | `Flickrie.get_set_info`            |
+| `flickr.photosets.getList`       | → | `Flickrie.sets_from_user`          |
+| `flickr.photosets.getPhotos`     | → | `Flickrie.photos_from_set`         |
 
 ## License
 
