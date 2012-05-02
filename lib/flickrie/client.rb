@@ -5,14 +5,14 @@ module Flickrie
     attr_accessor :api_key, :shared_secret, :timeout, :open_timeout,
       :access_token, :access_secret
 
-    def client
+    def client(access_token_hash = {})
       @client ||= begin
         client = Client.new(params) do |conn|
           conn.request :oauth,
             :consumer_key => api_key,
             :consumer_secret => shared_secret,
-            :token => access_token,
-            :token_secret => access_secret
+            :token => access_token_hash[:token] || access_token,
+            :token_secret => access_token_hash[:secret] || access_secret
           conn.response :json, :content_type => /(text\/plain)|(json)$/
           conn.adapter Faraday.default_adapter
         end
