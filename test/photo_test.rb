@@ -157,6 +157,7 @@ class PhotoTest < Test::Unit::TestCase
       Flickrie.remove_photo_tag(tag.id)
       Flickrie.photos_from_contacts(:include_self => 1)
       Flickrie.public_photos_from_user_contacts(@user_nsid, :include_self => 1)
+      Flickrie.get_photo_context(@photo_id)
       Flickrie.search_photos(:user_id => @user_nsid)
     end
   end

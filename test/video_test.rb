@@ -78,9 +78,10 @@ class VideoTest < Test::Unit::TestCase
       Flickrie.remove_video_tag(tag.id)
       Flickrie.videos_from_contacts(:include_self => 1)
       Flickrie.public_videos_from_user_contacts(@user_nsid, :include_self => 1)
-      Flickrie.search_videos(:user_id => @user_nsid)
       Flickrie.public_videos_from_user(@user_nsid)
       Flickrie.videos_from_set(@set_id)
+      Flickrie.get_video_context(@video_id)
+      Flickrie.search_videos(:user_id => @user_nsid)
     end
   end
 end

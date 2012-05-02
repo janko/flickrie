@@ -68,6 +68,8 @@ module Flickrie
     def url
       if owner and id
         "http://www.flickr.com/photos/#{owner.nsid}/#{id}"
+      elsif @info['url']
+        "http://www.flickr.com" + @info['url']
       end
     end
 
@@ -101,6 +103,8 @@ module Flickrie
     def can_share?;    @info['usage']['canshare'].to_i == 1    if @info['usage']['canshare']    end
 
     def has_people?; @info['people']['haspeople'].to_i == 1 if @info['people'] end
+
+    def faved?; @info['is_faved'].to_i == 1 if @info['is_faved'] end
 
     def notes
       @info['notes']['note'].map { |hash| Note.new(hash) } if @info['notes']
@@ -197,6 +201,20 @@ module Flickrie
         end
 
         from_user(hash)
+      end
+
+      def from_context(hash)
+        hash['count'] = hash['count']['_content'].to_i
+
+        ['prevphoto', 'nextphoto'].each do |media|
+          unless hash[media]['media'].nil?
+            hash[media] = new(hash[media])
+          else
+            hash[media] = nil
+          end
+        end
+
+        hash
       end
     end
     extend(ClassMethods)

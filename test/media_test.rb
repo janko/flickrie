@@ -331,6 +331,32 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_media_context
+    context = Flickrie.get_media_context(@media_id)
+
+    assert_equal 98, context['count']
+
+    previous_media = context['prevphoto']
+    assert_equal '6946978706', previous_media.id
+    assert_equal 'b38270bbd6', previous_media.secret
+    assert_equal '7216', previous_media.server
+    assert_equal 8, previous_media.farm
+    assert_equal 'IMG_0795', previous_media.title
+    refute previous_media.url.empty?
+    assert_equal '0', previous_media.license.id
+    assert_equal false, previous_media.faved?
+
+    next_media = context['nextphoto']
+    assert_equal '6946979704', next_media.id
+    assert_equal '74513ff732', next_media.secret
+    assert_equal '7234', next_media.server
+    assert_equal 8, next_media.farm
+    assert_equal 'IMG_0797', next_media.title
+    refute next_media.url.empty?
+    assert_equal '0', next_media.license.id
+    assert_equal false, next_media.faved?
+  end
+
   def test_methods_returning_nil
     media = Flickrie::Photo.new
 

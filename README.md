@@ -209,6 +209,7 @@ basis of this gem.
 "flickr.photos.delete"                  -> Flickrie.delete_photo
 "flickr.photos.getContactsPhotos"       -> Flickrie.photos_from_contacts
 "flickr.photos.getContactsPublicPhotos" -> Flickrie.public_photos_from_user_contacts
+"flickr.photos.getContext"              -> Flickrie.get_photo_context
 "flickr.photos.getInfo"                 -> Flickrie.get_photo_info
 "flickr.photos.getSizes"                -> Flickrie.get_photo_sizes
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag

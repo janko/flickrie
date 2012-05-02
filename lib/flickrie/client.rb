@@ -123,6 +123,10 @@ module Flickrie
       get 'flickr.photos.getContactsPublicPhotos', ensure_media(params)
     end
 
+    def get_media_context(media_id)
+      get 'flickr.photos.getContext', :photo_id => media_id
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end

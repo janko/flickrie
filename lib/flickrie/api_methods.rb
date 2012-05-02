@@ -75,6 +75,13 @@ module Flickrie
         select { |media| media.is_a?(Photo) }
     end
 
+    def get_media_context(media_id)
+      response = client.get_media_context(media_id)
+      Media.from_context(response.body)
+    end
+    alias get_photo_context get_media_context
+    alias get_video_context get_media_context
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])
