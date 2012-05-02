@@ -187,8 +187,8 @@ module Flickrie
         new.get_sizes(info)
       end
 
-      def from_search(info)
-        from_user(info)
+      def from_search(hash)
+        from_user(hash)
       end
     end
     extend(ClassMethods)
