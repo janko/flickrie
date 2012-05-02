@@ -8,3 +8,7 @@ group :development, :test do
   gem "flickrie", :path => "~/Projects/flickrie"
   gem "pry"
 end
+
+group :test do
+  gem "turn"
+end
