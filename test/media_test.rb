@@ -135,8 +135,8 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '7049', media.server
     assert_equal 8, media.farm
     assert_equal 'IMG_0796', media.title
-    assert_equal 'luka', media.tags
-    assert_equal '', media.machine_tags
+    assert_equal 'luka', media.tags.join(' ')
+    assert_equal '', media.machine_tags.join(' ')
     assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_equal true, media.primary?
@@ -178,8 +178,8 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '7049', media.server
     assert_equal 8, media.farm
     assert_equal 'IMG_0796', media.title
-    assert_equal 'luka', media.tags
-    assert_equal '', media.machine_tags
+    assert_equal 'luka', media.tags.join(' ')
+    assert_equal '', media.machine_tags.join(' ')
     assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_not_nil media.url
@@ -226,8 +226,8 @@ class MediaTest < Test::Unit::TestCase
     assert_equal '7049', media.server
     assert_equal 8, media.farm
     assert_equal 'IMG_0796', media.title
-    assert_equal 'luka', media.tags
-    assert_equal '', media.machine_tags
+    assert_equal 'luka', media.tags.join(' ')
+    assert_equal '', media.machine_tags.join(' ')
     assert_equal 2, media.views_count
     assert_equal '0', media.license.id
     assert_not_nil media.url

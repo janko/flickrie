@@ -13,7 +13,6 @@ module Flickrie
     def title;          @info['title']        end
     def description;    @info['description']  end
     def tags;           @info['tags']         end
-    def machine_tags;   @info['machine_tags'] end
     def media_status;   @info['media_status'] end
     def path_alias;     @info['pathalias']    end
 
@@ -27,6 +26,10 @@ module Flickrie
 
     def location
       Location.new(@info['location']) if @info['location']
+    end
+
+    def machine_tags
+      tags.select { |tag| tag.machine_tag? } if tags
     end
 
     def geo_permissions
@@ -151,6 +154,12 @@ module Flickrie
             'takengranularity' => info.delete('datetakengranularity'),
           }
           info['usage'] = {}
+
+          unless info['tags'].nil?
+            info['tags'] = info['tags'].split(' ').map do |tag_content|
+              Tag.new('_content' => tag_content)
+            end
+          end
 
           new(info)
         end

@@ -6,11 +6,11 @@ module Flickrie
       def content; @info['_content'] end
 
       def machine_tag?
-        @info['machine_tag'].to_i == 1
+        @info['machine_tag'].to_i == 1 if @info['machine_tag']
       end
 
       def author
-        User.new('nsid' => @info['author'])
+        User.new('nsid' => @info['author']) if @info['author']
       end
 
       def initialize(info)
