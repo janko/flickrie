@@ -145,4 +145,17 @@ class PhotoTest < Test::Unit::TestCase
         assert_nil photo.height
       end
   end
+
+  def test_other_api_calls
+    # add_photo_tags, get_photo_info, remove_photo_tag,
+    # search_photos, photos_from_contacts
+
+    assert_nothing_raised do
+      Flickrie.add_photo_tags(@photo_id, "janko")
+      photo = Flickrie.get_photo_info(@photo_id)
+      tag = photo.tags.find { |tag| tag.content == "janko" }
+      Flickrie.remove_photo_tag(tag.id)
+      Flickrie.search_photos(:user_id => @user_nsid)
+    end
+  end
 end

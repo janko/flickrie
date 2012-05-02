@@ -65,4 +65,20 @@ class VideoTest < Test::Unit::TestCase
     assert_nil video.download_url
     assert_nil video.mobile_download_url
   end
+
+  def test_other_api_calls
+    # add_video_tags, remove_video_tag,
+    # search_videos, videos_from_contacts,
+    # public_videos_from_user, videos_from_set
+
+    assert_nothing_raised do
+      Flickrie.add_video_tags(@video_id, "janko")
+      video = Flickrie.get_video_info(@video_id)
+      tag = video.tags.find { |tag| tag.content == "janko" }
+      Flickrie.remove_video_tag(tag.id)
+      Flickrie.search_videos(:user_id => @user_nsid)
+      Flickrie.public_videos_from_user(@user_nsid)
+      Flickrie.videos_from_set(@set_id)
+    end
+  end
 end
