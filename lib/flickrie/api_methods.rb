@@ -30,14 +30,12 @@ module Flickrie
       Media.from_user(response.body['photos'])
     end
     def public_photos_from_user(user_nsid, params = {})
-      public_media_from_user(user_nsid, params).select do |media|
-        media.is_a?(Photo)
-      end
+      public_media_from_user(user_nsid, params).
+        select { |media| media.is_a?(Photo) }
     end
     def public_videos_from_user(user_nsid, params = {})
-      public_media_from_user(user_nsid, params).select do |media|
-        media.is_a?(Video)
-      end
+      public_media_from_user(user_nsid, params).
+        select { |media| media.is_a?(Video) }
     end
 
     # photos
