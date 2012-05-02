@@ -1,4 +1,4 @@
-require 'test'
+require 'test/unit'
 require 'flickrie/client'
 require 'flickrie/oauth'
 

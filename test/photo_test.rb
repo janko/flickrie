@@ -10,7 +10,6 @@ end
 
 class PhotoTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @photo_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -43,8 +42,8 @@ class PhotoTest < Test::Unit::TestCase
 
   def get_sizes_assertions(photo)
     assert_equal true, photo.can_download?
-    assert_equal false, photo.can_blog?
-    assert_equal false, photo.can_print?
+    assert_equal true, photo.can_blog?
+    assert_equal true, photo.can_print?
 
     assert_sizes(photo)
   end

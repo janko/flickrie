@@ -10,10 +10,6 @@ end
 
 class MediaTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
-    Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
-    Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']
-    Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']
     @media_id = 6946979188
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'

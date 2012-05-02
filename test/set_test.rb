@@ -10,7 +10,6 @@ end
 
 class SetTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
   end
@@ -41,7 +40,7 @@ class SetTest < Test::Unit::TestCase
     assert set.media.find { |media| media.is_a?(Flickrie::Photo) }
     assert set.media.find { |media| media.is_a?(Flickrie::Video) }
 
-    assert_equal false, set.can_comment?
+    assert_equal true, set.can_comment?
 
     assert_instance_of Time, set.created_at
     assert_instance_of Time, set.updated_at
@@ -73,7 +72,7 @@ class SetTest < Test::Unit::TestCase
     assert set.media.find { |media| media.is_a?(Flickrie::Photo) }
     assert set.media.find { |media| media.is_a?(Flickrie::Video) }
 
-    assert_equal false, set.can_comment?
+    assert_equal true, set.can_comment?
     assert_equal false, set.needs_interstitial?
     assert_equal true, set.visibility_can_see_set?
 

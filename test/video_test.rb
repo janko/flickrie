@@ -10,7 +10,6 @@ end
 
 class VideoTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @video_id = 7093038981
     @set_id = 72157629851991663
     @user_nsid = '67131352@N04'
@@ -45,8 +44,8 @@ class VideoTest < Test::Unit::TestCase
 
   def get_sizes_assertions(video)
     assert_equal true, video.can_download?
-    assert_equal false, video.can_blog?
-    assert_equal false, video.can_print?
+    assert_equal true, video.can_blog?
+    assert_equal true, video.can_print?
 
     refute video.source_url.empty?
     refute video.download_url.empty?

@@ -8,10 +8,6 @@ Flickrie::License.instance_eval do
 end
 
 class LicenseTest < Test::Unit::TestCase
-  def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
-  end
-
   def test_licenses_staying_the_same
     licenses_array = Flickrie.client.get_licenses.body['licenses']['license']
     assert_equal licenses_array.sort_by { |hash| hash['id'] },

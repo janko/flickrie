@@ -10,7 +10,6 @@ end
 
 class UserTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @user_nsid = '67131352@N04'
   end
 

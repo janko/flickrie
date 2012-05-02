@@ -4,7 +4,6 @@ require 'flickrie/client'
 
 class ClientTest < Test::Unit::TestCase
   def setup
-    Flickrie.api_key = ENV['FLICKR_API_KEY']
     @client = Flickrie.client
     @set_id = 72157629851991663
     @media_id = 7093038981
