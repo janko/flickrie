@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test'
 require 'flickrie/location'
 
 class LocationTest < Test::Unit::TestCase

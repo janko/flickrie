@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'test/unit'
+require 'test'
 require 'flickrie'
 
 Flickrie::Video.instance_eval do
