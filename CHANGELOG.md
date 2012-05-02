@@ -19,4 +19,4 @@
 
 ## Version 0.2.2
 
-- remove `addressable` gem as dependency
+- removed `addressable` gem as dependency
