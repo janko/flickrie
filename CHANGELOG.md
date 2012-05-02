@@ -6,6 +6,10 @@
 - covered `flickr.photos.getContactsPublicPhotos`
 - covered `flickr.photos.getContext`
 
+## Version 0.3.2
+
+- enabled passing params to `Flickrie::Set#photos`
+
 ## Version 0.3.1
 
 - fixed an error when accessing tags from photos fetched through
@@ -19,4 +23,4 @@
 
 ## Version 0.2.2
 
-- removed `addressable` gem as dependency
+- removed `addressable` gem as a dependency
