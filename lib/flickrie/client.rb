@@ -28,6 +28,7 @@ module Flickrie
           conn.adapter Faraday.default_adapter
         end
 
+        client.builder.insert_after FaradayMiddleware::ParseJson, OAuthStatusCheck
         client.builder.insert_before FaradayMiddleware::ParseJson, StatusCheck
         client
       end
@@ -58,6 +59,15 @@ module Flickrie
     def on_complete(env)
       if env[:body]['stat'] != 'ok'
         raise Error, env[:body]['message']
+      end
+    end
+  end
+
+  class OAuthStatusCheck < Faraday::Response::Middleware
+    def on_complete(env)
+      if env[:status] != 200
+        message = env[:body][/(?<=oauth_problem=)[^&]+/]
+        raise Error, message.gsub('_', ' ').capitalize
       end
     end
   end
