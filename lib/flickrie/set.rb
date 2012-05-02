@@ -19,9 +19,9 @@ module Flickrie
 
     def owner; User.new('nsid' => @info['owner']) if @info['owner'] end
 
-    def photos; Flickrie.photos_from_set(id) end
-    def videos; Flickrie.videos_from_set(id) end
-    def media;  Flickrie.media_from_set(id)  end
+    def photos(params = {}); Flickrie.photos_from_set(id, params) end
+    def videos(params = {}); Flickrie.videos_from_set(id, params) end
+    def media(params = {});  Flickrie.media_from_set(id, params)  end
 
     def can_comment?; @info['can_comment'].to_i == 1 if @info['can_comment'] end
 
