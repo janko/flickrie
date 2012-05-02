@@ -221,6 +221,10 @@ basis of this gem.
 "flickr.photosets.getPhotos"     -> Flickrie.photos_from_set
 ```
 
+## Changelog
+
+You can see the changelog [here]((https://github.com/janko-m/flickrie/blob/master/CHANGELOG.md).
+
 ## License
 
 [MIT](https://github.com/janko-m/flickrie/blob/master/LICENSE)
