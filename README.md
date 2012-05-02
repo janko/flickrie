@@ -13,11 +13,19 @@ not a string representing that time (often in a timestamp (integer) format).
 That's what wrappers should be for.
 
 The method names here aren't called the same as Flickr's API methods, but they follow a pattern which
-shouldn't be too difficult to learn. Also, some attribute names that you
+shouldn't be too difficult to learn. Take a look at the "Covered API
+methods" section of this readme.
+
+Also, some attribute names that you
 get from the response are changed. So, for example, the `last_update`
 attribute is called `updated_at`, and the `candownload` attribute is
 called `can_download?`. After all, this is a **ruby** wrapper, so it
 should be written in Ruby/Rails fashion :)
+
+There are 2 things that are different from the Flickr's API documentation:
+- "photoset" is here just "set". This is because the word "photoset" is actually
+incorrect, since sets can also hold videos.
+- "person" is here refered to as "user".
 
 ## Examples of usage
 
@@ -49,10 +57,6 @@ photo.title       # => "Samantha and me"
 photo.owner       # => #<User: nsid="67313352@N04", ...>
 photo.owner.nsid  # => "67313352@N04"
 ```
-
-Note that, what Flickr refers to as "photoset" in its documentation, I
-refer to as "set". This is because the word "photoset" is actually
-incorrect, since sets can also hold videos.
 
 You can also throw in some parameters to `Flickrie.photos_from_set` to get more information about photos. For example,
 
