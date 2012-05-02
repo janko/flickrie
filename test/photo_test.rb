@@ -155,6 +155,7 @@ class PhotoTest < Test::Unit::TestCase
       photo = Flickrie.get_photo_info(@photo_id)
       tag = photo.tags.find { |tag| tag.content == "janko" }
       Flickrie.remove_photo_tag(tag.id)
+      Flickrie.photos_from_contacts(:include_self => 1)
       Flickrie.search_photos(:user_id => @user_nsid)
     end
   end

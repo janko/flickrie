@@ -51,6 +51,17 @@ module Flickrie
     alias delete_photo delete_media
     alias delete_video delete_media
 
+    def media_from_contacts(params = {})
+      response = client.media_from_contacts(params)
+      Media.from_contacts(response.body['photos'])
+    end
+    def photos_from_contacts(params = {})
+      media_from_contacts(params).select { |media| media.is_a?(Photo) }
+    end
+    def videos_from_contacts(params = {})
+      media_from_contacts(params).select { |media| media.is_a?(Video) }
+    end
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])

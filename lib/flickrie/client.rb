@@ -114,6 +114,10 @@ module Flickrie
       post 'flickr.photos.delete', :photo_id => media_id
     end
 
+    def media_from_contacts(params = {})
+      get 'flickr.photos.getContactsPhotos', ensure_media(params)
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end

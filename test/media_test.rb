@@ -286,6 +286,45 @@ class MediaTest < Test::Unit::TestCase
     assert_equal media.tags.join(' '), tags_before_change.chomp("janko").rstrip
   end
 
+  def test_media_from_contacts
+    media = Flickrie.media_from_contacts(:include_self => 1, :single_photo => 1,
+                                         :extras => @all_extras).first
+
+    assert_equal '7093101501', media.id
+    assert_equal '9337f28800', media.secret
+    assert_equal '7090', media.server
+    assert_equal 8, media.farm
+    assert_equal 'IMG_0917', media.title
+    assert_equal '', media.tags.join(' ')
+    assert_equal '', media.machine_tags.join(' ')
+    assert_equal 0, media.views_count
+    assert_equal '0', media.license.id
+    assert_not_nil media.url
+    assert_equal 'ready', media.media_status
+
+    # Time
+    assert_instance_of Time, media.uploaded_at
+    assert_instance_of Time, media.updated_at
+    assert_instance_of Time, media.taken_at
+    assert_equal 0, media.taken_at_granularity
+
+    # Location
+    assert_nil media.location
+
+    # Owner
+    assert_equal '67131352@N04', media.owner.nsid
+    assert_equal 'Janko Marohnić', media.owner.username
+    assert_equal '5464', media.owner.icon_server
+    assert_equal 6, media.owner.icon_farm
+    refute media.owner.buddy_icon_url.empty?
+
+    # Visibility (This is the difference from Flickrie.media_from_set)
+    assert_equal true, media.visibility.public?
+    assert_equal false, media.visibility.friends?
+    assert_equal false, media.visibility.family?
+    assert_equal nil, media.visibility.contacts?
+  end
+
   def test_methods_returning_nil
     media = Flickrie::Photo.new
 

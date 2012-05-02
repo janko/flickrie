@@ -190,6 +190,14 @@ module Flickrie
       def from_search(hash)
         from_user(hash)
       end
+
+      def from_contacts(hash)
+        hash['photo'].each do |info|
+          info['ownername'] = info.delete('username')
+        end
+
+        from_user(hash)
+      end
     end
     extend(ClassMethods)
 
