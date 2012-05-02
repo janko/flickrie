@@ -2,8 +2,19 @@ require 'faraday_middleware'
 
 module Flickrie
   class << self
-    attr_accessor :api_key, :shared_secret, :timeout, :open_timeout,
-      :access_token, :access_secret
+    def self.attr_accessor_with_client_reset(*attributes)
+      attr_reader *attributes
+
+      attributes.each do |attribute|
+        define_method "#{attribute}=" do |value|
+          instance_variable_set "@#{attribute}", value
+          @client = nil
+        end
+      end
+    end
+
+    attr_accessor_with_client_reset :api_key, :shared_secret,
+      :timeout, :open_timeout, :access_token, :access_secret
 
     def client(access_token_hash = {})
       @client ||= begin
