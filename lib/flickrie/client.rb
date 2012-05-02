@@ -118,6 +118,11 @@ module Flickrie
       get 'flickr.photos.getContactsPhotos', ensure_media(params)
     end
 
+    def public_media_from_user_contacts(user_nsid, params = {})
+      params = {:user_id => user_nsid}.merge(params)
+      get 'flickr.photos.getContactsPublicPhotos', ensure_media(params)
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end

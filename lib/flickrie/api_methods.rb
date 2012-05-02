@@ -62,6 +62,19 @@ module Flickrie
       media_from_contacts(params).select { |media| media.is_a?(Video) }
     end
 
+    def public_media_from_user_contacts(user_nsid, params = {})
+      response = client.public_media_from_user_contacts(user_nsid, params)
+      Media.from_contacts(response.body['photos'])
+    end
+    def public_photos_from_user_contacts(user_nsid, params = {})
+      public_media_from_user_contacts(user_nsid, params).
+        select { |media| media.is_a?(Photo) }
+    end
+    def public_videos_from_user_contacts(user_nsid, params = {})
+      public_media_from_user_contacts(user_nsid, params).
+        select { |media| media.is_a?(Photo) }
+    end
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])

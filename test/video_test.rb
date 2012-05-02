@@ -77,6 +77,7 @@ class VideoTest < Test::Unit::TestCase
       tag = video.tags.find { |tag| tag.content == "janko" }
       Flickrie.remove_video_tag(tag.id)
       Flickrie.videos_from_contacts(:include_self => 1)
+      Flickrie.public_videos_from_user_contacts(@user_nsid, :include_self => 1)
       Flickrie.search_videos(:user_id => @user_nsid)
       Flickrie.public_videos_from_user(@user_nsid)
       Flickrie.videos_from_set(@set_id)
