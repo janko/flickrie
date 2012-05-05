@@ -147,6 +147,24 @@ are "read", "write" and "delete".
 If you want to make authentication in your web application, check out my [flickr_auth](https://github.com/janko-m/flickr_auth) gem.
 Or, if you want to do it manually, check out [this wiki](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications) for instructions.
 
+## Photo upload
+
+```ruby
+photo_id = Flickrie.upload("/path/to/photo.jpg", :title => "A cow")
+photo = Flickrie.get_photo_info(photo_id)
+photo.title # => "A cow"
+```
+
+For the list of parameters you can pass in when uploading a photo, see
+[this page](http://www.flickr.com/services/api/upload.api.html).
+
+Few notes:
+- Photo uploads require authentication with "write" permissions.
+- Path to the photo has to be absolute.
+
+See [this wiki](https://github.com/janko-m/flickrie/wiki/Asynchronous_photo_upload) for an example
+of an asynchronous photo upload.
+
 ## A few words
 
 Now, I covered only a few out of many Flickr's API methods using this approach,

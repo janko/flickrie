@@ -1,4 +1,5 @@
 require 'flickrie/client'
+require 'flickrie/upload_client'
 require 'flickrie/oauth'
 require 'flickrie/license'
 require 'flickrie/user'
@@ -9,6 +10,24 @@ require 'flickrie/set'
 
 module Flickrie
   module ApiMethods
+    def upload(media, params = {})
+      response = upload_client.upload(media, params)
+      if params[:async] == 1
+        response.body['rsp']['ticketid']
+      else
+        response.body['rsp']['photoid']
+      end
+    end
+
+    def replace(media, media_id, params = {})
+      response = upload_client.replace(media, media_id, params)
+      if params[:async] == 1
+        response.body['rsp']['ticketid']
+      else
+        response.body['rsp']['photoid']
+      end
+    end
+
     # people
     def find_user_by_email(email)
       response = client.find_user_by_email(email)

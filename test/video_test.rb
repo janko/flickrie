@@ -66,6 +66,13 @@ class VideoTest < Test::Unit::TestCase
     assert_nil video.mobile_download_url
   end
 
+  def test_video_upload
+    video_path = File.join(File.expand_path(File.dirname(__FILE__)), 'video.mov')
+    video_id = Flickrie.upload(video_path)
+    assert_nothing_raised(Flickrie::Error) { Flickrie.get_video_info(video_id) }
+    Flickrie.delete_video(video_id)
+  end
+
   def test_other_api_calls
     # add_video_tags, remove_video_tag,
     # search_videos, videos_from_contacts,

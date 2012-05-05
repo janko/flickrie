@@ -146,6 +146,24 @@ class PhotoTest < Test::Unit::TestCase
       end
   end
 
+  def test_photo_upload
+    photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+    photo_id = Flickrie.upload(photo_path)
+    assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
+    Flickrie.delete_photo(photo_id)
+  end
+
+  def test_asynchronous_photo_upload
+    photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+    ticket_id = Flickrie.upload(photo_path, :async => 1)
+    begin
+      ticket = Flickrie.check_upload_tickets([ticket_id]).first
+    end until ticket.complete?
+    photo_id = ticket.photo_id
+    assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
+    Flickrie.delete_photo(photo_id)
+  end
+
   def test_other_api_calls
     # add_photo_tags, get_photo_info, remove_photo_tag,
     # search_photos, photos_from_contacts

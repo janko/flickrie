@@ -286,6 +286,14 @@ class MediaTest < Test::Unit::TestCase
     assert_equal media.tags.join(' '), tags_before_change.chomp("janko").rstrip
   end
 
+  def test_delete_media
+    media_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+    media_id = Flickrie.upload(media_path)
+    assert_includes Flickrie.public_media_from_user(@user_nsid).map(&:id), media_id
+    Flickrie.delete_media(media_id)
+    refute_includes Flickrie.public_media_from_user(@user_nsid).map(&:id), media_id
+  end
+
   def test_media_from_contacts
     medias = [
       Flickrie.media_from_contacts(
@@ -355,6 +363,19 @@ class MediaTest < Test::Unit::TestCase
     refute next_media.url.empty?
     assert_equal '0', next_media.license.id
     assert_equal false, next_media.faved?
+  end
+
+  def test_media_replace
+    media_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+    begin
+      media_id = Flickrie.upload(media_path)
+      Flickrie.replace(media_path, media_id)
+      flunk
+    rescue => exception
+      assert_equal "Not a pro account", exception.message
+    ensure
+      Flickrie.delete_media(media_id)
+    end
   end
 
   def test_methods_returning_nil
