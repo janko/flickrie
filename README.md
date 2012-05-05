@@ -35,13 +35,13 @@ You first need to install the gem.
 [sudo] gem install flickrie
 ```
 
-Then in your app you set the API key and secret (if you don't have them
+Then in your app you set the API key and shared secret (if you don't have them
 already, you can apply for them [here](http://www.flickr.com/services/apps/create/apply)).
 
 ```ruby
 require 'flickrie'
-Flickrie.api_key = "your api key"
-Flickrie.shared_secret = "your shared secret"
+Flickrie.api_key = "API_KEY"
+Flickrie.shared_secret = "SHARED_SECRET"
 ```
 
 Then you can search for stuff.
@@ -122,8 +122,8 @@ be sure to check the [wiki](https://github.com/janko-m/flickrie/wiki) for some a
 ```ruby
 require 'flickrie'
 
-Flickrie.api_key = "your api key"
-Flickrie.shared_secret = "your shared secret"
+Flickrie.api_key = "API_KEY"
+Flickrie.shared_secret = "SHARED_SECRET"
 
 request_token = Flickrie::OAuth.get_request_token
 url = request_token.get_authorization_url
