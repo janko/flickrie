@@ -2,3 +2,4 @@ TODO.md
 Gemfile.lock
 *.gem
 pkg/
+credentials.rb
