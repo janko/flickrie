@@ -1,10 +1,12 @@
 # Flickrie changelog
 
-## Version 0.4.0 (Unreleased)
+## Version 0.4.0
 
 - covered `flickr.photos.getContactsPhotos`
 - covered `flickr.photos.getContactsPublicPhotos`
 - covered `flickr.photos.getContext`
+- implemented uploading photos
+- covered `flickr.photos.upload.checkTickets`
 
 ## Version 0.3.2
 
