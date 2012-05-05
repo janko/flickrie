@@ -1,6 +1,4 @@
 require 'test/unit'
-require 'flickrie/client'
-require 'flickrie/oauth'
 
 class OAuthTest < Test::Unit::TestCase
   def test_raising_errors

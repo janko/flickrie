@@ -1,5 +1,4 @@
 require 'test'
-require 'flickrie/location'
 
 class LocationTest < Test::Unit::TestCase
   def test_attributes_returning_nil

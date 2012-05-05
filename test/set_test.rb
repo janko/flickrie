@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'test'
-require 'flickrie'
 
 Flickrie::Set.instance_eval do
   def public_new(*args)
