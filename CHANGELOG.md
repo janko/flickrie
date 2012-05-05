@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 0.4.1
+
+- handle file uploads for Rails and Sinatra smarter (see [this wiki](https://github.com/janko-m/flickrie/wiki/Some-tips.md), tip #7)
+
 ## Version 0.4.0
 
 - covered `flickr.photos.getContactsPhotos`

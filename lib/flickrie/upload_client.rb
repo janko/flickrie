@@ -39,13 +39,16 @@ module Flickrie
   class UploadClient < Faraday::Connection
     def upload(media, params = {})
       media_file = get_file(media, params[:mime_type])
-      post "upload", {:photo => media_file}.merge(params)
+      media_title = get_title(media)
+      post "upload", {:photo => media_file,
+        :title => media_title}.merge(params)
     end
 
     def replace(media, media_id, params = {})
-      media_file = get_file(media)
+      media_file = get_file(media, params[:mime_type])
+      media_title = get_title(media)
       post "replace", {:photo => media_file,
-                       :photo_id => media_id}.merge(params)
+        :photo_id => media_id, :title => media_title}.merge(params)
     end
 
     private
@@ -70,11 +73,21 @@ module Flickrie
     }.freeze
 
     def get_file(object, mime_type = nil)
-      if object.is_a?(String)
-        Faraday::UploadIO.new(object, mime_type || get_mime_type(object))
-      else
-        object
+      if object.class.name == "String"
+        # file path
+        file_path = object
+        mime_type ||= get_mime_type(file_path)
+      elsif object.class.name == "ActionDispatch::Http::UploadedFile"
+        # Rails
+        file_path = object.tempfile
+        mime_type ||= object.content_type
+      elsif object.class.name == "Hash"
+        # Sinatra
+        file_path = object[:tempfile].path
+        mime_type ||= object[:type]
       end
+
+      Faraday::UploadIO.new(file_path, mime_type)
     end
 
     def get_mime_type(file_path)
@@ -83,6 +96,19 @@ module Flickrie
 
     rescue NoMethodError
       raise Error, "Don't know mime type for this extension (#{extension})"
+    end
+
+    def get_title(object)
+      filename =
+        if object.class.name == "String"
+          File.basename(object)
+        elsif object.class.name == "ActionDispatch::Http::UploadedFile"
+          object.original_filename
+        elsif object.class.name == "Hash"
+          object[:filename]
+        end
+
+      filename.match(/\.\w{3,4}$/).pre_match
     end
   end
 end
