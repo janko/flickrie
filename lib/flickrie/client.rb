@@ -17,36 +17,37 @@ module Flickrie
       :timeout, :open_timeout, :access_token, :access_secret
 
     def client(access_token_hash = {})
-      @client ||= begin
-        client = Client.new(params) do |conn|
-          conn.request :oauth,
-            :consumer_key => api_key,
-            :consumer_secret => shared_secret,
-            :token => access_token_hash[:token] || access_token,
-            :token_secret => access_token_hash[:secret] || access_secret
-          conn.response :json, :content_type => /(text\/plain)|(json)$/
-          conn.adapter Faraday.default_adapter
-        end
+      @client ||= Client.new(params) do |conn|
+        conn.request :oauth,
+          :consumer_key => api_key,
+          :consumer_secret => shared_secret,
+          :token => access_token_hash[:token] || access_token,
+          :token_secret => access_token_hash[:secret] || access_secret
 
-        client.builder.insert_after FaradayMiddleware::ParseJson, OAuthStatusCheck
-        client.builder.insert_before FaradayMiddleware::ParseJson, StatusCheck
-        client
+        conn.use StatusCheck
+        conn.response :json, :content_type => /(text\/plain)|(json)$/
+        conn.use OAuthStatusCheck
+
+        conn.adapter Faraday.default_adapter
       end
     end
 
     private
 
+    OPEN_TIMEOUT = 4
+    TIMEOUT = 6
+
     def params
       {
-        :url => 'http://api.flickr.com/services/rest/',
+        :url => 'http://api.flickr.com/services/rest',
         :params => {
           :format => 'json',
           :nojsoncallback => '1',
           :api_key => api_key
         },
         :request => {
-          :open_timeout => open_timeout || 8,
-          :timeout => timeout || 8
+          :open_timeout => open_timeout || OPEN_TIMEOUT,
+          :timeout => timeout || TIMEOUT
         }
       }
     end

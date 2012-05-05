@@ -66,6 +66,7 @@ module Flickrie
 
     def delete_media(media_id)
       client.delete_media(media_id)
+      media_id
     end
     alias delete_photo delete_media
     alias delete_video delete_media
