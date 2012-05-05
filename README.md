@@ -247,7 +247,7 @@ basis of this gem.
 
 ## Changelog
 
-You can see the changelog [here]((https://github.com/janko-m/flickrie/blob/master/CHANGELOG.md).
+You can see the changelog [here](https://github.com/janko-m/flickrie/blob/master/CHANGELOG.md).
 
 ## License
 
