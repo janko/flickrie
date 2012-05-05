@@ -113,7 +113,7 @@
 - ~~flickr.photos.getContactsPhotos~~
 - ~~flickr.photos.getContactsPublicPhotos~~
 - ~~flickr.photos.getContext~~
-- flickr.photos.getCounts
+- ~~flickr.photos.getCounts~~
 - flickr.photos.getExif
 - flickr.photos.getFavorites
 - ~~flickr.photos.getInfo~~

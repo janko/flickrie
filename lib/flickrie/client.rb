@@ -128,6 +128,10 @@ module Flickrie
       get 'flickr.photos.getContext', :photo_id => media_id
     end
 
+    def get_media_counts(params = {})
+      get 'flickr.photos.getCounts', params
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end

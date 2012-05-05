@@ -7,6 +7,7 @@ require 'flickrie/media'
 require 'flickrie/photo'
 require 'flickrie/video'
 require 'flickrie/set'
+require 'flickrie/media_count'
 
 module Flickrie
   module ApiMethods
@@ -101,6 +102,21 @@ module Flickrie
     end
     alias get_photo_context get_media_context
     alias get_video_context get_media_context
+
+    def get_media_counts(params = {})
+      response = client.get_media_counts(
+        params.dup.tap do |hash|
+          if hash[:taken_dates].is_a?(String)
+            hash[:taken_dates] = hash[:taken_dates].split(',').
+              map { |date| DateTime.parse(date) }.
+              map(&:to_time).map(&:getutc).join(',')
+          end
+        end)
+      response.body['photocounts']['photocount'].
+        map { |info| MediaCount.new(info, params) }
+    end
+    alias get_photos_counts get_media_counts
+    alias get_videos_counts get_media_counts
 
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
