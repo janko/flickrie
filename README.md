@@ -233,11 +233,11 @@ basis of this gem.
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
 "flickr.photos.search"                  -> Flickrie.search_photos
 
-# photos.upload
-"flickr.photos.upload.checkTickets"     -> Flickrie.check_upload_tickets
-
 # photos.licenses
 "flickr.photos.licenses.getInfo"        -> Flickrie.get_licenses
+
+# photos.upload
+"flickr.photos.upload.checkTickets"     -> Flickrie.check_upload_tickets
 
 # photosets
 "flickr.photosets.getInfo"              -> Flickrie.get_set_info
