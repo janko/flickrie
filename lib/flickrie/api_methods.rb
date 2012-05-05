@@ -134,6 +134,14 @@ module Flickrie
       search_media(search_params.merge(:media => 'videos'))
     end
 
+    # photos.upload
+    def check_upload_tickets(tickets)
+      tickets = tickets.join(',') if tickets.is_a?(Array)
+      response = client.check_upload_tickets(tickets)
+      response.body['uploader']['ticket'].
+        map { |info| Media::Ticket.new(info) }
+    end
+
     # licenses
     def get_licenses
       response = client.get_licenses

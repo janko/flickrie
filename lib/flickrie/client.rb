@@ -143,6 +143,11 @@ module Flickrie
       get 'flickr.photos.search', ensure_media(params)
     end
 
+    # photos.upload
+    def check_upload_tickets(tickets)
+      get 'flickr.photos.upload.checkTickets', :tickets => tickets
+    end
+
     # licenses
     def get_licenses
       get 'flickr.photos.licenses.getInfo'
