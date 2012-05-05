@@ -162,7 +162,7 @@ Few notes:
 - Photo uploads require authentication with "write" permissions.
 - Path to the photo has to be absolute.
 
-See [this wiki](https://github.com/janko-m/flickrie/wiki/Asynchronous_photo_upload) for an example
+See [this wiki](https://github.com/janko-m/flickrie/wiki/Asynchronous-photo-upload) for an example
 of an asynchronous photo upload.
 
 ## A few words
