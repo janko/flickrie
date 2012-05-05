@@ -153,7 +153,7 @@ module Flickrie
 
     # photos.upload
     def check_upload_tickets(tickets)
-      tickets = tickets.join(',') if tickets.is_a?(Array)
+      tickets = tickets.join(',') if tickets.respond_to?(:join)
       response = client.check_upload_tickets(tickets)
       response.body['uploader']['ticket'].
         map { |info| Media::Ticket.new(info) }
