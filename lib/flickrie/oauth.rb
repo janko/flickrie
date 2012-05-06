@@ -13,13 +13,13 @@ module Flickrie
       }.merge(additional_oauth_params)
 
       Faraday.new(URL) do |connection|
-        connection.request :oauth, oauth_params
         connection.use ParseResponseParams
         connection.adapter Faraday.default_adapter
       end.
         tap do |connection|
           connection.builder.insert_before ParseResponseParams, StatusCheck
         end
+        conn.use FaradayMiddleware::OAuth, oauth_params
     end
 
     class StatusCheck < Faraday::Response::Middleware
