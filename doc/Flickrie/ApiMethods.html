@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module Flickrie::ApiMethods - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/flickrie/api_methods.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-add_media_tags">#add_media_tags</a>
+    
+    <li><a href="#method-i-add_photo_tags">#add_photo_tags</a>
+    
+    <li><a href="#method-i-add_video_tags">#add_video_tags</a>
+    
+    <li><a href="#method-i-check_upload_tickets">#check_upload_tickets</a>
+    
+    <li><a href="#method-i-delete_media">#delete_media</a>
+    
+    <li><a href="#method-i-delete_photo">#delete_photo</a>
+    
+    <li><a href="#method-i-delete_video">#delete_video</a>
+    
+    <li><a href="#method-i-find_user_by_email">#find_user_by_email</a>
+    
+    <li><a href="#method-i-find_user_by_username">#find_user_by_username</a>
+    
+    <li><a href="#method-i-get_licenses">#get_licenses</a>
+    
+    <li><a href="#method-i-get_media_context">#get_media_context</a>
+    
+    <li><a href="#method-i-get_media_counts">#get_media_counts</a>
+    
+    <li><a href="#method-i-get_media_info">#get_media_info</a>
+    
+    <li><a href="#method-i-get_photo_context">#get_photo_context</a>
+    
+    <li><a href="#method-i-get_photo_exif">#get_photo_exif</a>
+    
+    <li><a href="#method-i-get_photo_info">#get_photo_info</a>
+    
+    <li><a href="#method-i-get_photo_sizes">#get_photo_sizes</a>
+    
+    <li><a href="#method-i-get_photos_counts">#get_photos_counts</a>
+    
+    <li><a href="#method-i-get_set_info">#get_set_info</a>
+    
+    <li><a href="#method-i-get_user_info">#get_user_info</a>
+    
+    <li><a href="#method-i-get_video_context">#get_video_context</a>
+    
+    <li><a href="#method-i-get_video_exif">#get_video_exif</a>
+    
+    <li><a href="#method-i-get_video_info">#get_video_info</a>
+    
+    <li><a href="#method-i-get_video_sizes">#get_video_sizes</a>
+    
+    <li><a href="#method-i-get_videos_counts">#get_videos_counts</a>
+    
+    <li><a href="#method-i-media_from_contacts">#media_from_contacts</a>
+    
+    <li><a href="#method-i-media_from_set">#media_from_set</a>
+    
+    <li><a href="#method-i-photos_from_contacts">#photos_from_contacts</a>
+    
+    <li><a href="#method-i-photos_from_set">#photos_from_set</a>
+    
+    <li><a href="#method-i-public_media_from_user">#public_media_from_user</a>
+    
+    <li><a href="#method-i-public_media_from_user_contacts">#public_media_from_user_contacts</a>
+    
+    <li><a href="#method-i-public_photos_from_user">#public_photos_from_user</a>
+    
+    <li><a href="#method-i-public_photos_from_user_contacts">#public_photos_from_user_contacts</a>
+    
+    <li><a href="#method-i-public_videos_from_user">#public_videos_from_user</a>
+    
+    <li><a href="#method-i-public_videos_from_user_contacts">#public_videos_from_user_contacts</a>
+    
+    <li><a href="#method-i-remove_media_tag">#remove_media_tag</a>
+    
+    <li><a href="#method-i-remove_photo_tag">#remove_photo_tag</a>
+    
+    <li><a href="#method-i-remove_video_tag">#remove_video_tag</a>
+    
+    <li><a href="#method-i-replace">#replace</a>
+    
+    <li><a href="#method-i-search_media">#search_media</a>
+    
+    <li><a href="#method-i-search_photos">#search_photos</a>
+    
+    <li><a href="#method-i-search_videos">#search_videos</a>
+    
+    <li><a href="#method-i-sets_from_user">#sets_from_user</a>
+    
+    <li><a href="#method-i-upload">#upload</a>
+    
+    <li><a href="#method-i-videos_from_contacts">#videos_from_contacts</a>
+    
+    <li><a href="#method-i-videos_from_set">#videos_from_set</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Flickrie.html">Flickrie</a>
+  
+    <li><a href="../Flickrie/ApiMethods.html">Flickrie::ApiMethods</a>
+  
+    <li><a href="../Flickrie/Client.html">Flickrie::Client</a>
+  
+    <li><a href="../Flickrie/Error.html">Flickrie::Error</a>
+  
+    <li><a href="../Flickrie/Instance.html">Flickrie::Instance</a>
+  
+    <li><a href="../Flickrie/License.html">Flickrie::License</a>
+  
+    <li><a href="../Flickrie/Location.html">Flickrie::Location</a>
+  
+    <li><a href="../Flickrie/Media.html">Flickrie::Media</a>
+  
+    <li><a href="../Flickrie/Media/ClassMethods.html">Flickrie::Media::ClassMethods</a>
+  
+    <li><a href="../Flickrie/Media/Exif.html">Flickrie::Media::Exif</a>
+  
+    <li><a href="../Flickrie/Media/Note.html">Flickrie::Media::Note</a>
+  
+    <li><a href="../Flickrie/Media/Tag.html">Flickrie::Media::Tag</a>
+  
+    <li><a href="../Flickrie/Media/Ticket.html">Flickrie::Media::Ticket</a>
+  
+    <li><a href="../Flickrie/Media/Visibility.html">Flickrie::Media::Visibility</a>
+  
+    <li><a href="../Flickrie/MediaCount.html">Flickrie::MediaCount</a>
+  
+    <li><a href="../Flickrie/OAuth.html">Flickrie::OAuth</a>
+  
+    <li><a href="../Flickrie/OAuth/AccessToken.html">Flickrie::OAuth::AccessToken</a>
+  
+    <li><a href="../Flickrie/OAuth/Error.html">Flickrie::OAuth::Error</a>
+  
+    <li><a href="../Flickrie/OAuth/ParseResponseParams.html">Flickrie::OAuth::ParseResponseParams</a>
+  
+    <li><a href="../Flickrie/OAuth/RequestToken.html">Flickrie::OAuth::RequestToken</a>
+  
+    <li><a href="../Flickrie/OAuth/StatusCheck.html">Flickrie::OAuth::StatusCheck</a>
+  
+    <li><a href="../Flickrie/OAuth/Token.html">Flickrie::OAuth::Token</a>
+  
+    <li><a href="../Flickrie/OAuthStatusCheck.html">Flickrie::OAuthStatusCheck</a>
+  
+    <li><a href="../Flickrie/Photo.html">Flickrie::Photo</a>
+  
+    <li><a href="../Flickrie/Set.html">Flickrie::Set</a>
+  
+    <li><a href="../Flickrie/StatusCheck.html">Flickrie::StatusCheck</a>
+  
+    <li><a href="../Flickrie/UploadClient.html">Flickrie::UploadClient</a>
+  
+    <li><a href="../Flickrie/UploadStatusCheck.html">Flickrie::UploadStatusCheck</a>
+  
+    <li><a href="../Flickrie/User.html">Flickrie::User</a>
+  
+    <li><a href="../Flickrie/Video.html">Flickrie::Video</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Flickrie::ApiMethods</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-add_media_tags" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_media_tags</span><span
+            class="method-args">(media_id, tags)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>photos</p>
+          
+
+          
+          <div class="method-source-code" id="add_media_tags-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_media_tags</span>(<span class="ruby-identifier">media_id</span>, <span class="ruby-identifier">tags</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">add_media_tags</span>(<span class="ruby-identifier">media_id</span>, <span class="ruby-identifier">tags</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_media_tags-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-add_photo_tags">add_photo_tags</a>, <a href="ApiMethods.html#method-i-add_video_tags">add_video_tags</a>
+        </div>
+        
+
+        
+      </div><!-- add_media_tags-method -->
+
+    
+      <div id="method-i-add_photo_tags" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">add_photo_tags</span><span
+            class="method-args">(media_id, tags)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-add_media_tags">add_media_tags</a>
+        </div>
+        
+      </div><!-- add_photo_tags-method -->
+
+    
+      <div id="method-i-add_video_tags" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">add_video_tags</span><span
+            class="method-args">(media_id, tags)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-add_media_tags">add_media_tags</a>
+        </div>
+        
+      </div><!-- add_video_tags-method -->
+
+    
+      <div id="method-i-check_upload_tickets" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_upload_tickets</span><span
+            class="method-args">(tickets)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>photos.upload</p>
+          
+
+          
+          <div class="method-source-code" id="check_upload_tickets-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_upload_tickets</span>(<span class="ruby-identifier">tickets</span>)
+  <span class="ruby-identifier">tickets</span> = <span class="ruby-identifier">tickets</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">','</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">tickets</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:join</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">check_upload_tickets</span>(<span class="ruby-identifier">tickets</span>)
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'uploader'</span>][<span class="ruby-string">'ticket'</span>].
+    <span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">info</span><span class="ruby-operator">|</span> <span class="ruby-constant">Media</span><span class="ruby-operator">::</span><span class="ruby-constant">Ticket</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">info</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- check_upload_tickets-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- check_upload_tickets-method -->
+
+    
+      <div id="method-i-delete_media" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_media</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_media-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_media</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_media</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-identifier">media_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_media-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-delete_photo">delete_photo</a>, <a href="ApiMethods.html#method-i-delete_video">delete_video</a>
+        </div>
+        
+
+        
+      </div><!-- delete_media-method -->
+
+    
+      <div id="method-i-delete_photo" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_photo</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-delete_media">delete_media</a>
+        </div>
+        
+      </div><!-- delete_photo-method -->
+
+    
+      <div id="method-i-delete_video" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_video</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-delete_media">delete_media</a>
+        </div>
+        
+      </div><!-- delete_video-method -->
+
+    
+      <div id="method-i-find_user_by_email" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_user_by_email</span><span
+            class="method-args">(email)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>people</p>
+          
+
+          
+          <div class="method-source-code" id="find_user_by_email-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_user_by_email</span>(<span class="ruby-identifier">email</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">find_user_by_email</span>(<span class="ruby-identifier">email</span>)
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">from_find</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'user'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_user_by_email-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_user_by_email-method -->
+
+    
+      <div id="method-i-find_user_by_username" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_user_by_username</span><span
+            class="method-args">(username)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_user_by_username-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_user_by_username</span>(<span class="ruby-identifier">username</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">find_user_by_username</span>(<span class="ruby-identifier">username</span>)
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">from_find</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'user'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_user_by_username-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_user_by_username-method -->
+
+    
+      <div id="method-i-get_licenses" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_licenses</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>licenses</p>
+          
+
+          
+          <div class="method-source-code" id="get_licenses-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_licenses</span>
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_licenses</span>
+  <span class="ruby-constant">License</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'licenses'</span>][<span class="ruby-string">'license'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_licenses-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_licenses-method -->
+
+    
+      <div id="method-i-get_media_context" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_media_context</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_media_context-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_media_context</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_context</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_context</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_media_context-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-get_photo_context">get_photo_context</a>, <a href="ApiMethods.html#method-i-get_video_context">get_video_context</a>
+        </div>
+        
+
+        
+      </div><!-- get_media_context-method -->
+
+    
+      <div id="method-i-get_media_counts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_media_counts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_media_counts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_media_counts</span>(<span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_counts</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photocounts'</span>][<span class="ruby-string">'photocount'</span>].
+    <span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">info</span><span class="ruby-operator">|</span> <span class="ruby-constant">MediaCount</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">info</span>, <span class="ruby-identifier">params</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_media_counts-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-get_photos_counts">get_photos_counts</a>, <a href="ApiMethods.html#method-i-get_videos_counts">get_videos_counts</a>
+        </div>
+        
+
+        
+      </div><!-- get_media_counts-method -->
+
+    
+      <div id="method-i-get_media_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_media_info</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_media_info-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_media_info</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_info</span>(<span class="ruby-identifier">media_id</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_info</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photo'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_media_info-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-get_photo_info">get_photo_info</a>, <a href="ApiMethods.html#method-i-get_video_info">get_video_info</a>
+        </div>
+        
+
+        
+      </div><!-- get_media_info-method -->
+
+    
+      <div id="method-i-get_photo_context" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_photo_context</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_context">get_media_context</a>
+        </div>
+        
+      </div><!-- get_photo_context-method -->
+
+    
+      <div id="method-i-get_photo_exif" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_photo_exif</span><span
+            class="method-args">(photo_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_photo_exif-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_photo_exif</span>(<span class="ruby-identifier">photo_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_exif</span>(<span class="ruby-identifier">photo_id</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Photo</span>.<span class="ruby-identifier">from_exif</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photo'</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-string">'media'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'photo'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_photo_exif-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_photo_exif-method -->
+
+    
+      <div id="method-i-get_photo_info" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_photo_info</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_info">get_media_info</a>
+        </div>
+        
+      </div><!-- get_photo_info-method -->
+
+    
+      <div id="method-i-get_photo_sizes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_photo_sizes</span><span
+            class="method-args">(photo_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_photo_sizes-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_photo_sizes</span>(<span class="ruby-identifier">photo_id</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_sizes</span>(<span class="ruby-identifier">photo_id</span>)
+  <span class="ruby-constant">Photo</span>.<span class="ruby-identifier">from_sizes</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'sizes'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_photo_sizes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_photo_sizes-method -->
+
+    
+      <div id="method-i-get_photos_counts" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_photos_counts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_counts">get_media_counts</a>
+        </div>
+        
+      </div><!-- get_photos_counts-method -->
+
+    
+      <div id="method-i-get_set_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_set_info</span><span
+            class="method-args">(set_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>photosets</p>
+          
+
+          
+          <div class="method-source-code" id="get_set_info-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_set_info</span>(<span class="ruby-identifier">set_id</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_set_info</span>(<span class="ruby-identifier">set_id</span>)
+  <span class="ruby-constant">Set</span>.<span class="ruby-identifier">from_info</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photoset'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_set_info-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_set_info-method -->
+
+    
+      <div id="method-i-get_user_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_user_info</span><span
+            class="method-args">(user_nsid)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_user_info-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_user_info</span>(<span class="ruby-identifier">user_nsid</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_user_info</span>(<span class="ruby-identifier">user_nsid</span>)
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">from_info</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'person'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_user_info-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_user_info-method -->
+
+    
+      <div id="method-i-get_video_context" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_video_context</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_context">get_media_context</a>
+        </div>
+        
+      </div><!-- get_video_context-method -->
+
+    
+      <div id="method-i-get_video_exif" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_video_exif</span><span
+            class="method-args">(video_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_video_exif-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_video_exif</span>(<span class="ruby-identifier">video_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_exif</span>(<span class="ruby-identifier">video_id</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Video</span>.<span class="ruby-identifier">from_exif</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photo'</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-string">'media'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'video'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_video_exif-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_video_exif-method -->
+
+    
+      <div id="method-i-get_video_info" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_video_info</span><span
+            class="method-args">(media_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_info">get_media_info</a>
+        </div>
+        
+      </div><!-- get_video_info-method -->
+
+    
+      <div id="method-i-get_video_sizes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_video_sizes</span><span
+            class="method-args">(video_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_video_sizes-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_video_sizes</span>(<span class="ruby-identifier">video_id</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_sizes</span>(<span class="ruby-identifier">video_id</span>)
+  <span class="ruby-constant">Video</span>.<span class="ruby-identifier">from_sizes</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'sizes'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_video_sizes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_video_sizes-method -->
+
+    
+      <div id="method-i-get_videos_counts" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">get_videos_counts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-get_media_counts">get_media_counts</a>
+        </div>
+        
+      </div><!-- get_videos_counts-method -->
+
+    
+      <div id="method-i-media_from_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">media_from_contacts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="media_from_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">media_from_contacts</span>(<span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">media_from_contacts</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_contacts</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photos'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- media_from_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- media_from_contacts-method -->
+
+    
+      <div id="method-i-media_from_set" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">media_from_set</span><span
+            class="method-args">(set_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="media_from_set-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">media_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">media_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_set</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photoset'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- media_from_set-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- media_from_set-method -->
+
+    
+      <div id="method-i-photos_from_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">photos_from_contacts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="photos_from_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">photos_from_contacts</span>(<span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">media_from_contacts</span>(<span class="ruby-identifier">params</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Photo</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- photos_from_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- photos_from_contacts-method -->
+
+    
+      <div id="method-i-photos_from_set" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">photos_from_set</span><span
+            class="method-args">(set_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="photos_from_set-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">photos_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">media_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:media</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'photos'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- photos_from_set-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- photos_from_set-method -->
+
+    
+      <div id="method-i-public_media_from_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_media_from_user</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_media_from_user-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_media_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">public_media_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_user</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photos'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_media_from_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_media_from_user-method -->
+
+    
+      <div id="method-i-public_media_from_user_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_media_from_user_contacts</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_media_from_user_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_media_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">public_media_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_contacts</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photos'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_media_from_user_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_media_from_user_contacts-method -->
+
+    
+      <div id="method-i-public_photos_from_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_photos_from_user</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_photos_from_user-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_photos_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">public_media_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>).
+    <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Photo</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_photos_from_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_photos_from_user-method -->
+
+    
+      <div id="method-i-public_photos_from_user_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_photos_from_user_contacts</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_photos_from_user_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_photos_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">public_media_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>).
+    <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Photo</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_photos_from_user_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_photos_from_user_contacts-method -->
+
+    
+      <div id="method-i-public_videos_from_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_videos_from_user</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_videos_from_user-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_videos_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">public_media_from_user</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>).
+    <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Video</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_videos_from_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_videos_from_user-method -->
+
+    
+      <div id="method-i-public_videos_from_user_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">public_videos_from_user_contacts</span><span
+            class="method-args">(user_nsid, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="public_videos_from_user_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">public_videos_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">public_media_from_user_contacts</span>(<span class="ruby-identifier">user_nsid</span>, <span class="ruby-identifier">params</span>).
+    <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Photo</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- public_videos_from_user_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- public_videos_from_user_contacts-method -->
+
+    
+      <div id="method-i-remove_media_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_media_tag</span><span
+            class="method-args">(tag_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="remove_media_tag-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_media_tag</span>(<span class="ruby-identifier">tag_id</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">remove_media_tag</span>(<span class="ruby-identifier">tag_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- remove_media_tag-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="ApiMethods.html#method-i-remove_photo_tag">remove_photo_tag</a>, <a href="ApiMethods.html#method-i-remove_video_tag">remove_video_tag</a>
+        </div>
+        
+
+        
+      </div><!-- remove_media_tag-method -->
+
+    
+      <div id="method-i-remove_photo_tag" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_photo_tag</span><span
+            class="method-args">(tag_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-remove_media_tag">remove_media_tag</a>
+        </div>
+        
+      </div><!-- remove_photo_tag-method -->
+
+    
+      <div id="method-i-remove_video_tag" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_video_tag</span><span
+            class="method-args">(tag_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="ApiMethods.html#method-i-remove_media_tag">remove_media_tag</a>
+        </div>
+        
+      </div><!-- remove_video_tag-method -->
+
+    
+      <div id="method-i-replace" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">replace</span><span
+            class="method-args">(media, media_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="replace-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">media</span>, <span class="ruby-identifier">media_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">upload_client</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">media</span>, <span class="ruby-identifier">media_id</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:async</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'rsp'</span>][<span class="ruby-string">'ticketid'</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'rsp'</span>][<span class="ruby-string">'photoid'</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- replace-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- replace-method -->
+
+    
+      <div id="method-i-search_media" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_media</span><span
+            class="method-args">(search_params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_media-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_media</span>(<span class="ruby-identifier">search_params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">search_media</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-constant">Media</span>.<span class="ruby-identifier">from_search</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photos'</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search_media-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search_media-method -->
+
+    
+      <div id="method-i-search_photos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_photos</span><span
+            class="method-args">(search_params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_photos-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_photos</span>(<span class="ruby-identifier">search_params</span> = {})
+  <span class="ruby-identifier">search_media</span>(<span class="ruby-identifier">search_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:media</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'photos'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search_photos-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search_photos-method -->
+
+    
+      <div id="method-i-search_videos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_videos</span><span
+            class="method-args">(search_params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_videos-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_videos</span>(<span class="ruby-identifier">search_params</span> = {})
+  <span class="ruby-identifier">search_media</span>(<span class="ruby-identifier">search_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:media</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'videos'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search_videos-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search_videos-method -->
+
+    
+      <div id="method-i-sets_from_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sets_from_user</span><span
+            class="method-args">(user_nsid)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sets_from_user-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sets_from_user</span>(<span class="ruby-identifier">user_nsid</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">sets_from_user</span>(<span class="ruby-identifier">user_nsid</span>)
+  <span class="ruby-constant">Set</span>.<span class="ruby-identifier">from_user</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'photosets'</span>][<span class="ruby-string">'photoset'</span>], <span class="ruby-identifier">user_nsid</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- sets_from_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sets_from_user-method -->
+
+    
+      <div id="method-i-upload" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upload</span><span
+            class="method-args">(media, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="upload-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload</span>(<span class="ruby-identifier">media</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">upload_client</span>.<span class="ruby-identifier">upload</span>(<span class="ruby-identifier">media</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:async</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'rsp'</span>][<span class="ruby-string">'ticketid'</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">'rsp'</span>][<span class="ruby-string">'photoid'</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- upload-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- upload-method -->
+
+    
+      <div id="method-i-videos_from_contacts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">videos_from_contacts</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="videos_from_contacts-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">videos_from_contacts</span>(<span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">media_from_contacts</span>(<span class="ruby-identifier">params</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">media</span><span class="ruby-operator">|</span> <span class="ruby-identifier">media</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Video</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- videos_from_contacts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- videos_from_contacts-method -->
+
+    
+      <div id="method-i-videos_from_set" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">videos_from_set</span><span
+            class="method-args">(set_id, params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="videos_from_set-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/api_methods.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">videos_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span> = {})
+  <span class="ruby-identifier">media_from_set</span>(<span class="ruby-identifier">set_id</span>, <span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:media</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'videos'</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- videos_from_set-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- videos_from_set-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

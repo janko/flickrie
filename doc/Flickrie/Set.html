@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Flickrie::Set - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/flickrie/set.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-can_comment-3F">#can_comment?</a>
+    
+    <li><a href="#method-i-comments_count">#comments_count</a>
+    
+    <li><a href="#method-i-created_at">#created_at</a>
+    
+    <li><a href="#method-i-description">#description</a>
+    
+    <li><a href="#method-i-farm">#farm</a>
+    
+    <li><a href="#method-i-get_info">#get_info</a>
+    
+    <li><a href="#method-i-id">#id</a>
+    
+    <li><a href="#method-i-media">#media</a>
+    
+    <li><a href="#method-i-media_count">#media_count</a>
+    
+    <li><a href="#method-i-needs_interstitial-3F">#needs_interstitial?</a>
+    
+    <li><a href="#method-i-owner">#owner</a>
+    
+    <li><a href="#method-i-photos">#photos</a>
+    
+    <li><a href="#method-i-photos_count">#photos_count</a>
+    
+    <li><a href="#method-i-primary_media_id">#primary_media_id</a>
+    
+    <li><a href="#method-i-primary_photo_id">#primary_photo_id</a>
+    
+    <li><a href="#method-i-primary_video_id">#primary_video_id</a>
+    
+    <li><a href="#method-i-secret">#secret</a>
+    
+    <li><a href="#method-i-server">#server</a>
+    
+    <li><a href="#method-i-title">#title</a>
+    
+    <li><a href="#method-i-updated_at">#updated_at</a>
+    
+    <li><a href="#method-i-url">#url</a>
+    
+    <li><a href="#method-i-videos">#videos</a>
+    
+    <li><a href="#method-i-videos_count">#videos_count</a>
+    
+    <li><a href="#method-i-views_count">#views_count</a>
+    
+    <li><a href="#method-i-visibility_can_see_set-3F">#visibility_can_see_set?</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Flickrie.html">Flickrie</a>
+  
+    <li><a href="../Flickrie/ApiMethods.html">Flickrie::ApiMethods</a>
+  
+    <li><a href="../Flickrie/Client.html">Flickrie::Client</a>
+  
+    <li><a href="../Flickrie/Error.html">Flickrie::Error</a>
+  
+    <li><a href="../Flickrie/Instance.html">Flickrie::Instance</a>
+  
+    <li><a href="../Flickrie/License.html">Flickrie::License</a>
+  
+    <li><a href="../Flickrie/Location.html">Flickrie::Location</a>
+  
+    <li><a href="../Flickrie/Media.html">Flickrie::Media</a>
+  
+    <li><a href="../Flickrie/Media/ClassMethods.html">Flickrie::Media::ClassMethods</a>
+  
+    <li><a href="../Flickrie/Media/Exif.html">Flickrie::Media::Exif</a>
+  
+    <li><a href="../Flickrie/Media/Note.html">Flickrie::Media::Note</a>
+  
+    <li><a href="../Flickrie/Media/Tag.html">Flickrie::Media::Tag</a>
+  
+    <li><a href="../Flickrie/Media/Ticket.html">Flickrie::Media::Ticket</a>
+  
+    <li><a href="../Flickrie/Media/Visibility.html">Flickrie::Media::Visibility</a>
+  
+    <li><a href="../Flickrie/MediaCount.html">Flickrie::MediaCount</a>
+  
+    <li><a href="../Flickrie/OAuth.html">Flickrie::OAuth</a>
+  
+    <li><a href="../Flickrie/OAuth/AccessToken.html">Flickrie::OAuth::AccessToken</a>
+  
+    <li><a href="../Flickrie/OAuth/Error.html">Flickrie::OAuth::Error</a>
+  
+    <li><a href="../Flickrie/OAuth/ParseResponseParams.html">Flickrie::OAuth::ParseResponseParams</a>
+  
+    <li><a href="../Flickrie/OAuth/RequestToken.html">Flickrie::OAuth::RequestToken</a>
+  
+    <li><a href="../Flickrie/OAuth/StatusCheck.html">Flickrie::OAuth::StatusCheck</a>
+  
+    <li><a href="../Flickrie/OAuth/Token.html">Flickrie::OAuth::Token</a>
+  
+    <li><a href="../Flickrie/OAuthStatusCheck.html">Flickrie::OAuthStatusCheck</a>
+  
+    <li><a href="../Flickrie/Photo.html">Flickrie::Photo</a>
+  
+    <li><a href="../Flickrie/Set.html">Flickrie::Set</a>
+  
+    <li><a href="../Flickrie/StatusCheck.html">Flickrie::StatusCheck</a>
+  
+    <li><a href="../Flickrie/UploadClient.html">Flickrie::UploadClient</a>
+  
+    <li><a href="../Flickrie/UploadStatusCheck.html">Flickrie::UploadStatusCheck</a>
+  
+    <li><a href="../Flickrie/User.html">Flickrie::User</a>
+  
+    <li><a href="../Flickrie/Video.html">Flickrie::Video</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Flickrie::Set</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(info = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">info</span> = {})
+  <span class="ruby-ivar">@info</span> = <span class="ruby-identifier">info</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-can_comment-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_comment?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="can_comment-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_comment?</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'can_comment'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'can_comment'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- can_comment-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- can_comment-3F-method -->
+
+    
+      <div id="method-i-comments_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">comments_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="comments_count-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">comments_count</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_comments'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_comments'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- comments_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- comments_count-method -->
+
+    
+      <div id="method-i-created_at" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">created_at</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="created_at-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">created_at</span>; <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@info</span>[<span class="ruby-string">'date_create'</span>].<span class="ruby-identifier">to_i</span>) <span class="ruby-keyword">end</span></pre>
+          </div><!-- created_at-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- created_at-method -->
+
+    
+      <div id="method-i-description" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">description</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="description-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'description'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- description-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- description-method -->
+
+    
+      <div id="method-i-farm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">farm</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="farm-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">farm</span>;        <span class="ruby-ivar">@info</span>[<span class="ruby-string">'farm'</span>]        <span class="ruby-keyword">end</span></pre>
+          </div><!-- farm-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- farm-method -->
+
+    
+      <div id="method-i-get_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_info</span><span
+            class="method-args">(info = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_info-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_info</span>(<span class="ruby-identifier">info</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">info</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Flickrie</span>.<span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_set_info</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">body</span>[<span class="ruby-string">'photoset'</span>]
+  <span class="ruby-identifier">info</span>[<span class="ruby-string">'title'</span>] = <span class="ruby-identifier">info</span>[<span class="ruby-string">'title'</span>][<span class="ruby-string">'_content'</span>]
+  <span class="ruby-identifier">info</span>[<span class="ruby-string">'description'</span>] = <span class="ruby-identifier">info</span>[<span class="ruby-string">'description'</span>][<span class="ruby-string">'_content'</span>]
+  <span class="ruby-ivar">@info</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">info</span>)
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_info-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_info-method -->
+
+    
+      <div id="method-i-id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="id-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">id</span>;          <span class="ruby-ivar">@info</span>[<span class="ruby-string">'id'</span>]          <span class="ruby-keyword">end</span></pre>
+          </div><!-- id-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- id-method -->
+
+    
+      <div id="method-i-media" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">media</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="media-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">media</span>(<span class="ruby-identifier">params</span> = {});  <span class="ruby-constant">Flickrie</span>.<span class="ruby-identifier">media_from_set</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">params</span>)  <span class="ruby-keyword">end</span></pre>
+          </div><!-- media-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- media-method -->
+
+    
+      <div id="method-i-media_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">media_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="media_count-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">media_count</span>; <span class="ruby-identifier">photos_count</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">videos_count</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">end</span></pre>
+          </div><!-- media_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- media_count-method -->
+
+    
+      <div id="method-i-needs_interstitial-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">needs_interstitial?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>TODO: Figure out what this is</p>
+          
+
+          
+          <div class="method-source-code" id="needs_interstitial-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_interstitial?</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'needs_interstitial'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">end</span></pre>
+          </div><!-- needs_interstitial-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- needs_interstitial-3F-method -->
+
+    
+      <div id="method-i-owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">owner</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="owner-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">owner</span>; <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'nsid'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'owner'</span>]) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'owner'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- owner-method -->
+
+    
+      <div id="method-i-photos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">photos</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="photos-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">photos</span>(<span class="ruby-identifier">params</span> = {}); <span class="ruby-constant">Flickrie</span>.<span class="ruby-identifier">photos_from_set</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">params</span>) <span class="ruby-keyword">end</span></pre>
+          </div><!-- photos-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- photos-method -->
+
+    
+      <div id="method-i-photos_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">photos_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="photos_count-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">photos_count</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_photos'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_photos'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- photos_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- photos_count-method -->
+
+    
+      <div id="method-i-primary_media_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">primary_media_id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="primary_media_id-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">primary_media_id</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'primary'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- primary_media_id-source -->
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Set.html#method-i-primary_photo_id">primary_photo_id</a>, <a href="Set.html#method-i-primary_video_id">primary_video_id</a>
+        </div>
+        
+
+        
+      </div><!-- primary_media_id-method -->
+
+    
+      <div id="method-i-primary_photo_id" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">primary_photo_id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Set.html#method-i-primary_media_id">primary_media_id</a>
+        </div>
+        
+      </div><!-- primary_photo_id-method -->
+
+    
+      <div id="method-i-primary_video_id" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">primary_video_id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Set.html#method-i-primary_media_id">primary_media_id</a>
+        </div>
+        
+      </div><!-- primary_video_id-method -->
+
+    
+      <div id="method-i-secret" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">secret</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="secret-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">secret</span>;      <span class="ruby-ivar">@info</span>[<span class="ruby-string">'secret'</span>]      <span class="ruby-keyword">end</span></pre>
+          </div><!-- secret-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- secret-method -->
+
+    
+      <div id="method-i-server" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">server</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="server-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">server</span>;      <span class="ruby-ivar">@info</span>[<span class="ruby-string">'server'</span>]      <span class="ruby-keyword">end</span></pre>
+          </div><!-- server-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- server-method -->
+
+    
+      <div id="method-i-title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">title</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="title-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>;       <span class="ruby-ivar">@info</span>[<span class="ruby-string">'title'</span>]       <span class="ruby-keyword">end</span></pre>
+          </div><!-- title-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- title-method -->
+
+    
+      <div id="method-i-updated_at" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">updated_at</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="updated_at-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">updated_at</span>; <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@info</span>[<span class="ruby-string">'date_update'</span>].<span class="ruby-identifier">to_i</span>) <span class="ruby-keyword">end</span></pre>
+          </div><!-- updated_at-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- updated_at-method -->
+
+    
+      <div id="method-i-url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">url</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="url-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">url</span>; <span class="ruby-node">&quot;http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}&quot;</span> <span class="ruby-keyword">end</span></pre>
+          </div><!-- url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- url-method -->
+
+    
+      <div id="method-i-videos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">videos</span><span
+            class="method-args">(params = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="videos-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">videos</span>(<span class="ruby-identifier">params</span> = {}); <span class="ruby-constant">Flickrie</span>.<span class="ruby-identifier">videos_from_set</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">params</span>) <span class="ruby-keyword">end</span></pre>
+          </div><!-- videos-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- videos-method -->
+
+    
+      <div id="method-i-videos_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">videos_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="videos_count-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">videos_count</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_videos'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_videos'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- videos_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- videos_count-method -->
+
+    
+      <div id="method-i-views_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">views_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="views_count-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">views_count</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_views'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">'count_views'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- views_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- views_count-method -->
+
+    
+      <div id="method-i-visibility_can_see_set-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">visibility_can_see_set?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="visibility_can_see_set-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/set.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">visibility_can_see_set?</span>; <span class="ruby-ivar">@info</span>[<span class="ruby-string">'visibility_can_see_set'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">end</span></pre>
+          </div><!-- visibility_can_see_set-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- visibility_can_see_set-3F-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

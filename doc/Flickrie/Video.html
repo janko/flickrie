@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Flickrie::Video - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/flickrie/video.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Media.html">Flickrie::Media</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-download_url">#download_url</a>
+    
+    <li><a href="#method-i-duration">#duration</a>
+    
+    <li><a href="#method-i-failed-3F">#failed?</a>
+    
+    <li><a href="#method-i-get_info">#get_info</a>
+    
+    <li><a href="#method-i-get_sizes">#get_sizes</a>
+    
+    <li><a href="#method-i-height">#height</a>
+    
+    <li><a href="#method-i-mobile_download_url">#mobile_download_url</a>
+    
+    <li><a href="#method-i-pending-3F">#pending?</a>
+    
+    <li><a href="#method-i-ready-3F">#ready?</a>
+    
+    <li><a href="#method-i-source_url">#source_url</a>
+    
+    <li><a href="#method-i-width">#width</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="../Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Flickrie.html">Flickrie</a>
+  
+    <li><a href="../Flickrie/ApiMethods.html">Flickrie::ApiMethods</a>
+  
+    <li><a href="../Flickrie/Client.html">Flickrie::Client</a>
+  
+    <li><a href="../Flickrie/Error.html">Flickrie::Error</a>
+  
+    <li><a href="../Flickrie/Instance.html">Flickrie::Instance</a>
+  
+    <li><a href="../Flickrie/License.html">Flickrie::License</a>
+  
+    <li><a href="../Flickrie/Location.html">Flickrie::Location</a>
+  
+    <li><a href="../Flickrie/Media.html">Flickrie::Media</a>
+  
+    <li><a href="../Flickrie/Media/ClassMethods.html">Flickrie::Media::ClassMethods</a>
+  
+    <li><a href="../Flickrie/Media/Exif.html">Flickrie::Media::Exif</a>
+  
+    <li><a href="../Flickrie/Media/Note.html">Flickrie::Media::Note</a>
+  
+    <li><a href="../Flickrie/Media/Tag.html">Flickrie::Media::Tag</a>
+  
+    <li><a href="../Flickrie/Media/Ticket.html">Flickrie::Media::Ticket</a>
+  
+    <li><a href="../Flickrie/Media/Visibility.html">Flickrie::Media::Visibility</a>
+  
+    <li><a href="../Flickrie/MediaCount.html">Flickrie::MediaCount</a>
+  
+    <li><a href="../Flickrie/OAuth.html">Flickrie::OAuth</a>
+  
+    <li><a href="../Flickrie/OAuth/AccessToken.html">Flickrie::OAuth::AccessToken</a>
+  
+    <li><a href="../Flickrie/OAuth/Error.html">Flickrie::OAuth::Error</a>
+  
+    <li><a href="../Flickrie/OAuth/ParseResponseParams.html">Flickrie::OAuth::ParseResponseParams</a>
+  
+    <li><a href="../Flickrie/OAuth/RequestToken.html">Flickrie::OAuth::RequestToken</a>
+  
+    <li><a href="../Flickrie/OAuth/StatusCheck.html">Flickrie::OAuth::StatusCheck</a>
+  
+    <li><a href="../Flickrie/OAuth/Token.html">Flickrie::OAuth::Token</a>
+  
+    <li><a href="../Flickrie/OAuthStatusCheck.html">Flickrie::OAuthStatusCheck</a>
+  
+    <li><a href="../Flickrie/Photo.html">Flickrie::Photo</a>
+  
+    <li><a href="../Flickrie/Set.html">Flickrie::Set</a>
+  
+    <li><a href="../Flickrie/StatusCheck.html">Flickrie::StatusCheck</a>
+  
+    <li><a href="../Flickrie/UploadClient.html">Flickrie::UploadClient</a>
+  
+    <li><a href="../Flickrie/UploadStatusCheck.html">Flickrie::UploadStatusCheck</a>
+  
+    <li><a href="../Flickrie/User.html">Flickrie::User</a>
+  
+    <li><a href="../Flickrie/Video.html">Flickrie::Video</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Flickrie::Video</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(info = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">info</span> = {})
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@video</span> = {}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-download_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">download_url</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="download_url-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">download_url</span>;        <span class="ruby-ivar">@video</span>[<span class="ruby-string">'download_url'</span>]        <span class="ruby-keyword">end</span></pre>
+          </div><!-- download_url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- download_url-method -->
+
+    
+      <div id="method-i-duration" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duration</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="duration-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duration</span>; <span class="ruby-ivar">@video</span>[<span class="ruby-string">'duration'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'duration'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- duration-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- duration-method -->
+
+    
+      <div id="method-i-failed-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">failed?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="failed-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">failed?</span>;  <span class="ruby-ivar">@video</span>[<span class="ruby-string">'failed'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'failed'</span>]   <span class="ruby-keyword">end</span></pre>
+          </div><!-- failed-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- failed-3F-method -->
+
+    
+      <div id="method-i-get_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_info</span><span
+            class="method-args">(info = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_info-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_info</span>(<span class="ruby-identifier">info</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@video</span> = <span class="ruby-ivar">@info</span>[<span class="ruby-string">'video'</span>]
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_info-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_info-method -->
+
+    
+      <div id="method-i-get_sizes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_sizes</span><span
+            class="method-args">(info = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_sizes-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_sizes</span>(<span class="ruby-identifier">info</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">info</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Flickrie</span>.<span class="ruby-identifier">client</span>.<span class="ruby-identifier">get_media_sizes</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">body</span>[<span class="ruby-string">'sizes'</span>]
+  <span class="ruby-ivar">@info</span>[<span class="ruby-string">'usage'</span>].<span class="ruby-identifier">update</span>          <span class="ruby-string">'canblog'</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">info</span>[<span class="ruby-string">'canblog'</span>],
+    <span class="ruby-string">'canprint'</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">info</span>[<span class="ruby-string">'canprint'</span>],
+    <span class="ruby-string">'candownload'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">info</span>[<span class="ruby-string">'candownload'</span>]
+  <span class="ruby-identifier">info</span>[<span class="ruby-string">'size'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">hash</span>[<span class="ruby-string">'label'</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'Video Player'</span> <span class="ruby-keyword">then</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'source_url'</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-string">'source'</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'Site MP4'</span>     <span class="ruby-keyword">then</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'download_url'</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-string">'source'</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">'Mobile MP4'</span>   <span class="ruby-keyword">then</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'mobile_download_url'</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-string">'source'</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_sizes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_sizes-method -->
+
+    
+      <div id="method-i-height" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">height</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="height-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">height</span>; <span class="ruby-ivar">@video</span>[<span class="ruby-string">'height'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'height'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- height-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- height-method -->
+
+    
+      <div id="method-i-mobile_download_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mobile_download_url</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mobile_download_url-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">mobile_download_url</span>; <span class="ruby-ivar">@video</span>[<span class="ruby-string">'mobile_download_url'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- mobile_download_url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- mobile_download_url-method -->
+
+    
+      <div id="method-i-pending-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pending?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="pending-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pending?</span>; <span class="ruby-ivar">@video</span>[<span class="ruby-string">'pending'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'pending'</span>] <span class="ruby-keyword">end</span></pre>
+          </div><!-- pending-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pending-3F-method -->
+
+    
+      <div id="method-i-ready-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ready?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ready-3F-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ready?</span>;   <span class="ruby-ivar">@video</span>[<span class="ruby-string">'ready'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'ready'</span>]     <span class="ruby-keyword">end</span></pre>
+          </div><!-- ready-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ready-3F-method -->
+
+    
+      <div id="method-i-source_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">source_url</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="source_url-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">source_url</span>;          <span class="ruby-ivar">@video</span>[<span class="ruby-string">'source_url'</span>]          <span class="ruby-keyword">end</span></pre>
+          </div><!-- source_url-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- source_url-method -->
+
+    
+      <div id="method-i-width" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">width</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="width-source">
+            <pre><span class="ruby-comment"># File lib/flickrie/video.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">width</span>;  <span class="ruby-ivar">@video</span>[<span class="ruby-string">'width'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video</span>[<span class="ruby-string">'width'</span>]   <span class="ruby-keyword">end</span></pre>
+          </div><!-- width-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- width-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
