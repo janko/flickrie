@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 0.5.1
+
+- fixed a documentation error
+
 ## Version 0.5.0
 
 - covered `flickr.photos.getCounts`
