@@ -12,14 +12,14 @@ module Flickrie
         :consumer_secret => Flickrie.shared_secret
       }.merge(additional_oauth_params)
 
-      Faraday.new(URL) do |connection|
-        connection.use ParseResponseParams
-        connection.adapter Faraday.default_adapter
-      end.
-        tap do |connection|
-          connection.builder.insert_before ParseResponseParams, StatusCheck
-        end
+      Faraday.new(URL) do |conn|
         conn.use FaradayMiddleware::OAuth, oauth_params
+
+        conn.use StatusCheck
+        conn.use ParseResponseParams
+
+        conn.adapter Faraday.default_adapter
+      end
     end
 
     class StatusCheck < Faraday::Response::Middleware
