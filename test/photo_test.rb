@@ -163,6 +163,19 @@ class PhotoTest < Test::Unit::TestCase
     Flickrie.delete_photo(photo_id)
   end
 
+  def test_get_photo_exif
+    [
+      Flickrie.get_photo_exif(@photo_id),
+      Flickrie::Photo.public_new('id' => @photo_id).get_exif
+    ].
+      each do |photo|
+        assert_equal "Canon PowerShot G12", photo.camera
+        assert_equal "180 dpi", photo.exif.get('X-Resolution')
+        assert_equal "180 dpi", photo.exif.get('X-Resolution', :data => 'clean')
+        assert_equal "180",     photo.exif.get('X-Resolution', :data => 'raw')
+      end
+  end
+
   def test_other_api_calls
     # add_photo_tags, get_photo_info, remove_photo_tag,
     # search_photos, photos_from_contacts

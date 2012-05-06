@@ -132,6 +132,10 @@ module Flickrie
       get 'flickr.photos.getCounts', params
     end
 
+    def get_media_exif(media_id, params = {})
+      get 'flickr.photos.getExif', {:photo_id => media_id}.merge(params)
+    end
+
     def get_media_info(media_id)
       get 'flickr.photos.getInfo', :photo_id => media_id
     end

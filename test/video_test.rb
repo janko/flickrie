@@ -72,6 +72,18 @@ class VideoTest < Test::Unit::TestCase
     Flickrie.delete_video(video_id)
   end
 
+  def test_get_video_exif
+    [
+      Flickrie.get_video_exif(@video_id),
+      Flickrie::Video.public_new('id' => @video_id).get_exif
+    ].
+      each do |video|
+        assert_nil video.camera
+        assert_nil video.exif
+      end
+  end
+
+
   def test_other_api_calls
     # add_video_tags, remove_video_tag,
     # search_videos, videos_from_contacts,

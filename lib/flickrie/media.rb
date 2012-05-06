@@ -2,6 +2,7 @@ require 'flickrie/media/visibility'
 require 'flickrie/media/note'
 require 'flickrie/media/tag'
 require 'flickrie/media/ticket'
+require 'flickrie/media/exif'
 require 'flickrie/location'
 require 'date'
 
@@ -16,6 +17,16 @@ module Flickrie
     def tags;           @info['tags']         end
     def media_status;   @info['media_status'] end
     def path_alias;     @info['pathalias']    end
+    def camera;         @info['camera']       end
+    # ==== Example
+    #
+    #   photo.exif.get('Model') # => 'Canon PowerShot G12'
+    #
+    #   photo.exif.get('X-Resolution', :data => 'raw')   # => '180'
+    #   photo.exif.get('X-Resolution', :data => 'clean') # => '180 dpi'
+    #   photo.exif.get('X-Resolution')                   # => '180 dpi'
+    #
+    def exif;           @info['exif']         end
 
     def views_count
       @info['views'].to_i if @info['views']
@@ -125,6 +136,15 @@ module Flickrie
       self
     end
 
+    def get_exif(params = {}, info = nil)
+      info ||= Flickrie.client.get_media_exif(id, params).body['photo']
+
+      @info['camera'] = info['camera'] unless info['camera'].empty?
+      @info['exif'] = Exif.new(info['exif']) unless info['exif'].empty?
+
+      self
+    end
+
     def initialize(info = {})
       @info = info
       @info['dates'] ||= {}
@@ -216,6 +236,10 @@ module Flickrie
         end
 
         hash
+      end
+
+      def from_exif(info)
+        new.get_exif({}, info)
       end
     end
     extend(ClassMethods)

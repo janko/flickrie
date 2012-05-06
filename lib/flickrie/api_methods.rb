@@ -118,6 +118,15 @@ module Flickrie
     alias get_photos_counts get_media_counts
     alias get_videos_counts get_media_counts
 
+    def get_photo_exif(photo_id, params = {})
+      response = client.get_media_exif(photo_id, params)
+      Photo.from_exif(response.body['photo'].merge('media' => 'photo'))
+    end
+    def get_video_exif(video_id, params = {})
+      response = client.get_media_exif(video_id, params)
+      Video.from_exif(response.body['photo'].merge('media' => 'video'))
+    end
+
     def get_media_info(media_id)
       response = client.get_media_info(media_id)
       Media.from_info(response.body['photo'])
