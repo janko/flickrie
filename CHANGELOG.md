@@ -1,5 +1,10 @@
 # Flickrie changelog
 
+## Version 0.5.2
+
+- the gem now also works with Faraday 0.7 (I apologize for not
+  making Faraday >= 0.8 a dependency before)
+
 ## Version 0.5.1
 
 - fixed a documentation error
