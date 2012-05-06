@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'flickrie'
 
 class InstanceTest < Test::Unit::TestCase
   def test_if_it_works
