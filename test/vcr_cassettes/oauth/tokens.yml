@@ -1,0 +1,400 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.flickr.com/services/oauth/request_token?oauth_callback=oob
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="foo", oauth_nonce="edaabcee2f77684daa73dda527396e99",
+        oauth_signature="UZ%2BTWyCZcvHDKjeDUG%2Bm8%2BWDgb0%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343068", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: !binary |-
+        VW5hdXRob3JpemVk
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyNDoyOSBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bG9jYWxpemF0aW9uPWVuLXVzJTNCdXMlM0J1czsgZXhwaXJlcz1TdW4sIDA0
+        LU1heS0yMDE0IDIyOjI0OjI5IEdNVDsgcGF0aD0vOyBkb21haW49LmZsaWNr
+        ci5jb20=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3NjQuZmxpY2tyLm11ZC55YWhvby5jb20=
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        dGV4dC9wbGFpbjtjaGFyc2V0PVVURi04
+      !binary "QWdl":
+      - !binary |-
+        MA==
+      !binary "Vmlh":
+      - !binary |-
+        SFRUUC8xLjEgcjE4LnljcGkubXVkLnlhaG9vLm5ldCAoWWFob29UcmFmZmlj
+        U2VydmVyLzEuMjAuMTQgW2NNc1NmIF0pLCBIVFRQLzEuMSByMDQueWNwaS51
+        a2wueWFob28ubmV0IChZYWhvb1RyYWZmaWNTZXJ2ZXIvMS4yMC4xNCBbY01z
+        U2YgXSk=
+      !binary "U2VydmVy":
+      - !binary |-
+        WVRTLzEuMjAuMTQ=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA8tPLC3JiC8oyk/KSc21Tc7PKy7NTS2Kz06tjC/Ny87LL88D
+        ACQeHIgiAAAA
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:24:29 GMT
+- request:
+    method: get
+    uri: http://www.flickr.com/services/oauth/request_token?oauth_callback=oob
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="bd7e4b459f3a622e4f944832b3f9a713",
+        oauth_signature="M%2B3f57ppWOqNjFZP18x9A60kvOY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343069", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: !binary |-
+        VW5hdXRob3JpemVk
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyNDoyOSBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bG9jYWxpemF0aW9uPWVuLXVzJTNCdXMlM0J1czsgZXhwaXJlcz1TdW4sIDA0
+        LU1heS0yMDE0IDIyOjI0OjI5IEdNVDsgcGF0aD0vOyBkb21haW49LmZsaWNr
+        ci5jb20=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTI1LmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        dGV4dC9wbGFpbjtjaGFyc2V0PVVURi04
+      !binary "QWdl":
+      - !binary |-
+        MA==
+      !binary "Vmlh":
+      - !binary |-
+        SFRUUC8xLjEgcjM1LnljcGkubXVkLnlhaG9vLm5ldCAoWWFob29UcmFmZmlj
+        U2VydmVyLzEuMjAuMTQgW2NNc1NmIF0pLCBIVFRQLzEuMSByMTMueWNwaS51
+        a2wueWFob28ubmV0IChZYWhvb1RyYWZmaWNTZXJ2ZXIvMS4yMC4xNCBbY01z
+        U2YgXSk=
+      !binary "U2VydmVy":
+      - !binary |-
+        WVRTLzEuMjAuMTQ=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA0WPzW6EMAyEnwZuRZAE2Bz2gLY/e+mpvUeJMUsESWgSQH37
+        hqqikiVbM/6ssZNrHMXinZrRXIN+WBlXj0LbTc66z3tU60MEFa5vL5/5GOOS
+        0S4jr6n2fS+GWcPkC3AmCQH9pgFDGt1xNnWPXyuGKKKb0Oa/qgA5z0rClNFn
+        51RGmj/Z2bAa9GLC72RV2DJeXtpaAkCtOFQgeSXJQFpVNyU7OessYAJU3yJT
+        rOYDlQ0hyAbO2IUSRQcu24qewP+TBuPo+sTe37vb08e9q86lqE3KLc1yRKG0
+        oYyWDT/tDX3Qzh5mUf4AQ1mAi0QBAAA=
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:24:29 GMT
+- request:
+    method: get
+    uri: http://www.flickr.com/services/oauth/request_token?oauth_callback=oob
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="2ca4aff315809f3f75a4b3e9f6f6aa5b",
+        oauth_signature="dOydAJPfTyplanWGttFjl8qJCfE%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343069", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyNDoyOSBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bG9jYWxpemF0aW9uPWVuLXVzJTNCdXMlM0J1czsgZXhwaXJlcz1TdW4sIDA0
+        LU1heS0yMDE0IDIyOjI0OjI5IEdNVDsgcGF0aD0vOyBkb21haW49LmZsaWNr
+        ci5jb20=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTEzLmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        dGV4dC9wbGFpbjtjaGFyc2V0PVVURi04
+      !binary "QWdl":
+      - !binary |-
+        Mw==
+      !binary "Vmlh":
+      - !binary |-
+        SFRUUC8xLjEgcjEyLnljcGkubXVkLnlhaG9vLm5ldCAoWWFob29UcmFmZmlj
+        U2VydmVyLzEuMjAuMTQgW2NNc1NmIF0pLCBIVFRQLzEuMSByMTMueWNwaS51
+        a2wueWFob28ubmV0IChZYWhvb1RyYWZmaWNTZXJ2ZXIvMS4yMC4xNCBbY01z
+        U2YgXSk=
+      !binary "U2VydmVy":
+      - !binary |-
+        WVRTLzEuMjAuMTQ=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA03KOw6DMAwA0Nt0Q7Kd2oYhZ4mMMWrFJ1II90fq1Pm9anf/
+        FLd9n8234vVcv+2IJfd2x6v+tNctzqyErEKToApDwvcANhKopGWiGQP1v5cr
+        vEXPYgDEnFZ0TcD2AB9AkjJwAAAA
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:24:30 GMT
+- request:
+    method: get
+    uri: http://www.flickr.com/services/oauth/request_token?oauth_callback=oob
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="b4d524c3fb426f673047b3019d244158",
+        oauth_signature="Y0MkAlr63GVbfDNXctFNl9fa70U%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343070", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyNDozMCBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bG9jYWxpemF0aW9uPWVuLXVzJTNCdXMlM0J1czsgZXhwaXJlcz1TdW4sIDA0
+        LU1heS0yMDE0IDIyOjI0OjMwIEdNVDsgcGF0aD0vOyBkb21haW49LmZsaWNr
+        ci5jb20=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3NTAuZmxpY2tyLm11ZC55YWhvby5jb20=
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        dGV4dC9wbGFpbjtjaGFyc2V0PVVURi04
+      !binary "QWdl":
+      - !binary |-
+        MA==
+      !binary "Vmlh":
+      - !binary |-
+        SFRUUC8xLjEgcjM5LnljcGkubXVkLnlhaG9vLm5ldCAoWWFob29UcmFmZmlj
+        U2VydmVyLzEuMjAuMTQgW2NNc1NmIF0pLCBIVFRQLzEuMSByMTYueWNwaS51
+        a2wueWFob28ubmV0IChZYWhvb1RyYWZmaWNTZXJ2ZXIvMS4yMC4xNCBbY01z
+        U2YgXSk=
+      !binary "U2VydmVy":
+      - !binary |-
+        WVRTLzEuMjAuMTQ=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA03KOw6AIAwA0Nu4mQiVYgfOQkop0fghQby/iZPze5Wfvkbh
+        40gse5R6la2dmkNvjw710153vYK3xnm0hMajm2Zjx5IUEnERJZhQ4N/jrdK0
+        B7GLLh4gFyKHbF6Jln3ScAAAAA==
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:24:30 GMT
+- request:
+    method: get
+    uri: http://www.flickr.com/services/oauth/access_token?oauth_verifier=foo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="f8c06cd238b27de342905bcc649609b3",
+        oauth_signature="vmvLStm4V%2BB4bh5rWrVU1m2si4o%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343070", oauth_token="72157629617650412-fbe3b9afce9306c3",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: !binary |-
+        VW5hdXRob3JpemVk
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyNDozMCBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bG9jYWxpemF0aW9uPWVuLXVzJTNCdXMlM0J1czsgZXhwaXJlcz1TdW4sIDA0
+        LU1heS0yMDE0IDIyOjI0OjMwIEdNVDsgcGF0aD0vOyBkb21haW49LmZsaWNr
+        ci5jb20=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTc5LmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        dGV4dC9wbGFpbjtjaGFyc2V0PVVURi04
+      !binary "QWdl":
+      - !binary |-
+        MA==
+      !binary "Vmlh":
+      - !binary |-
+        SFRUUC8xLjEgcjQ1LnljcGkubXVkLnlhaG9vLm5ldCAoWWFob29UcmFmZmlj
+        U2VydmVyLzEuMjAuMTQgW2NNc1NmIF0pLCBIVFRQLzEuMSByMTkueWNwaS5k
+        ZWUueWFob28ubmV0IChZYWhvb1RyYWZmaWNTZXJ2ZXIvMS4yMC4xNCBbY01z
+        U2YgXSk=
+      !binary "U2VydmVy":
+      - !binary |-
+        WVRTLzEuMjAuMTQ=
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA8tPLC3JiC8oyk/KSc21LcnPTs2LL0rNSk0uSU0BAExk+24c
+        AAAA
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:24:30 GMT
+recorded_with: VCR 2.1.1

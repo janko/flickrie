@@ -21,24 +21,28 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_get_video_info
-    video = Flickrie.get_video_info(@video_id)
+    VCR.use_cassette 'video/get_info' do
+      video = Flickrie.get_video_info(@video_id)
 
-    assert_equal true, video.ready?
-    assert_equal false, video.failed?
-    assert_equal false, video.pending?
+      assert_equal true, video.ready?
+      assert_equal false, video.failed?
+      assert_equal false, video.pending?
 
-    assert_equal 16, video.duration
-    assert_equal 352, video.width
-    assert_equal 288, video.height
+      assert_equal 16, video.duration
+      assert_equal 352, video.width
+      assert_equal 288, video.height
 
-    assert_nil video.source_url
-    assert_nil video.download_url
-    assert_nil video.mobile_download_url
+      assert_nil video.source_url
+      assert_nil video.download_url
+      assert_nil video.mobile_download_url
+    end
   end
 
   def test_get_video_sizes
-    get_sizes_assertions(Flickrie.get_video_sizes(@video_id))
-    get_sizes_assertions(Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes)
+    VCR.use_cassette 'video/get_sizes' do
+      get_sizes_assertions(Flickrie.get_video_sizes(@video_id))
+      get_sizes_assertions(Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes)
+    end
   end
 
   def get_sizes_assertions(video)
@@ -66,40 +70,44 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_video_upload
-    video_path = File.join(File.expand_path(File.dirname(__FILE__)), 'video.mov')
-    video_id = Flickrie.upload(video_path)
-    assert_nothing_raised(Flickrie::Error) { Flickrie.get_video_info(video_id) }
-    Flickrie.delete_video(video_id)
+    VCR.use_cassette 'video/upload' do
+      video_path = File.join(File.expand_path(File.dirname(__FILE__)), 'video.mov')
+      video_id = Flickrie.upload(video_path)
+      assert_nothing_raised(Flickrie::Error) { Flickrie.get_video_info(video_id) }
+      Flickrie.delete_video(video_id)
+    end
   end
 
   def test_get_video_exif
-    [
-      Flickrie.get_video_exif(@video_id),
-      Flickrie::Video.public_new('id' => @video_id).get_exif
-    ].
-      each do |video|
-        assert_nil video.camera
-        assert_nil video.exif
-      end
+    VCR.use_cassette 'video/get_exif' do
+      [Flickrie.get_video_exif(@video_id),
+       Flickrie::Video.public_new('id' => @video_id).get_exif].
+        each do |video|
+          assert_nil video.camera
+          assert_nil video.exif
+        end
+    end
   end
 
 
   def test_other_api_calls
-    # add_video_tags, remove_video_tag,
-    # search_videos, videos_from_contacts,
-    # public_videos_from_user, videos_from_set
+    VCR.use_cassette 'video/other_api_calls' do
+      # add_video_tags, remove_video_tag,
+      # search_videos, videos_from_contacts,
+      # public_videos_from_user, videos_from_set
 
-    assert_nothing_raised do
-      Flickrie.add_video_tags(@video_id, "janko")
-      video = Flickrie.get_video_info(@video_id)
-      tag = video.tags.find { |tag| tag.content == "janko" }
-      Flickrie.remove_video_tag(tag.id)
-      Flickrie.videos_from_contacts(:include_self => 1)
-      Flickrie.public_videos_from_user_contacts(@user_nsid, :include_self => 1)
-      Flickrie.public_videos_from_user(@user_nsid)
-      Flickrie.videos_from_set(@set_id)
-      Flickrie.get_video_context(@video_id)
-      Flickrie.search_videos(:user_id => @user_nsid)
+      assert_nothing_raised do
+        Flickrie.add_video_tags(@video_id, "janko")
+        video = Flickrie.get_video_info(@video_id)
+        tag = video.tags.find { |tag| tag.content == "janko" }
+        Flickrie.remove_video_tag(tag.id)
+        Flickrie.videos_from_contacts(:include_self => 1)
+        Flickrie.public_videos_from_user_contacts(@user_nsid, :include_self => 1)
+        Flickrie.public_videos_from_user(@user_nsid)
+        Flickrie.videos_from_set(@set_id)
+        Flickrie.get_video_context(@video_id)
+        Flickrie.search_videos(:user_id => @user_nsid)
+      end
     end
   end
 end

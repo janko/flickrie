@@ -1,0 +1,182 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://api.flickr.com/services/rest?api_key=1e7490875accc5b9c1ca91a2f27b5604&format=json&method=flickr.photos.addTags&nojsoncallback=1&photo_id=6946979188&tags=janko
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="3c56537697f1b314b1df18a65444dc7d",
+        oauth_signature="C7YV86etpF6kBJtqH0N9OLX0L9E%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343027", oauth_token="72157629879773565-6da848f99ba7038a",
+        oauth_version="1.0"
+      Content-Length:
+      - '0'
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 06 May 2012 22:23:48 GMT
+      P3p:
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV
+        TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY
+        ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private
+      X-Served-By:
+      - www205.flickr.mud.yahoo.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '13'
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"stat":"ok"}'
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:23:48 GMT
+- request:
+    method: get
+    uri: http://api.flickr.com/services/rest?api_key=1e7490875accc5b9c1ca91a2f27b5604&format=json&method=flickr.photos.getInfo&nojsoncallback=1&photo_id=6946979188
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="6483b51e4720a9dea72a08574f29f4ae",
+        oauth_signature="TFmaepzxT0zRGJc0M%2Fmm4JcPvN4%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343028", oauth_token="72157629879773565-6da848f99ba7038a",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U3VuLCAwNiBNYXkgMjAxMiAyMjoyMzo0OSBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTQ0LmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        ODY2
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA5VVbW/bNhD+KwY/NzZJUaSkT0MzrEuHDuiQZEDmwqAlxmIs
+        kQJJxTWC/PeRlCw7bmasn8Q7Hp+7e+5FL6CrtdOgeAGyAgWgOaE5y1GWgQ8z
+        YEVphPNqnK7XhGQpXg9q8yyMVzNI8qB45KYFReZPFXei7xrNKxHgUJKQLMGM
+        pMFM2kf+rI10AhTQy40shbJeADDC8kfh9qtGPIvmoDPacSe1AkUeXuidCo5f
+        gLJDuAwlKEnxL39CEsx7H5ribYD8zNVWz75wo2sllz1EkEVAwZvLFo0uR5fg
+        gW+MWH+YXRvtVTzmUGo15Z8SSg7KgQP66kUnXSNClCuvd0IFBm++fFpBllMQ
+        DCphSyO7wcsbs1thXTR5llauZSPdPtbGdv3a0wUKNPBopFDVwGJgtZWNt4Ov
+        YwVseNNp694pguNbEXLDEKErmFxhOEOsgLCAx+uN4apvuIneh0I03Lq+C+AD
+        Ik1IAnEWY+2EaaW1PpvBsRdL3bYxo2S851XVCsdBgYfsxM6GIAK0qKTjx1xL
+        rqbXIVsvT49RdBep+IlXkZfe8o0YLSvfR6FHJ9N1ozeT0Bl5gmJrbsSIMXqw
+        Z0VDkQWlR+LDART/jBPFMEoZxTnJWEZwTuNg8d7V2rzTwMPF5Qb97q8SRMNx
+        Ks8udGOcxTqcou6Htvo2FEt3Q3fW3B6EmJ3jmxi//x7DpwzmOUbJ1XEzXGU5
+        pfhiGoaHgJp+y88COahaXtZSiVX0FbxfcIdT37qXaRv8PQW+zhxOujOPkYvj
+        qL/4Bvdj21eeDJLOM8hwmkULtRnVKJ3nlKV5HgIpy97wMtCPEIid4R1+d9O0
+        eOBDZ54EM+yTYNA1vBSrmDKET+Rm3zzcM1v+LbexmlrEqyxFaJyxUvfq/+El
+        kFa/m/rrPdP0qZ0/3H09hUQpxNgzGkGN2Py4gj4ZXs3eRf5s0a938+72znQf
+        r2/+qO93p8gYQgYRg8dwzXm8J3v0BPa3Xv11fZPe3q0pp1bf7t/CJgSTjCTD
+        pvlZ2ja+wf32se8t0RAXL920Rf97p/amiQj+GyfD7bswn/HX2YW18rbnaue6
+        YrlYLna73fzRe9yauV8dy0V8YJeL0/b10tTqy8U4pK3fbvzgISZi/X/QK/QW
+        vP4LD3BJ97QHAAA=
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:23:49 GMT
+- request:
+    method: post
+    uri: http://api.flickr.com/services/rest?api_key=1e7490875accc5b9c1ca91a2f27b5604&format=json&method=flickr.photos.removeTag&nojsoncallback=1&tag_id=67099213-6946979188-257458
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="0af2624e1c5a572b0f7bc39faf6b5264",
+        oauth_signature="3a396ZEv%2BLaHalrRt49W9oeRB7s%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336343029", oauth_token="72157629879773565-6da848f99ba7038a",
+        oauth_version="1.0"
+      Content-Length:
+      - '0'
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 06 May 2012 22:23:49 GMT
+      P3p:
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV
+        TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY
+        ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Cache-Control:
+      - private
+      X-Served-By:
+      - www177.flickr.mud.yahoo.com
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '13'
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"stat":"ok"}'
+    http_version: 
+  recorded_at: Sun, 06 May 2012 22:23:50 GMT
+recorded_with: VCR 2.1.1

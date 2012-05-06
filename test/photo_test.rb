@@ -21,37 +21,44 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_photos_from_set
-    photo = Flickrie.photos_from_set(@set_id, :extras => @all_extras).
-      find { |photo| photo.id.to_i == @photo_id }
+    VCR.use_cassette 'photo/from_set' do
+      photo = Flickrie.photos_from_set(@set_id, :extras => @all_extras).
+        find { |photo| photo.id.to_i == @photo_id }
 
-    assert_sizes(photo)
+      assert_sizes(photo)
+    end
   end
 
   def test_public_photos_from_user
-    photo = Flickrie.public_photos_from_user(@user_nsid, :extras => @all_extras).
-      find { |photo| photo.id.to_i == @photo_id }
+    VCR.use_cassette 'photo/from_user' do
+      photo = Flickrie.public_photos_from_user(@user_nsid, :extras => @all_extras).
+        find { |photo| photo.id.to_i == @photo_id }
 
-    assert_sizes(photo, :exclude => ['Square 150', 'Small 320', 'Medium 800'])
+      assert_sizes(photo, :exclude => ['Square 150', 'Small 320', 'Medium 800'])
+    end
   end
 
   def test_get_photo_sizes
-    get_sizes_assertions(Flickrie.get_photo_sizes(@photo_id))
-    get_sizes_assertions(Flickrie::Photo.public_new('id' => @photo_id.to_s).get_sizes)
-  end
+    VCR.use_cassette 'photo/get_sizes' do
+      [Flickrie.get_photo_sizes(@photo_id),
+       Flickrie::Photo.public_new('id' => @photo_id.to_s).get_sizes].
+        each do |photo|
+          assert_equal true, photo.can_download?
+          assert_equal true, photo.can_blog?
+          assert_equal true, photo.can_print?
 
-  def get_sizes_assertions(photo)
-    assert_equal true, photo.can_download?
-    assert_equal true, photo.can_blog?
-    assert_equal true, photo.can_print?
-
-    assert_sizes(photo)
+          assert_sizes(photo)
+        end
+    end
   end
 
   def test_search_photos
-    photo = Flickrie.search_photos(:user_id => @user_nsid, :extras => @all_extras).
-      find { |photo| photo.id.to_i == @photo_id }
+    VCR.use_cassette 'photo/search' do
+      photo = Flickrie.search_photos(:user_id => @user_nsid, :extras => @all_extras).
+        find { |photo| photo.id.to_i == @photo_id }
 
-    assert_sizes(photo)
+      assert_sizes(photo)
+    end
   end
 
   def assert_sizes(photo, options = {})
@@ -146,49 +153,55 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_photo_upload
-    photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
-    photo_id = Flickrie.upload(photo_path)
-    assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
-    Flickrie.delete_photo(photo_id)
+    VCR.use_cassette 'photo/upload' do
+      photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+      photo_id = Flickrie.upload(photo_path)
+      assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
+      Flickrie.delete_photo(photo_id)
+    end
   end
 
   def test_asynchronous_photo_upload
-    photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
-    ticket_id = Flickrie.upload(photo_path, :async => 1)
-    begin
-      ticket = Flickrie.check_upload_tickets([ticket_id]).first
-    end until ticket.complete?
-    photo_id = ticket.photo_id
-    assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
-    Flickrie.delete_photo(photo_id)
+    VCR.use_cassette 'photo/asynchronous_upload' do
+      photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
+      ticket_id = Flickrie.upload(photo_path, :async => 1)
+      begin
+        ticket = Flickrie.check_upload_tickets([ticket_id]).first
+      end until ticket.complete?
+      photo_id = ticket.photo_id
+      assert_nothing_raised(Flickrie::Error) { Flickrie.get_photo_info(photo_id) }
+      Flickrie.delete_photo(photo_id)
+    end
   end
 
   def test_get_photo_exif
-    [
-      Flickrie.get_photo_exif(@photo_id),
-      Flickrie::Photo.public_new('id' => @photo_id).get_exif
-    ].
-      each do |photo|
-        assert_equal "Canon PowerShot G12", photo.camera
-        assert_equal "180 dpi", photo.exif.get('X-Resolution')
-        assert_equal "180 dpi", photo.exif.get('X-Resolution', :data => 'clean')
-        assert_equal "180",     photo.exif.get('X-Resolution', :data => 'raw')
-      end
+    VCR.use_cassette 'photo/get_exif' do
+      [Flickrie.get_photo_exif(@photo_id),
+       Flickrie::Photo.public_new('id' => @photo_id).get_exif].
+        each do |photo|
+          assert_equal "Canon PowerShot G12", photo.camera
+          assert_equal "180 dpi", photo.exif.get('X-Resolution')
+          assert_equal "180 dpi", photo.exif.get('X-Resolution', :data => 'clean')
+          assert_equal "180",     photo.exif.get('X-Resolution', :data => 'raw')
+        end
+    end
   end
 
   def test_other_api_calls
-    # add_photo_tags, get_photo_info, remove_photo_tag,
-    # search_photos, photos_from_contacts
+    VCR.use_cassette 'photo/other_api_calls' do
+      # add_photo_tags, get_photo_info, remove_photo_tag,
+      # search_photos, photos_from_contacts
 
-    assert_nothing_raised do
-      Flickrie.add_photo_tags(@photo_id, "janko")
-      photo = Flickrie.get_photo_info(@photo_id)
-      tag = photo.tags.find { |tag| tag.content == "janko" }
-      Flickrie.remove_photo_tag(tag.id)
-      Flickrie.photos_from_contacts(:include_self => 1)
-      Flickrie.public_photos_from_user_contacts(@user_nsid, :include_self => 1)
-      Flickrie.get_photo_context(@photo_id)
-      Flickrie.search_photos(:user_id => @user_nsid)
+      assert_nothing_raised do
+        Flickrie.add_photo_tags(@photo_id, "janko")
+        photo = Flickrie.get_photo_info(@photo_id)
+        tag = photo.tags.find { |tag| tag.content == "janko" }
+        Flickrie.remove_photo_tag(tag.id)
+        Flickrie.photos_from_contacts(:include_self => 1)
+        Flickrie.public_photos_from_user_contacts(@user_nsid, :include_self => 1)
+        Flickrie.get_photo_context(@photo_id)
+        Flickrie.search_photos(:user_id => @user_nsid)
+      end
     end
   end
 end
