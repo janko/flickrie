@@ -17,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
 
   gem.add_dependency "faraday_middleware"
-  gem.add_dependency "simple_oauth"
-  gem.add_dependency "multi_xml"
+  gem.add_dependency "simple_oauth", '~> 0.1'
+  gem.add_dependency "multi_xml", '~> 0.4'
 
   gem.add_development_dependency "activesupport"
 end
