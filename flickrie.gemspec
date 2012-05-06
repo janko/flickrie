@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "multi_xml", '~> 0.4'
 
   gem.add_development_dependency "activesupport"
+  gem.add_development_dependency "turn"
   gem.add_development_dependency "vcr"
   gem.add_development_dependency "webmock"
 end

@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'flickrie'
+require 'test_helper'
 
 class OAuthTest < Test::Unit::TestCase
   def test_raising_errors

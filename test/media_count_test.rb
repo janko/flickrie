@@ -1,4 +1,4 @@
-require 'test'
+require 'test_helper'
 
 class MediaCountTest < Test::Unit::TestCase
   def test_get_media_count

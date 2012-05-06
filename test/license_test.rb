@@ -1,4 +1,4 @@
-require 'test'
+require 'test_helper'
 
 Flickrie::License.instance_eval do
   def public_response_array

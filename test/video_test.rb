@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'test'
+require 'test_helper'
 
 Flickrie::Video.instance_eval do
   def public_new(*args)

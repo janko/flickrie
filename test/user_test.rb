@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'test'
+require 'test_helper'
 
 Flickrie::User.instance_eval do
   def public_new(*args)
@@ -24,8 +24,8 @@ class UserTest < Test::Unit::TestCase
           assert_equal 'Zagreb, Croatia', user.location
           assert_equal 'Sarajevo, Skopje, Warsaw, Zagreb', user.time_zone['label']
           assert_equal '+01:00', user.time_zone['offset']
-          assert_equal <<-DESCRIPTION.chomp, user.description
-      I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.
+          assert_equal <<-DESCRIPTION.chomp.lstrip, user.description
+            I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.
           DESCRIPTION
 
           refute user.profile_url.empty?

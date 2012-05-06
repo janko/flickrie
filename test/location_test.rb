@@ -1,4 +1,4 @@
-require 'test'
+require 'test_helper'
 
 class LocationTest < Test::Unit::TestCase
   def test_attributes_returning_nil
