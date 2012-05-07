@@ -6,7 +6,7 @@
   didn't cover some part of it with methods. So, for example, `photo['id']`
   will access the photo's ID.
 
-- when `Flickrie::Error` is raises, you can now access its `#code`
+- when `Flickrie::Error` is raised, you can now access its `#code`
   attribute. This makes better error handling, because error code
   is (supposed to be) unique, unlike the error message
 
