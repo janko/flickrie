@@ -45,13 +45,7 @@ module Flickrie
     end
 
     def geo_permissions
-      if @info['geoperms']
-        Visibility.new \
-          *[@info['geoperms']['ispublic'],
-            @info['geoperms']['isfriend'],
-            @info['geoperms']['isfamily'],
-            @info['geoperms']['iscontact']]
-      end
+      Visibility.new(@info['geoperms']) if @info['geoperms']
     end
 
     def license
@@ -86,12 +80,7 @@ module Flickrie
     end
 
     def visibility
-      if @info['visibility']
-        Visibility.new \
-          *[@info['visibility']['ispublic'],
-            @info['visibility']['isfriend'],
-            @info['visibility']['isfamily']]
-      end
+      Visibility.new(@info['visibility']) if @info['visibility']
     end
 
     def primary?; @info['isprimary'].to_i == 1 if @info['isprimary'] end
