@@ -12,7 +12,6 @@ class UserTest < Test::Unit::TestCase
     @user_nsid = '67131352@N04'
   end
 
-  def test_get_user_info
   def test_square_brackets
     VCR.use_cassette 'user/square_brackets' do
       user = Flickrie.get_user_info(@user_nsid)
@@ -20,6 +19,7 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_info
     VCR.use_cassette 'user/get_info' do
       [Flickrie.get_user_info(@user_nsid),
        Flickrie::User.public_new('nsid' => @user_nsid).get_info].
@@ -53,7 +53,7 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
-  def test_find_user_by_username_or_email
+  def test_find_by_username_or_email
     VCR.use_cassette 'user/find_by_email_or_username' do
       user = Flickrie.find_user_by_username('Janko Marohnić')
 

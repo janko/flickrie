@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class InstanceTest < Test::Unit::TestCase
-  def test_if_it_works
-    VCR.use_cassette 'instance/only' do
+  def test_calling_api_methods
+    VCR.use_cassette 'instance/calling_api_methods' do
       Flickrie.access_token = nil
       Flickrie.access_secret = nil
 

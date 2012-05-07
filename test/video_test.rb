@@ -20,7 +20,6 @@ class VideoTest < Test::Unit::TestCase
       url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
   end
 
-  def test_get_video_info
   def test_square_brackets
     VCR.use_cassette 'video/square_brackets' do
       video = Flickrie.get_video_info(@video_id)
@@ -28,6 +27,7 @@ class VideoTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_info
     VCR.use_cassette 'video/get_info' do
       video = Flickrie.get_video_info(@video_id)
 
@@ -45,21 +45,20 @@ class VideoTest < Test::Unit::TestCase
     end
   end
 
-  def test_get_video_sizes
+  def test_get_sizes
     VCR.use_cassette 'video/get_sizes' do
-      get_sizes_assertions(Flickrie.get_video_sizes(@video_id))
-      get_sizes_assertions(Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes)
+      [Flickrie.get_video_sizes(@video_id),
+       Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes].
+        each do |video|
+          assert_equal true, video.usage.can_download?
+          assert_equal true, video.usage.can_blog?
+          assert_equal true, video.usage.can_print?
+
+          refute video.source_url.empty?
+          refute video.download_url.empty?
+          refute video.mobile_download_url.empty?
+        end
     end
-  end
-
-  def get_sizes_assertions(video)
-    assert_equal true, video.can_download?
-    assert_equal true, video.can_blog?
-    assert_equal true, video.can_print?
-
-    refute video.source_url.empty?
-    refute video.download_url.empty?
-    refute video.mobile_download_url.empty?
   end
 
   def test_methods_returning_nil
@@ -76,7 +75,7 @@ class VideoTest < Test::Unit::TestCase
     assert_nil video.mobile_download_url
   end
 
-  def test_video_upload
+  def test_upload
     VCR.use_cassette 'video/upload' do
       video_path = File.join(File.expand_path(File.dirname(__FILE__)), 'video.mov')
       video_id = Flickrie.upload(video_path)
@@ -85,7 +84,7 @@ class VideoTest < Test::Unit::TestCase
     end
   end
 
-  def test_get_video_exif
+  def test_get_exif
     VCR.use_cassette 'video/get_exif' do
       [Flickrie.get_video_exif(@video_id),
        Flickrie::Video.public_new('id' => @video_id).get_exif].

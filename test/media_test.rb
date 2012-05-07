@@ -20,7 +20,7 @@ class MediaTest < Test::Unit::TestCase
       url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
   end
 
-  def test_get_media_info
+  def test_get_info
     VCR.use_cassette 'media/get_info' do
       [Flickrie.get_media_info(@media_id),
        Flickrie::Photo.public_new('id' => @media_id.to_s).get_info].
@@ -126,7 +126,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_media_from_set
+  def test_from_set
     VCR.use_cassette 'media/from_set' do
       media = Flickrie.media_from_set(@set_id, :extras => @all_extras).
         find { |media| media.id.to_i == @media_id }
@@ -171,7 +171,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_public_media_from_user
+  def test_public_from_user
     VCR.use_cassette 'media/from_user' do
       media = Flickrie.public_media_from_user(@user_nsid, :extras => @all_extras).
         find { |media| media.id.to_i == @media_id }
@@ -221,7 +221,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_search_media
+  def test_search
     VCR.use_cassette 'media/search' do
       media = Flickrie.search_media(:user_id => @user_nsid, :extras => @all_extras).
         find { |media| media.id.to_i == @media_id }
@@ -272,7 +272,7 @@ class MediaTest < Test::Unit::TestCase
   end
 
   def test_tags
-    VCR.use_cassette 'media/add_tags' do
+    VCR.use_cassette 'media/tags' do
       media = Flickrie.get_media_info(@media_id)
       tags_before_change = media.tags.join(' ')
       Flickrie.add_media_tags(@media_id, "janko")
@@ -281,22 +281,12 @@ class MediaTest < Test::Unit::TestCase
         media.tags.join(' ')
       tag_id = media.tags.find { |tag| tag.content == "janko" }.id
       Flickrie.remove_media_tag(tag_id)
-    end
-  end
-
-  def test_remove_media_tag
-    VCR.use_cassette 'media/remove_tag' do
-      Flickrie.add_media_tags(@media_id, "janko")
-      media = Flickrie.get_media_info(@media_id)
-      tags_before_change = media.tags.join(' ')
-      tag_id = media.tags.find { |tag| tag.content == "janko" }.id
-      Flickrie.remove_media_tag(tag_id)
       media.get_info
-      assert_equal media.tags.join(' '), tags_before_change.chomp("janko").rstrip
+      assert_equal tags_before_change, media.tags.join(' ')
     end
   end
 
-  def test_delete_media
+  def test_delete
     VCR.use_cassette 'media/delete' do
       media_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
       media_id = Flickrie.upload(media_path)
@@ -306,7 +296,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_media_from_contacts
+  def test_from_contacts
     VCR.use_cassette 'media/from_contacts' do
       medias = [
         Flickrie.media_from_contacts(
@@ -353,7 +343,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_get_media_context
+  def test_get_context
     VCR.use_cassette 'media/get_context' do
       context = Flickrie.get_media_context(@media_id)
 
@@ -381,7 +371,7 @@ class MediaTest < Test::Unit::TestCase
     end
   end
 
-  def test_media_replace
+  def test_replace
     VCR.use_cassette 'media/replace' do
       media_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
       begin

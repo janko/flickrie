@@ -20,7 +20,6 @@ class PhotoTest < Test::Unit::TestCase
       url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
   end
 
-  def test_photos_from_set
   def test_square_brackets
     VCR.use_cassette 'photo/square_brackets' do
       photo = Flickrie.get_photo_info(@photo_id)
@@ -28,6 +27,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
+  def test_from_set
     VCR.use_cassette 'photo/from_set' do
       photo = Flickrie.photos_from_set(@set_id, :extras => @all_extras).
         find { |photo| photo.id.to_i == @photo_id }
@@ -36,7 +36,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
-  def test_public_photos_from_user
+  def test_public_from_user
     VCR.use_cassette 'photo/from_user' do
       photo = Flickrie.public_photos_from_user(@user_nsid, :extras => @all_extras).
         find { |photo| photo.id.to_i == @photo_id }
@@ -45,7 +45,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
-  def test_get_photo_sizes
+  def test_get_sizes
     VCR.use_cassette 'photo/get_sizes' do
       [Flickrie.get_photo_sizes(@photo_id),
        Flickrie::Photo.public_new('id' => @photo_id.to_s).get_sizes].
@@ -59,7 +59,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
-  def test_search_photos
+  def test_search
     VCR.use_cassette 'photo/search' do
       photo = Flickrie.search_photos(:user_id => @user_nsid, :extras => @all_extras).
         find { |photo| photo.id.to_i == @photo_id }
@@ -159,7 +159,7 @@ class PhotoTest < Test::Unit::TestCase
       end
   end
 
-  def test_photo_upload
+  def test_upload
     VCR.use_cassette 'photo/upload' do
       photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
       photo_id = Flickrie.upload(photo_path)
@@ -168,7 +168,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
-  def test_asynchronous_photo_upload
+  def test_asynchronous_upload
     VCR.use_cassette 'photo/asynchronous_upload' do
       photo_path = File.join(File.expand_path(File.dirname(__FILE__)), 'photo.jpg')
       ticket_id = Flickrie.upload(photo_path, :async => 1)
@@ -181,7 +181,7 @@ class PhotoTest < Test::Unit::TestCase
     end
   end
 
-  def test_get_photo_exif
+  def test_get_exif
     VCR.use_cassette 'photo/get_exif' do
       [Flickrie.get_photo_exif(@photo_id),
        Flickrie::Photo.public_new('id' => @photo_id).get_exif].

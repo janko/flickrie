@@ -13,7 +13,6 @@ class SetTest < Test::Unit::TestCase
     @user_nsid = '67131352@N04'
   end
 
-  def test_get_set_info
   def test_square_brackets
     VCR.use_cassette 'set/square_brackets' do
       set = Flickrie.get_set_info(@set_id)
@@ -21,6 +20,7 @@ class SetTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_info
     VCR.use_cassette 'set/get_info' do
       [Flickrie.get_set_info(@set_id),
        Flickrie::Set.public_new('id' => @set_id.to_s).get_info].
@@ -55,7 +55,7 @@ class SetTest < Test::Unit::TestCase
     end
   end
 
-  def test_sets_from_user
+  def test_from_user
     VCR.use_cassette 'set/from_user' do
       set = Flickrie.sets_from_user(@user_nsid).
         find { |set| set.id.to_i == @set_id }

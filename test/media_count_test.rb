@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MediaCountTest < Test::Unit::TestCase
-  def test_get_media_count
+  def test_get
     VCR.use_cassette 'media_count/get' do
       dates = [DateTime.parse("1st March 2012"), DateTime.parse("5th May 2012")].map(&:to_time)
 
