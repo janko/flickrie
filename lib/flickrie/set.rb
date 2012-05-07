@@ -70,24 +70,3 @@ module Flickrie
     end
   end
 end
-
-__END__
-
-{
-  "id"=>"72157629443464020",
-  "primary"=>"6913731566",
-  "secret"=>"23879c079a",
-  "server"=>"7130",
-  "farm"=>8,
-  "photos"=>"1",
-  "videos"=>0,
-  "title"=>{"_content"=>"Bla"},
-  "description"=>{"_content"=>""},
-  "needs_interstitial"=>0,
-  "visibility_can_see_set"=>1,
-  "count_views"=>"0",
-  "count_comments"=>"0",
-  "can_comment"=>0,
-  "date_create"=>"1334331151",
-  "date_update"=>"1334331155
-}

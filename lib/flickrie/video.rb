@@ -47,16 +47,3 @@ module Flickrie
     end
   end
 end
-
-__END__
-
-{
-  ...
-  "video"=>
-   {"ready"=>1,
-    "failed"=>0,
-    "pending"=>0,
-    "duration"=>"34",
-    "width"=>"480",
-    "height"=>"360"}
-}

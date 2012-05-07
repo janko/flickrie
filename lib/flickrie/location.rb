@@ -28,39 +28,3 @@ module Flickrie
     end
   end
 end
-
-__END__
-
-{
-  "latitude" => 37.792608,
-  "longitude" => -122.402672,
-  "accuracy" => "14",
-  "context" => "0",
-  "neighbourhood" => {
-    "_content" => "Financial District",
-    "place_id" => "GddgqTpTUb8LgT93hw",
-    "woeid" => "23512022"
-  },
-  "locality" => {
-    "_content" => "San Francisco",
-    "place_id" => "7.MJR8tTVrIO1EgB",
-    "woeid" => "2487956"
-  },
-  "county" => {
-    "_content" => "San Francisco",
-    "place_id" => ".7sOmlRQUL9nK.kMzA",
-    "woeid" => "12587707"
-  },
-  "region" => {
-    "_content" => "California",
-    "place_id" => "NsbUWfBTUb4mbyVu",
-    "woeid" => "2347563"
-  },
-  "country" => {
-    "_content" => "United States",
-    "place_id" => "nz.gsghTUb4c2WAecA",
-    "woeid" => "23424977"
-  },
-  "place_id" =>"GddgqTpTUb8LgT93hw",
-  "woeid" =>"23512022"
-}
