@@ -1,5 +1,15 @@
 # Flickrie changelog
 
+## Version 0.6.0
+
+- you can access the raw response hash with square brackets, if you notice I
+  didn't cover some part of it with methods. So, for example, `photo['id']`
+  will access the photo's ID.
+
+- when `Flickrie::Error` is raises, you can now access its `#code`
+  attribute. This makes better error handling, because error code
+  is (supposed to be) unique, unlike the error message
+
 ## Version 0.5.2
 
 - the gem now also works with Faraday 0.7 (I apologize for not
