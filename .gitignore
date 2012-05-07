@@ -3,3 +3,4 @@ Gemfile.lock
 pkg/
 credentials.rb
 doc/
+.DS_Store
