@@ -18,3 +18,8 @@ namespace :test do
         end
       end
 end
+
+task :rdoc do
+  system "rm -rf doc/"
+  system "rdoc lib/"
+end
