@@ -14,6 +14,7 @@ module Flickrie
       end
     end
 
+    # :doc:
     attr_accessor_with_client_reset :api_key, :shared_secret,
       :timeout, :open_timeout, :access_token, :access_secret
 
