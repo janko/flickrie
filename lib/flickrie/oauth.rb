@@ -6,6 +6,7 @@ module Flickrie
     URL = 'http://www.flickr.com/services/oauth'.freeze
     NO_CALLBACK = 'oob'.freeze
 
+    # :nodoc:
     def self.new_connection(additional_oauth_params = {})
       oauth_params = {
         :consumer_key => Flickrie.api_key,
@@ -22,7 +23,7 @@ module Flickrie
       end
     end
 
-    class StatusCheck < Faraday::Response::Middleware
+    class StatusCheck < Faraday::Response::Middleware # :nodoc:
       def on_complete(env)
         if env[:status] != 200
           raise Error, env[:body]['oauth_problem'].gsub('_', ' ').capitalize
@@ -33,13 +34,14 @@ module Flickrie
     class Error < StandardError
     end
 
-    class ParseResponseParams < FaradayMiddleware::ResponseMiddleware
+    class ParseResponseParams < FaradayMiddleware::ResponseMiddleware # :nodoc:
       define_parser do |body|
         params_array = body.split('&').map { |param| param.split('=') }
         Hash[*params_array.flatten]
       end
     end
 
+    # :doc:
     def self.get_request_token(options = {})
       connection = new_connection
 
@@ -62,7 +64,7 @@ module Flickrie
       AccessToken.from_response(response.body)
     end
 
-    module Token
+    module Token # :nodoc:
       def from_response(body)
         new(body['oauth_token'], body['oauth_token_secret'])
       end

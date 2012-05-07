@@ -29,6 +29,7 @@ module Flickrie
       end
     end
 
+    #--
     # people
     def find_user_by_email(email)
       response = client.find_user_by_email(email)
@@ -58,6 +59,7 @@ module Flickrie
         select { |media| media.is_a?(Video) }
     end
 
+    #--
     # photos
     def add_media_tags(media_id, tags)
       client.add_media_tags(media_id, tags)
@@ -160,6 +162,7 @@ module Flickrie
       search_media(search_params.merge(:media => 'videos'))
     end
 
+    #--
     # photos.upload
     def check_upload_tickets(tickets)
       tickets = tickets.join(',') if tickets.respond_to?(:join)
@@ -168,12 +171,14 @@ module Flickrie
         map { |info| Media::Ticket.new(info) }
     end
 
+    #--
     # licenses
     def get_licenses
       response = client.get_licenses
       License.from_hash(response.body['licenses']['license'])
     end
 
+    #--
     # photosets
     def get_set_info(set_id)
       response = client.get_set_info(set_id)

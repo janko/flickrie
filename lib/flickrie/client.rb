@@ -2,6 +2,7 @@ require 'faraday_middleware'
 
 module Flickrie
   class << self
+    # :nodoc:
     def self.attr_accessor_with_client_reset(*attributes)
       attr_reader *attributes
 
@@ -62,7 +63,7 @@ module Flickrie
     end
   end
 
-  class StatusCheck < Faraday::Response::Middleware
+  class StatusCheck < Faraday::Response::Middleware # :nodoc:
     def on_complete(env)
       if env[:body]['stat'] != 'ok'
         raise Error.new(env[:body]['message'], env[:body]['code']),
@@ -71,7 +72,7 @@ module Flickrie
     end
   end
 
-  class OAuthStatusCheck < Faraday::Response::Middleware
+  class OAuthStatusCheck < Faraday::Response::Middleware # :nodoc:
     def on_complete(env)
       if env[:status] != 200
         message = env[:body][/(?<=oauth_problem=)[^&]+/]
@@ -95,6 +96,7 @@ module Flickrie
       end
     end
 
+    #--
     # people
     def find_user_by_email(email)
       get 'flickr.people.findByEmail', :find_email => email
@@ -113,6 +115,7 @@ module Flickrie
       get 'flickr.people.getPublicPhotos', ensure_media(params)
     end
 
+    #--
     # photos
     def add_media_tags(media_id, tags)
       post 'flickr.photos.addTags', :photo_id => media_id, :tags => tags
@@ -159,16 +162,19 @@ module Flickrie
       get 'flickr.photos.search', ensure_media(params)
     end
 
+    #--
     # photos.upload
     def check_upload_tickets(tickets)
       get 'flickr.photos.upload.checkTickets', :tickets => tickets
     end
 
-    # licenses
+    #--
+    # photos.licenses
     def get_licenses
       get 'flickr.photos.licenses.getInfo'
     end
 
+    #--
     # photosets
     def get_set_info(set_id)
       get 'flickr.photosets.getInfo', :photoset_id => set_id

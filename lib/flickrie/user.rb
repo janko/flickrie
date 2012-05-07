@@ -58,7 +58,6 @@ module Flickrie
       info ||= Flickrie.client.get_user_info(nsid).body['person']
       @info.update(info)
 
-      # Fixes
       %w[username realname location description profileurl
          mobileurl photosurl].each do |attribute|
         @info[attribute] = @info[attribute]['_content']

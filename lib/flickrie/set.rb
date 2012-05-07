@@ -25,6 +25,7 @@ module Flickrie
 
     def can_comment?; @info['can_comment'].to_i == 1 if @info['can_comment'] end
 
+    #--
     # TODO: Figure out what this is
     def needs_interstitial?; @info['needs_interstitial'].to_i == 1 end
     def visibility_can_see_set?; @info['visibility_can_see_set'].to_i == 1 end

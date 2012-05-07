@@ -1,21 +1,13 @@
 module Flickrie
   class Location
-    %w[latitude longitude accuracy context place_id woeid].each do |attr_name|
-      define_method(attr_name) do
-        @info[attr_name]
-      end
-    end
+    attr_reader :latitude, :longitude, :accuracy, :context, :place_id,
+      :woeid
 
-    %w[neighbourhood locality county region country].each do |place_name|
-      define_method(place_name) do
-        if @info[place_name]
-          Struct.new(:name, :place_id, :woeid).new \
-            @info[place_name]['_content'],
-            @info[place_name]['place_id'],
-            @info[place_name]['woeid']
-        end
-      end
-    end
+    def neighbourhood; place('neighbourhood') end
+    def locality;      place('locality')      end
+    def county;        place('county')        end
+    def region;        place('region')        end
+    def country;       place('country')       end
 
     def [](key)
       @info[key]
@@ -25,6 +17,19 @@ module Flickrie
 
     def initialize(info = {})
       @info = info
+
+      %w[latitude longitude accuracy context place_id woeid].each do |attribute|
+        instance_variable_set "@#{attribute}", @info[attribute]
+      end
+    end
+
+    def place(place_name)
+      if @info[place_name]
+        Struct.new(:name, :place_id, :woeid).new \
+          @info[place_name]['_content'],
+          @info[place_name]['place_id'],
+          @info[place_name]['woeid']
+      end
     end
   end
 end

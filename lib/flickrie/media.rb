@@ -129,7 +129,6 @@ module Flickrie
     def get_info(info = nil)
       info ||= Flickrie.client.get_media_info(id).body['photo']
 
-      # Fixes
       info['title'] = info['title']['_content']
       info['description'] = info['description']['_content']
       info['comments_count'] = info.delete('comments')['_content']
@@ -155,7 +154,7 @@ module Flickrie
       @info['usage'] ||= {}
     end
 
-    module ClassMethods
+    module ClassMethods # :nodoc:
       def from_set(hash)
         hash['photo'].map do |info|
           info['owner'] = {

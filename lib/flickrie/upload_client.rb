@@ -28,7 +28,7 @@ module Flickrie
     end
   end
 
-  class UploadStatusCheck < Faraday::Response::Middleware
+  class UploadStatusCheck < Faraday::Response::Middleware # :nodoc:
     def on_complete(env)
       if env[:body]['rsp']['stat'] != 'ok'
         error = env[:body]['rsp']['err']
