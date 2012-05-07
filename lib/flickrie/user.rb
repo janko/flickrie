@@ -50,6 +50,10 @@ module Flickrie
       @info['ispro'].to_i == 1 if @info['ispro']
     end
 
+    def [](key)
+      @info[key]
+    end
+
     def get_info(info = nil)
       info ||= Flickrie.client.get_user_info(nsid).body['person']
       @info.update(info)

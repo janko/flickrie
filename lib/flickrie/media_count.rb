@@ -20,6 +20,10 @@ module Flickrie
       dates.first..dates.last
     end
 
+    def [](key)
+      @info[key]
+    end
+
     def initialize(info, params)
       @info = info
       @dates_kind = (params[:dates].nil? ? "mysql timestamp" : "unix timestamp")

@@ -14,6 +14,10 @@ module Flickrie
         Time.at(@info['imported'].to_i)
       end
 
+      def [](key)
+        @info[key]
+      end
+
       def initialize(info)
         @info = info
       end

@@ -8,6 +8,10 @@ module Flickrie
 
       def initialize(*visibility)
         @visibility = visibility.flatten
+      def [](key)
+        @info[key]
+      end
+
       end
     end
   end

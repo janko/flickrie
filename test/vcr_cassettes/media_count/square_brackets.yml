@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.flickr.com/services/rest?api_key=1e7490875accc5b9c1ca91a2f27b5604&format=json&method=flickr.photos.getCounts&nojsoncallback=1&taken_dates=2012-03-01%2000:00:00%20UTC,2012-05-05%2000:00:00%20UTC
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="58b58b5e555447011efa459f3903c8a7",
+        oauth_signature="k6jIg5lJvzQC%2Fu%2FFVDQPZ3ar%2F%2FU%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336382736", oauth_token="72157629879773565-6da848f99ba7038a",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        TW9uLCAwNyBNYXkgMjAxMiAwOToyNTozNyBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTQyLmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MTAw
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWKsjIL8lPzi/NKylWsqpG4ipZRVcrQVlKhko6CkppRfm5
+        KYklqUC+kYGhka6Bsa6BoYKBgRUYgVSU5KPImwIRQr42thaopLgkEWRgfrZS
+        LQBsrblFfQAAAA==
+    http_version: 
+  recorded_at: Mon, 07 May 2012 09:25:37 GMT
+recorded_with: VCR 2.1.1

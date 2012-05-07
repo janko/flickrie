@@ -13,6 +13,13 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_get_user_info
+  def test_square_brackets
+    VCR.use_cassette 'user/square_brackets' do
+      user = Flickrie.get_user_info(@user_nsid)
+      assert_equal user['nsid'], user.nsid
+    end
+  end
+
     VCR.use_cassette 'user/get_info' do
       [Flickrie.get_user_info(@user_nsid),
        Flickrie::User.public_new('nsid' => @user_nsid).get_info].

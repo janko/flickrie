@@ -10,6 +10,10 @@ module Flickrie
         raise Error, "The information about '#{key}' doesn't exist"
       end
 
+      def [](key)
+        @info[key]
+      end
+
       def initialize(info)
         @info = info
       end

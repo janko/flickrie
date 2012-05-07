@@ -21,6 +21,13 @@ class PhotoTest < Test::Unit::TestCase
   end
 
   def test_photos_from_set
+  def test_square_brackets
+    VCR.use_cassette 'photo/square_brackets' do
+      photo = Flickrie.get_photo_info(@photo_id)
+      assert_equal 1, photo['usage']['candownload'].to_i
+    end
+  end
+
     VCR.use_cassette 'photo/from_set' do
       photo = Flickrie.photos_from_set(@set_id, :extras => @all_extras).
         find { |photo| photo.id.to_i == @photo_id }

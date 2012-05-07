@@ -1,0 +1,85 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.flickr.com/services/rest?api_key=1e7490875accc5b9c1ca91a2f27b5604&format=json&method=flickr.photos.getInfo&nojsoncallback=1&photo_id=6946979188
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - OAuth oauth_consumer_key="1e7490875accc5b9c1ca91a2f27b5604", oauth_nonce="d9bad88aea26d2c16f17b6a6be0e962c",
+        oauth_signature="az43SKBOmcSszAN4O95sxkpeuik%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1336382741", oauth_token="72157629879773565-6da848f99ba7038a",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        TW9uLCAwNyBNYXkgMjAxMiAwOToyNTo0MSBHTVQ=
+      !binary "UDNw":
+      - !binary |-
+        cG9saWN5cmVmPSJodHRwOi8vaW5mby55YWhvby5jb20vdzNjL3AzcC54bWwi
+        LCBDUD0iQ0FPIERTUCBDT1IgQ1VSIEFETSBERVYgVEFJIFBTQSBQU0QgSVZB
+        aSBJVkRpIENPTmkgVEVMbyBPVFBpIE9VUiBERUxpIFNBTWkgT1RSaSBVTlJp
+        IFBVQmkgSU5EIFBIWSBPTkwgVU5JIFBVUiBGSU4gQ09NIE5BViBJTlQgREVN
+        IENOVCBTVEEgUE9MIEhFQSBQUkUgTE9DIEdPViI=
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZQ==
+      !binary "WC1TZXJ2ZWQtQnk=":
+      - !binary |-
+        d3d3MTkxLmZsaWNrci5tdWQueWFob28uY29t
+      !binary "VmFyeQ==":
+      - !binary |-
+        QWNjZXB0LUVuY29kaW5n
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        ODQy
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA5VVXW/TPBT+K5WvWWs7H05yhRgCBgIJtO2VRlF1mniNaWJH
+        trNSTfvvr+2kaTfGBFfxOT5+znM+c4+6WlmFinskKlSgNI/TnOUky9CrGTK8
+        1Nw6NU3W6zjOEroe1PqOa6dmOM694hZ0i4rMnSqwvO8aBRX3cCSK4iyiLE68
+        mTC3cKe0sBwV2MmNKLk0TkA4wMItt/tVw+94c9BpZcEKJVGR+xdqJ73jeyTN
+        QJeRiEQJff0Fx968d9QktB7yI8itmn0GrWoplj0mmAVADs3LFo0qR5foBjaa
+        r1/NzrVyKggxlEpO8SdxGh+UQw7SBydaYRvuWa6c3nLpM3jx+f0KszxF3qDi
+        ptSiG7w8MrvkxgaTO2HEWjTC7kNtTNevXbpQQYY8asFlNWTRZ7UVjbPDD2MF
+        jH/TKWOfKYKFLfexUUzIGY7OKJ4RVmBc4OP1RoPsG9DB+1CIBoztOw8+IKZR
+        RlkUBa4d160wxkUzOHZiqdo2RBSN91BVLbeACjpEx3fGk/DQvBIWjrGWIKfX
+        PlonT49JcBdS8Q+vQl56Axs+Wlauj3yPTqbrRm0modPiBMXUoPmIMXowT4pG
+        QhakGhPvD6j4Pk4UoyRhKc3jjGUxzdMwWNDbWulnGni4eLlBf7mriKT+OJVn
+        57sxzGLtT0H3W1v9GIqluqE7azAHIURnYRP4u++RfspwnlMSnR03w1mWpyl9
+        MQwNnlDTb+EJkYOqhbIWkq+CLzwwOw7evWs3N0R95ajFyTzDjCZZsJCbUU2S
+        eZ6yJM89jbLsNZQ+GYSgUCfn75edetcBH/rkhMsw3d6ga6DkqxAvxj/ji31z
+        c81M+Z/YhtwqHq6yhBCaoaERevl3eBFOqw+6/nrNVPqznd9cfT2FJAmmlCYs
+        gGq++X0hvNdQzZ5F/mjI26t5d3mluzfnF5/q690pMsWYYcLwka5+yvdkq53A
+        vuvlt/OL5PJqnUJq1OX+MWwU0ziLx7n/17RtXLu5XWCeW2meF5R22ml/3nC9
+        bgKC+4Y+tfvOT0v4kXV+yB+3XG1tVywXy8Vut5vfOo9bPXeDvFyEB2a5OG1e
+        J019vlyMI9O6XQMHDyEQ4/5KTqG26OF/4fwfTEIHAAA=
+    http_version: 
+  recorded_at: Mon, 07 May 2012 09:25:41 GMT
+recorded_with: VCR 2.1.1

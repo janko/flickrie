@@ -14,6 +14,13 @@ class SetTest < Test::Unit::TestCase
   end
 
   def test_get_set_info
+  def test_square_brackets
+    VCR.use_cassette 'set/square_brackets' do
+      set = Flickrie.get_set_info(@set_id)
+      assert_equal @set_id, set['id'].to_i
+    end
+  end
+
     VCR.use_cassette 'set/get_info' do
       [Flickrie.get_set_info(@set_id),
        Flickrie::Set.public_new('id' => @set_id.to_s).get_info].

@@ -17,6 +17,10 @@ module Flickrie
       end
     end
 
+    def [](key)
+      @info[key]
+    end
+
     private
 
     def initialize(info = {})

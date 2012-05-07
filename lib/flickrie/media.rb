@@ -122,6 +122,10 @@ module Flickrie
       @info['notes']['note'].map { |hash| Note.new(hash) } if @info['notes']
     end
 
+    def [](key)
+      @info[key]
+    end
+
     def get_info(info = nil)
       info ||= Flickrie.client.get_media_info(id).body['photo']
 

@@ -13,6 +13,10 @@ module Flickrie
         User.new('nsid' => @info['author']) if @info['author']
       end
 
+      def [](key)
+        @info[key]
+      end
+
       def initialize(info)
         @info = info
       end

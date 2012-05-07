@@ -21,6 +21,13 @@ class VideoTest < Test::Unit::TestCase
   end
 
   def test_get_video_info
+  def test_square_brackets
+    VCR.use_cassette 'video/square_brackets' do
+      video = Flickrie.get_video_info(@video_id)
+      assert_equal 1, video['usage']['candownload'].to_i
+    end
+  end
+
     VCR.use_cassette 'video/get_info' do
       video = Flickrie.get_video_info(@video_id)
 

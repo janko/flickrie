@@ -34,6 +34,10 @@ module Flickrie
 
     def url; "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}" end
 
+    def [](key)
+      @info[key]
+    end
+
     def get_info(info = nil)
       info ||= Flickrie.client.get_set_info(id).body['photoset']
       info['title'] = info['title']['_content']
