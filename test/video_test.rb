@@ -49,9 +49,9 @@ class VideoTest < Test::Unit::TestCase
       [Flickrie.get_video_sizes(@video_id),
        Flickrie::Video.public_new('id' => @video_id.to_s).get_sizes].
         each do |video|
-          assert_equal true, video.usage.can_download?
-          assert_equal true, video.usage.can_blog?
-          assert_equal true, video.usage.can_print?
+          assert_equal true, video.can_download?
+          assert_equal true, video.can_blog?
+          assert_equal true, video.can_print?
 
           refute video.source_url.empty?
           refute video.download_url.empty?
