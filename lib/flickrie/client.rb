@@ -54,12 +54,19 @@ module Flickrie
   end
 
   class Error < StandardError
+    attr_reader :code
+
+    def initialize(message, code = nil)
+      super(message)
+      @code = code.to_i
+    end
   end
 
   class StatusCheck < Faraday::Response::Middleware
     def on_complete(env)
       if env[:body]['stat'] != 'ok'
-        raise Error, env[:body]['message']
+        raise Error.new(env[:body]['message'], env[:body]['code']),
+          env[:body]['message']
       end
     end
   end

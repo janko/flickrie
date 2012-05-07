@@ -31,7 +31,9 @@ module Flickrie
   class UploadStatusCheck < Faraday::Response::Middleware
     def on_complete(env)
       if env[:body]['rsp']['stat'] != 'ok'
-        raise Error, env[:body]['rsp']['err']['msg']
+        error = env[:body]['rsp']['err']
+        raise Error.new(error['msg'], error['code']),
+          error['msg']
       end
     end
   end
