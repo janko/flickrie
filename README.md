@@ -114,8 +114,12 @@ photo.width      # => 320
 ```
 
 You can see the full list of available methods and attributes in the
-[documentation](http://janko-m.github.com/flickrie/doc/Flickrie.html). Also,
-be sure to check the [wiki](https://github.com/janko-m/flickrie/wiki) for some additional info and tips.
+[documentation](http://janko-m.github.com/flickrie/doc/Flickrie.html).
+For photos (and videos) have a look at the `Flickrie::Media` module,
+because it's included into `Flickrie::Photo` and `Flickrie::Video`, and most
+of the attributes are there.
+
+Also, be sure to check the [wiki](https://github.com/janko-m/flickrie/wiki) for some additional info and tips.
 
 ## Authentication
 
