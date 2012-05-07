@@ -1,5 +1,3 @@
-require 'test_helper'
-
 class LocationTest < Test::Unit::TestCase
   def setup
     @media_id = 6946979188

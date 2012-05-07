@@ -5,7 +5,7 @@ CURRENT_DIR = File.expand_path(File.dirname(__FILE__))
 
 task :test do
   Dir["#{CURRENT_DIR}/test/**/*_test.rb"].each do |test_file|
-    system "bundle exec turn -Itest #{test_file}"
+    system "bundle exec turn -Itest --require=test_helper #{test_file}"
   end
 end
 
@@ -14,7 +14,7 @@ namespace :test do
     map { |t| [File.basename(t).chomp('_test.rb').to_sym, t] }.
       each do |test_name, test_file|
         task(test_name) do
-          system "bundle exec turn -Itest #{test_file}"
+          system "bundle exec turn -Itest --require=test_helper #{test_file}"
         end
       end
 end

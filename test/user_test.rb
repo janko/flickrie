@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'test_helper'
 
 Flickrie::User.instance_eval do
   def public_new(*args)

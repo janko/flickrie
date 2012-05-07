@@ -1,5 +1,3 @@
-require 'test_helper'
-
 class OAuthTest < Test::Unit::TestCase
   def test_tokens
     VCR.use_cassette 'oauth/tokens' do

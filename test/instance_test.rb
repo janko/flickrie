@@ -1,5 +1,3 @@
-require 'test_helper'
-
 class InstanceTest < Test::Unit::TestCase
   def test_calling_api_methods
     VCR.use_cassette 'instance/calling_api_methods' do

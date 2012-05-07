@@ -1,5 +1,3 @@
-require 'test_helper'
-
 class MediaCountTest < Test::Unit::TestCase
   def test_get
     VCR.use_cassette 'media_count/get' do
