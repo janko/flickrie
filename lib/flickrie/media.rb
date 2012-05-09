@@ -186,8 +186,10 @@ module Flickrie
       end
 
       def from_user(hash)
-        hash['owner'] = hash['photo'].first['owner']
-        hash['ownername'] = hash['photo'].first['ownername']
+        if hash['photo'].first
+          hash['owner'] = hash['photo'].first['owner']
+          hash['ownername'] = hash['photo'].first['ownername']
+        end
         hash['photo'].each do |info|
           info['visibility'] = {
             'ispublic' => info.delete('ispublic'),
