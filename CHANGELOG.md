@@ -3,8 +3,8 @@
 ## Version 0.6.0
 
 - you can access the raw response hash with square brackets, if you notice I
-  didn't cover some part of it with methods. So, for example, `photo['id']`
-  will access the photo's ID.
+  didn't cover some part of it with methods. So, for example, after calling
+  `Flickrie.get_photo_info`, you can get the photo ID by calling `photo['id']`
 
 - when `Flickrie::Error` is raised, you can now access its `#code`
   attribute. This makes better error handling, because error code
