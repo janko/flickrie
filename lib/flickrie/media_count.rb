@@ -28,5 +28,15 @@ module Flickrie
       @info = info
       @dates_kind = (params[:dates].nil? ? "mysql timestamp" : "unix timestamp")
     end
+
+    def self.ensure_utc(params)
+      params.dup.tap do |hash|
+        if hash[:taken_dates].is_a?(String)
+          hash[:taken_dates] = hash[:taken_dates].split(',').
+            map { |date| DateTime.parse(date) }.
+            map(&:to_time).map(&:getutc).join(',')
+        end
+      end
+    end
   end
 end
