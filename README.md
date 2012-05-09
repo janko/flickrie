@@ -94,23 +94,26 @@ photo.get_info
 photo.description # => "In this photo Peter said something really funny..."
 ```
 
-You'll also probably want to display these photos in your app.
+You'll also probably want to display these photos in your app. There are
+some neat methods available for you to help you out with this.
 
 ```ruby
 photo = Flickrie.get_photo_sizes(8232348)
 # or "photo.get_sizes" on an existing photo
 
-photo.medium!(800)
-photo.size       # => "Medium 800"
-photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_c.jpg"
-photo.width      # => 600
-photo.height     # => 800
+photo.medium!(500)
+photo.size       # => "Medium 500"
+photo.source_url # => "http://farm8.staticflickr.com/7090/7093101501_9337f28800.jpg"
+photo.width      # => 375
+photo.height     # => 500
 
-photo.small!(320)
-photo.size       # => "Small 320"
-photo.source_url # => "http://farm8.staticflickr.com/7049/6946979188_25bb44852b_n.jpg"
-photo.width      # => 240
-photo.width      # => 320
+photo.available_sizes # => ["Square 75", "Thumbnail", "Square 150", "Small 240", "Small 320", "Medium 500"]
+```
+
+So, in your ERB template you could do something like this (in Rails):
+
+```erb
+<%= image_tag photo.source_url, :size => "#{photo.width}x#{photo.height}" %>
 ```
 
 You can see the full list of available methods and attributes in the
