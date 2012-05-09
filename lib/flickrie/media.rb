@@ -112,6 +112,13 @@ module Flickrie
       self
     end
 
+    def get_favorites(params = {}, info = nil)
+      info ||= Flickrie.client.get_media_favorites(id, params).body['photo']
+      @info.update(info)
+
+      self
+    end
+
     def initialize(info = {})
       @info = info
     end

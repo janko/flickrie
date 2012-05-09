@@ -115,7 +115,7 @@
 - ~~flickr.photos.getContext~~
 - ~~flickr.photos.getCounts~~
 - ~~flickr.photos.getExif~~
-- flickr.photos.getFavorites
+- ~~flickr.photos.getFavorites~~
 - ~~flickr.photos.getInfo~~
 - flickr.photos.getNotInSet
 - flickr.photos.getPerms

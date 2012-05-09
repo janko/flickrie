@@ -154,6 +154,11 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def get_media_favorites(media_id, params = {})
+      get 'flickr.photos.getFavorites',
+        {:photo_id => media_id}.merge(params)
+    end
+
     def get_media_info(media_id, params = {})
       get 'flickr.photos.getInfo',
         {:photo_id => media_id}.merge(params)

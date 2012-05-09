@@ -124,10 +124,20 @@ module Flickrie
       Video.from_exif(response.body['photo'])
     end
 
+    def get_photo_favorites(photo_id, params = {})
+      response = client.get_media_favorites(photo_id, params)
+      Photo.new(response.body['photo'])
+    end
+    def get_video_favorites(video_id, params = {})
+      response = client.get_media_favorites(video_id, params)
+      Video.new(response.body['photo'])
+    end
+
     def get_media_info(media_id, params = {})
       response = client.get_media_info(media_id, params)
       Media.from_info(response.body['photo'])
     end
+
     alias get_photo_info get_media_info
     alias get_video_info get_media_info
 

@@ -94,6 +94,16 @@ class VideoTest < Test::Unit::TestCase
     end
   end
 
+  def test_get_favorites
+    VCR.use_cassette 'video/get_favorites' do
+      [Flickrie.get_video_favorites(6933413950),
+       Flickrie::Video.public_new('id' => 6933413950).get_favorites].
+        each do |video|
+          assert_equal @user_nsid, video.favorites.first.nsid
+          assert_instance_of Time, video.favorites.first.favorited_at
+        end
+    end
+  end
 
   def test_other_api_calls
     VCR.use_cassette 'video/other_api_calls' do

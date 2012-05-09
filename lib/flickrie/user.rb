@@ -31,11 +31,13 @@ module Flickrie
 
     def favorited_at() Time.at(Integer(@info['favedate'])) rescue nil end
 
-    def media_count
-      if @info['photos'] and @info['photos']['count']
-        @info['photos']['count'].to_i
-      end
+    def favorited_at
+      Time.at(@info['favedate'].to_i)
     end
+
+    def media_count() Integer(@info['photos']['count']) rescue nil end
+    alias photos_count media_count
+    alias videos_count media_count
 
     def public_photos() Flickrie.public_photos_from_user(nsid) end
 

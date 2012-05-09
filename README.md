@@ -237,6 +237,7 @@ basis of this gem.
 "flickr.photos.getContext"              -> Flickrie.get_photo_context
 "flickr.photos.getCounts"               -> Flickrie.get_photos_counts
 "flickr.photos.getExif"                 -> Flickrie.get_photo_exif
+"flickr.photos.getFavorites"            -> Flickrie.get_photo_favorites
 "flickr.photos.getInfo"                 -> Flickrie.get_photo_info
 "flickr.photos.getSizes"                -> Flickrie.get_photo_sizes
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
