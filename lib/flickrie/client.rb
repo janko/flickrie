@@ -99,31 +99,36 @@ module Flickrie
 
     #--
     # people
-    def find_user_by_email(email)
-      get 'flickr.people.findByEmail', :find_email => email
+    def find_user_by_email(email, params = {})
+      get 'flickr.people.findByEmail',
+        {:find_email => email}.merge(params)
     end
 
-    def find_user_by_username(username)
-      get 'flickr.people.findByUsername', :username => username
+    def find_user_by_username(username, params = {})
+      get 'flickr.people.findByUsername',
+        {:username => username}.merge(params)
     end
 
-    def get_user_info(user_nsid)
-      get 'flickr.people.getInfo', :user_id => user_nsid
+    def get_user_info(user_nsid, params = {})
+      get 'flickr.people.getInfo',
+        {:user_id => user_nsid}.merge(params)
     end
 
     def public_media_from_user(user_nsid, params = {})
-      params = {:user_id => user_nsid}.merge(params)
-      get 'flickr.people.getPublicPhotos', ensure_media(params)
+      get 'flickr.people.getPublicPhotos',
+        ensure_media({:user_id => user_nsid}.merge(params))
     end
 
     #--
     # photos
-    def add_media_tags(media_id, tags)
-      post 'flickr.photos.addTags', :photo_id => media_id, :tags => tags
+    def add_media_tags(media_id, tags, params = {})
+      post 'flickr.photos.addTags',
+        {:photo_id => media_id, :tags => tags}.merge(params)
     end
 
-    def delete_media(media_id)
-      post 'flickr.photos.delete', :photo_id => media_id
+    def delete_media(media_id, params = {})
+      post 'flickr.photos.delete',
+        {:photo_id => media_id}.merge(params)
     end
 
     def media_from_contacts(params = {})
@@ -131,12 +136,13 @@ module Flickrie
     end
 
     def public_media_from_user_contacts(user_nsid, params = {})
-      params = {:user_id => user_nsid}.merge(params)
-      get 'flickr.photos.getContactsPublicPhotos', ensure_media(params)
+      get 'flickr.photos.getContactsPublicPhotos',
+        ensure_media({:user_id => user_nsid}.merge(params))
     end
 
-    def get_media_context(media_id)
-      get 'flickr.photos.getContext', :photo_id => media_id
+    def get_media_context(media_id, params = {})
+      get 'flickr.photos.getContext',
+        {:photo_id => media_id}.merge(params)
     end
 
     def get_media_counts(params = {})
@@ -144,19 +150,23 @@ module Flickrie
     end
 
     def get_media_exif(media_id, params = {})
-      get 'flickr.photos.getExif', {:photo_id => media_id}.merge(params)
+      get 'flickr.photos.getExif',
+        {:photo_id => media_id}.merge(params)
     end
 
-    def get_media_info(media_id)
-      get 'flickr.photos.getInfo', :photo_id => media_id
+    def get_media_info(media_id, params = {})
+      get 'flickr.photos.getInfo',
+        {:photo_id => media_id}.merge(params)
     end
 
-    def get_media_sizes(media_id)
-      get 'flickr.photos.getSizes', :photo_id => media_id
+    def get_media_sizes(media_id, params = {})
+      get 'flickr.photos.getSizes',
+        {:photo_id => media_id}.merge(params)
     end
 
-    def remove_media_tag(tag_id)
-      post 'flickr.photos.removeTag', :tag_id => tag_id
+    def remove_media_tag(tag_id, params = {})
+      post 'flickr.photos.removeTag',
+        {:tag_id => tag_id}.merge(params)
     end
 
     def search_media(params = {})
@@ -165,29 +175,32 @@ module Flickrie
 
     #--
     # photos.upload
-    def check_upload_tickets(tickets)
-      get 'flickr.photos.upload.checkTickets', :tickets => tickets
+    def check_upload_tickets(tickets, params = {})
+      get 'flickr.photos.upload.checkTickets',
+        {:tickets => tickets}.merge(params)
     end
 
     #--
     # photos.licenses
-    def get_licenses
-      get 'flickr.photos.licenses.getInfo'
+    def get_licenses(params = {})
+      get 'flickr.photos.licenses.getInfo', params
     end
 
     #--
     # photosets
-    def get_set_info(set_id)
-      get 'flickr.photosets.getInfo', :photoset_id => set_id
+    def get_set_info(set_id, params = {})
+      get 'flickr.photosets.getInfo',
+        {:photoset_id => set_id}.merge(params)
     end
 
-    def sets_from_user(user_nsid)
-      get 'flickr.photosets.getList', :user_id => user_nsid
+    def sets_from_user(user_nsid, params = {})
+      get 'flickr.photosets.getList',
+        {:user_id => user_nsid}.merge(params)
     end
 
     def media_from_set(set_id, params = {})
-      params = {:photoset_id => set_id}.merge(params)
-      get 'flickr.photosets.getPhotos', ensure_media(params)
+      get 'flickr.photosets.getPhotos',
+        ensure_media({:photoset_id => set_id}.merge(params))
     end
 
     private

@@ -32,18 +32,18 @@ module Flickrie
 
     #--
     # people
-    def find_user_by_email(email)
-      response = client.find_user_by_email(email)
+    def find_user_by_email(email, params = {})
+      response = client.find_user_by_email(email, params)
       User.from_find(response.body['user'])
     end
 
-    def find_user_by_username(username)
-      response = client.find_user_by_username(username)
+    def find_user_by_username(username, params = {})
+      response = client.find_user_by_username(username, params)
       User.from_find(response.body['user'])
     end
 
-    def get_user_info(user_nsid)
-      response = client.get_user_info(user_nsid)
+    def get_user_info(user_nsid, params = {})
+      response = client.get_user_info(user_nsid, params)
       User.from_info(response.body['person'])
     end
 
@@ -62,14 +62,14 @@ module Flickrie
 
     #--
     # photos
-    def add_media_tags(media_id, tags)
-      client.add_media_tags(media_id, tags)
+    def add_media_tags(media_id, tags, params = {})
+      client.add_media_tags(media_id, tags, params)
     end
     alias add_photo_tags add_media_tags
     alias add_video_tags add_media_tags
 
-    def delete_media(media_id)
-      client.delete_media(media_id)
+    def delete_media(media_id, params = {})
+      client.delete_media(media_id, params)
       media_id
     end
     alias delete_photo delete_media
@@ -99,8 +99,8 @@ module Flickrie
         select { |media| media.is_a?(Photo) }
     end
 
-    def get_media_context(media_id)
-      response = client.get_media_context(media_id)
+    def get_media_context(media_id, params = {})
+      response = client.get_media_context(media_id, params)
       Media.from_context(response.body)
     end
     alias get_photo_context get_media_context
@@ -117,31 +117,31 @@ module Flickrie
 
     def get_photo_exif(photo_id, params = {})
       response = client.get_media_exif(photo_id, params)
-      Photo.from_exif(response.body['photo'].merge('media' => 'photo'))
+      Photo.from_exif(response.body['photo'])
     end
     def get_video_exif(video_id, params = {})
       response = client.get_media_exif(video_id, params)
-      Video.from_exif(response.body['photo'].merge('media' => 'video'))
+      Video.from_exif(response.body['photo'])
     end
 
-    def get_media_info(media_id)
-      response = client.get_media_info(media_id)
+    def get_media_info(media_id, params = {})
+      response = client.get_media_info(media_id, params)
       Media.from_info(response.body['photo'])
     end
     alias get_photo_info get_media_info
     alias get_video_info get_media_info
 
-    def get_photo_sizes(photo_id)
-      response = client.get_media_sizes(photo_id)
+    def get_photo_sizes(photo_id, params = {})
+      response = client.get_media_sizes(photo_id, params)
       Photo.from_sizes(response.body['sizes'])
     end
-    def get_video_sizes(video_id)
-      response = client.get_media_sizes(video_id)
+    def get_video_sizes(video_id, params = {})
+      response = client.get_media_sizes(video_id, params)
       Video.from_sizes(response.body['sizes'])
     end
 
-    def remove_media_tag(tag_id)
-      client.remove_media_tag(tag_id)
+    def remove_media_tag(tag_id, params = {})
+      client.remove_media_tag(tag_id, params)
     end
     alias remove_photo_tag remove_media_tag
     alias remove_video_tag remove_media_tag
@@ -159,29 +159,29 @@ module Flickrie
 
     #--
     # photos.upload
-    def check_upload_tickets(tickets)
+    def check_upload_tickets(tickets, params = {})
       tickets = tickets.join(',') if tickets.respond_to?(:join)
-      response = client.check_upload_tickets(tickets)
+      response = client.check_upload_tickets(tickets, params)
       response.body['uploader']['ticket'].
         map { |info| Ticket.new(info) }
     end
 
     #--
     # licenses
-    def get_licenses
-      response = client.get_licenses
+    def get_licenses(params = {})
+      response = client.get_licenses(params)
       License.from_hash(response.body['licenses']['license'])
     end
 
     #--
     # photosets
-    def get_set_info(set_id)
-      response = client.get_set_info(set_id)
+    def get_set_info(set_id, params = {})
+      response = client.get_set_info(set_id, params)
       Set.from_info(response.body['photoset'])
     end
 
-    def sets_from_user(user_nsid)
-      response = client.sets_from_user(user_nsid)
+    def sets_from_user(user_nsid, params = {})
+      response = client.sets_from_user(user_nsid, params)
       Set.from_user(response.body['photosets']['photoset'], user_nsid)
     end
 
