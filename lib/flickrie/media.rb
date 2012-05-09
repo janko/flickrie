@@ -1,7 +1,6 @@
 require 'flickrie/media/visibility'
 require 'flickrie/media/note'
 require 'flickrie/media/tag'
-require 'flickrie/media/ticket'
 require 'flickrie/media/exif'
 require 'flickrie/location'
 require 'date'

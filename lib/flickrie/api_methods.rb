@@ -8,6 +8,7 @@ require 'flickrie/photo'
 require 'flickrie/video'
 require 'flickrie/set'
 require 'flickrie/media_count'
+require 'flickrie/ticket'
 
 module Flickrie
   module ApiMethods
@@ -168,7 +169,7 @@ module Flickrie
       tickets = tickets.join(',') if tickets.respond_to?(:join)
       response = client.check_upload_tickets(tickets)
       response.body['uploader']['ticket'].
-        map { |info| Media::Ticket.new(info) }
+        map { |info| Ticket.new(info) }
     end
 
     #--
