@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 0.6.1
+
+- `Flickrie::Media::Ticket` is now called just `Flickrie::Ticket`
+
 ## Version 0.6.0
 
 - you can access the raw response hash with square brackets, if you notice I
