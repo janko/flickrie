@@ -88,8 +88,8 @@ class VideoTest < Test::Unit::TestCase
       [Flickrie.get_video_exif(@video_id),
        Flickrie::Video.public_new('id' => @video_id).get_exif].
         each do |video|
-          assert_nil video.exif
           assert_equal "", video.camera
+          assert_nil video.exif.get("Model")
         end
     end
   end

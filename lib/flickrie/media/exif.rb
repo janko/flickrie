@@ -7,7 +7,7 @@ module Flickrie
         data['_content']
 
       rescue NoMethodError
-        raise Error, "The information about '#{key}' doesn't exist"
+        nil
       end
 
       def [](key)

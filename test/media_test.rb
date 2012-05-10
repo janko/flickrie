@@ -15,8 +15,8 @@ class MediaTest < Test::Unit::TestCase
     # license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o
     @all_extras = %w[license date_upload date_taken owner_name
       icon_server original_format last_update geo tags machine_tags
-      o_dims views media path_alias
-      url_sq url_q url_t url_s url_n url_m url_z url_c url_l url_o]
+      o_dims views media path_alias url_sq url_q url_t url_s url_n
+      url_m url_z url_c url_l url_o].join(',')
   end
 
   def test_get_info

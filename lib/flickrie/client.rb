@@ -206,8 +206,9 @@ module Flickrie
     private
 
     def ensure_media(params)
-      params[:extras] = [params[:extras], 'media'].compact.join(',')
-      params
+      params.dup.tap do |dup_params|
+        dup_params[:extras] = [dup_params[:extras], 'media'].compact.join(',')
+      end
     end
   end
 end
