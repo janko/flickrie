@@ -5,13 +5,9 @@ module Flickrie
     alias photo_id media_id
     alias video_id media_id
 
-    def complete?
-      @info['complete'].to_i == 1
-    end
+    def complete?() Integer(@info['complete']) == 1 rescue nil end
 
-    def imported_at
-      Time.at(@info['imported'].to_i)
-    end
+    def imported_at() Time.at(Integer(@info['imported'])) rescue nil end
 
     def [](key)
       @info[key]

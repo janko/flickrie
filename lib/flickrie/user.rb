@@ -26,17 +26,10 @@ module Flickrie
       end
     end
 
-    def first_taken
-      if @info['photos'] and @info['photos']['firstdatetaken']
-        DateTime.parse(@info['photos']['firstdatetaken']).to_time
-      end
-    end
+    def first_taken() DateTime.parse(@info['photos']['firstdatetaken']).to_time rescue nil end
+    def first_uploaded() Time.at(Integer(@info['photos']['firstdate'])) rescue nil end
 
-    def first_uploaded
-      if @info['photos'] and @info['photos']['firstdate']
-        Time.at(@info['photos']['firstdate'].to_i)
-      end
-    end
+    def favorited_at() Time.at(Integer(@info['favedate'])) rescue nil end
 
     def media_count
       if @info['photos'] and @info['photos']['count']
@@ -46,16 +39,14 @@ module Flickrie
 
     def public_photos() Flickrie.public_photos_from_user(nsid) end
 
-    def pro?
-      @info['ispro'].to_i == 1 if @info['ispro']
-    end
+    def pro?() Integer(@info['ispro']) == 1 rescue nil end
 
     def [](key)
       @info[key]
     end
 
-    def get_info(info = nil)
-      info ||= Flickrie.client.get_user_info(nsid).body['person']
+    def get_info(params = {}, info = nil)
+      info ||= Flickrie.client.get_user_info(nsid, params).body['person']
       @info.update(info)
 
       %w[username realname location description profileurl
@@ -78,7 +69,7 @@ module Flickrie
     end
 
     def self.from_info(info)
-      new.get_info(info)
+      new.get_info({}, info)
     end
 
     def self.from_find(info)

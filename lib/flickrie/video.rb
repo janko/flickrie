@@ -2,14 +2,14 @@ module Flickrie
   class Video
     include Media
 
-    def ready?()   @video['ready'].to_i == 1 if @video['ready']     end
-    def failed?()  @video['failed'].to_i == 1 if @video['failed']   end
-    def pending?() @video['pending'].to_i == 1 if @video['pending'] end
+    def ready?()   Integer(@video['ready']) == 1   rescue nil end
+    def failed?()  Integer(@video['failed']) == 1  rescue nil end
+    def pending?() Integer(@video['pending']) == 1 rescue nil end
 
-    def duration() @video['duration'].to_i if @video['duration'] end
+    def duration() Integer(@video['duration']) rescue nil end
 
-    def width()  @video['width'].to_i if @video['width']   end
-    def height() @video['height'].to_i if @video['height'] end
+    def width()  Integer(@video['width'])  rescue nil end
+    def height() Integer(@video['height']) rescue nil end
 
     def source_url()          @video['source_url']          end
     def download_url()        @video['download_url']        end

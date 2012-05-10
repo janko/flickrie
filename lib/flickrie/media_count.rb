@@ -2,9 +2,7 @@ require 'date'
 
 module Flickrie
   class MediaCount
-    def value
-      @info['count'].to_i
-    end
+    def value() Integer(@info['count']) rescue nil end
 
     def date_range
       dates =
@@ -13,8 +11,8 @@ module Flickrie
           [DateTime.parse(@info['fromdate']).to_time,
            DateTime.parse(@info['todate']).to_time]
         when "unix timestamp"
-          [Time.at(@info['fromdate'].to_i),
-           Time.at(@info['todate'].to_i)]
+          [Time.at(Integer(@info['fromdate'])),
+           Time.at(Integer(@info['todate']))]
         end
 
       dates.first..dates.last

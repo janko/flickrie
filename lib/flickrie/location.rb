@@ -1,7 +1,6 @@
 module Flickrie
   class Location
-    attr_reader :latitude, :longitude, :accuracy, :context, :place_id,
-      :woeid
+    attr_reader :latitude, :longitude, :accuracy, :context, :place_id, :woeid
 
     def neighbourhood() place('neighbourhood') end
     def locality()      place('locality')      end
