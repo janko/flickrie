@@ -15,8 +15,8 @@ module Flickrie
     def download_url()        @video['download_url']        end
     def mobile_download_url() @video['mobile_download_url'] end
 
-    def get_sizes(info = nil)
-      info ||= Flickrie.client.get_media_sizes(id).body['sizes']
+    def get_sizes(params = {}, info = nil)
+      info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}
       @info['usage'].update \
         'canblog'     => info['canblog'],
@@ -33,7 +33,7 @@ module Flickrie
       self
     end
 
-    def get_info(info = nil)
+    def get_info(params = {}, info = nil)
       super
       @video = @info['video']
 

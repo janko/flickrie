@@ -91,8 +91,8 @@ module Flickrie
       @info[key]
     end
 
-    def get_info(info = nil)
-      info ||= Flickrie.client.get_media_info(id).body['photo']
+    def get_info(params = {}, info = nil)
+      info ||= Flickrie.client.get_media_info(id, params).body['photo']
       @info.update(info)
 
       # Fixes
@@ -161,7 +161,7 @@ module Flickrie
       end
 
       def from_info(info)
-        new('media' => info['media']).get_info(info)
+        new('media' => info['media']).get_info({}, info)
       end
 
       def from_user(hash)
@@ -181,7 +181,7 @@ module Flickrie
       end
 
       def from_sizes(info)
-        new.get_sizes(info)
+        new.get_sizes({}, info)
       end
 
       def from_search(hash)
