@@ -11,7 +11,6 @@ group :development, :test do
 end
 
 group :test do
-  # This is to get rid of 'gem install minitest' messages
-  # in the tests
+  # This is to get rid of 'gem install minitest' messages in tests
   gem "minitest"
 end
