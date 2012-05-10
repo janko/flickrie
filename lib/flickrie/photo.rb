@@ -17,19 +17,19 @@ module Flickrie
       'Original'   => 'o'
     }
 
-    def square!(number); @size = "Square #{number}"; self end
-    def thumbnail!;      @size = "Thumbnail";        self end
-    def small!(number);  @size = "Small #{number}";  self end
-    def medium!(number); @size = "Medium #{number}"; self end
-    def large!(number);  @size = "Large #{number}";  self end
-    def original!;       @size = "Original";         self end
+    def square!(number)() @size = "Square #{number}"() self end
+    def thumbnail!()      @size = "Thumbnail"()        self end
+    def small!(number)()  @size = "Small #{number}"()  self end
+    def medium!(number)() @size = "Medium #{number}"() self end
+    def large!(number)()  @size = "Large #{number}"()  self end
+    def original!()       @size = "Original"()         self end
 
-    def square(number); dup.square!(number) end
-    def thumbnail;      dup.thumbnail!      end
-    def small(number);  dup.small!(number)  end
-    def medium(number); dup.medium!(number) end
-    def large(number);  dup.large!(number)  end
-    def original;       dup.original!       end
+    def square(number)() dup.square!(number) end
+    def thumbnail()      dup.thumbnail!      end
+    def small(number)()  dup.small!(number)  end
+    def medium(number)() dup.medium!(number) end
+    def large(number)()  dup.large!(number)  end
+    def original()       dup.original!       end
 
     [75, 150].each do |n|
       define_method("square#{n}!") { square!(n) }
@@ -48,19 +48,19 @@ module Flickrie
       define_method("large#{n}") { large(n) }
     end
 
-    def largest!; @size = largest_size; self end
-    def largest;  dup.largest! end
+    def largest!() @size = largest_size() self end
+    def largest()  dup.largest! end
 
     def available_sizes
       SIZES.select { |_, s| @info["url_#{s}"] }.keys
     end
 
-    def width;      @info["width_#{size_abbr}"].to_i if @info["width_#{size_abbr}"]   end
-    def height;     @info["height_#{size_abbr}"].to_i if @info["height_#{size_abbr}"] end
+    def width()      @info["width_#{size_abbr}"].to_i if @info["width_#{size_abbr}"]   end
+    def height()     @info["height_#{size_abbr}"].to_i if @info["height_#{size_abbr}"] end
 
-    def source_url; @info["url_#{size_abbr}"] end
+    def source_url() @info["url_#{size_abbr}"] end
 
-    def rotation; @info['rotation'].to_i if @info['rotation'] end
+    def rotation() @info['rotation'].to_i if @info['rotation'] end
 
     def get_sizes(info = nil)
       info ||= Flickrie.client.get_media_sizes(id).body['sizes']

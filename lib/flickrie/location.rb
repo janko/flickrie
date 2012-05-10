@@ -3,11 +3,11 @@ module Flickrie
     attr_reader :latitude, :longitude, :accuracy, :context, :place_id,
       :woeid
 
-    def neighbourhood; place('neighbourhood') end
-    def locality;      place('locality')      end
-    def county;        place('county')        end
-    def region;        place('region')        end
-    def country;       place('country')       end
+    def neighbourhood() place('neighbourhood') end
+    def locality()      place('locality')      end
+    def county()        place('county')        end
+    def region()        place('region')        end
+    def country()       place('country')       end
 
     def [](key)
       @info[key]

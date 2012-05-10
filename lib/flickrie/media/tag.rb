@@ -1,9 +1,9 @@
 module Flickrie
   module Media
     class Tag
-      def id;      @info['id']       end
-      def raw;     @info['raw']      end
-      def content; @info['_content'] end
+      def id()      @info['id']       end
+      def raw()     @info['raw']      end
+      def content() @info['_content'] end
 
       def machine_tag?
         @info['machine_tag'].to_i == 1 if @info['machine_tag']

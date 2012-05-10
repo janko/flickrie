@@ -7,16 +7,16 @@ require 'date'
 
 module Flickrie
   module Media
-    def id;             @info['id']           end
-    def secret;         @info['secret']       end
-    def server;         @info['server']       end
-    def farm;           @info['farm']         end
-    def title;          @info['title']        end
-    def description;    @info['description']  end
-    def tags;           @info['tags']         end
-    def media_status;   @info['media_status'] end
-    def path_alias;     @info['pathalias']    end
-    def camera;         @info['camera']       end
+    def id()             @info['id']           end
+    def secret()         @info['secret']       end
+    def server()         @info['server']       end
+    def farm()           @info['farm']         end
+    def title()          @info['title']        end
+    def description()    @info['description']  end
+    def tags()           @info['tags']         end
+    def media_status()   @info['media_status'] end
+    def path_alias()     @info['pathalias']    end
+    def camera()         @info['camera']       end
     # ==== Example
     #
     #   photo.exif.get('Model') # => 'Canon PowerShot G12'
@@ -25,7 +25,7 @@ module Flickrie
     #   photo.exif.get('X-Resolution', :data => 'clean') # => '180 dpi'
     #   photo.exif.get('X-Resolution')                   # => '180 dpi'
     #
-    def exif;           @info['exif']         end
+    def exif()           @info['exif']         end
 
     def views_count
       @info['views'].to_i if @info['views']
@@ -51,10 +51,10 @@ module Flickrie
       License.new(@info['license']) if @info['license']
     end
 
-    def posted_at;   Time.at(@info['dates']['posted'].to_i) if @info['dates']['posted']         end
-    def uploaded_at; Time.at(@info['dates']['uploaded'].to_i) if @info['dates']['uploaded']     end
-    def updated_at;  Time.at(@info['dates']['lastupdate'].to_i) if @info['dates']['lastupdate'] end
-    def taken_at;    DateTime.parse(@info['dates']['taken']).to_time if @info['dates']['taken'] end
+    def posted_at()   Time.at(@info['dates']['posted'].to_i) if @info['dates']['posted']         end
+    def uploaded_at() Time.at(@info['dates']['uploaded'].to_i) if @info['dates']['uploaded']     end
+    def updated_at()  Time.at(@info['dates']['lastupdate'].to_i) if @info['dates']['lastupdate'] end
+    def taken_at()    DateTime.parse(@info['dates']['taken']).to_time if @info['dates']['taken'] end
 
     def taken_at_granularity
       @info['dates']['takengranularity'].to_i if @info['dates']['takengranularity']
@@ -64,11 +64,11 @@ module Flickrie
       User.new(@info['owner']) if @info['owner']
     end
 
-    def safety_level; @info['safety_level'].to_i if @info['safety_level'] end
+    def safety_level() @info['safety_level'].to_i if @info['safety_level'] end
 
-    def safe?;       safety_level <= 1 if safety_level end
-    def moderate?;   safety_level == 2 if safety_level end
-    def restricted?; safety_level == 3 if safety_level end
+    def safe?()       safety_level <= 1 if safety_level end
+    def moderate?()   safety_level == 2 if safety_level end
+    def restricted?() safety_level == 3 if safety_level end
 
     def url
       if owner and id
@@ -82,12 +82,12 @@ module Flickrie
       Visibility.new(@info['visibility']) if @info['visibility']
     end
 
-    def primary?; @info['isprimary'].to_i == 1 if @info['isprimary'] end
+    def primary?() @info['isprimary'].to_i == 1 if @info['isprimary'] end
 
-    def favorite?; @info['isfavorite'].to_i == 1 if @info['isfavorite'] end
+    def favorite?() @info['isfavorite'].to_i == 1 if @info['isfavorite'] end
 
-    def can_comment?;  @info['editability']['cancomment'].to_i == 1 if @info['editability'] end
-    def can_add_meta?; @info['editability']['canaddmeta'].to_i == 1 if @info['editability'] end
+    def can_comment?()  @info['editability']['cancomment'].to_i == 1 if @info['editability'] end
+    def can_add_meta?() @info['editability']['canaddmeta'].to_i == 1 if @info['editability'] end
 
     def can_everyone_comment?
       @info['publiceditability']['cancomment'].to_i == 1 if @info['publiceditability']
@@ -97,14 +97,14 @@ module Flickrie
       @info['publiceditability']['canaddmeta'].to_i == 1 if @info['publiceditability']
     end
 
-    def can_download?; @info['usage']['candownload'].to_i == 1 if @info['usage']['candownload'] end
-    def can_blog?;     @info['usage']['canblog'].to_i == 1     if @info['usage']['canblog']     end
-    def can_print?;    @info['usage']['canprint'].to_i == 1    if @info['usage']['canprint']    end
-    def can_share?;    @info['usage']['canshare'].to_i == 1    if @info['usage']['canshare']    end
+    def can_download?() @info['usage']['candownload'].to_i == 1 if @info['usage']['candownload'] end
+    def can_blog?()     @info['usage']['canblog'].to_i == 1     if @info['usage']['canblog']     end
+    def can_print?()    @info['usage']['canprint'].to_i == 1    if @info['usage']['canprint']    end
+    def can_share?()    @info['usage']['canshare'].to_i == 1    if @info['usage']['canshare']    end
 
-    def has_people?; @info['people']['haspeople'].to_i == 1 if @info['people'] end
+    def has_people?() @info['people']['haspeople'].to_i == 1 if @info['people'] end
 
-    def faved?; @info['is_faved'].to_i == 1 if @info['is_faved'] end
+    def faved?() @info['is_faved'].to_i == 1 if @info['is_faved'] end
 
     def notes
       @info['notes']['note'].map { |hash| Note.new(hash) } if @info['notes']

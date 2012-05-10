@@ -2,19 +2,19 @@ require 'date'
 
 module Flickrie
   class User
-    def id;           @info['id']          end
-    def nsid;         @info['nsid']        end
-    def username;     @info['username']    end
-    def real_name;    @info['realname']    end
-    def location;     @info['location']    end
-    def time_zone;    @info['timezone']    end
-    def description;  @info['description'] end
-    def profile_url;  @info['profileurl']  end
-    def mobile_url;   @info['mobileurl']   end
-    def photos_url;   @info['photosurl']   end
-    def path_alias;   @info['path_alias']  end
-    def icon_server;  @info['iconserver']  end
-    def icon_farm;    @info['iconfarm']    end
+    def id()           @info['id']          end
+    def nsid()         @info['nsid']        end
+    def username()     @info['username']    end
+    def real_name()    @info['realname']    end
+    def location()     @info['location']    end
+    def time_zone()    @info['timezone']    end
+    def description()  @info['description'] end
+    def profile_url()  @info['profileurl']  end
+    def mobile_url()   @info['mobileurl']   end
+    def photos_url()   @info['photosurl']   end
+    def path_alias()   @info['path_alias']  end
+    def icon_server()  @info['iconserver']  end
+    def icon_farm()    @info['iconfarm']    end
 
     def buddy_icon_url
       if icon_farm
@@ -44,7 +44,7 @@ module Flickrie
       end
     end
 
-    def public_photos; Flickrie.public_photos_from_user(nsid) end
+    def public_photos() Flickrie.public_photos_from_user(nsid) end
 
     def pro?
       @info['ispro'].to_i == 1 if @info['ispro']
