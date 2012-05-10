@@ -17,6 +17,7 @@ module Flickrie
 
     def get_sizes(info = nil)
       info ||= Flickrie.client.get_media_sizes(id).body['sizes']
+      @info['usage'] ||= {}
       @info['usage'].update \
         'canblog'     => info['canblog'],
         'canprint'    => info['canprint'],

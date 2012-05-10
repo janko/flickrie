@@ -16,6 +16,8 @@ module Flickrie
     private
 
     def initialize(info = {})
+      raise ArgumentError if info.nil?
+
       @info = info
 
       %w[latitude longitude accuracy context place_id woeid].each do |attribute|

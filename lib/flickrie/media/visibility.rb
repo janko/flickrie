@@ -11,6 +11,8 @@ module Flickrie
       end
 
       def initialize(info)
+        raise ArgumentError if info.nil?
+
         @info = info
       end
     end

@@ -14,6 +14,8 @@ module Flickrie
           hash['id'] == argument
         end
         initialize(hash)
+      else
+        raise ArgumentError
       end
     end
 

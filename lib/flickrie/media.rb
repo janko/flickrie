@@ -13,10 +13,10 @@ module Flickrie
     def farm()           @info['farm']         end
     def title()          @info['title']        end
     def description()    @info['description']  end
-    def tags()           @info['tags']         end
     def media_status()   @info['media_status'] end
     def path_alias()     @info['pathalias']    end
-    def camera()         @info['camera']       end
+
+    def camera() @info['camera'] end
     # ==== Example
     #
     #   photo.exif.get('Model') # => 'Canon PowerShot G12'
@@ -25,46 +25,29 @@ module Flickrie
     #   photo.exif.get('X-Resolution', :data => 'clean') # => '180 dpi'
     #   photo.exif.get('X-Resolution')                   # => '180 dpi'
     #
-    def exif()           @info['exif']         end
+    def exif() Exif.new(@info['exif']) rescue nil end
 
-    def views_count
-      @info['views'].to_i if @info['views']
-    end
+    def views_count()    Integer(@info['views'])          rescue nil end
+    def comments_count() Integer(@info['comments_count']) rescue nil end
 
-    def comments_count
-      @info['comments_count'].to_i if @info['comments_count']
-    end
+    def location() Location.new(@info['location']) rescue nil end
 
-    def location
-      Location.new(@info['location']) if @info['location']
-    end
+    def tags() @info['tags'].map { |info| Tag.new(info) }     rescue nil end
+    def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
 
-    def machine_tags
-      tags.select { |tag| tag.machine_tag? } if tags
-    end
+    def geo_permissions() Visibility.new(@info['geoperms']) rescue nil end
 
-    def geo_permissions
-      Visibility.new(@info['geoperms']) if @info['geoperms']
-    end
+    def license() License.new(@info['license']) rescue nil end
 
-    def license
-      License.new(@info['license']) if @info['license']
-    end
+    def posted_at()   Time.at(Integer(@info['dates']['posted']))           rescue nil end
+    def uploaded_at() Time.at(Integer(@info['dates']['uploaded']))         rescue nil end
+    def updated_at()  Time.at(Integer(@info['dates']['lastupdate']))       rescue nil end
+    def taken_at()    DateTime.parse(@info['dates']['taken']).to_time      rescue nil end
+    def taken_at_granularity() Integer(@info['dates']['takengranularity']) rescue nil end
 
-    def posted_at()   Time.at(@info['dates']['posted'].to_i) if @info['dates']['posted']         end
-    def uploaded_at() Time.at(@info['dates']['uploaded'].to_i) if @info['dates']['uploaded']     end
-    def updated_at()  Time.at(@info['dates']['lastupdate'].to_i) if @info['dates']['lastupdate'] end
-    def taken_at()    DateTime.parse(@info['dates']['taken']).to_time if @info['dates']['taken'] end
+    def owner() User.new(@info['owner']) rescue nil end
 
-    def taken_at_granularity
-      @info['dates']['takengranularity'].to_i if @info['dates']['takengranularity']
-    end
-
-    def owner
-      User.new(@info['owner']) if @info['owner']
-    end
-
-    def safety_level() @info['safety_level'].to_i if @info['safety_level'] end
+    def safety_level() Integer(@info['safety_level']) rescue nil end
 
     def safe?()       safety_level <= 1 if safety_level end
     def moderate?()   safety_level == 2 if safety_level end
@@ -78,37 +61,30 @@ module Flickrie
       end
     end
 
-    def visibility
-      Visibility.new(@info['visibility']) if @info['visibility']
-    end
+    def visibility() Visibility.new(@info['visibility']) rescue nil end
 
-    def primary?() @info['isprimary'].to_i == 1 if @info['isprimary'] end
+    def primary?() Integer(@info['isprimary']) == 1 rescue nil end
 
-    def favorite?() @info['isfavorite'].to_i == 1 if @info['isfavorite'] end
+    def favorite?() Integer(@info['isfavorite']) == 1 rescue nil end
 
-    def can_comment?()  @info['editability']['cancomment'].to_i == 1 if @info['editability'] end
-    def can_add_meta?() @info['editability']['canaddmeta'].to_i == 1 if @info['editability'] end
+    def can_comment?()  Integer(@info['editability']['cancomment']) == 1 rescue nil end
+    def can_add_meta?() Integer(@info['editability']['canaddmeta']) == 1 rescue nil end
 
-    def can_everyone_comment?
-      @info['publiceditability']['cancomment'].to_i == 1 if @info['publiceditability']
-    end
+    def can_everyone_comment?()  Integer(@info['publiceditability']['cancomment']) == 1 rescue nil end
+    def can_everyone_add_meta?() Integer(@info['publiceditability']['canaddmeta']) == 1 rescue nil end
 
-    def can_everyone_add_meta?
-      @info['publiceditability']['canaddmeta'].to_i == 1 if @info['publiceditability']
-    end
+    def can_download?() Integer(@info['usage']['candownload']) == 1 rescue nil end
+    def can_blog?()     Integer(@info['usage']['canblog']) == 1     rescue nil end
+    def can_print?()    Integer(@info['usage']['canprint']) == 1    rescue nil end
+    def can_share?()    Integer(@info['usage']['canshare']) == 1    rescue nil end
 
-    def can_download?() @info['usage']['candownload'].to_i == 1 if @info['usage']['candownload'] end
-    def can_blog?()     @info['usage']['canblog'].to_i == 1     if @info['usage']['canblog']     end
-    def can_print?()    @info['usage']['canprint'].to_i == 1    if @info['usage']['canprint']    end
-    def can_share?()    @info['usage']['canshare'].to_i == 1    if @info['usage']['canshare']    end
+    def has_people?() Integer(@info['people']['haspeople']) == 1 rescue nil end
 
-    def has_people?() @info['people']['haspeople'].to_i == 1 if @info['people'] end
+    def faved?() Integer(@info['is_faved']) == 1 rescue nil end
 
-    def faved?() @info['is_faved'].to_i == 1 if @info['is_faved'] end
+    def notes() @info['notes']['note'].map { |hash| Note.new(hash) } rescue nil end
 
-    def notes
-      @info['notes']['note'].map { |hash| Note.new(hash) } if @info['notes']
-    end
+    def favorites() @info['person'].map { |info| User.new(info) } rescue nil end
 
     def [](key)
       @info[key]
@@ -116,30 +92,27 @@ module Flickrie
 
     def get_info(info = nil)
       info ||= Flickrie.client.get_media_info(id).body['photo']
-
-      info['title'] = info['title']['_content']
-      info['description'] = info['description']['_content']
-      info['comments_count'] = info.delete('comments')['_content']
-      info['dates']['uploaded'] = info.delete('dateuploaded')
-      info['tags'] = info['tags']['tag'].map { |info| Tag.new(info) }
-
       @info.update(info)
+
+      # Fixes
+      @info['title'] = @info['title']['_content']
+      @info['description'] = @info['description']['_content']
+      @info['comments_count'] = @info.delete('comments')['_content']
+      @info['dates']['uploaded'] = @info.delete('dateuploaded')
+      @info['tags'] = @info['tags']['tag']
+
       self
     end
 
     def get_exif(params = {}, info = nil)
       info ||= Flickrie.client.get_media_exif(id, params).body['photo']
-
-      @info['camera'] = info['camera'] unless info['camera'].empty?
-      @info['exif'] = Exif.new(info['exif']) unless info['exif'].empty?
+      @info.update(info)
 
       self
     end
 
     def initialize(info = {})
       @info = info
-      @info['dates'] ||= {}
-      @info['usage'] ||= {}
     end
 
     module ClassMethods # :nodoc:
@@ -169,11 +142,16 @@ module Flickrie
             'taken' => info.delete('datetaken'),
             'takengranularity' => info.delete('datetakengranularity'),
           }
-          info['usage'] = {}
 
           unless info['tags'].nil?
             info['tags'] = info['tags'].split(' ').map do |tag_content|
-              Tag.new('_content' => tag_content)
+              {'_content' => tag_content, 'machine_tag' => 0}
+            end
+          end
+          unless info['machine_tags'].nil?
+            info['tags'] ||= []
+            info['tags'] += info.delete('machine_tags').split(' ').map do |tag_content|
+              {'_content' => tag_content, 'machine_tag' => 1}
             end
           end
 
