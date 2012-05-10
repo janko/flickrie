@@ -53,6 +53,7 @@ module Flickrie
     def moderate?()   safety_level == 2 if safety_level end
     def restricted?() safety_level == 3 if safety_level end
 
+    # TODO: Take care about the url from #get_info
     def url
       if owner and id
         "http://www.flickr.com/photos/#{owner.nsid}/#{id}"
