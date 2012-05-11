@@ -138,7 +138,7 @@ puts "Visit this url to authenticate: #{url}"
 
 print "If you agreed, the code was displayed afterwards. Enter it: "
 code = gets.strip
-access_token = Flickrie::OAuth.get_access_token(code)
+access_token = Flickrie::OAuth.get_access_token(code, request_token)
 Flickrie.access_token = access_token.token
 Flickrie.access_secret = access_token.secret
 puts "You successfully authenticated!"
