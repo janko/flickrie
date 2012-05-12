@@ -208,6 +208,12 @@ module Flickrie
         ensure_media({:photoset_id => set_id}.merge(params))
     end
 
+    #--
+    # test
+    def test_login(params = {})
+      get 'flickr.test.login', params
+    end
+
     private
 
     def ensure_media(params)

@@ -78,5 +78,9 @@ module Flickrie
       info['username'] = info['username']['_content']
       new(info)
     end
+
+    def self.from_test(info)
+      from_find(info)
+    end
   end
 end

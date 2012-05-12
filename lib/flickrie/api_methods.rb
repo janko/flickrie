@@ -205,5 +205,12 @@ module Flickrie
     def videos_from_set(set_id, params = {})
       media_from_set(set_id, params.merge(:media => 'videos'))
     end
+
+    #--
+    # test
+    def test_login(params = {})
+      response = client.test_login(params)
+      User.from_test(response.body['user'])
+    end
   end
 end
