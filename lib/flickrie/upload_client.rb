@@ -15,6 +15,7 @@ module Flickrie
 
         conn.use UploadStatusCheck
         conn.use FaradayMiddleware::ParseXml
+        conn.use OAuthStatusCheck
 
         conn.adapter Faraday.default_adapter
       end
