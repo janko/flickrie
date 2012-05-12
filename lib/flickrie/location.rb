@@ -19,9 +19,10 @@ module Flickrie
 
       @info = info
 
-      %w[latitude longitude accuracy context place_id woeid].each do |attribute|
+      %w[latitude longitude accuracy place_id woeid].each do |attribute|
         instance_variable_set "@#{attribute}", @info[attribute]
       end
+      @context = Integer(@info['context']) rescue nil
     end
 
     def place(place_name)

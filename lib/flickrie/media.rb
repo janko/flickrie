@@ -31,11 +31,10 @@ module Flickrie
     def comments_count() Integer(@info['comments_count']) rescue nil end
 
     def location() Location.new(@info['location']) rescue nil end
+    def geo_permissions() Visibility.new(@info['geoperms']) rescue nil end
 
     def tags() @info['tags'].map { |info| Tag.new(info) }     rescue nil end
     def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
-
-    def geo_permissions() Visibility.new(@info['geoperms']) rescue nil end
 
     def license() License.new(@info['license']) rescue nil end
 

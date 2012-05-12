@@ -6,8 +6,8 @@ module Flickrie
 
     SIZES = {
       'Square 75'  => 'sq',
-      'Square 150' => 'q',
       'Thumbnail'  => 't',
+      'Square 150' => 'q',
       'Small 240'  => 's',
       'Small 320'  => 'n',
       'Medium 500' => 'm',
