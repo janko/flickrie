@@ -10,6 +10,8 @@ task :spec, :spec do |task, args|
   end
 end
 
+task :console do
+  system "bundle exec pry -I. --require 'flickrie' --require 'credentials'"
 end
 
 task :rdoc do
