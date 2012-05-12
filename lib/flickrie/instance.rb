@@ -6,8 +6,13 @@ module Flickrie
       @access_token, @access_secret = access_token, access_secret
     end
 
-    def client()        Flickrie.client(access_token_hash)        end
-    def upload_client() Flickrie.upload_client(access_token_hash) end
+    def client
+      @client ||= Flickrie.new_client(access_token_hash)
+    end
+
+    def upload_client
+      @upload_client ||= Flickrie.new_upload_client(access_token_hash)
+    end
 
     include ApiMethods
 

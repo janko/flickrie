@@ -1,7 +1,11 @@
 module Flickrie
   class << self
-    def upload_client(access_token_hash = {})
-      @upload_client ||= UploadClient.new(upload_params) do |conn|
+    def upload_client
+      @upload_client ||= new_upload_client
+    end
+
+    def new_upload_client(access_token_hash = {})
+      UploadClient.new(upload_params) do |conn|
         conn.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,

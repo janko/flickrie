@@ -9,7 +9,7 @@ module Flickrie
       attributes.each do |attribute|
         define_method "#{attribute}=" do |value|
           instance_variable_set "@#{attribute}", value
-          @client = nil
+          @client = @upload_client = nil
         end
       end
     end
@@ -18,8 +18,12 @@ module Flickrie
     attr_accessor_with_client_reset :api_key, :shared_secret,
       :timeout, :open_timeout, :access_token, :access_secret
 
-    def client(access_token_hash = {})
-      @client ||= Client.new(params) do |conn|
+    def client
+      @client ||= new_client
+    end
+
+    def new_client(access_token_hash = {})
+      Client.new(params) do |conn|
         conn.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
