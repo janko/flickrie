@@ -3,5 +3,4 @@ Gemfile.lock
 pkg/
 doc/
 .DS_Store
-spec/vcr_cassettes
 api_methods.md

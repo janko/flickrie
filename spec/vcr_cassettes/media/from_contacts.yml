@@ -1,0 +1,73 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContactsPhotos&include_self=1&single_photo=1&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="2497774aa77ba05fc3faf915113c8282", oauth_signature="WZH6S%2F6TcaQ5ZtK7XbMLQ4TfOTc%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336940577", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sun, 13 May 2012 20:22:58 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www184.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "226"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"photo\":[{\"id\":\"7093101501\", \"secret\":\"9337f28800\", \"server\":\"7090\", \"farm\":8, \"owner\":\"67131352@N04\", \"username\":\"Janko Marohni\\u0107\", \"title\":\"IMG_0917\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}], \"total\":2, \"page\":1, \"per_page\":10, \"pages\":1}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sun, 13 May 2012 20:22:58 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContactsPublicPhotos&user_id=67131352%40N04&include_self=1&single_photo=1&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="e0697a02cd7a38730f60dfce1ff8a406", oauth_signature="rJrHubA4r2THYJGoSrwtB4PtC9k%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336940578", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sun, 13 May 2012 20:22:58 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www63.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "226"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"photo\":[{\"id\":\"7093101501\", \"secret\":\"9337f28800\", \"server\":\"7090\", \"farm\":8, \"owner\":\"67131352@N04\", \"username\":\"Janko Marohni\\u0107\", \"title\":\"IMG_0917\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}], \"total\":2, \"page\":1, \"per_page\":10, \"pages\":1}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sun, 13 May 2012 20:22:58 GMT
+recorded_with: VCR 2.1.1

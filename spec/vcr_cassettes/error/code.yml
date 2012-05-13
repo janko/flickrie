@@ -1,0 +1,84 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key&method=flickr.photos.licenses.getInfo
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="", oauth_nonce="033f3a2d21c719f0376cc5b1b2457495", oauth_signature="NLavR%2BnVvTCi6PpKaDMQ7WjZdjo%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336940555", oauth_token="", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sun, 13 May 2012 20:22:35 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      access-control-allow-origin: 
+      - "*"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www21.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "91"
+      connection: 
+      - close
+      content-type: 
+      - text/plain; charset=utf-8
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"stat\":\"fail\", \"code\":100, \"message\":\"Invalid API Key (Key has invalid format)\"}"
+    http_version: 
+  recorded_at: Sun, 13 May 2012 20:22:35 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/upload
+    body: 
+      encoding: ASCII-8BIT
+      string: "#<Faraday::CompositeReadIO:0x007f8f855fc960>"
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="", oauth_nonce="921d2b0600a03b7eeff17b1199685cfe", oauth_signature="hENq3%2FvNqUd%2FsYG5gHP1jMLRU7I%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336940555", oauth_token="", oauth_version="1.0"
+      Content-Type: 
+      - multipart/form-data;boundary=-----------RubyMultipartPost
+      Content-Length: 
+      - "47086"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sun, 13 May 2012 20:22:35 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      connection: 
+      - close
+      content-length: 
+      - "132"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www227.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-type: 
+      - text/xml; charset=utf-8
+    body: 
+      encoding: US-ASCII
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <rsp stat="fail">
+        	<err code="100" msg="Invalid API Key (Key has invalid format)" />
+        </rsp>
+
+    http_version: 
+  recorded_at: Sun, 13 May 2012 20:22:36 GMT
+recorded_with: VCR 2.1.1

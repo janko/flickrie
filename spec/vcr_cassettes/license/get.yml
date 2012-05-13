@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.licenses.getInfo
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5a7bec720529d84912f3f1fa99dd1b31", oauth_signature="X7ISLtG%2F2zWBB5m1G4RsydBVeZY%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1336940568", oauth_token="", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sun, 13 May 2012 20:22:48 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www188.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "313"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"licenses\":{\"license\":[{\"id\":\"0\", \"name\":\"All Rights Reserved\", \"url\":\"\"}, {\"id\":\"4\", \"name\":\"Attribution License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by\\/2.0\\/\"}, {\"id\":\"6\", \"name\":\"Attribution-NoDerivs License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by-nd\\/2.0\\/\"}, {\"id\":\"3\", \"name\":\"Attribution-NonCommercial-NoDerivs License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by-nc-nd\\/2.0\\/\"}, {\"id\":\"2\", \"name\":\"Attribution-NonCommercial License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by-nc\\/2.0\\/\"}, {\"id\":\"1\", \"name\":\"Attribution-NonCommercial-ShareAlike License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by-nc-sa\\/2.0\\/\"}, {\"id\":\"5\", \"name\":\"Attribution-ShareAlike License\", \"url\":\"http:\\/\\/creativecommons.org\\/licenses\\/by-sa\\/2.0\\/\"}, {\"id\":\"7\", \"name\":\"No known copyright restrictions\", \"url\":\"http:\\/\\/www.flickr.com\\/commons\\/usage\\/\"}, {\"id\":\"8\", \"name\":\"United States Government Work\", \"url\":\"http:\\/\\/www.usa.gov\\/copyright.shtml\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sun, 13 May 2012 20:22:48 GMT
+recorded_with: VCR 2.1.1
