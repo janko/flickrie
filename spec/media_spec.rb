@@ -232,10 +232,10 @@ describe Flickrie::Media do
 
     it "should have all attributes correctly set" do
       context = Flickrie.get_media_context(PHOTO_ID)
-      context.count.should eq(98)
-      context.previous.title.should eq('IMG_0795')
-      context.previous.url.should_not be_empty
-      context.previous.faved?.should be_false
+      context['count'].should eq(98)
+      context['prevphoto'].title.should eq('IMG_0795')
+      context['prevphoto'].url.should_not be_empty
+      context['prevphoto'].faved?.should be_false
     end
   end
 
