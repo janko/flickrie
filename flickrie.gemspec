@@ -1,8 +1,8 @@
 # encoding: utf-8
-require File.expand_path('../lib/flickrie/version', __FILE__)
-
 Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 1.9.0"
+
+  gem.version       = "0.7.1"
 
   gem.author        = "Janko Marohnić"
   gem.email         = "janko.marohnic@gmail.com"
