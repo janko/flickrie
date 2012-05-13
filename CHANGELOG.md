@@ -1,5 +1,27 @@
 # Flickrie changelog
 
+## Version 1.0.0
+
+- cover `flickr.photos.getFavorites` and `flickr.test.login`
+- change the way `flickr.photos.getContext` works (this is the part that is NOT backwards compatible)
+
+Before:
+```ruby
+context = Flickrie.get_photo_context(712472397)
+context['count'] # => 12
+context['prevphoto'] # => #<Photo: ...>
+context['nexphoto'] # => #<Photo: ...>
+```
+Now:
+```ruby
+context = Flickrie.get_photo_context(712472397)
+context.count # => 12
+context.previous # => #<Photo: ...>
+context.next # => #<Photo: ...>
+```
+
+- bug fixes (especially regarding the `Flickr::Instance`)
+
 ## Version 0.6.1
 
 - `Flickrie::Media::Ticket` is now called just `Flickrie::Ticket`
