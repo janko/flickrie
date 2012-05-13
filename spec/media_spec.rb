@@ -12,7 +12,7 @@ describe Flickrie::Media do
       :media_status => 'ready',
       :path_alias => nil,
       :camera => 'Canon PowerShot G12',
-      :views_count => 2,
+      :views_count => 4,
       :comments_count => 1,
       :location => {
         :latitude => 45.807258,
