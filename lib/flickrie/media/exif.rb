@@ -10,9 +10,8 @@ module Flickrie
         nil
       end
 
-      def [](key)
-        @info[key]
-      end
+      def [](key) @info[key] end
+      def hash() @info end
 
       def initialize(info)
         raise ArgumentError if info.nil?

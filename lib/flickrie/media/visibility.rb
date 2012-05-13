@@ -6,9 +6,8 @@ module Flickrie
       def family?()   @info['isfamily'].to_i == 1 if @info['isfamily']   end
       def contacts?() @info['iscontact'].to_i == 1 if @info['iscontact'] end
 
-      def [](key)
-        @info[key]
-      end
+      def [](key) @info[key] end
+      def hash() @info end
 
       def initialize(info)
         raise ArgumentError if info.nil?
