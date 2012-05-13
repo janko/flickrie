@@ -37,6 +37,7 @@ module Flickrie
     class ParseResponseParams < FaradayMiddleware::ResponseMiddleware # :nodoc:
       define_parser do |body|
         params_array = body.split('&').map { |param| param.split('=') }
+        params_array.map! { |params| params.count == 1 ? params << "" : params}
         Hash[*params_array.flatten]
       end
     end
