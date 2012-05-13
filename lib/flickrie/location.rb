@@ -8,9 +8,8 @@ module Flickrie
     def region()        place('region')        end
     def country()       place('country')       end
 
-    def [](key)
-      @info[key]
-    end
+    def [](key) @info[key] end
+    def hash() @info end
 
     private
 

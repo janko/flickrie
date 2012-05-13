@@ -9,9 +9,8 @@ module Flickrie
 
     def imported_at() Time.at(Integer(@info['imported'])) rescue nil end
 
-    def [](key)
-      @info[key]
-    end
+    def [](key) @info[key] end
+    def hash() @info end
 
     def initialize(info)
       @info = info

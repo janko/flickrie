@@ -18,9 +18,8 @@ module Flickrie
       dates.first..dates.last
     end
 
-    def [](key)
-      @info[key]
-    end
+    def [](key) @info[key] end
+    def hash() @info end
 
     def initialize(info, params)
       @info = info

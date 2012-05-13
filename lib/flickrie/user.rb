@@ -43,9 +43,8 @@ module Flickrie
 
     def pro?() Integer(@info['ispro']) == 1 rescue nil end
 
-    def [](key)
-      @info[key]
-    end
+    def [](key) @info[key] end
+    def hash() @info end
 
     def get_info(params = {}, info = nil)
       info ||= Flickrie.client.get_user_info(nsid, params).body['person']

@@ -86,9 +86,8 @@ module Flickrie
 
     def favorites() @info['person'].map { |info| User.new(info) } rescue nil end
 
-    def [](key)
-      @info[key]
-    end
+    def [](key) @info[key] end
+    def hash() @info end
 
     def get_info(params = {}, info = nil)
       info ||= Flickrie.client.get_media_info(id, params).body['photo']
