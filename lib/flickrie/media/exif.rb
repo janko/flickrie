@@ -13,6 +13,8 @@ module Flickrie
       def [](key) @info[key] end
       def hash() @info end
 
+      private
+
       def initialize(info)
         raise ArgumentError if info.nil?
 

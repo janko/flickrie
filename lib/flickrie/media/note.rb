@@ -11,6 +11,8 @@ module Flickrie
       def [](key) @info[key] end
       def hash() @info end
 
+      private
+
       def initialize(hash)
         @id = hash['id']
         @author = User.new \
