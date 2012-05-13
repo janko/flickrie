@@ -266,6 +266,9 @@ basis of this gem.
 "flickr.photosets.getInfo"              -> Flickrie.get_set_info
 "flickr.photosets.getList"              -> Flickrie.sets_from_user
 "flickr.photosets.getPhotos"            -> Flickrie.photos_from_set
+
+# test
+"flickr.test.login"                     -> Flickrie.test_login
 ```
 
 ## Changelog
