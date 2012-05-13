@@ -216,16 +216,8 @@ to help. I will also be happy if you let me know about any bugs.
 
 ## How to contribute
 
-I will be happy if you want to contribute. The procedure is nothing
-special, you just fork the project and send me a pull request.
-
-For your tests to be able to run, you should make a Flickr account, and
-get the API key and secret. You can get them [here](http://www.flickr.com/services/apps/create/apply).
-You also have to get the access token. You can do that by using my
-authentication system. After you have these four things, you have to
-assign them to environment variables named `FLICKR_API_KEY`,
-`FLICKR_SHARED_SECRET`, `FLICKR_ACCESS_TOKEN`, `FLICKR_ACCESS_SECRET`.
-Once you do that, you should be able to run tests.
+I will be happy if you want to contribute. You just have to do some
+minor setup to be able to run tests. See [this wiki](https://github.com/janko-m/flickrie/wiki/How-to-contribute).
 
 ## Cedits
 
