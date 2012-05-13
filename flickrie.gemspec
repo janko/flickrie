@@ -2,6 +2,8 @@
 require File.expand_path('../lib/flickrie/version', __FILE__)
 
 Gem::Specification.new do |gem|
+  gem.required_ruby_version = ">= 1.9.0"
+
   gem.author        = "Janko Marohnić"
   gem.email         = "janko.marohnic@gmail.com"
   gem.description   = %q{This gem is a nice wrapper for the Flickr API with an intuitive interface.}
