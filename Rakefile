@@ -11,7 +11,12 @@ task :spec, :spec do |task, args|
 end
 
 task :console do
-  system "bundle exec pry -I. --require 'flickrie' --require 'credentials'"
+  begin
+    require 'pry'
+    system "bundle exec pry -I. --require 'flickrie' --require 'credentials'"
+  rescue LoadError
+    system "bundle exec irb -I. -r 'flickrie' -r 'credentials'"
+  end
 end
 
 task :rdoc do
