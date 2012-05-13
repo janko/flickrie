@@ -5,3 +5,4 @@ credentials.rb
 doc/
 .DS_Store
 spec/vcr_cassettes
+api_methods.md
