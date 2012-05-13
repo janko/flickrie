@@ -214,11 +214,6 @@ default.
 Please, feel free to post any issues that you're having, I will be happy
 to help. I will also be happy if you let me know about any bugs.
 
-## How to contribute
-
-I will be happy if you want to contribute. You just have to do some
-minor setup to be able to run tests. See [this wiki](https://github.com/janko-m/flickrie/wiki/How-to-contribute).
-
 ## Cedits
 
 Special thanks to @**mislav**, my brother, he helped me really a lot
