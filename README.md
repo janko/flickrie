@@ -214,6 +214,23 @@ default.
 Please, feel free to post any issues that you're having, I will be happy
 to help. I will also be happy if you let me know about any bugs.
 
+## How to contribute
+
+Nothing special, you just fork the project, and send me a pull request.
+Don't forget to cover the change with tests. If you don't know how to
+write tests, send the pull requests without them, it's ok.
+
+An important note: if you want to add a line in the tests which makes a **new** HTTP request,
+you'll have to get your own API key and access token. You can get the
+API key and secret [here](http://www.flickr.com/services/apps/create/apply)
+(assuming you already have a Flickr account), and you can then obtain an access token by using my
+authentication system (described above). You then have to assign these
+values to the environment variables `FLICKR_API_KEY`, `FLICKR_SHARED_SECRET`,
+`FLICKR_ACCESS_TOKEN` and `FLICKR_ACCESS_SECRET`. That's it, you should
+be able to run the tests normally now.
+
+Feel free to email me if you have any problems.
+
 ## Cedits
 
 Special thanks to @**mislav**, my brother, he helped me really a lot
