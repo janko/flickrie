@@ -12,6 +12,8 @@ module Flickrie
     def [](key) @info[key] end
     def hash() @info end
 
+    private
+
     def initialize(info)
       @info = info
     end

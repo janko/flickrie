@@ -21,6 +21,8 @@ module Flickrie
     def [](key) @info[key] end
     def hash() @info end
 
+    private
+
     def initialize(info, params)
       @info = info
       @dates_kind = (params[:dates].nil? ? "mysql timestamp" : "unix timestamp")
