@@ -211,17 +211,11 @@ module Flickrie
       end
 
       def from_context(hash)
-        hash['count'] = hash['count']['_content'].to_i
-
-        ['prevphoto', 'nextphoto'].each do |media|
-          unless hash[media]['media'].nil?
-            hash[media] = new(hash[media])
-          else
-            hash[media] = nil
-          end
-        end
-
-        hash
+        count = hash['count']['_content'].to_i
+        previous_photo = new(hash['prevphoto']) rescue nil
+        next_photo = new(hash['nextphoto']) rescue nil
+        Struct.new(:count, :previous, :next).new \
+          count, previous_photo, next_photo
       end
 
       def from_exif(info)
