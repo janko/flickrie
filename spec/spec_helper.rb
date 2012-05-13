@@ -9,7 +9,13 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
   config.hook_into :faraday
-  config.default_cassette_options = {:record => :new_episodes}
+  config.default_cassette_options = {
+    :record => :new_episodes,
+    :serialize_with => :syck,
+    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)]
+  }
+  config.filter_sensitive_data('API_KEY') { ENV['FLICKR_API_KEY'] }
+  config.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
 end
 
 module RSpecHelpers
