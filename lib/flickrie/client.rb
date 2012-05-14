@@ -1,6 +1,11 @@
 require 'faraday_middleware'
 
 module Flickrie
+  DEFAULTS = {
+    :open_timeout => 4,
+    :timeout => 6
+  }.freeze
+
   class << self
     def self.attr_accessor_with_client_reset(*attributes) # :nodoc:
       attr_reader *attributes
@@ -43,9 +48,6 @@ module Flickrie
 
     private
 
-    OPEN_TIMEOUT = 4
-    TIMEOUT = 6
-
     def params
       {
         :url => 'http://api.flickr.com/services/rest',
@@ -55,8 +57,8 @@ module Flickrie
           :api_key => api_key
         },
         :request => {
-          :open_timeout => open_timeout || OPEN_TIMEOUT,
-          :timeout => timeout || TIMEOUT
+          :open_timeout => open_timeout || DEFAULTS[:open_timeout],
+          :timeout => timeout || DEFAULTS[:timeout]
         }
       }
     end

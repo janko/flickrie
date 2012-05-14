@@ -1,10 +1,7 @@
 require 'flickrie'
 require 'vcr'
 require 'active_support/core_ext/hash/except'
-begin
-  require 'debugger'
-rescue LoadError
-end
+require 'debugger' rescue nil
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'

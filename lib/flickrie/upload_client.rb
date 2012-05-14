@@ -28,7 +28,7 @@ module Flickrie
       {
         :url => 'http://api.flickr.com/services',
         :request => {
-          :open_timeout => open_timeout || OPEN_TIMEOUT
+          :open_timeout => open_timeout || DEFAULTS[:open_timeout]
         }
       }
     end
@@ -81,16 +81,13 @@ module Flickrie
     }.freeze
 
     def get_file(object, mime_type = nil)
-      if object.class.name == "String"
-        # file path
+      if object.class.name == "String" # file path
         file_path = object
         mime_type ||= get_mime_type(file_path)
-      elsif object.class.name == "ActionDispatch::Http::UploadedFile"
-        # Rails
+      elsif object.class.name == "ActionDispatch::Http::UploadedFile" # Rails
         file_path = object.tempfile
         mime_type ||= object.content_type
-      elsif object.class.name == "Hash"
-        # Sinatra
+      elsif object.class.name == "Hash" # Sinatra
         file_path = object[:tempfile].path
         mime_type ||= object[:type]
       end
@@ -108,11 +105,11 @@ module Flickrie
 
     def get_title(object)
       filename =
-        if object.class.name == "String"
+        if object.class.name == "String" # file path
           File.basename(object)
-        elsif object.class.name == "ActionDispatch::Http::UploadedFile"
+        elsif object.class.name == "ActionDispatch::Http::UploadedFile" # Rails
           object.original_filename
-        elsif object.class.name == "Hash"
+        elsif object.class.name == "Hash" # Sinatra
           object[:filename]
         end
 
