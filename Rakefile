@@ -10,9 +10,13 @@ task :console do
   end
 end
 
-RDoc::Task.new :rerdoc => "rdoc:force" do |rdoc|
-  rdoc.rdoc_files.include "lib/**/*.rb"
-  rdoc.rdoc_dir = "doc"
+begin
+  require 'rdoc/task'
+  RDoc::Task.new :rerdoc => "rdoc:force" do |rdoc|
+    rdoc.rdoc_files.include "lib/**/*.rb"
+    rdoc.rdoc_dir = "doc"
+  end
+rescue LoadError
 end
 
 # copied from Rails

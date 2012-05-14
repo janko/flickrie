@@ -44,7 +44,7 @@ module Flickrie
     end
   end
 
-  class UploadClient < Faraday::Connection
+  class UploadClient < Faraday::Connection # :nodoc:
     def upload(media, params = {})
       media_file = get_file(media, params[:mime_type])
       media_title = get_title(media)
