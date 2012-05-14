@@ -1,4 +1,6 @@
 # encoding: utf-8
+require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
+
 describe Flickrie::Instance do
   context "calling api methods" do
     use_vcr_cassette "instance/calling_api_methods"

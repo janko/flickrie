@@ -1,3 +1,5 @@
+require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
+
 describe Flickrie::License do
   context "get licenses" do
     use_vcr_cassette "license/get"

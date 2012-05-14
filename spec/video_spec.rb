@@ -1,3 +1,5 @@
+require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
+
 describe Flickrie::Video do
   context "get info" do
     use_vcr_cassette "video/get_info"
