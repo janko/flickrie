@@ -6,6 +6,13 @@ module Flickrie
       @access_token, @access_secret = access_token, access_secret
     end
 
+    # ==== Example
+    #
+    #   flickrie = Flickrie::Instance.new("ACCESS_TOKEN", "ACCESS_SECRET")
+    #
+    #   flickrie.client.get "flickr.photos.licenses.getInfo"
+    #   flickrie.client.post "flickr.photos.licenses.setLicense", :photo_id => 1241497, :license_id => 2
+    #
     def client
       @client ||= Flickrie.new_client(access_token_hash)
     end

@@ -39,6 +39,8 @@ module Flickrie
     alias photos_count media_count
     alias videos_count media_count
 
+    # The same as calling <tt>Flickrie.public_photos_from_user(user.nsid)</tt>
+    #
     def public_photos() Flickrie.public_photos_from_user(nsid) end
 
     def pro?() Integer(@info['ispro']) == 1 rescue nil end
@@ -46,6 +48,8 @@ module Flickrie
     def [](key) @info[key] end
     def hash() @info end
 
+    # The same as calling <tt>Flickrie.get_user_info(user.nsid)</tt>
+    #
     def get_info(params = {}, info = nil)
       info ||= Flickrie.client.get_user_info(nsid, params).body['person']
       @info.update(info)

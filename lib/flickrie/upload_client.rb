@@ -1,5 +1,6 @@
 module Flickrie
   class << self
+    # :nodoc:
     def upload_client
       @upload_client ||= new_upload_client
     end

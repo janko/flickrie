@@ -1,4 +1,6 @@
 module Flickrie
+  # See Flickrie::Media for the other methods.
+  #
   class Video
     include Media
 
@@ -15,6 +17,8 @@ module Flickrie
     def download_url()        @video['download_url']        end
     def mobile_download_url() @video['mobile_download_url'] end
 
+    # This fetches the #source_url, #download_url and the #mobile_download_url
+    #
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}

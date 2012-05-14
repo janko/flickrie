@@ -12,6 +12,15 @@ require 'flickrie/ticket'
 
 module Flickrie
   module ApiMethods
+    # ==== Example
+    #
+    #   path = File.expand_path("photo.jpg")
+    #   id = Flickrie.upload(path, :title => "Me and Jessica", :description => "...")
+    #   photo = Flickrie.get_photo_info(id)
+    #   photo.title # => "Me and Jessica"
+    #
+    # If the <tt>:async => 1</tt> option is passed, returns the ticket ID.
+    #
     def upload(media, params = {})
       response = upload_client.upload(media, params)
       if params[:async] == 1
@@ -21,6 +30,16 @@ module Flickrie
       end
     end
 
+    # ==== Example
+    #
+    #   path = File.expand_path("photo.jpg")
+    #   photo_id = 42374 # ID of the photo to be replaced
+    #   id = Flickrie.replace(path, photo_id, :title => "Me and Jessica", :description => "...")
+    #   photo = Flickrie.get_photo_info(id)
+    #   photo.title # => "Me and Jessica"
+    #
+    # If the <tt>:async => 1</tt> option is passed, returns the ticket ID.
+    #
     def replace(media, media_id, params = {})
       response = upload_client.replace(media, media_id, params)
       if params[:async] == 1
@@ -169,6 +188,8 @@ module Flickrie
 
     #--
     # photos.upload
+    #++
+    # Returns an array of Flickrie::Ticket
     def check_upload_tickets(tickets, params = {})
       tickets = tickets.join(',') if tickets.respond_to?(:join)
       response = client.check_upload_tickets(tickets, params)
@@ -178,6 +199,8 @@ module Flickrie
 
     #--
     # licenses
+    #++
+    # Returns an array of Flickrie::License
     def get_licenses(params = {})
       response = client.get_licenses(params)
       License.from_hash(response.body['licenses']['license'])

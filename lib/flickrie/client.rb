@@ -2,8 +2,7 @@ require 'faraday_middleware'
 
 module Flickrie
   class << self
-    # :nodoc:
-    def self.attr_accessor_with_client_reset(*attributes)
+    def self.attr_accessor_with_client_reset(*attributes) # :nodoc:
       attr_reader *attributes
 
       attributes.each do |attribute|
@@ -14,15 +13,19 @@ module Flickrie
       end
     end
 
-    # :doc:
     attr_accessor_with_client_reset :api_key, :shared_secret,
       :timeout, :open_timeout, :access_token, :access_secret
 
+    # ==== Example
+    #
+    #   Flickrie.client.get  "flickr.photos.licenses.getInfo"
+    #   Flickrie.client.post "flickr.photos.licenses.setLicense", :photo_id => 1241497, :license_id => 2
+    #
     def client
       @client ||= new_client
     end
 
-    def new_client(access_token_hash = {})
+    def new_client(access_token_hash = {}) # :nodoc:
       Client.new(params) do |conn|
         conn.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
@@ -86,7 +89,7 @@ module Flickrie
     end
   end
 
-  class Client < Faraday::Connection
+  class Client < Faraday::Connection # :nodoc:
     def get(method, params = {})
       super() do |req|
         req.params[:method] = method

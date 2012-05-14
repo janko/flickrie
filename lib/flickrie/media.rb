@@ -30,12 +30,22 @@ module Flickrie
     def views_count()    Integer(@info['views'])          rescue nil end
     def comments_count() Integer(@info['comments_count']) rescue nil end
 
+    # Returns an instance of Flickrie::Location
+    #
     def location() Location.new(@info['location']) rescue nil end
+    # Returns an instance of Flickrie::Media::Visibility
+    #
     def geo_permissions() Visibility.new(@info['geoperms']) rescue nil end
 
+    # Returns an array of Flickrie::Media::Tag
+    #
     def tags() @info['tags'].map { |info| Tag.new(info) }     rescue nil end
+    # Returns an array of Flickrie::Media::Tag
+    #
     def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
 
+    # Returns an instance of Flickrie::License
+    #
     def license() License.new(@info['license']) rescue nil end
 
     def posted_at()   Time.at(Integer(@info['dates']['posted']))           rescue nil end
@@ -44,6 +54,8 @@ module Flickrie
     def taken_at()    DateTime.parse(@info['dates']['taken']).to_time      rescue nil end
     def taken_at_granularity() Integer(@info['dates']['takengranularity']) rescue nil end
 
+    # Returns an instance of Flickrie::User
+    #
     def owner() User.new(@info['owner']) rescue nil end
 
     def safety_level() Integer(@info['safety_level']) rescue nil end
@@ -52,6 +64,7 @@ module Flickrie
     def moderate?()   safety_level == 2 if safety_level end
     def restricted?() safety_level == 3 if safety_level end
 
+    #--
     # TODO: Take care about the url from #get_info
     def url
       if owner and id
@@ -61,6 +74,8 @@ module Flickrie
       end
     end
 
+    # Returns an instance of Flickrie::Media::Visibility
+    #
     def visibility() Visibility.new(@info['visibility']) rescue nil end
 
     def primary?() Integer(@info['isprimary']) == 1 rescue nil end
@@ -82,8 +97,12 @@ module Flickrie
 
     def faved?() Integer(@info['is_faved']) == 1 rescue nil end
 
+    # Returns an array of Flickrie::Media::Note
+    #
     def notes() @info['notes']['note'].map { |hash| Note.new(hash) } rescue nil end
 
+    # Returns an array of Flickrie::User
+    #
     def favorites() @info['person'].map { |info| User.new(info) } rescue nil end
 
     def [](key) @info[key] end
