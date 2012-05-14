@@ -1,0 +1,73 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.getInfo&user_id=67131352%40N04
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="81764767ae4418713e79d1357a8ddf28", oauth_signature="BrymGEDuxLLUlHgPciWO%2FphfHtU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013935", oauth_token="", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 14 May 2012 16:45:35 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www121.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "416"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"person\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"ispro\":0, \"iconserver\":\"5464\", \"iconfarm\":6, \"path_alias\":null, \"username\":{\"_content\":\"Janko Marohni\\u0107\"}, \"realname\":{\"_content\":\"Janko Marohni\\u0107\"}, \"location\":{\"_content\":\"Zagreb, Croatia\"}, \"timezone\":{\"label\":\"Sarajevo, Skopje, Warsaw, Zagreb\", \"offset\":\"+01:00\"}, \"description\":{\"_content\":\"I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.\"}, \"photosurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/\"}, \"profileurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/people\\/67131352@N04\\/\"}, \"mobileurl\":{\"_content\":\"http:\\/\\/m.flickr.com\\/photostream.gne?id=67099213\"}, \"photos\":{\"firstdatetaken\":{\"_content\":\"2011-03-20 12:29:43\"}, \"firstdate\":{\"_content\":\"1334832295\"}, \"count\":{\"_content\":98}}}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 14 May 2012 16:45:36 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.getInfo&user_id=67131352%40N04
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c9e8ac45505126c2fd826c81ca99b1f9", oauth_signature="Q34xtj4IkInWak%2BmNX39z74RsRU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013936", oauth_token="", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 14 May 2012 16:45:36 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www87.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "416"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"person\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"ispro\":0, \"iconserver\":\"5464\", \"iconfarm\":6, \"path_alias\":null, \"username\":{\"_content\":\"Janko Marohni\\u0107\"}, \"realname\":{\"_content\":\"Janko Marohni\\u0107\"}, \"location\":{\"_content\":\"Zagreb, Croatia\"}, \"timezone\":{\"label\":\"Sarajevo, Skopje, Warsaw, Zagreb\", \"offset\":\"+01:00\"}, \"description\":{\"_content\":\"I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.\"}, \"photosurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/\"}, \"profileurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/people\\/67131352@N04\\/\"}, \"mobileurl\":{\"_content\":\"http:\\/\\/m.flickr.com\\/photostream.gne?id=67099213\"}, \"photos\":{\"firstdatetaken\":{\"_content\":\"2011-03-20 12:29:43\"}, \"firstdate\":{\"_content\":\"1334832295\"}, \"count\":{\"_content\":98}}}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 14 May 2012 16:45:36 GMT
+recorded_with: VCR 2.1.1
