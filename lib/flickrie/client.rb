@@ -27,14 +27,14 @@ module Flickrie
 
     def new_client(access_token_hash = {}) # :nodoc:
       Client.new(params) do |conn|
-        conn.use FaradayMiddleware::OAuth,
+        conn.request :oauth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
           :token => access_token_hash[:token] || access_token,
           :token_secret => access_token_hash[:secret] || access_secret
 
         conn.use StatusCheck
-        conn.use FaradayMiddleware::ParseJson, :content_type => /(text\/plain)|(json)$/
+        conn.response :json, :content_type => /(text\/plain)|(json)$/
         conn.use OAuthStatusCheck
 
         conn.adapter Faraday.default_adapter

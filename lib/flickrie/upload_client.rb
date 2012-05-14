@@ -7,7 +7,7 @@ module Flickrie
 
     def new_upload_client(access_token_hash = {})
       UploadClient.new(upload_params) do |conn|
-        conn.use FaradayMiddleware::OAuth,
+        conn.request :oauth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
           :token => access_token_hash[:token] || access_token,
@@ -15,7 +15,7 @@ module Flickrie
         conn.request :multipart
 
         conn.use UploadStatusCheck
-        conn.use FaradayMiddleware::ParseXml
+        conn.response :xml
         conn.use OAuthStatusCheck
 
         conn.adapter Faraday.default_adapter
