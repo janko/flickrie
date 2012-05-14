@@ -2,11 +2,18 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 
 task :console do
+  credentials = [
+    "Flickrie.api_key = ENV['FLICKR_API_KEY']",
+    "Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']",
+    "Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']",
+    "Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']"
+  ].join('; ') if ENV['FLICKR_API_KEY']
   begin
     require 'pry'
-    system "bundle exec pry -I. --require 'flickrie' --require 'credentials'"
+    fill_credentials = %( --exec "#{credentials}; 'Credentials were filled in.'") if credentials
+    system %(pry --require "flickrie") + fill_credentials.to_s
   rescue LoadError
-    system "bundle exec irb -I. -r 'flickrie' -r 'credentials'"
+    system "irb -r 'flickrie'"
   end
 end
 
