@@ -47,6 +47,7 @@ RSpec.configure do |config|
     # so that I can use the '@instance' object when I want to make authenticated API calls
     @flickrie = Flickrie::Instance.new(ENV['FLICKR_ACCESS_TOKEN'], ENV['FLICKR_ACCESS_SECRET'])
   end
+  config.fail_fast = true
 end
 
 PHOTO_PATH = File.join(File.expand_path(File.dirname(__FILE__)), 'files/photo.jpg').freeze
