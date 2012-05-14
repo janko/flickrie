@@ -18,7 +18,7 @@ module Flickrie
         conn.response :xml
         conn.use OAuthStatusCheck
 
-        conn.adapter Faraday.default_adapter
+        conn.adapter :net_http
       end
     end
 

@@ -19,7 +19,7 @@ module Flickrie
         conn.use StatusCheck
         conn.use ParseResponseParams
 
-        conn.adapter Faraday.default_adapter
+        conn.adapter :net_http
       end
     end
 

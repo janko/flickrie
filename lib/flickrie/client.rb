@@ -42,7 +42,7 @@ module Flickrie
         conn.response :json, :content_type => /(text\/plain)|(json)$/
         conn.use OAuthStatusCheck
 
-        conn.adapter Faraday.default_adapter
+        conn.adapter :net_http
       end
     end
 
