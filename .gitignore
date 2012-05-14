@@ -2,5 +2,6 @@ TODO.md
 Gemfile.lock
 pkg/
 doc/
+wiki/
 .DS_Store
 api_methods.md
