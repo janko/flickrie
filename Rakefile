@@ -1,5 +1,6 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
+require 'rdoc/task' rescue nil
 
 task "spec" do |task, args|
   system "bundle exec rspec -I spec --require 'spec_helper'"
@@ -21,7 +22,7 @@ task :console do
   end
 end
 
-task :rdoc do
-  system "rm -rf doc/"
-  system "rdoc lib/"
+RDoc::Task.new :rerdoc => "rdoc:force" do |rdoc|
+  rdoc.rdoc_files.include "lib/**/*.rb"
+  rdoc.rdoc_dir = "doc"
 end
