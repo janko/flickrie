@@ -1,12 +1,14 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-task :spec, :spec do |task, args|
-  command = "bundle exec rspec -I spec --require 'spec_helper'"
-  if args['spec'].nil?
-    system(command)
-  else
-    system(command + " spec/#{args['spec']}_spec.rb")
+task "spec" do |task, args|
+  system "bundle exec rspec -I spec --require 'spec_helper'"
+end
+
+Dir["spec/*_spec.rb"].each do |spec|
+  task_name = File.basename(spec)[/.+(?=_spec\.rb)/]
+  task "spec:#{task_name}" do
+    system "bundle exec rspec -I spec --require 'spec_helper' #{spec}"
   end
 end
 
