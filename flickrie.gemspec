@@ -14,7 +14,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "flickrie"
   gem.require_paths = ["lib"]
-  gem.version       = Flickrie::VERSION
 
   gem.license       = "MIT"
 
