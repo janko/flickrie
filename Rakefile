@@ -1,29 +1,40 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-task :console do
-  credentials = [
-    "Flickrie.api_key = ENV['FLICKR_API_KEY']",
-    "Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']",
-    "Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']",
-    "Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']"
-  ].join('; ') if ENV['FLICKR_API_KEY']
-  begin
-    require 'pry'
-    fill_credentials = %( --exec "#{credentials}; 'Credentials were filled in.'") if credentials
-    system %(pry --require "flickrie") + fill_credentials.to_s
-  rescue LoadError
-    system "irb -r 'flickrie'"
+desc "Run the specs (use spec:name to run a single spec)"
+task :spec do |task, args|
+  system "bundle exec rspec"
+end
+
+Dir["spec/*_spec.rb"].each do |spec|
+  task_name = File.basename(spec)[/.+(?=_spec\.rb)/]
+  task :"spec:#{task_name}" do
+    system "bundle exec rspec #{spec}"
   end
 end
 
-begin
-  require 'rdoc/task'
-  RDoc::Task.new :rerdoc => "rdoc:force" do |rdoc|
-    rdoc.rdoc_files.include "lib/**/*.rb"
-    rdoc.rdoc_dir = "doc"
+desc "Open the console with credentials (API key, secret etc.) already filled in"
+task :console do
+  File.open("credentials.rb", "w") do |f|
+    f.write <<-CREDENTIALS
+      Flickrie.api_key = ENV['FLICKR_API_KEY']
+      Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
+      Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']
+      Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']
+    CREDENTIALS
   end
-rescue LoadError
+  begin
+    require 'pry'
+    system "bundle exec pry --require 'flickrie' --require './credentials'"
+  rescue LoadError
+    system "bundle exec irb -r 'flickrie' -r './credentials'"
+  end
+  FileUtils.remove_file "credentials.rb"
+end
+
+task :rdoc do
+  FileUtils.rm_rf "doc"
+  system "rdoc lib/"
 end
 
 # copied from Rails
