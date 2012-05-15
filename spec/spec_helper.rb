@@ -1,6 +1,9 @@
 require 'flickrie'
 require 'vcr'
-require 'debugger' rescue nil
+begin
+  require 'debugger'
+rescue LoadError
+end
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
