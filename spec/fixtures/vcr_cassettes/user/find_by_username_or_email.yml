@@ -2,26 +2,26 @@
 http_interactions: 
 - request: 
     method: get
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.findByUsername&username=Janko+Marohni%C4%87
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.findByUsername&username=Janko%20Marohni%C4%87
     body: 
       encoding: US-ASCII
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="b39d3e74d4f682c93affde0903257cd1", oauth_signature="GrGM4Fl4TjMUWPxdvswaOfD%2BIQA%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013936", oauth_token="", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="bbd163d0042874b0dfe56fb5c9dad1f3", oauth_signature="capQP%2F7g0fDMEFnzT5jH1C6iW%2BE%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337098036", oauth_token="", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:36 GMT
+      - Tue, 15 May 2012 16:07:16 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www114.flickr.mud.yahoo.com
+      - www4.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -34,7 +34,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"user\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"username\":{\"_content\":\"Janko Marohni\\u0107\"}}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:36 GMT
+  recorded_at: Tue, 15 May 2012 16:07:16 GMT
 - request: 
     method: get
     uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.findByEmail&find_email=janko.marohnic%40gmail.com
@@ -43,20 +43,20 @@ http_interactions:
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="ece88f5e40847869d947564163fcda18", oauth_signature="3j%2FeDuYHgG40LaSVaYr1LcFIYXE%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013936", oauth_token="", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="e1f890c835b68a4fc0156197ba87a7ef", oauth_signature="9KQMkDl39NNTMZy22szQOrLLjsc%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337098036", oauth_token="", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:37 GMT
+      - Tue, 15 May 2012 16:07:17 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www141.flickr.mud.yahoo.com
+      - www12.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -69,5 +69,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"user\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"username\":{\"_content\":\"Janko Marohni\\u0107\"}}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:37 GMT
+  recorded_at: Tue, 15 May 2012 16:07:17 GMT
 recorded_with: VCR 2.1.1

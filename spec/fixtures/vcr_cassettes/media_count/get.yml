@@ -2,26 +2,26 @@
 http_interactions: 
 - request: 
     method: get
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getCounts&taken_dates=2012-03-01+00%3A00%3A00+UTC%2C2012-05-05+00%3A00%3A00+UTC
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getCounts&taken_dates=2012-03-01%2000%3A00%3A00%20UTC%2C2012-05-05%2000%3A00%3A00%20UTC
     body: 
       encoding: US-ASCII
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="d38bc757b83c140328eb688200e2902c", oauth_signature="ARgIKQHJytmJXuOBWFJtm%2Fz35Z4%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013908", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="fafa14f2a9454089a177be7cac15c252", oauth_signature="nstmD9wxZJtrLi%2BH%2B0m0yij8M8Y%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337098035", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:08 GMT
+      - Tue, 15 May 2012 16:07:15 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www110.flickr.mud.yahoo.com
+      - www128.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -34,7 +34,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"photocounts\":{\"photocount\":[{\"count\":\"1\", \"fromdate\":\"2012-03-01 00:00:00\", \"todate\":\"2012-05-05 00:00:00\"}]}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:09 GMT
+  recorded_at: Tue, 15 May 2012 16:07:15 GMT
 - request: 
     method: get
     uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getCounts&dates=1330560000%2C1336176000
@@ -43,20 +43,20 @@ http_interactions:
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="db6e2ccd3ddfc1d3f98db0fd16b4612a", oauth_signature="bd%2B6BHR%2BBZt1T7xbX2Xfvj9OlSI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013909", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="07337898474bc1af47d91bab4d8b2ce3", oauth_signature="2g7upcSg3pxihFQYizGx8Xx7jAs%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337098035", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:09 GMT
+      - Tue, 15 May 2012 16:07:16 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www99.flickr.mud.yahoo.com
+      - www194.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -69,5 +69,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"photocounts\":{\"photocount\":[{\"count\":\"98\", \"fromdate\":\"1330560000\", \"todate\":\"1336176000\"}]}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:09 GMT
+  recorded_at: Tue, 15 May 2012 16:07:16 GMT
 recorded_with: VCR 2.1.1
