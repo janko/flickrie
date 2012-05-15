@@ -3,6 +3,7 @@ source :rubygems
 gemspec
 
 group :development, :test do
+  gem "faraday", '0.7.4'
 end
 
 # You can run `bundle [install] --without debugger pry` if
