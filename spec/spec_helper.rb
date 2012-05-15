@@ -1,6 +1,5 @@
 require 'flickrie'
 require 'vcr'
-require 'active_support/core_ext/hash/except'
 require 'debugger' rescue nil
 
 VCR.configure do |config|
@@ -68,5 +67,16 @@ klasses.each do |klass|
     def public_new(*args)
       new(*args)
     end
+  end
+end
+
+class Hash
+  def except!(*keys)
+    keys.each { |key| delete(key) }
+    self
+  end
+
+  def except(*keys)
+    self.dup.except!(*keys)
   end
 end
