@@ -114,9 +114,7 @@ describe Flickrie::Media do
   end
 
   context "get info" do
-    use_vcr_cassette "media/get_info"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       [
         Flickrie.get_media_info(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_info,
@@ -171,9 +169,8 @@ describe Flickrie::Media do
 
   context "from set" do
     include_context "common"
-    use_vcr_cassette "media/from_set"
 
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       media = Flickrie.media_from_set(SET_ID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
@@ -183,9 +180,8 @@ describe Flickrie::Media do
 
   context "public from user" do
     include_context "common"
-    use_vcr_cassette "media/public_from_user"
 
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       media = Flickrie.public_media_from_user(USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
@@ -195,9 +191,8 @@ describe Flickrie::Media do
 
   context "search" do
     include_context "common"
-    use_vcr_cassette "media/search"
 
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       media = Flickrie.search_media(:user_id => USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
@@ -206,9 +201,7 @@ describe Flickrie::Media do
   end
 
   context "from contacts" do
-    use_vcr_cassette "media/from_contacts"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       params = {:include_self => 1, :single_photo => 1}
       [
         @flickrie.media_from_contacts(params).first,
@@ -229,9 +222,7 @@ describe Flickrie::Media do
   end
 
   context "get context" do
-    use_vcr_cassette "media/get_context"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       context = Flickrie.get_media_context(PHOTO_ID)
       context['count'].should eq(98)
       context['prevphoto'].title.should eq('IMG_0795')
@@ -254,9 +245,7 @@ describe Flickrie::Media do
   end
 
   context "get exif" do
-    use_vcr_cassette "media/get_exif"
-
-    it "should get exif correctly" do
+    it "should get exif correctly", :vcr do
       [
         Flickrie.get_photo_exif(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_exif

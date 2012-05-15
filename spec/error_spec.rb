@@ -5,19 +5,13 @@ describe Flickrie::Error do
     Flickrie.api_key = nil
   end
 
-  context "was raised" do
-    use_vcr_cassette "error/was_raised"
-
-    it "should be raised when the request failed" do
+  context "a request was made and failed" do
+    it "should be raised", :vcr do
       expect { Flickrie.get_licenses }.to raise_error(described_class)
       expect { Flickrie.upload(PHOTO_PATH) }.to raise_error(described_class)
     end
-  end
 
-  context "code" do
-    use_vcr_cassette "error/code"
-
-    it "should have #code attribute present" do
+    it "should have #code attribute present", :vcr do
       begin
         Flickrie.get_licenses
       rescue => exception

@@ -2,9 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
 
 describe Flickrie::OAuth do
   context "incorrect credentials" do
-    use_vcr_cassette "oauth/incorrect_credentials"
-
-    it "should raise exceptions" do
+    it "should raise exceptions", :vcr do
       Flickrie.api_key = "foo"
       Flickrie.shared_secret = "foo"
 

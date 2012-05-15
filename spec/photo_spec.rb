@@ -53,9 +53,7 @@ describe Flickrie::Photo do
   end
 
   context "get sizes" do
-    use_vcr_cassette "photo/get_sizes"
-
-    it "should have attributes correctly set" do
+    it "should have attributes correctly set", :vcr do
       [
         Flickrie.get_photo_sizes(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_sizes
@@ -72,9 +70,7 @@ describe Flickrie::Photo do
   end
 
   context "search" do
-    use_vcr_cassette "photo/search"
-
-    it "should have all sizes available" do
+    it "should have all sizes available", :vcr do
       photo = Flickrie.search_photos(:user_id => USER_NSID, :extras => EXTRAS).
         find { |photo| photo.id == PHOTO_ID }
       photo.available_sizes.should eq(SIZES)
@@ -82,9 +78,7 @@ describe Flickrie::Photo do
   end
 
   context "get info" do
-    use_vcr_cassette "photo/get_info"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       photo = Flickrie.get_photo_info(PHOTO_ID)
       photo.rotation.should eq(90)
     end

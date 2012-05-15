@@ -41,15 +41,32 @@ module RSpecHelpers
 end
 
 RSpec.configure do |config|
-  config.extend VCR::RSpec::Macros
   config.include RSpecHelpers
   config.before(:all) do
+RSpec.configure do |c|
+  c.include RSpecHelpers
+  c.before(:all) do
     Flickrie.api_key = ENV['FLICKR_API_KEY']
     Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
     # so that I can use the '@instance' object when I want to make authenticated API calls
     @flickrie = Flickrie::Instance.new(ENV['FLICKR_ACCESS_TOKEN'], ENV['FLICKR_ACCESS_SECRET'])
   end
   config.fail_fast = true
+  c.treat_symbols_as_metadata_keys_with_true_values = true
+  c.around(:each, :vcr) do |example|
+    if example.metadata[:cassette].nil?
+      # the example is also wrapped in a 'context' block
+      class_name = example.metadata[:example_group][:example_group][:description_args].first.to_s
+      cassette_name = example.metadata[:example_group][:description_args].first
+    else
+      # the example isn't wrapped in a 'context' block
+      class_name = example.metadata[:example_group][:description_args].first.to_s
+      cassette_name = example.metadata[:cassette]
+    end
+
+    folder = class_name.to_s.match(/^Flickrie::/).post_match.to_file_path
+    VCR.use_cassette("#{folder}/#{cassette_name}") { example.call }
+  end
 end
 
 PHOTO_PATH = File.join(File.expand_path(File.dirname(__FILE__)), 'files/photo.jpg').freeze
@@ -81,5 +98,11 @@ class Hash
 
   def except(*keys)
     self.dup.except!(*keys)
+  end
+end
+
+class String
+  def to_file_path
+    split("::").collect { |klass| klass.split(/(?=[A-Z])/).map(&:downcase).join('_') }.join('/')
   end
 end

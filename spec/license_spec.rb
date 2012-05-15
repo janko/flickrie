@@ -1,10 +1,8 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
 
 describe Flickrie::License do
-  context "get licenses" do
-    use_vcr_cassette "license/get"
-
-    it "should have all attributes correctly set" do
+  context "get" do
+    it "should have all attributes correctly set", :vcr do
       licenses = Flickrie.get_licenses
 
       licenses.each do |license|

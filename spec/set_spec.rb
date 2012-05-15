@@ -43,9 +43,7 @@ describe Flickrie::Set do
   end
 
   context "get info" do
-    use_vcr_cassette "set/get_info"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       [
         Flickrie.get_set_info(SET_ID),
         Flickrie::Set.public_new('id' => SET_ID).get_info
@@ -57,9 +55,7 @@ describe Flickrie::Set do
   end
 
   context "from user" do
-    use_vcr_cassette "set/from_user"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       set = Flickrie.sets_from_user(USER_NSID).find { |set| set.id == SET_ID }
       test_common_attributes(set)
       set.needs_interstitial?.should be_false

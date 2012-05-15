@@ -2,9 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
 
 describe Flickrie::Video do
   context "get info" do
-    use_vcr_cassette "video/get_info"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       video = Flickrie.get_video_info(VIDEO_ID)
 
       video.ready?.should be_true
@@ -22,9 +20,7 @@ describe Flickrie::Video do
   end
 
   context "get sizes" do
-    use_vcr_cassette "video/get_sizes"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       [
         Flickrie.get_video_sizes(VIDEO_ID),
         Flickrie::Video.public_new('id' => VIDEO_ID).get_sizes

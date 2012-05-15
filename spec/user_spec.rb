@@ -3,9 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
 
 describe Flickrie::User do
   context "get info" do
-    use_vcr_cassette "user/get_info"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       [
         Flickrie.get_user_info(USER_NSID),
         Flickrie::User.public_new('nsid' => USER_NSID).get_info
@@ -40,9 +38,7 @@ describe Flickrie::User do
   end
 
   context "find by username or email" do
-    use_vcr_cassette "user/find_by_username_or_email"
-
-    it "should have all attributes correctly set" do
+    it "should have all attributes correctly set", :vcr do
       [
         Flickrie.find_user_by_username('Janko Marohnić'),
         Flickrie.find_user_by_email('janko.marohnic@gmail.com')

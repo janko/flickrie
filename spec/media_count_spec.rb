@@ -2,9 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "spec_helper"))
 
 describe Flickrie::MediaCount do
   context "get" do
-    use_vcr_cassette "media_count/get"
-
-    it "should have correctly set all attributes" do
+    it "should have correctly set all attributes", :vcr do
       dates = [DateTime.parse("1st March 2012"), DateTime.parse("5th May 2012")].map(&:to_time)
       [
         @flickrie.get_media_counts(:taken_dates => dates.join(',')).first,
