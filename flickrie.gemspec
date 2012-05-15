@@ -2,7 +2,6 @@
 require File.expand_path("../lib/flickrie/version", __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.required_ruby_version = ">= 1.9.0"
   gem.version       = Flickrie::VERSION
 
 
@@ -18,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.license       = "MIT"
+  gem.required_ruby_version = ">= 1.9.2"
 
   gem.add_dependency "faraday_middleware", '>= 0.8.7'
   gem.add_dependency "simple_oauth", '~> 0.1'
