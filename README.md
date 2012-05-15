@@ -244,6 +244,7 @@ basis of this gem.
 "flickr.people.findByEmail"             -> Flickrie.find_user_by_email
 "flickr.people.findByUsername"          -> Flickrie.find_user_by_username
 "flickr.people.getInfo"                 -> Flickrie.get_user_info
+"flickr.people.getPhotos"               -> Flickrie.photos_from_user
 "flickr.people.getPublicPhotos"         -> Flickrie.public_photos_from_user
 
 # photos

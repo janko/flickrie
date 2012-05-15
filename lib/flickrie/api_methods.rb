@@ -66,6 +66,19 @@ module Flickrie
       User.from_info(response.body['person'])
     end
 
+    def media_from_user(user_nsid, params = {})
+      response = client.media_from_user(user_nsid, params)
+      Media.from_user(response.body['photos'])
+    end
+    def photos_from_user(user_nsid, params = {})
+      media_from_user(user_nsid, params).
+        select { |media| media.is_a?(Photo) }
+    end
+    def videos_from_user(user_nsid, params = {})
+      media_from_user(user_nsid, params).
+        select { |media| media.is_a?(Video) }
+    end
+
     def public_media_from_user(user_nsid, params = {})
       response = client.public_media_from_user(user_nsid, params)
       Media.from_user(response.body['photos'])

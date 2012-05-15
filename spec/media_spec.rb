@@ -178,6 +178,17 @@ describe Flickrie::Media do
     end
   end
 
+  context "from user" do
+    include_context "common"
+
+    it "should have all attributes correctly set", :vcr do
+      media = @flickrie.media_from_user(USER_NSID, :extras => EXTRAS).
+        find { |media| media.id == PHOTO_ID }
+      test_common_attributes(media)
+      test_attribute(media, :visibility)
+    end
+  end
+
   context "public from user" do
     include_context "common"
 

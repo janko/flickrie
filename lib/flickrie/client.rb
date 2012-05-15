@@ -123,6 +123,11 @@ module Flickrie
         {:user_id => user_nsid}.merge(params)
     end
 
+    def media_from_user(user_nsid, params = {})
+      get 'flickr.people.getPhotos',
+        ensure_media({:user_id => user_nsid}.merge(params))
+    end
+
     def public_media_from_user(user_nsid, params = {})
       get 'flickr.people.getPublicPhotos',
         ensure_media({:user_id => user_nsid}.merge(params))
