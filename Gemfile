@@ -2,7 +2,7 @@ source :rubygems
 
 gemspec
 
-group :development, :test do
+group :test do
   gem "faraday", '0.7.4'
 end
 
