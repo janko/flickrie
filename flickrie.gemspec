@@ -26,5 +26,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake", '~> 0.9'
   gem.add_development_dependency "rspec", '>= 2'
-  gem.add_development_dependency "vcr", '>= 2', '< 3'
+  gem.add_development_dependency "vcr", '~> 2.1'
 end
