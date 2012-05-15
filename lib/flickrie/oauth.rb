@@ -8,13 +8,11 @@ module Flickrie
 
     # :nodoc:
     def self.new_connection(additional_oauth_params = {})
-      oauth_params = {
-        :consumer_key => Flickrie.api_key,
-        :consumer_secret => Flickrie.shared_secret
-      }.merge(additional_oauth_params)
-
       Faraday.new(URL) do |conn|
-        conn.use FaradayMiddleware::OAuth, oauth_params
+        conn.use FaradayMiddleware::OAuth, {
+            :consumer_key => Flickrie.api_key,
+            :consumer_secret => Flickrie.shared_secret
+          }.merge(additional_oauth_params)
 
         conn.use StatusCheck
         conn.use ParseResponseParams
