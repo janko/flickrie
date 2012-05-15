@@ -20,6 +20,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 1.9.2"
 
   gem.add_dependency "faraday_middleware", '>= 0.8.7', '< 0.9'
+  gem.add_dependency "faraday", '>= 0.7.6', '< 0.9'
   gem.add_dependency "simple_oauth", '~> 0.1'
   gem.add_dependency "multi_xml", '~> 0.4'
 
