@@ -2,7 +2,8 @@
 require File.expand_path("../lib/flickrie/version", __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.version       = Flickrie::VERSION
+  gem.name         = "flickrie"
+  gem.version      = Flickrie::VERSION
 
   gem.author       = "Janko Marohnić"
   gem.email        = "janko.marohnic@gmail.com"
@@ -11,9 +12,8 @@ Gem::Specification.new do |gem|
   gem.homepage     = "https://github.com/janko-m/flickrie"
 
   gem.files        = `git ls-files`.split($\)
-  gem.test_files   = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name         = "flickrie"
   gem.require_path = "lib"
+  gem.test_files   = gem.files.grep(%r{^(test|spec|features)/})
 
   gem.license      = "MIT"
 
