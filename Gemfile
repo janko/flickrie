@@ -3,7 +3,6 @@ source :rubygems
 gemspec
 
 group :development, :test do
-  gem "rake"
 end
 
 # You can run `bundle [install] --without debugger pry` if
