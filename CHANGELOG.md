@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 0.7.2
+
+- specified versions of dependencies and Ruby accurately
+
 ## Version 0.7.1
 
 - fixed an oauth bug
