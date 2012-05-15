@@ -1,5 +1,10 @@
 # Flickrie changelog
 
+## Version 0.7.3
+
+- covered "flickr.people.getPhotos" (I released it as a patch because
+  it's important)
+
 ## Version 0.7.2
 
 - specified versions of dependencies and Ruby accurately
