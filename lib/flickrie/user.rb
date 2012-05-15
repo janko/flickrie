@@ -18,8 +18,8 @@ module Flickrie
 
     def buddy_icon_url
       if icon_farm
-        if icon_server.to_i > 0
-          "http://farm{#{icon_farm}}.staticflickr.com/{#{icon_server}}/buddyicons/#{nsid}.jpg"
+        if icon_server.to_i > 0 && (nsid || id)
+          "http://farm{#{icon_farm}}.staticflickr.com/{#{icon_server}}/buddyicons/#{nsid || id}.jpg"
         else
           "http://www.flickr.com/images/buddyicon.jpg"
         end
@@ -41,7 +41,7 @@ module Flickrie
 
     # The same as calling <tt>Flickrie.public_photos_from_user(user.nsid)</tt>
     #
-    def public_photos() Flickrie.public_photos_from_user(nsid) end
+    def public_photos() Flickrie.public_photos_from_user(nsid || id) end
 
     def pro?() Integer(@info['ispro']) == 1 rescue nil end
 
@@ -51,7 +51,7 @@ module Flickrie
     # The same as calling <tt>Flickrie.get_user_info(user.nsid)</tt>
     #
     def get_info(params = {}, info = nil)
-      info ||= Flickrie.client.get_user_info(nsid, params).body['person']
+      info ||= Flickrie.client.get_user_info(nsid || id, params).body['person']
       @info.update(info)
 
       %w[username realname location description profileurl
