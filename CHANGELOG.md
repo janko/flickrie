@@ -3,14 +3,14 @@
 ## Version 0.7.1
 
 - fixed an oauth bug
-- add `#hash` method to photos, sets etc. which you can call to get the
+- added `#hash` method to photos, sets etc. which you can call to get the
   raw data (in Ruby hash). This is useful if I accidentally left something out,
-  or if Flickr added something new that I didn't cover yet, so you can
+  or if Flickr added something new that I didn't cover yet, that you can
   still get to the data. `#[]` reads from the same hash.
 
 ## Version 0.7.0
 
-- cover `flickr.photos.getFavorites` and `flickr.test.login`
+- covered `flickr.photos.getFavorites` and `flickr.test.login`
 - bug fixes (especially regarding the `Flickr::Instance`)
 
 ## Version 0.6.1
