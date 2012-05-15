@@ -5,18 +5,6 @@ begin
 rescue LoadError
 end
 
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.hook_into :faraday
-  config.default_cassette_options = {
-    :record => :new_episodes,
-    :serialize_with => :syck,
-    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)]
-  }
-  config.filter_sensitive_data('API_KEY') { ENV['FLICKR_API_KEY'] }
-  config.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
-end
-
 module RSpecHelpers
   def test_attribute(object, attribute, hash = nil)
     expectation = hash || @attributes[attribute]
@@ -40,9 +28,6 @@ module RSpecHelpers
   end
 end
 
-RSpec.configure do |config|
-  config.include RSpecHelpers
-  config.before(:all) do
 RSpec.configure do |c|
   c.include RSpecHelpers
   c.before(:all) do
@@ -51,7 +36,6 @@ RSpec.configure do |c|
     # so that I can use the '@instance' object when I want to make authenticated API calls
     @flickrie = Flickrie::Instance.new(ENV['FLICKR_ACCESS_TOKEN'], ENV['FLICKR_ACCESS_SECRET'])
   end
-  config.fail_fast = true
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.around(:each, :vcr) do |example|
     if example.metadata[:cassette].nil?
@@ -67,6 +51,19 @@ RSpec.configure do |c|
     folder = class_name.to_s.match(/^Flickrie::/).post_match.to_file_path
     VCR.use_cassette("#{folder}/#{cassette_name}") { example.call }
   end
+  c.fail_fast = true
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  c.hook_into :faraday
+  c.default_cassette_options = {
+    :record => :new_episodes,
+    :serialize_with => :syck,
+    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)]
+  }
+  c.filter_sensitive_data('API_KEY') { ENV['FLICKR_API_KEY'] }
+  c.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
 end
 
 PHOTO_PATH = File.join(File.expand_path(File.dirname(__FILE__)), 'files/photo.jpg').freeze
