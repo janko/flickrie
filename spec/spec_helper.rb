@@ -26,6 +26,13 @@ module RSpecHelpers
       end
     end
   end
+
+  # SomeModule::AnotherModule::Class => "some_module/another_module/class"
+  def to_file_path(constants)
+    constants.split("::").collect do |constant|
+      constant.split(/(?=[A-Z])/).map(&:downcase).join('_')
+    end.join('/')
+  end
 end
 
 RSpec.configure do |c|
@@ -48,7 +55,7 @@ RSpec.configure do |c|
       cassette_name = example.metadata[:cassette]
     end
 
-    folder = class_name.to_s.match(/^Flickrie::/).post_match.to_file_path
+    folder = to_file_path(class_name.to_s.match(/^Flickrie::/).post_match)
     VCR.use_cassette("#{folder}/#{cassette_name}") { example.call }
   end
   c.fail_fast = true
@@ -95,11 +102,5 @@ class Hash
 
   def except(*keys)
     self.dup.except!(*keys)
-  end
-end
-
-class String
-  def to_file_path
-    split("::").collect { |klass| klass.split(/(?=[A-Z])/).map(&:downcase).join('_') }.join('/')
   end
 end
