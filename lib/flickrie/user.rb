@@ -9,9 +9,6 @@ module Flickrie
     def location()     @info['location']    end
     def time_zone()    @info['timezone']    end
     def description()  @info['description'] end
-    def profile_url()  @info['profileurl']  end
-    def mobile_url()   @info['mobileurl']   end
-    def photos_url()   @info['photosurl']   end
     def path_alias()   @info['path_alias']  end
     def icon_server()  @info['iconserver']  end
     def icon_farm()    @info['iconfarm']    end
@@ -26,14 +23,14 @@ module Flickrie
       end
     end
 
+    def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" end
+    def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" end
+    def mobile_url()  @info['mobileurl'] end
+
     def first_taken() DateTime.parse(@info['photos']['firstdatetaken']).to_time rescue nil end
     def first_uploaded() Time.at(Integer(@info['photos']['firstdate'])) rescue nil end
 
     def favorited_at() Time.at(Integer(@info['favedate'])) rescue nil end
-
-    def favorited_at
-      Time.at(@info['favedate'].to_i)
-    end
 
     def media_count() Integer(@info['photos']['count']) rescue nil end
     alias photos_count media_count
