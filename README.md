@@ -27,6 +27,8 @@ There are 2 things that are different from the Flickr's API documentation:
 incorrect, since sets can also hold videos.
 - "person" is here refered to as "user".
 
+The gem works on Ruby versions `1.9.2` and `1.9.3`.
+
 ## Examples of usage
 
 You first need to install the gem.
