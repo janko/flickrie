@@ -183,9 +183,7 @@ photo.title # => "A cow"
 For the list of parameters you can pass in when uploading a photo, see
 [this page](http://www.flickr.com/services/api/upload.api.html).
 
-Few notes:
-- Photo uploads require authentication with "write" permissions.
-- Path to the photo has to be absolute.
+Note that photo uploads require authentication with "write" permissions.
 
 See [this wiki](https://github.com/janko-m/flickrie/wiki/Asynchronous-photo-upload) for an example
 of an asynchronous photo upload.
