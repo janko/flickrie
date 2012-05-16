@@ -1,4 +1,4 @@
-# Flickrie
+# Flickrie [![Build Status](https://secure.travis-ci.org/[janko-m]/[flickrie].png)](http://travis-ci.org/[janko-m]/[flickrie])
 
 ## About
 
