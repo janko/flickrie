@@ -6,3 +6,4 @@ wiki/
 .DS_Store
 api_methods.md
 .bundle/
+.rspec

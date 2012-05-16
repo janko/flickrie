@@ -3,13 +3,13 @@ Bundler::GemHelper.install_tasks
 
 desc "Run the specs (use spec:name to run a single spec)"
 task :spec do |task, args|
-  system "bundle exec rspec --color"
+  system "rspec"
 end
 
 Dir["spec/*_spec.rb"].each do |spec|
   task_name = File.basename(spec)[/.+(?=_spec\.rb)/]
   task :"spec:#{task_name}" do
-    system "bundle exec rspec #{spec} --color"
+    system "rspec #{spec}"
   end
 end
 
