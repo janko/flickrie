@@ -27,9 +27,9 @@ task :console do
   end
   begin
     require 'pry'
-    system "bundle exec pry --require 'flickrie' --require './credentials'"
+    system "pry --require 'flickrie' --require './credentials'"
   rescue LoadError
-    system "bundle exec irb -r 'flickrie' -r './credentials'"
+    system "irb -r 'flickrie' -r './credentials'"
   end
   FileUtils.remove_file "credentials.rb"
 end
