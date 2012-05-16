@@ -10,4 +10,15 @@ describe Flickrie::Location do
       end
     end
   end
+
+  context "accessing areas" do
+    it "should have #to_s defined on them" do
+      location = Flickrie::Location.public_new \
+        'neighbourhood' => {
+          '_content' => 'A gangsta ghetto, yo'
+        }
+
+      location.neighbourhood.to_s.should eq('A gangsta ghetto, yo')
+    end
+  end
 end
