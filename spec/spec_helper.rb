@@ -6,7 +6,7 @@ rescue LoadError
 end
 
 module RSpecHelpers
-  def test_attribute(object, attribute, hash = nil)
+  def test_recursively(object, attribute, hash = nil)
     expectation = hash || @attributes[attribute]
     unless expectation.is_a?(Hash)
       object.send(attribute).should eq(expectation)

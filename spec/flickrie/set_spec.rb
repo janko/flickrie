@@ -27,7 +27,7 @@ describe Flickrie::Set do
 
   def test_common_attributes(set)
     @attributes.keys.each do |attribute|
-      test_attribute(set, attribute)
+      test_recursively(set, attribute)
     end
 
     set.photos.all? { |photo| photo.is_a?(Flickrie::Photo) }.should be_true

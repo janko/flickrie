@@ -130,7 +130,7 @@ describe Flickrie::Media do
             :can_everyone_add_meta?, :can_download?, :can_blog?,
             :can_print?, :can_share?, :has_people?, :notes
           ].
-            each { |attribute| test_attribute(media, attribute) }
+            each { |attribute| test_recursively(media, attribute) }
 
           # other
           media.url.empty?.should be_false
@@ -150,12 +150,12 @@ describe Flickrie::Media do
         :id, :secret, :server, :farm, :title, :media_status, :views_count,
         :geo_permissions, :machine_tags, :license, :taken_at_granularity
       ].
-        each { |attribute| test_attribute(media, attribute) }
+        each { |attribute| test_recursively(media, attribute) }
 
       # the incomplete ones
-      test_attribute(media, :location, @attributes[:location].except(:locality, :county, :region, :country))
-      test_attribute(media.tags, :first, @attributes[:tags][:first].except(:author, :raw, :machine_tag?))
-      test_attribute(media, :owner, @attributes[:owner].except(:real_name, :location))
+      test_recursively(media, :location, @attributes[:location].except(:locality, :county, :region, :country))
+      test_recursively(media.tags, :first, @attributes[:tags][:first].except(:author, :raw, :machine_tag?))
+      test_recursively(media, :owner, @attributes[:owner].except(:real_name, :location))
 
       # other
       media.url.empty?.should be_false
@@ -185,7 +185,7 @@ describe Flickrie::Media do
       media = @flickrie.media_from_user(USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
-      test_attribute(media, :visibility)
+      test_recursively(media, :visibility)
     end
   end
 
@@ -196,7 +196,7 @@ describe Flickrie::Media do
       media = Flickrie.public_media_from_user(USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
-      test_attribute(media, :visibility)
+      test_recursively(media, :visibility)
     end
   end
 
@@ -207,7 +207,7 @@ describe Flickrie::Media do
       media = Flickrie.search_media(:user_id => USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
-      test_attribute(media, :visibility)
+      test_recursively(media, :visibility)
     end
   end
 
@@ -226,7 +226,7 @@ describe Flickrie::Media do
           media.owner.nsid.should eq(USER_NSID)
           media.owner.username.should eq('Janko Marohnić')
           media.title.should eq('IMG_0917')
-          test_attribute(media, :visibility)
+          test_recursively(media, :visibility)
           media.media_status.should eq('ready')
         end
     end
