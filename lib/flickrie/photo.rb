@@ -1,6 +1,5 @@
 module Flickrie
   # See Flickrie::Media for the other methods.
-  #
   class Photo
     include Media
 
@@ -66,7 +65,6 @@ module Flickrie
     def rotation() Integer(@info['rotation']) rescue nil end
 
     # Same as calling <tt>Flickrie.get_photo_sizes(photo.id)</tt>
-    #
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}

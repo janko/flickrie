@@ -20,7 +20,6 @@ module Flickrie
     #   photo.title # => "Me and Jessica"
     #
     # If the <tt>:async => 1</tt> option is passed, returns the ticket ID.
-    #
     def upload(media, params = {})
       response = upload_client.upload(media, params)
       if params[:async] == 1
@@ -39,7 +38,6 @@ module Flickrie
     #   photo.title # => "Me and Jessica"
     #
     # If the <tt>:async => 1</tt> option is passed, returns the ticket ID.
-    #
     def replace(media, media_id, params = {})
       response = upload_client.replace(media, media_id, params)
       if params[:async] == 1

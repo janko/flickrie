@@ -20,17 +20,13 @@ module Flickrie
     end
 
     # Returns an instance of Flickrie::User
-    #
     def owner() User.new('nsid' => @info['owner']) if @info['owner'] end
 
     # Same as calling <tt>Flickrie.photos_from_set(set.id)</tt>
-    #
     def photos(params = {}) Flickrie.photos_from_set(id, params) end
     # Same as calling <tt>Flickrie.videos_from_set(set.id)</tt>
-    #
     def videos(params = {}) Flickrie.videos_from_set(id, params) end
     # Same as calling <tt>Flickrie.media_from_set(set.id)</tt>
-    #
     def media(params = {})  Flickrie.media_from_set(id, params)  end
 
     def can_comment?() Integer(@info['can_comment']) == 1 rescue nil end
@@ -51,7 +47,6 @@ module Flickrie
     def hash() @info end
 
     # Same as calling <tt>Flickrie.get_set_info(set.id)</tt>
-    #
     def get_info(info = nil)
       info ||= Flickrie.client.get_set_info(id).body['photoset']
       @info.update(info)

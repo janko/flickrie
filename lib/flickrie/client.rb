@@ -25,7 +25,6 @@ module Flickrie
     #
     #   Flickrie.client.get  "flickr.photos.licenses.getInfo"
     #   Flickrie.client.post "flickr.photos.licenses.setLicense", :photo_id => 1241497, :license_id => 2
-    #
     def client
       @client ||= new_client
     end
