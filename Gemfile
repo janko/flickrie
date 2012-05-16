@@ -6,7 +6,9 @@ group :test do
   gem "faraday", '0.7.6'
 end
 
-# You can run `bundle [install] --without debugger pry` if
+# You can run `bundle [install] --without extras` if
 # you don't want to install them
-gem "debugger", :group => :debugger
-gem "pry",      :group => :pry
+group :extras do
+  gem "debugger"
+  gem "pry"
+end
