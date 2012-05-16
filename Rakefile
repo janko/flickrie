@@ -34,11 +34,6 @@ task :console do
   FileUtils.remove_file "credentials.rb"
 end
 
-task :rdoc do
-  FileUtils.rm_rf "doc"
-  system "rdoc lib/"
-end
-
 # copied from Rails
 begin
   require 'rails/source_annotation_extractor'
