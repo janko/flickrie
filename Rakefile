@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
+task :default => :spec
+
 desc "Run the specs (use spec:name to run a single spec)"
 task :spec do |task, args|
   system "rspec"
