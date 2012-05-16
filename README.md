@@ -2,30 +2,34 @@
 
 ## About
 
-This gem is a nice wrapper for the Flickr API with an intuitive interface.
+This gem is a nice wrapper for the Flickr API with an object-oriented interface.
 
-The reason why I did this gem is because the other ones either weren't
-well maintained, or they were too literal in the sense that the responses from
-the API calls weren't processed almost at all. It doesn't seem too bad
-at first, but it would be great that, for example, if you're reading a time attribute,
-such as `last_update`, you actually **get** the instance of `Time`, and
-not a string representing that time (often in a timestamp (integer) format).
-That's what wrappers should be for.
+The reason why I did this gem is because the existing ones either weren't
+well maintained, or they weren't object oriented and provided a literal
+wrapper over the API. That didn't statisfy me, because Flickr API
+sometimes gives you the same information in different ways. And I want
+to normalize that. Also, JSON responses can return "time" attributes
+only in the string format. And I thought it would be nice that, if you're
+accessing the `updated_at` attribute for example, you actually **get**
+an instance of `Time`, instead of a string, or even integer. These are
+just some of the reason I decided to make this gem.
 
-The method names here aren't called the same as Flickr's API methods, but they follow a pattern which
-shouldn't be too difficult to learn. Take a look at the "Covered API
-methods" section of this readme.
+The method names here aren't called the same as Flickr's API methods
+(and they can't be), but they follow a pattern which
+shouldn't be too difficult to predict. Take a look at the ["Currently covered API
+methods"](https://github.com/janko-m/flickrie#currently-covered-api-methods) section of this readme.
 
-Also, some attribute names that you
-get from the response are changed. So, for example, the `last_update`
-attribute is called `updated_at`, and the `candownload` attribute is
-called `can_download?`. After all, this is a **ruby** wrapper, so it
-should be written in Ruby/Rails fashion :)
-
-There are 2 things that are different from the Flickr's API documentation:
-- "photoset" is here just "set". This is because the word "photoset" is actually
-incorrect, since sets can also hold videos.
-- "person" is here refered to as "user".
+Also, some attribute names that you get from the response are changed.
+So, for example, the `last_update` attribute is called `updated_at`,
+and the `candownload` attribute is called `can_download?`. Because this
+is a **ruby** wrapper, I wanted to write it in Ruby/Rails fashion. At
+first you might not approve of this, because then you might not know
+what the methods name are if you know the name of the key in the
+response hash. But, on the other hand, Flickr often gives you the same
+information in different formats, so this also acts as a normalizer. The
+downsize of this approach is that it may not be up to date when the
+Flickr API changes, but that's why I have **you** to open a new issue
+when you notice something isn't working :)
 
 The gem works on Ruby versions `1.9.2` and `1.9.3`.
 
@@ -37,16 +41,25 @@ You first need to install the gem.
 [sudo] gem install flickrie
 ```
 
+Then, if you're using Bundler in your project, put it into your `Gemfile`:
+
+```ruby
+gem "flickrie"
+```
+
 Then in your app you set the API key and shared secret (if you don't have them
 already, you can apply for them [here](http://www.flickr.com/services/apps/create/apply)).
 
 ```ruby
 require 'flickrie'
+
 Flickrie.api_key = "API_KEY"
 Flickrie.shared_secret = "SHARED_SECRET"
 ```
 
-Then you can search for stuff.
+If your in Rails, it's a good idea to put this into an initializer.
+
+Now you can search for stuff.
 
 ```ruby
 set_id = 819234
@@ -66,7 +79,7 @@ You can also throw in some parameters to `Flickrie.photos_from_set` to get more 
 photos = Flickrie.photos_from_set(819234, :extras => 'owner_name,last_update,tags,views')
 
 photo = photos.first
-photo.tags           # => "cave cold forrest"
+photo.tags.join(' ') # => "cave cold forrest"
 photo.owner.username # => "jsmith"
 photo.updated_at     # => 2012-04-20 23:29:17 +0200
 photo.views_count    # => 24
@@ -88,7 +101,7 @@ photo.owner.real_name       # => "John Smith"
 photo.location.country.name # => "United States"
 ```
 
-If you already have an existing photo, you can also get info like this:
+If you already have an existing photo (providing it holds its ID), you can also get info like this:
 
 ```ruby
 photo.description # => nil
@@ -153,8 +166,11 @@ request_token.get_authorization_url(:permissions => "read")
 to ask only for "read" permissions from the user. Available permissions
 are "read", "write" and "delete".
 
-If you want to make authentication in your web application, check out my [flickr_auth](https://github.com/janko-m/flickr_auth) gem.
-Or, if you want to do it manually, check out [this wiki](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications) for instructions.
+If you want to make authentication in your web application, check out my
+[flickr_auth](https://github.com/janko-m/flickr_auth) gem.
+Or, if you want to do it manually, check out
+[this wiki](https://github.com/janko-m/flickrie/wiki/Authentication-in-web-applications)
+for instructions.
 
 ## Photo upload
 
@@ -215,23 +231,6 @@ default.
 
 Please, feel free to post any issues that you're having, I will be happy
 to help. I will also be happy if you let me know about any bugs.
-
-## How to contribute
-
-Nothing special, you just fork the project, and send me a pull request.
-Don't forget to cover the change with tests. If you don't know how to
-write tests, send the pull requests without them, it's ok.
-
-An important note: if you want to add a line in the tests which makes a **new** HTTP request,
-you'll have to get your own API key and access token. You can get the
-API key and secret [here](http://www.flickr.com/services/apps/create/apply)
-(assuming you already have a Flickr account), and you can then obtain an access token by using my
-authentication system (described above). You then have to assign these
-values to the environment variables `FLICKR_API_KEY`, `FLICKR_SHARED_SECRET`,
-`FLICKR_ACCESS_TOKEN` and `FLICKR_ACCESS_SECRET`. That's it, you should
-be able to run the tests normally now.
-
-Feel free to email me if you have any problems.
 
 ## Cedits
 
