@@ -1,4 +1,4 @@
-require File.expand_path("../../spec_helper", __FILE__)
+require 'spec_helper'
 
 describe Flickrie::ApiMethods do
   it "should upload and delete correctly", :vcr, :cassette => "upload and delete" do

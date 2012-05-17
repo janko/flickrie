@@ -1,4 +1,4 @@
-require File.expand_path("../../spec_helper", __FILE__)
+require 'spec_helper'
 
 SIZES = ['Square 75', 'Thumbnail', 'Square 150', 'Small 240', 'Small 320',
   'Medium 500', 'Medium 640', 'Medium 800', 'Large 1024']
