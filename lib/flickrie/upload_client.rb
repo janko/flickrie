@@ -1,3 +1,5 @@
+require 'faraday_middleware'
+
 module Flickrie
   class << self
     # :nodoc:
@@ -6,19 +8,19 @@ module Flickrie
     end
 
     def new_upload_client(access_token_hash = {})
-      UploadClient.new(upload_params) do |conn|
-        conn.use FaradayMiddleware::OAuth,
+      UploadClient.new(upload_params) do |b|
+        b.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
           :token => access_token_hash[:token] || access_token,
           :token_secret => access_token_hash[:secret] || access_secret
-        conn.request :multipart
+        b.request :multipart
 
-        conn.use UploadStatusCheck
-        conn.use FaradayMiddleware::ParseXml
-        conn.use OAuthStatusCheck
+        b.use UploadStatusCheck
+        b.use FaradayMiddleware::ParseXml
+        b.use OAuthStatusCheck
 
-        conn.adapter :net_http
+        b.adapter :net_http
       end
     end
 
@@ -46,22 +48,27 @@ module Flickrie
 
   class UploadClient < Faraday::Connection # :nodoc:
     def upload(media, params = {})
-      media_file = get_file(media, params[:mime_type])
-      media_title = get_title(media)
-      post "upload", {:photo => media_file,
-        :title => media_title}.merge(params)
+      file = get_file(media, params[:content_type])
+      title = file.original_filename.match(/\.\w{3,4}$/).pre_match
+      post "upload", {
+        :photo => file,
+        :title => title
+      }.merge(params)
     end
 
     def replace(media, media_id, params = {})
-      media_file = get_file(media, params[:mime_type])
-      media_title = get_title(media)
-      post "replace", {:photo => media_file,
-        :photo_id => media_id, :title => media_title}.merge(params)
+      file = get_file(media, params[:content_type])
+      title = file.original_filename.match(/\.\w{3,4}$/).pre_match
+      post "replace", {
+        :photo => file,
+        :photo_id => media_id,
+        :title => title
+      }.merge(params)
     end
 
     private
 
-    MIME_TYPES = {
+    CONTENT_TYPES = {
       %w[.jpg .jpeg .jpe .jif .jfif .jfi] => 'image/jpeg',
       %w[.gif]                            => 'image/gif',
       %w[.png]                            => 'image/png',
@@ -80,40 +87,31 @@ module Flickrie
       %w[.avi]                                => 'video/avi'
     }.freeze
 
-    def get_file(object, mime_type = nil)
-      if object.class.name == "String" # file path
-        file_path = object
-        mime_type ||= get_mime_type(file_path)
-      elsif object.class.name == "ActionDispatch::Http::UploadedFile" # Rails
-        file_path = object.tempfile
-        mime_type ||= object.content_type
-      elsif object.class.name == "Hash" # Sinatra
-        file_path = object[:tempfile].path
-        mime_type ||= object[:type]
-      end
-
-      Faraday::UploadIO.new(file_path, mime_type)
-    end
-
-    def get_mime_type(file_path)
-      extension = file_path[/\.\w{3,4}$/]
-      mime_type = MIME_TYPES.find { |k,v| k.include?(extension) }.last
-
-    rescue NoMethodError
-      raise Error, "Don't know mime type for this extension (#{extension})"
-    end
-
-    def get_title(object)
-      filename =
-        if object.class.name == "String" # file path
-          File.basename(object)
-        elsif object.class.name == "ActionDispatch::Http::UploadedFile" # Rails
-          object.original_filename
-        elsif object.class.name == "Hash" # Sinatra
-          object[:filename]
+    def get_file(object, content_type = nil)
+      file, content_type, file_path =
+        case object.class.name
+        when "String"
+          # file path
+          [File.open(object), content_type || determine_content_type(object), object]
+        when "ActionDispatch::Http::UploadedFile"
+          # file from Rails
+          [object, object.content_type, object.tempfile]
+        when "Hash"
+          # file from Sinatra
+          [object[:tempfile], object[:type], object[:tempfile].path]
+        else
+          raise Error, "Invalid file format"
         end
 
-      filename.match(/\.\w{3,4}$/).pre_match
+      Faraday::UploadIO.new(file, content_type, file_path)
+    end
+
+    def determine_content_type(file_path)
+      extension = file_path[/\.\w{3,4}$/]
+      content_type = CONTENT_TYPES.find { |k,v| k.include?(extension) }.last
+
+    rescue NoMethodError
+      raise Error, "Don't know the content type for this extension (#{extension})"
     end
   end
 end

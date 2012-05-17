@@ -1,5 +1,10 @@
 # Flickrie changelog
 
+## Version 1.0.0 (Unreleased)
+
+- if you're passing in the content type of the file you're uploading,
+  the parameter is now called `:content_type`, not `:mime_type`
+
 ## Version 0.7.3
 
 - covered "flickr.people.getPhotos" (I released it as a patch because
