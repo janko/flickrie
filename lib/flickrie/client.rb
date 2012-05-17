@@ -1,10 +1,8 @@
 require 'faraday_middleware'
 
 module Flickrie
-  DEFAULTS = {
-    :open_timeout => 4,
-    :timeout => 6
-  }.freeze
+  OPEN_TIMEOUT = 4
+  TIMEOUT = 6
 
   class << self
     def self.attr_accessor_with_client_reset(*attributes) # :nodoc:
@@ -30,18 +28,18 @@ module Flickrie
     end
 
     def new_client(access_token_hash = {}) # :nodoc:
-      Client.new(params) do |conn|
-        conn.use FaradayMiddleware::OAuth,
+      Client.new(params) do |b|
+        b.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
           :token => access_token_hash[:token] || access_token,
           :token_secret => access_token_hash[:secret] || access_secret
 
-        conn.use StatusCheck
-        conn.use FaradayMiddleware::ParseJson, :content_type => /(text\/plain)|(json)$/
-        conn.use OAuthStatusCheck
+        b.use StatusCheck
+        b.use FaradayMiddleware::ParseJson
+        b.use OAuthStatusCheck
 
-        conn.adapter :net_http
+        b.adapter :net_http
       end
     end
 
@@ -56,8 +54,8 @@ module Flickrie
           :api_key => api_key
         },
         :request => {
-          :open_timeout => open_timeout || DEFAULTS[:open_timeout],
-          :timeout => timeout || DEFAULTS[:timeout]
+          :open_timeout => open_timeout || OPEN_TIMEOUT,
+          :timeout => timeout || TIMEOUT
         }
       }
     end

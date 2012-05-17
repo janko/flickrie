@@ -30,7 +30,7 @@ module Flickrie
       {
         :url => 'http://api.flickr.com/services',
         :request => {
-          :open_timeout => open_timeout || DEFAULTS[:open_timeout]
+          :open_timeout => open_timeout || OPEN_TIMEOUT
         }
       }
     end
