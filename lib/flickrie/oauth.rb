@@ -6,20 +6,34 @@ module Flickrie
     URL = 'http://www.flickr.com/services/oauth'.freeze
     NO_CALLBACK = 'oob'.freeze
 
-    # :nodoc:
-    def self.new_connection(additional_oauth_params = {})
-      Faraday.new(URL) do |conn|
-        conn.use FaradayMiddleware::OAuth, {
+    private
+
+      def self.new_connection(request_token = nil) # :nodoc:
+        Faraday.new(params) do |b|
+          b.use FaradayMiddleware::OAuth,
             :consumer_key => Flickrie.api_key,
-            :consumer_secret => Flickrie.shared_secret
-          }.merge(additional_oauth_params)
+            :consumer_secret => Flickrie.shared_secret,
+            :token => request_token.to_a.first,
+            :token_secret => request_token.to_a.last
 
-        conn.use StatusCheck
-        conn.use ParseResponseParams
+          b.use Middleware::ParseOAuthParams
+          b.use Middleware::OAuthCheck
 
-        conn.adapter :net_http
+          b.adapter :net_http
+        end
       end
-    end
+
+      def self.params
+        {
+          :url => URL,
+          :request => {
+            :open_timeout => Flickrie.open_timeout || OPEN_TIMEOUT,
+            :timeout => Flickrie.timeout || TIMEOUT
+          }
+        }
+      end
+
+    public
 
     class StatusCheck < Faraday::Response::Middleware # :nodoc:
       def on_complete(env)
@@ -40,53 +54,67 @@ module Flickrie
       end
     end
 
-    # :doc:
     def self.get_request_token(options = {})
       connection = new_connection
-
       response = connection.get "request_token" do |req|
         req.params[:oauth_callback] = options[:callback_url] || NO_CALLBACK
       end
 
-      RequestToken.from_response(response.body)
+      RequestToken.new(response.body)
     end
 
     def self.get_access_token(verifier, request_token)
-      connection = new_connection \
-        :token => request_token.token,
-        :token_secret => request_token.secret
-
+      connection = new_connection(request_token)
       response = connection.get "access_token" do |req|
         req.params[:oauth_verifier] = verifier
       end
 
-      AccessToken.from_response(response.body)
+      AccessToken.new(response.body)
     end
 
-    module Token # :nodoc:
-      def from_response(body)
-        new(body['oauth_token'], body['oauth_token_secret'])
+    module Token
+      attr_reader :token, :secret
+
+      def initialize(info)
+        @token = info[:oauth_token]
+        @secret = info[:oauth_token_secret]
+      end
+
+      def to_a
+        [token, secret]
       end
     end
 
-    class RequestToken < Struct.new(:token, :secret)
-      extend Token
+    class RequestToken
+      include Token
 
-      def get_authorization_url(options = {})
+      def get_authorization_url(params = {})
         require 'uri'
         url = URI.parse(URL)
-        url.path += "/authorize"
-        params = {
-          :oauth_token => token,
-          :perms => options[:permissions] || options[:perms]
-        }
-        url.query = params.map { |k, v| "#{k}=#{v}" }.join('&')
+        url.path += '/authorize'
+        query_params = {:oauth_token => token}.merge(params)
+        url.query = query_params.map { |k,v| "#{k}=#{v}" }.join('&')
         url.to_s
+      end
+      alias authorize_url get_authorization_url
+
+      def get_access_token(verifier)
+        OAuth.get_access_token(verifier, self)
       end
     end
 
-    class AccessToken < Struct.new(:token, :secret)
-      extend Token
+    class AccessToken
+      include Token
+
+      attr_reader :user_info
+
+      def initialize(info)
+        super
+        @user_info = info.tap do |info|
+          info.delete(:oauth_token)
+          info.delete(:oauth_token_secret)
+        end
+      end
     end
   end
 end

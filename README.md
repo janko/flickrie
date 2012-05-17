@@ -148,15 +148,17 @@ Flickrie.api_key = "API_KEY"
 Flickrie.shared_secret = "SHARED_SECRET"
 
 request_token = Flickrie::OAuth.get_request_token
-url = request_token.get_authorization_url
+url = request_token.authorize_url
 puts "Visit this url to authenticate: #{url}"
 
 print "If you agreed, the code was displayed afterwards. Enter it: "
 code = gets.strip
-access_token = Flickrie::OAuth.get_access_token(code, request_token)
+access_token = request_token.get_access_token(code)
+puts "You successfully authenticated!"
+
 Flickrie.access_token = access_token.token
 Flickrie.access_secret = access_token.secret
-puts "You successfully authenticated!"
+access_token.user_params # => {:fullname => "John Smith", :user_nsid => "67131352@N03", :username => "jsmith"}
 ```
 
 When getting the authorization url, you can also call
