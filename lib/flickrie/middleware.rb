@@ -40,6 +40,27 @@ module Flickrie
       end
     end
 
+    class Retry < Faraday::Middleware
+      def initialize(app, retries = 2, options = {})
+        @retries = retries
+        @exceptions = options[:on]
+        super(app)
+      end
+
+      def call(env)
+        retries = @retries
+        begin
+          @app.call(env)
+        rescue *@exceptions || Faraday::Error::TimeoutError
+          if retries > 0
+            retries -= 1
+            retry
+          end
+          raise
+        end
+      end
+    end
+
     class ParseOAuthParams < FaradayMiddleware::ResponseMiddleware
       define_parser do |body|
         CGI.parse(body).inject({}) do |hash, (key, value)|

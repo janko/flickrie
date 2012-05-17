@@ -9,6 +9,7 @@ module Flickrie
 
       def self.new_connection(request_token = nil) # :nodoc:
         Faraday.new(params) do |b|
+          b.use Middleware::Retry
           b.use FaradayMiddleware::OAuth,
             :consumer_key => Flickrie.api_key,
             :consumer_secret => Flickrie.shared_secret,

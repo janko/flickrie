@@ -29,6 +29,7 @@ module Flickrie
 
     def new_client(access_token_hash = {}) # :nodoc:
       Client.new(params) do |b|
+        b.use Middleware::Retry
         b.use FaradayMiddleware::OAuth,
           :consumer_key => api_key,
           :consumer_secret => shared_secret,
