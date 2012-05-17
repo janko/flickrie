@@ -16,9 +16,9 @@ module Flickrie
           :token_secret => access_token_hash[:secret] || access_secret
         b.request :multipart
 
-        b.use UploadStatusCheck
+        b.use Middleware::UploadStatusCheck
         b.use FaradayMiddleware::ParseXml
-        b.use OAuthStatusCheck
+        b.use Middleware::OAuthCheck
 
         b.adapter :net_http
       end
@@ -33,16 +33,6 @@ module Flickrie
           :open_timeout => open_timeout || OPEN_TIMEOUT
         }
       }
-    end
-  end
-
-  class UploadStatusCheck < Faraday::Response::Middleware # :nodoc:
-    def on_complete(env)
-      if env[:body]['rsp']['stat'] != 'ok'
-        error = env[:body]['rsp']['err']
-        raise Error.new(error['msg'], error['code']),
-          error['msg']
-      end
     end
   end
 

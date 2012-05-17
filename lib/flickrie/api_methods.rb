@@ -1,3 +1,4 @@
+require 'flickrie/middleware'
 require 'flickrie/client'
 require 'flickrie/upload_client'
 require 'flickrie/oauth'

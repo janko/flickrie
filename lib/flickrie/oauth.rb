@@ -1,5 +1,4 @@
 require 'faraday_middleware'
-require 'faraday_middleware/response_middleware'
 
 module Flickrie
   module OAuth
@@ -34,25 +33,6 @@ module Flickrie
       end
 
     public
-
-    class StatusCheck < Faraday::Response::Middleware # :nodoc:
-      def on_complete(env)
-        if env[:status] != 200
-          raise Error, env[:body]['oauth_problem'].gsub('_', ' ').capitalize
-        end
-      end
-    end
-
-    class Error < StandardError
-    end
-
-    class ParseResponseParams < FaradayMiddleware::ResponseMiddleware # :nodoc:
-      define_parser do |body|
-        params_array = body.split('&').map { |param| param.split('=') }
-        params_array.map! { |params| params.count == 1 ? params << "" : params}
-        Hash[*params_array.flatten]
-      end
-    end
 
     def self.get_request_token(options = {})
       connection = new_connection

@@ -35,9 +35,9 @@ module Flickrie
           :token => access_token_hash[:token] || access_token,
           :token_secret => access_token_hash[:secret] || access_secret
 
-        b.use StatusCheck
+        b.use Middleware::StatusCheck
         b.use FaradayMiddleware::ParseJson
-        b.use OAuthStatusCheck
+        b.use Middleware::OAuthCheck
 
         b.adapter :net_http
       end
@@ -58,33 +58,6 @@ module Flickrie
           :timeout => timeout || TIMEOUT
         }
       }
-    end
-  end
-
-  class Error < StandardError
-    attr_reader :code
-
-    def initialize(message, code = nil)
-      super(message)
-      @code = code.to_i
-    end
-  end
-
-  class StatusCheck < Faraday::Response::Middleware # :nodoc:
-    def on_complete(env)
-      if env[:body]['stat'] != 'ok'
-        raise Error.new(env[:body]['message'], env[:body]['code']),
-          env[:body]['message']
-      end
-    end
-  end
-
-  class OAuthStatusCheck < Faraday::Response::Middleware # :nodoc:
-    def on_complete(env)
-      if env[:status] != 200
-        message = env[:body][/(?<=oauth_problem=)[^&]+/]
-        raise Error, message.gsub('_', ' ').capitalize
-      end
     end
   end
 
