@@ -8,20 +8,20 @@ http_interactions:
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="ba7c6104c0fbfcc972418713559498e6", oauth_signature="Vj1o9kX69VEZZyXu8X1blxPn02Q%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013921", oauth_token="", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="ccc3f738fefd326c4349d0e7f68764b9", oauth_signature="7XXzebqW3bSVWHuPsLyXSmZgRQ0%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292028", oauth_token="", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:21 GMT
+      - Thu, 17 May 2012 22:00:29 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www165.flickr.mud.yahoo.com
+      - www10.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -34,5 +34,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"count\":{\"_content\":98}, \"prevphoto\":{\"id\":\"6946978706\", \"secret\":\"b38270bbd6\", \"server\":\"7216\", \"farm\":8, \"title\":\"IMG_0795\", \"url\":\"\\/photos\\/67131352@N04\\/6946978706\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7216\\/6946978706_b38270bbd6_s.jpg\", \"media\":\"photo\", \"license\":\"0\"}, \"nextphoto\":{\"id\":\"6946979704\", \"secret\":\"74513ff732\", \"server\":\"7234\", \"farm\":8, \"title\":\"IMG_0797\", \"url\":\"\\/photos\\/67131352@N04\\/6946979704\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7234\\/6946979704_74513ff732_s.jpg\", \"media\":\"photo\", \"license\":\"0\"}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:21 GMT
+  recorded_at: Thu, 17 May 2012 22:00:29 GMT
 recorded_with: VCR 2.1.1

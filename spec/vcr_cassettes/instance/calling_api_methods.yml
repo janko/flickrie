@@ -8,42 +8,42 @@ http_interactions:
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="47670da362341e29b95dd11ad8230bcc", oauth_signature="9W7mRcSKuxTjhyuRGKTfKeYLxtc%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013896", oauth_token="", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="187cb8c1526b685e23cf61414c769590", oauth_signature="mO5ftd9SPTp1oUI8IUusxRbvTpI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292006", oauth_token="", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:44:57 GMT
+      - Thu, 17 May 2012 22:00:06 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www196.flickr.mud.yahoo.com
+      - www10.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
-      - "823"
+      - "822"
       connection: 
       - close
       content-type: 
       - application/json
     body: 
       encoding: ASCII-8BIT
-      string: "{\"photo\":{\"id\":\"6946979188\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"dateuploaded\":\"1334832745\", \"isfavorite\":0, \"license\":\"0\", \"safety_level\":\"0\", \"rotation\":90, \"owner\":{\"nsid\":\"67131352@N04\", \"username\":\"Janko Marohni\\u0107\", \"realname\":\"Janko Marohni\\u0107\", \"location\":\"Zagreb, Croatia\", \"iconserver\":\"5464\", \"iconfarm\":6}, \"title\":{\"_content\":\"IMG_0796\"}, \"description\":{\"_content\":\"Test\"}, \"visibility\":{\"ispublic\":1, \"isfriend\":0, \"isfamily\":0}, \"dates\":{\"posted\":\"1334832745\", \"taken\":\"2011-03-20 17:00:05\", \"takengranularity\":\"0\", \"lastupdate\":\"1337013893\"}, \"views\":\"4\", \"editability\":{\"cancomment\":0, \"canaddmeta\":0}, \"publiceditability\":{\"cancomment\":1, \"canaddmeta\":0}, \"usage\":{\"candownload\":1, \"canblog\":0, \"canprint\":0, \"canshare\":0}, \"comments\":{\"_content\":\"1\"}, \"notes\":{\"note\":[{\"id\":\"72157629487842968\", \"author\":\"67131352@N04\", \"authorname\":\"Janko Marohni\\u0107\", \"x\":\"316\", \"y\":\"0\", \"w\":\"59\", \"h\":\"50\", \"_content\":\"Test\"}]}, \"people\":{\"haspeople\":0}, \"tags\":{\"tag\":[{\"id\":\"67099213-6946979188-89662\", \"author\":\"67131352@N04\", \"raw\":\"luka\", \"_content\":\"luka\", \"machine_tag\":0}]}, \"location\":{\"latitude\":45.807258, \"longitude\":15.967599, \"accuracy\":\"11\", \"context\":\"0\", \"locality\":{\"_content\":\"Zagreb\", \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"county\":{\"_content\":\"Zagreb\", \"place_id\":\"306dHrhQV7o6jm.ZUQ\", \"woeid\":\"15022257\"}, \"region\":{\"_content\":\"Grad Zagreb\", \"place_id\":\"Js1DU.pTUrpBCIKhVw\", \"woeid\":\"20070170\"}, \"country\":{\"_content\":\"Croatia\", \"place_id\":\"FunRCI5TUb6a6soTyw\", \"woeid\":\"23424843\"}, \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"geoperms\":{\"ispublic\":1, \"iscontact\":0, \"isfriend\":0, \"isfamily\":0}, \"urls\":{\"url\":[{\"type\":\"photopage\", \"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/\"}]}, \"media\":\"photo\"}, \"stat\":\"ok\"}"
+      string: "{\"photo\":{\"id\":\"6946979188\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"dateuploaded\":\"1334832745\", \"isfavorite\":0, \"license\":\"0\", \"safety_level\":\"0\", \"rotation\":90, \"owner\":{\"nsid\":\"67131352@N04\", \"username\":\"Janko Marohni\\u0107\", \"realname\":\"Janko Marohni\\u0107\", \"location\":\"Zagreb, Croatia\", \"iconserver\":\"5464\", \"iconfarm\":6}, \"title\":{\"_content\":\"IMG_0796\"}, \"description\":{\"_content\":\"Test\"}, \"visibility\":{\"ispublic\":1, \"isfriend\":0, \"isfamily\":0}, \"dates\":{\"posted\":\"1334832745\", \"taken\":\"2011-03-20 17:00:05\", \"takengranularity\":\"0\", \"lastupdate\":\"1337292003\"}, \"views\":\"4\", \"editability\":{\"cancomment\":0, \"canaddmeta\":0}, \"publiceditability\":{\"cancomment\":1, \"canaddmeta\":0}, \"usage\":{\"candownload\":1, \"canblog\":0, \"canprint\":0, \"canshare\":0}, \"comments\":{\"_content\":\"1\"}, \"notes\":{\"note\":[{\"id\":\"72157629487842968\", \"author\":\"67131352@N04\", \"authorname\":\"Janko Marohni\\u0107\", \"x\":\"316\", \"y\":\"0\", \"w\":\"59\", \"h\":\"50\", \"_content\":\"Test\"}]}, \"people\":{\"haspeople\":0}, \"tags\":{\"tag\":[{\"id\":\"67099213-6946979188-89662\", \"author\":\"67131352@N04\", \"raw\":\"luka\", \"_content\":\"luka\", \"machine_tag\":0}]}, \"location\":{\"latitude\":45.807258, \"longitude\":15.967599, \"accuracy\":\"11\", \"context\":\"0\", \"locality\":{\"_content\":\"Zagreb\", \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"county\":{\"_content\":\"Zagreb\", \"place_id\":\"306dHrhQV7o6jm.ZUQ\", \"woeid\":\"15022257\"}, \"region\":{\"_content\":\"Grad Zagreb\", \"place_id\":\"Js1DU.pTUrpBCIKhVw\", \"woeid\":\"20070170\"}, \"country\":{\"_content\":\"Croatia\", \"place_id\":\"FunRCI5TUb6a6soTyw\", \"woeid\":\"23424843\"}, \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"geoperms\":{\"ispublic\":1, \"iscontact\":0, \"isfriend\":0, \"isfamily\":0}, \"urls\":{\"url\":[{\"type\":\"photopage\", \"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/\"}]}, \"media\":\"photo\"}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:44:57 GMT
+  recorded_at: Thu, 17 May 2012 22:00:06 GMT
 - request: 
     method: post
     uri: http://api.flickr.com/services/upload
     body: 
       encoding: ASCII-8BIT
-      string: "#<Faraday::CompositeReadIO:0x007ffa68fd3300>"
+      string: "#<Faraday::CompositeReadIO:0x007fb6b4fd2ab0>"
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="26b3db8fcfbb731ecc69cc207e714617", oauth_signature="YYovX4kMyCMEKUrc2qw3lENtxMU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013897", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="07dd63804e8031ed02e0bb30bef1d864", oauth_signature="cO%2BXnrbXJ2hyeNfdxmSdnSYFk1o%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292006", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
       Content-Type: 
       - multipart/form-data;boundary=-----------RubyMultipartPost
       Content-Length: 
@@ -54,7 +54,7 @@ http_interactions:
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:44:57 GMT
+      - Thu, 17 May 2012 22:00:06 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       connection: 
@@ -64,7 +64,7 @@ http_interactions:
       cache-control: 
       - private
       x-served-by: 
-      - www194.flickr.mud.yahoo.com
+      - www188.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-type: 
@@ -74,33 +74,33 @@ http_interactions:
       string: |
         <?xml version="1.0" encoding="utf-8" ?>
         <rsp stat="ok">
-        <photoid>7197100542</photoid>
+        <photoid>7218056244</photoid>
         </rsp>
 
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:02 GMT
+  recorded_at: Thu, 17 May 2012 22:00:11 GMT
 - request: 
     method: post
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7197100542
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7218056244
     body: 
       encoding: US-ASCII
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="8cf7e438df7847c0b5e152032e3401b5", oauth_signature="AGzzPT3%2B1M%2BRJBRwhg2Mm7nSyuI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013902", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="962a8ebc8e65db64021e6d4a3c0c558a", oauth_signature="lxX%2BIZp3rb38vm6Nns1ijHkwb%2Fo%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292011", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:02 GMT
+      - Thu, 17 May 2012 22:00:11 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www20.flickr.mud.yahoo.com
+      - www3.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -113,7 +113,7 @@ http_interactions:
       encoding: US-ASCII
       string: "{\"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:02 GMT
+  recorded_at: Thu, 17 May 2012 22:00:11 GMT
 - request: 
     method: get
     uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.test.login
@@ -122,20 +122,20 @@ http_interactions:
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="a3f30568334e05b75e7dfaa7df221a31", oauth_signature="6LeND4%2Fsm%2Bu9KzpBPe6aDWGzbz8%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013902", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="be7247faffe238c45ce7c5b191602d9b", oauth_signature="6Be1nCK9mJURcddzKiMGpwtPOVk%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292011", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:03 GMT
+      - Thu, 17 May 2012 22:00:11 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www109.flickr.mud.yahoo.com
+      - www136.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -148,16 +148,16 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{\"user\":{\"id\":\"67131352@N04\", \"username\":{\"_content\":\"Janko Marohni\\u0107\"}}, \"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:03 GMT
+  recorded_at: Thu, 17 May 2012 22:00:11 GMT
 - request: 
     method: post
     uri: http://api.flickr.com/services/upload
     body: 
       encoding: ASCII-8BIT
-      string: "#<Faraday::CompositeReadIO:0x007ffa68f8d3c8>"
+      string: "#<Faraday::CompositeReadIO:0x007fb6b4e4e1f8>"
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="73bd0a6f90168b4278a4e3e6bae69b4f", oauth_signature="jNxIXKqbNaIYlto2pyzgn8rKRKE%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013903", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="ec3a1cedf77575c98a7f8a0a0d2e14d9", oauth_signature="qEydtywnWpHGy8vXA%2BZ6b8y4504%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292011", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
       Content-Type: 
       - multipart/form-data;boundary=-----------RubyMultipartPost
       Content-Length: 
@@ -168,7 +168,7 @@ http_interactions:
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:03 GMT
+      - Thu, 17 May 2012 22:00:12 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       connection: 
@@ -178,7 +178,7 @@ http_interactions:
       cache-control: 
       - private
       x-served-by: 
-      - www45.flickr.mud.yahoo.com
+      - www115.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-type: 
@@ -188,33 +188,33 @@ http_interactions:
       string: |
         <?xml version="1.0" encoding="utf-8" ?>
         <rsp stat="ok">
-        <photoid>7197101150</photoid>
+        <photoid>7218056706</photoid>
         </rsp>
 
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:07 GMT
+  recorded_at: Thu, 17 May 2012 22:00:16 GMT
 - request: 
     method: post
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7197101150
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7218056706
     body: 
       encoding: US-ASCII
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="57950faacca433e442f30474d3a7f8b4", oauth_signature="TTbAlKZ1AZ%2BzR%2F9kLzNMXKJWgHU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013907", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="da9d823974d7d9e4f8dc04d812fab7cc", oauth_signature="wqQ9pHBsewr0%2FTlXGgK3qXiai7c%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292016", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:45:07 GMT
+      - Thu, 17 May 2012 22:00:16 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www185.flickr.mud.yahoo.com
+      - www213.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -227,5 +227,5 @@ http_interactions:
       encoding: US-ASCII
       string: "{\"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:45:08 GMT
+  recorded_at: Thu, 17 May 2012 22:00:16 GMT
 recorded_with: VCR 2.1.1

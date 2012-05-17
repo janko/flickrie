@@ -5,10 +5,10 @@ http_interactions:
     uri: http://api.flickr.com/services/upload
     body: 
       encoding: ASCII-8BIT
-      string: "#<Faraday::CompositeReadIO:0x007ffa68dd3a78>"
+      string: "#<Faraday::CompositeReadIO:0x007fb6b4fd3488>"
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="92c8e2c71c8a40ee24a65bf3394005a4", oauth_signature="DUubsLRubA3Zy7a%2F8lMIZATmijI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013885", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="364e5d59e878d70629f4ed7b518b2a60", oauth_signature="UtvUrpuOxvyXhSO0GmWCovzaMw0%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337291994", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
       Content-Type: 
       - multipart/form-data;boundary=-----------RubyMultipartPost
       Content-Length: 
@@ -19,7 +19,7 @@ http_interactions:
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:44:45 GMT
+      - Thu, 17 May 2012 21:59:55 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       connection: 
@@ -29,7 +29,7 @@ http_interactions:
       cache-control: 
       - private
       x-served-by: 
-      - www27.flickr.mud.yahoo.com
+      - www31.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-type: 
@@ -39,20 +39,20 @@ http_interactions:
       string: |
         <?xml version="1.0" encoding="utf-8" ?>
         <rsp stat="ok">
-        <photoid>7197099228</photoid>
+        <photoid>7218055288</photoid>
         </rsp>
 
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:44:49 GMT
+  recorded_at: Thu, 17 May 2012 21:59:59 GMT
 - request: 
     method: post
     uri: http://api.flickr.com/services/replace
     body: 
       encoding: ASCII-8BIT
-      string: "#<Faraday::CompositeReadIO:0x007ffa68e0a050>"
+      string: "#<Faraday::CompositeReadIO:0x007fb6b4fd1b88>"
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5167cbe8bd5e1145a29a268ac46d55d3", oauth_signature="kjBSwiuXtbIRilZV2APQH5Mc%2FI4%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013889", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="8be3111c06b0302b91df5efefced7acd", oauth_signature="%2F7ufiI5sBnVHI5vnIuKo6ZjDhgU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337291999", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
       Content-Type: 
       - multipart/form-data;boundary=-----------RubyMultipartPost
       Content-Length: 
@@ -63,7 +63,7 @@ http_interactions:
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:44:49 GMT
+      - Thu, 17 May 2012 22:00:00 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       connection: 
@@ -73,7 +73,7 @@ http_interactions:
       cache-control: 
       - private
       x-served-by: 
-      - www47.flickr.mud.yahoo.com
+      - www191.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-type: 
@@ -87,29 +87,29 @@ http_interactions:
         </rsp>
 
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:44:50 GMT
+  recorded_at: Thu, 17 May 2012 22:00:01 GMT
 - request: 
     method: post
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7197099228
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7218055288
     body: 
       encoding: US-ASCII
       string: ""
     headers: 
       Authorization: 
-      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="28faae251df431a2862da8c5cf7cd091", oauth_signature="qE9MkDDdoNIuJGZxbCPCsSCShZA%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337013890", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="70afa76018e45cbe9fcb3eadf8952722", oauth_signature="zOZYNEMmdvBOk260CVsWx8E%2BLhQ%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337292001", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
   response: 
     status: 
       code: 200
       message: 
     headers: 
       date: 
-      - Mon, 14 May 2012 16:44:51 GMT
+      - Thu, 17 May 2012 22:00:01 GMT
       p3p: 
       - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
       cache-control: 
       - private
       x-served-by: 
-      - www21.flickr.mud.yahoo.com
+      - www110.flickr.mud.yahoo.com
       vary: 
       - Accept-Encoding
       content-length: 
@@ -122,5 +122,5 @@ http_interactions:
       encoding: US-ASCII
       string: "{\"stat\":\"ok\"}"
     http_version: 
-  recorded_at: Mon, 14 May 2012 16:44:51 GMT
+  recorded_at: Thu, 17 May 2012 22:00:01 GMT
 recorded_with: VCR 2.1.1
