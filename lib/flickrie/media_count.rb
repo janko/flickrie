@@ -17,6 +17,7 @@ module Flickrie
 
       dates.first..dates.last
     end
+    alias time_interval date_range
 
     def [](key) @info[key] end
     def hash() @info end
