@@ -55,7 +55,7 @@ RSpec.configure do |c|
       cassette_name = example.metadata[:cassette]
     end
 
-    folder = to_file_path(class_name.to_s.match(/^Flickrie::/).post_match)
+    folder = to_file_path(class_name.match(/^Flickrie::/).post_match)
     VCR.use_cassette("#{folder}/#{cassette_name}") { example.call }
   end
   c.fail_fast = true
