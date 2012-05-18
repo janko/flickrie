@@ -98,7 +98,7 @@ module Flickrie
     end
 
     def determine_content_type(file_path)
-      extension = file_path[/\.\w{3,4}$/]
+      extension = file_path[/\.\w+$/]
       content_type = CONTENT_TYPES.find { |k,v| k.include?(extension) }.last
 
     rescue NoMethodError
