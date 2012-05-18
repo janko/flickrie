@@ -22,6 +22,10 @@ module Flickrie
       end
     end
 
+    # ==== Example
+    #
+    #   user.time_zone.offset # => "+01:00"
+    #   user.time_zone.label  # => "Sarajevo, Skopje, Warsaw, Zagreb"
     def time_zone() Struct.new(:label, :offset).new(*@info['timezone'].values) rescue nil end
 
     def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" end

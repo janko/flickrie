@@ -130,6 +130,12 @@ module Flickrie
         select { |media| media.is_a?(Photo) }
     end
 
+    # ==== Example
+    #
+    #   context = Flickrie.get_photo_context(37124234)
+    #   context.count    # => 23
+    #   context.previous # => #<Photo: id=2433240, ...>
+    #   context.next     # => #<Video: id=1282404, ...>
     def get_media_context(media_id, params = {})
       response = client.get_media_context(media_id, params)
       Media.from_context(response.body)
@@ -137,6 +143,7 @@ module Flickrie
     alias get_photo_context get_media_context
     alias get_video_context get_media_context
 
+    # Returns instances of Flickrie::MediaCount
     def get_media_counts(params = {})
       response = client.get_media_counts \
         MediaCount.ensure_utc(params)
@@ -146,19 +153,23 @@ module Flickrie
     alias get_photos_counts get_media_counts
     alias get_videos_counts get_media_counts
 
+    # See Flickrie::Media#exif for details
     def get_photo_exif(photo_id, params = {})
       response = client.get_media_exif(photo_id, params)
       Photo.from_exif(response.body['photo'])
     end
+    # See Flickrie::Media#exif for details
     def get_video_exif(video_id, params = {})
       response = client.get_media_exif(video_id, params)
       Video.from_exif(response.body['photo'])
     end
 
+    # Returns instances of Flickrie::User
     def get_photo_favorites(photo_id, params = {})
       response = client.get_media_favorites(photo_id, params)
       Photo.new(response.body['photo'])
     end
+    # Returns instances of Flickrie::User
     def get_video_favorites(video_id, params = {})
       response = client.get_media_favorites(video_id, params)
       Video.new(response.body['photo'])
@@ -168,14 +179,15 @@ module Flickrie
       response = client.get_media_info(media_id, params)
       Media.from_info(response.body['photo'])
     end
-
     alias get_photo_info get_media_info
     alias get_video_info get_media_info
 
+    # Returns an instance of Flickrie::Photo
     def get_photo_sizes(photo_id, params = {})
       response = client.get_media_sizes(photo_id, params)
       Photo.from_sizes(response.body['sizes'])
     end
+    # Returns an instance of Flickrie::Video
     def get_video_sizes(video_id, params = {})
       response = client.get_media_sizes(video_id, params)
       Video.from_sizes(response.body['sizes'])
@@ -243,6 +255,8 @@ module Flickrie
 
     #--
     # test
+    #++
+    # Returns an instance of Flickrie::User
     def test_login(params = {})
       response = client.test_login(params)
       User.from_test(response.body['user'])
