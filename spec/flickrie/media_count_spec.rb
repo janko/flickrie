@@ -10,8 +10,12 @@ describe Flickrie::MediaCount do
       ].
         each do |count|
           count.value.should be_an_instance_of(Fixnum)
+
           count.date_range.begin.should eq(dates.first)
+          count.from.should eq(dates.first)
+
           count.date_range.end.should eq(dates.last)
+          count.to.should eq(dates.last)
         end
     end
   end

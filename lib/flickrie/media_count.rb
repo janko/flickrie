@@ -19,6 +19,9 @@ module Flickrie
     end
     alias time_interval date_range
 
+    def from() date_range.begin end
+    def to()   date_range.end   end
+
     def [](key) @info[key] end
     def hash() @info end
 
