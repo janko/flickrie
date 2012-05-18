@@ -41,9 +41,8 @@ module Flickrie
     end
 
     class Retry < Faraday::Middleware
-      def initialize(app, retries = 2, options = {})
+      def initialize(app, retries = 2)
         @retries = retries
-        @exceptions = options[:on]
         super(app)
       end
 
@@ -51,7 +50,7 @@ module Flickrie
         retries = @retries
         begin
           @app.call(env)
-        rescue *@exceptions || Faraday::Error::TimeoutError
+        rescue Faraday::Error::TimeoutError
           if retries > 0
             retries -= 1
             retry
