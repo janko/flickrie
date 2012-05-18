@@ -7,7 +7,6 @@ module Flickrie
     def username()     @info['username']    end
     def real_name()    @info['realname']    end
     def location()     @info['location']    end
-    def time_zone()    @info['timezone']    end
     def description()  @info['description'] end
     def path_alias()   @info['path_alias']  end
     def icon_server()  @info['iconserver']  end
@@ -22,6 +21,8 @@ module Flickrie
         end
       end
     end
+
+    def time_zone() Struct.new(:label, :offset).new(*@info['timezone'].values) rescue nil end
 
     def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" end
     def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" end

@@ -2,6 +2,25 @@
 require 'spec_helper'
 
 describe Flickrie::User do
+  before(:all) do
+    @attributes = {
+      :id => USER_NSID,
+      :nsid => USER_NSID,
+      :username => "Janko Marohnić",
+      :real_name => "Janko Marohnić",
+      :location => "Zagreb, Croatia",
+      :time_zone => {
+        :label => "Sarajevo, Skopje, Warsaw, Zagreb",
+        :offset => "+01:00"
+      },
+      :description => "I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.",
+      :icon_server => "5464",
+      :icon_farm => 6,
+      :pro? => false,
+      :media_count => 98
+    }
+  end
+
   context "get info" do
     it "should have all attributes correctly set", :vcr do
       [
@@ -9,30 +28,17 @@ describe Flickrie::User do
         Flickrie::User.public_new('nsid' => USER_NSID).get_info
       ].
         each do |user|
-          user.id.should eq(USER_NSID)
-          user.nsid.should eq(USER_NSID)
-          user.username.should eq('Janko Marohnić')
-          user.real_name.should eq('Janko Marohnić')
-          user.location.should eq('Zagreb, Croatia')
-          user.time_zone['label'].should eq('Sarajevo, Skopje, Warsaw, Zagreb')
-          user.time_zone['offset'].should eq('+01:00')
-          description = "I'm a programmer, and I'm gonna program a badass Ruby library for Flickr."
-          user.description.should eq(description)
+          @attributes.keys.each do |attribute|
+            test_recursively(user, attribute)
+          end
 
-          user.profile_url.should_not be_empty
-          user.mobile_url.should_not be_empty
-          user.photos_url.should_not be_empty
+          [:profile_url, :mobile_url, :photos_url, :buddy_icon_url].each do |attribute|
+            user.send(attribute).should_not be_empty
+          end
 
-          user.icon_server.should eq('5464')
-          user.icon_farm.should eq(6)
-          user.buddy_icon_url.should_not be_empty
-
-          user.pro?.should be_false
-
-          user.first_taken.should be_an_instance_of(Time)
-          user.first_uploaded.should be_an_instance_of(Time)
-
-          user.media_count.should eq(98)
+          [:first_taken, :first_uploaded].each do |time_attribute|
+            user.send(time_attribute).should be_an_instance_of(Time)
+          end
         end
     end
   end
@@ -44,9 +50,9 @@ describe Flickrie::User do
         Flickrie.find_user_by_email('janko.marohnic@gmail.com')
       ].
         each do |user|
-          user.id.should eq(USER_NSID)
-          user.nsid.should eq(USER_NSID)
-          user.username.should eq('Janko Marohnić')
+          [:id, :nsid, :username].each do |attribute|
+            test_recursively(user, attribute)
+          end
         end
     end
   end

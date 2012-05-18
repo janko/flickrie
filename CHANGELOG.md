@@ -17,6 +17,10 @@
    instead of `:permissions`. In this way you can pass any parameter,
    and it will be appended to the URL (in case Flickr adds a new parameter)
 
+-- When you have a `Flickrie::User` instance, the
+   `Flickrie::User#time_zone` now returns a struct with `#label` and
+   `#offset` attributes (before it returned a `Hash`)
+
 ## Version 0.7.3
 
 - covered "flickr.people.getPhotos" (I released it as a patch because
