@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'flickrie'
 require 'vcr'
 begin
@@ -40,13 +41,13 @@ RSpec.configure do |c|
   c.before(:all) do
     Flickrie.api_key = ENV['FLICKR_API_KEY']
     Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
-    # so that I can use the '@instance' object when I want to make authenticated API calls
-    @flickrie = Flickrie::Instance.new(ENV['FLICKR_ACCESS_TOKEN'], ENV['FLICKR_ACCESS_SECRET'])
+    Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']
+    Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']
   end
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.around(:each, :vcr) do |example|
     if example.metadata[:cassette].nil?
-      # the example is also wrapped in a 'context' block
+      # the example is wrapped in a 'context' block
       class_name = example.metadata[:example_group][:example_group][:description_args].first.to_s
       cassette_name = example.metadata[:example_group][:description_args].first
     else
@@ -73,11 +74,12 @@ VCR.configure do |c|
   c.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
 end
 
-PHOTO_PATH = File.join(File.expand_path(File.dirname(__FILE__)), 'files/photo.jpg').freeze
+PHOTO_PATH = File.expand_path('../files/photo.jpg', __FILE__).freeze
 PHOTO_ID = '6946979188'.freeze
 VIDEO_ID = '7093038981'.freeze
 SET_ID = '72157629851991663'.freeze
 USER_NSID = '67131352@N04'.freeze
+USER_USERNAME = 'Janko Marohnić'.freeze
 EXTRAS = %w[license date_upload date_taken owner_name
   icon_server original_format last_update geo tags machine_tags
   o_dims views media path_alias url_sq url_q url_t url_s url_n

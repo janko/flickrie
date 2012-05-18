@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'spec_helper'
 
 describe Flickrie::Media do
@@ -65,8 +64,8 @@ describe Flickrie::Media do
       :taken_at_granularity => 0,
       :owner => {
         :nsid => USER_NSID,
-        :username => "Janko Marohnić",
-        :real_name => "Janko Marohnić",
+        :username => USER_USERNAME,
+        :real_name => USER_USERNAME,
         :location => "Zagreb, Croatia",
         :icon_server => "5464",
         :icon_farm => 6
@@ -101,8 +100,8 @@ describe Flickrie::Media do
         :first => {
           :id => '72157629487842968',
           :author => {
-            :nsid => '67131352@N04',
-            :username => 'Janko Marohnić'
+            :nsid => USER_NSID,
+            :username => USER_USERNAME
           },
           :coordinates => [316, 0],
           :width => 59,
@@ -122,9 +121,9 @@ describe Flickrie::Media do
       ].
         each do |media|
           [
-            :id, :secret, :server, :farm, :title, :description,
-            :views_count, :comments_count, :location, :geo_permissions,
-            :tags, :machine_tags, :license, :taken_at_granularity, :owner,
+            :id, :secret, :server, :farm, :title, :description, :views_count,
+            :comments_count, :location, :geo_permissions, :tags,
+            :machine_tags, :license, :taken_at_granularity, :owner,
             :safety_level, :safe?, :moderate?, :restricted?, :visibility,
             :favorite?, :can_comment?, :can_add_meta?, :can_everyone_comment?,
             :can_everyone_add_meta?, :can_download?, :can_blog?,
@@ -182,7 +181,7 @@ describe Flickrie::Media do
     include_context "common"
 
     it "should have all attributes correctly set", :vcr do
-      media = @flickrie.media_from_user(USER_NSID, :extras => EXTRAS).
+      media = Flickrie.media_from_user(USER_NSID, :extras => EXTRAS).
         find { |media| media.id == PHOTO_ID }
       test_common_attributes(media)
       test_recursively(media, :visibility)
@@ -215,8 +214,8 @@ describe Flickrie::Media do
     it "should have all attributes correctly set", :vcr do
       params = {:include_self => 1, :single_photo => 1}
       [
-        @flickrie.media_from_contacts(params).first,
-        @flickrie.public_media_from_user_contacts(USER_NSID, params).first
+        Flickrie.media_from_contacts(params).first,
+        Flickrie.public_media_from_user_contacts(USER_NSID, params).first
       ].
         each do |media|
           media.id.should eq('7093101501')
@@ -224,7 +223,7 @@ describe Flickrie::Media do
           media.server.should eq('7090')
           media.farm.should eq(8)
           media.owner.nsid.should eq(USER_NSID)
-          media.owner.username.should eq('Janko Marohnić')
+          media.owner.username.should eq(USER_USERNAME)
           media.title.should eq('IMG_0917')
           test_recursively(media, :visibility)
           media.media_status.should eq('ready')

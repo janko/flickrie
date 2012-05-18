@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'spec_helper'
 
 describe Flickrie::User do
@@ -6,8 +5,8 @@ describe Flickrie::User do
     @attributes = {
       :id => USER_NSID,
       :nsid => USER_NSID,
-      :username => "Janko Marohnić",
-      :real_name => "Janko Marohnić",
+      :username => USER_USERNAME,
+      :real_name => USER_USERNAME,
       :location => "Zagreb, Croatia",
       :time_zone => {
         :label => "Sarajevo, Skopje, Warsaw, Zagreb",
@@ -46,7 +45,7 @@ describe Flickrie::User do
   context "find by username or email" do
     it "should have all attributes correctly set", :vcr do
       [
-        Flickrie.find_user_by_username('Janko Marohnić'),
+        Flickrie.find_user_by_username(USER_USERNAME),
         Flickrie.find_user_by_email('janko.marohnic@gmail.com')
       ].
         each do |user|
