@@ -2,8 +2,20 @@
 
 ## Version 1.0.0 (Unreleased)
 
-- if you're passing in the content type of the file you're uploading,
-  the parameter is now called `:content_type`, not `:mime_type`
+- Changes that are backwards compatible:
+
+- Changes that are **not** backwards compatible:
+
+-- If you're passing in the content type of the file you're uploading,
+   the parameter is now called `:content_type`, not `:mime_type`
+
+-- If there is a problem in obtaining the access token, `Flickrie::Error`
+   is now raised, instead of `Flickrie::OAuth::Error`
+
+-- When you're calling `request_token.authorize_url`, if you want to
+   specifiy permissions, you now have to pass the `:perms` option,
+   instead of `:permissions`. In this way you can pass any parameter,
+   and it will be appended to the URL (in case Flickr adds a new parameter)
 
 ## Version 0.7.3
 
