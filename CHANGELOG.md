@@ -5,7 +5,20 @@
 - Changes that are backwards compatible:
 
 -- Fixed content type not being passed to the file you're uploading
-   if you specified it directly,
+   if you specified it directly.
+
+-- The request will now be retried once more if it timeouts
+
+-- In authentication:
+--- you can now call `request_token.authorize_url` instead of `request_token.get_authorization_url`.
+--- you can now call `request_token.get_access_token(code)` instead of `Flickrie::OAuth.get_access_token(code, request_token)`.
+--- you also get the infomation about the user who just authenticated,
+    which you can then access with `access_token.user_info`
+    (it's a Hash with keys `:fullname`, `:user_nsid` and `:username`)
+
+-- When calling `Flickrie.get_photos_counts`, the `Flickrie::MediaCount`
+   now also has attributes `#time_interval` (alias for `#date_range`),
+   `#from` and `#to`.
 
 - Changes that are **not** backwards compatible:
 
@@ -15,14 +28,17 @@
 -- If there is a problem in obtaining the access token, `Flickrie::Error`
    is now raised, instead of `Flickrie::OAuth::Error`.
 
--- When you're calling `request_token.authorize_url`, if you want to
+-- When you're calling `request_token.get_authorization_url`, if you want to
    specifiy permissions, you now have to pass the `:perms` option,
    instead of `:permissions`. In this way you can pass any parameter,
    and it will be appended to the URL (in case Flickr adds a new parameter).
 
 -- When you have a `Flickrie::User` instance, the
    `Flickrie::User#time_zone` now returns a struct with `#label` and
-   `#offset` attributes (before it returned a `Hash`).
+   `#offset` attributes (before it returned a `Hash` with those keys).
+
+-- When you call `Flickrie.get_media_context`, the result is now a
+   struct with attributes `#count`, `#previous`, `#next`.
 
 ## Version 0.7.3
 
