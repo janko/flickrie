@@ -23,8 +23,10 @@ describe Flickrie::User do
   context "get info" do
     it "should have all attributes correctly set", :vcr do
       [
+        # Tests 'Flickrie.get_user_info'
         Flickrie.get_user_info(USER_NSID),
-        Flickrie::User.public_new('nsid' => USER_NSID).get_info
+        # Tests 'Flickrie::User#get_info'
+        Flickrie.find_user_by_email(USER_EMAIL).get_info
       ].
         each do |user|
           @attributes.keys.each do |attribute|
@@ -46,7 +48,7 @@ describe Flickrie::User do
     it "should have all attributes correctly set", :vcr do
       [
         Flickrie.find_user_by_username(USER_USERNAME),
-        Flickrie.find_user_by_email('janko.marohnic@gmail.com')
+        Flickrie.find_user_by_email(USER_EMAIL)
       ].
         each do |user|
           [:id, :nsid, :username].each do |attribute|

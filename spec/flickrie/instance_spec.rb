@@ -11,7 +11,5 @@ describe Flickrie::Instance do
     instance = Flickrie::Instance.new(ENV['FLICKR_ACCESS_TOKEN'], ENV['FLICKR_ACCESS_SECRET'])
     user = instance.test_login
     user.username.should eq(USER_USERNAME)
-    id = instance.upload(PHOTO_PATH)
-    instance.delete_photo(id)
   end
 end

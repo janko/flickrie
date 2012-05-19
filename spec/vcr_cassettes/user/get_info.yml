@@ -70,4 +70,39 @@ http_interactions:
       string: "{\"person\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"ispro\":0, \"iconserver\":\"5464\", \"iconfarm\":6, \"path_alias\":null, \"username\":{\"_content\":\"Janko Marohni\\u0107\"}, \"realname\":{\"_content\":\"Janko Marohni\\u0107\"}, \"location\":{\"_content\":\"Zagreb, Croatia\"}, \"timezone\":{\"label\":\"Sarajevo, Skopje, Warsaw, Zagreb\", \"offset\":\"+01:00\"}, \"description\":{\"_content\":\"I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.\"}, \"photosurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/\"}, \"profileurl\":{\"_content\":\"http:\\/\\/www.flickr.com\\/people\\/67131352@N04\\/\"}, \"mobileurl\":{\"_content\":\"http:\\/\\/m.flickr.com\\/photostream.gne?id=67099213\"}, \"photos\":{\"firstdatetaken\":{\"_content\":\"2011-03-20 12:29:43\"}, \"firstdate\":{\"_content\":\"1334832295\"}, \"count\":{\"_content\":98}}}, \"stat\":\"ok\"}"
     http_version: 
   recorded_at: Thu, 17 May 2012 22:00:44 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.findByEmail&find_email=janko.marohnic%40gmail.com
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="2e07d7b6ecc3319b74d30637b7338cae", oauth_signature="kiPR120BxFlZA%2BhaSgvzBzHQeyU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337437863", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sat, 19 May 2012 14:31:04 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www83.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "106"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"user\":{\"id\":\"67131352@N04\", \"nsid\":\"67131352@N04\", \"username\":{\"_content\":\"Janko Marohni\\u0107\"}}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sat, 19 May 2012 14:31:04 GMT
 recorded_with: VCR 2.1.1

@@ -1,0 +1,108 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContext&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="0e9cee2b483abfdc4e86aaf088af3f21", oauth_signature="8%2FfqEg87HquAJEZHsaJUGZFaTe8%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337445592", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sat, 19 May 2012 16:39:52 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www114.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "285"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"count\":{\"_content\":98}, \"prevphoto\":{\"id\":\"6946978706\", \"secret\":\"b38270bbd6\", \"server\":\"7216\", \"farm\":8, \"title\":\"IMG_0795\", \"url\":\"\\/photos\\/67131352@N04\\/6946978706\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7216\\/6946978706_b38270bbd6_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"nextphoto\":{\"id\":\"6946979704\", \"secret\":\"74513ff732\", \"server\":\"7234\", \"farm\":8, \"title\":\"IMG_0797\", \"url\":\"\\/photos\\/67131352@N04\\/6946979704\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7234\\/6946979704_74513ff732_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sat, 19 May 2012 16:39:52 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContext&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="97cfda590f7981bed0c51ddaf957fd13", oauth_signature="y%2FYsJuWm3J2Yfxht%2BOfwlqfZNHI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337445592", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sat, 19 May 2012 16:39:52 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www118.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "285"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"count\":{\"_content\":98}, \"prevphoto\":{\"id\":\"6946978706\", \"secret\":\"b38270bbd6\", \"server\":\"7216\", \"farm\":8, \"title\":\"IMG_0795\", \"url\":\"\\/photos\\/67131352@N04\\/6946978706\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7216\\/6946978706_b38270bbd6_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"nextphoto\":{\"id\":\"6946979704\", \"secret\":\"74513ff732\", \"server\":\"7234\", \"farm\":8, \"title\":\"IMG_0797\", \"url\":\"\\/photos\\/67131352@N04\\/6946979704\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7234\\/6946979704_74513ff732_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sat, 19 May 2012 16:39:52 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContext&photo_id=7093038981
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="4077c65ed2a2acb164c60e134a128d05", oauth_signature="ktqPLeNsOfRUWLaMzqf7wVjjplY%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337445592", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sat, 19 May 2012 16:39:53 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www143.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "250"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"count\":{\"_content\":98}, \"prevphoto\":{\"id\":0, \"is_faved\":0}, \"nextphoto\":{\"id\":\"6946968774\", \"secret\":\"e24f175d9b\", \"server\":\"7188\", \"farm\":8, \"title\":\"IMG_0778\", \"url\":\"\\/photos\\/67131352@N04\\/6946968774\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7188\\/6946968774_e24f175d9b_s.jpg\", \"media\":\"photo\", \"license\":null, \"is_faved\":0}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sat, 19 May 2012 16:39:53 GMT
+recorded_with: VCR 2.1.1

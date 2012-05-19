@@ -5,6 +5,7 @@ begin
   require 'debugger'
 rescue LoadError
 end
+require 'custom_matchers'
 
 module RSpecHelpers
   def test_recursively(object, attribute, hash = nil)
@@ -27,17 +28,11 @@ module RSpecHelpers
       end
     end
   end
-
-  # SomeModule::AnotherModule::Class => "some_module/another_module/class"
-  def to_file_path(constants)
-    constants.split("::").collect do |constant|
-      constant.split(/(?=[A-Z])/).map(&:downcase).join('_')
-    end.join('/')
-  end
 end
 
 RSpec.configure do |c|
   c.include RSpecHelpers
+  c.include CustomMatchers
   c.before(:all) do
     Flickrie.api_key = ENV['FLICKR_API_KEY']
     Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
@@ -46,18 +41,12 @@ RSpec.configure do |c|
   end
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.around(:each, :vcr) do |example|
-    if example.metadata[:cassette].nil?
-      # the example is wrapped in a 'context' block
-      class_name = example.metadata[:example_group][:example_group][:description_args].first.to_s
-      cassette_name = example.metadata[:example_group][:description_args].first
-    else
-      # the example isn't wrapped in a 'context' block
-      class_name = example.metadata[:example_group][:description_args].first.to_s
-      cassette_name = example.metadata[:cassette]
-    end
-
-    folder = to_file_path(class_name.match(/^Flickrie::/).post_match)
-    VCR.use_cassette("#{folder}/#{cassette_name}") { example.call }
+    # This is just an automatization of naming the VCR cassettes
+    klass = example.metadata[:example_group][:example_group][:description_args].first
+    folder = klass.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join('_')
+    subfolder = example.metadata[:example_group][:description_args].first
+    cassette_name = example.metadata[:description_args].first.match(/^should /).post_match
+    VCR.use_cassette("#{folder}/#{subfolder}/#{cassette_name}") { example.call }
   end
   c.fail_fast = true
 end
@@ -75,11 +64,13 @@ VCR.configure do |c|
 end
 
 PHOTO_PATH = File.expand_path('../files/photo.jpg', __FILE__).freeze
+MEDIA_ID = '6946979188'.freeze
 PHOTO_ID = '6946979188'.freeze
 VIDEO_ID = '7093038981'.freeze
 SET_ID = '72157629851991663'.freeze
 USER_NSID = '67131352@N04'.freeze
 USER_USERNAME = 'Janko Marohnić'.freeze
+USER_EMAIL = 'janko.marohnic@gmail.com'.freeze
 EXTRAS = %w[license date_upload date_taken owner_name
   icon_server original_format last_update geo tags machine_tags
   o_dims views media path_alias url_sq url_q url_t url_s url_n
@@ -87,7 +78,7 @@ EXTRAS = %w[license date_upload date_taken owner_name
 # for copying:
 #   license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o
 
-klasses = [Flickrie::Set, Flickrie::Photo, Flickrie::Video, Flickrie::User, Flickrie::Location]
+klasses = [Flickrie::Set, Flickrie::Photo, Flickrie::Video, Flickrie::Location]
 klasses.each do |klass|
   klass.instance_eval do
     def public_new(*args)
