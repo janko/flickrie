@@ -30,15 +30,15 @@ describe Flickrie::ApiMethods do
 
   context "people" do
     it "should get media from user", :vcr do
-      Flickrie.media_from_user(USER_NSID).each  { |object| object.should be_a_media }
-      Flickrie.photos_from_user(USER_NSID).each { |object| object.should be_a_photo }
-      Flickrie.videos_from_user(USER_NSID).each { |object| object.should be_a_video }
+      Flickrie.media_from_user(USER_NSID).first.id.should_not be_nil
+      Flickrie.photos_from_user(USER_NSID).first.id.should_not be_nil
+      Flickrie.videos_from_user(USER_NSID).first.id.should_not be_nil
     end
 
     it "should get public media from user", :vcr do
-      Flickrie.public_media_from_user(USER_NSID).each  { |object| object.should be_a_media }
-      Flickrie.public_photos_from_user(USER_NSID).each { |object| object.should be_a_photo }
-      Flickrie.public_videos_from_user(USER_NSID).each { |object| object.should be_a_video }
+      Flickrie.public_media_from_user(USER_NSID).first.id.should_not be_nil
+      Flickrie.public_photos_from_user(USER_NSID).first.id.should_not be_nil
+      Flickrie.public_videos_from_user(USER_NSID).first.id.should_not be_nil
     end
   end
 
@@ -61,15 +61,15 @@ describe Flickrie::ApiMethods do
 
     it "should get from contacts", :vcr do
       params = {:include_self => 1, :single_photo => 1}
-      Flickrie.media_from_contacts(params).each  { |object| object.should be_a_media }
-      Flickrie.photos_from_contacts(params).each { |object| object.should be_a_photo }
-      Flickrie.videos_from_contacts(params).each { |object| object.should be_a_video }
+      Flickrie.media_from_contacts(params).first.id.should_not be_nil
+      Flickrie.photos_from_contacts(params).first.id.should_not be_nil
+      # Flickrie.videos_from_contacts(params).first.id.should_not be_nil
     end
 
     it "should get public from user contacts", :vcr do
       params = {:include_self => 1, :single_photo => 1}
-      Flickrie.public_media_from_user_contacts(USER_NSID, params).each  { |object| object.should be_a_media }
-      Flickrie.public_photos_from_user_contacts(USER_NSID, params).each { |object| object.should be_a_photo }
+      Flickrie.public_media_from_user_contacts(USER_NSID, params).first.id.should_not be_nil
+      Flickrie.public_photos_from_user_contacts(USER_NSID, params).first.id.should_not be_nil
       # Flickrie.public_videos_from_user_contacts(USER_NSID, params).each { |object| object.should be_a_video }
     end
 
@@ -87,38 +87,38 @@ describe Flickrie::ApiMethods do
     end
 
     it "should get exif", :vcr do
-      Flickrie.get_photo_exif(PHOTO_ID).should be_a_photo
-      Flickrie.get_video_exif(VIDEO_ID).should be_a_video
+      Flickrie.get_photo_exif(PHOTO_ID).exif.should_not be_nil
+      Flickrie.get_video_exif(VIDEO_ID).exif.should_not be_nil
     end
 
     it "should get favorites", :vcr do
-      Flickrie.get_photo_favorites(PHOTO_ID).should be_a_photo
-      Flickrie.get_video_favorites(PHOTO_ID).should be_a_video
+      Flickrie.get_photo_favorites(PHOTO_ID).favorites.should_not be_nil
+      Flickrie.get_video_favorites(PHOTO_ID).favorites.should_not be_nil
     end
 
     it "should get info", :vcr do
-      Flickrie.get_media_info(MEDIA_ID).should be_a_media
-      Flickrie.get_photo_info(PHOTO_ID).should be_a_photo
-      Flickrie.get_video_info(VIDEO_ID).should be_a_video
+      Flickrie.get_media_info(MEDIA_ID).id.should_not be_nil
+      Flickrie.get_photo_info(PHOTO_ID).id.should_not be_nil
+      Flickrie.get_video_info(VIDEO_ID).id.should_not be_nil
     end
 
     it "should get sizes", :vcr do
-      Flickrie.get_photo_sizes(PHOTO_ID).should be_a_photo
-      Flickrie.get_video_sizes(VIDEO_ID).should be_a_video
+      Flickrie.get_photo_sizes(PHOTO_ID).size.should_not be_nil
+      Flickrie.get_video_sizes(VIDEO_ID).download_url.should_not be_nil
     end
 
     it "should search", :vcr do
-      Flickrie.search_media(:user_id => USER_NSID).each  { |object| object.should be_a_media }
-      Flickrie.search_photos(:user_id => USER_NSID).each { |object| object.should be_a_photo }
-      Flickrie.search_videos(:user_id => USER_NSID).each { |object| object.should be_a_video }
+      Flickrie.search_media(:user_id => USER_NSID).first.id.should_not be_nil
+      Flickrie.search_photos(:user_id => USER_NSID).first.id.should_not be_nil
+      Flickrie.search_videos(:user_id => USER_NSID).first.id.should_not be_nil
     end
   end
 
   context "photosets" do
     it "should get media", :vcr do
-      Flickrie.media_from_set(SET_ID).each { |object| object.should be_a_media }
-      Flickrie.photos_from_set(SET_ID).each { |object| object.should be_a_photo }
-      Flickrie.videos_from_set(SET_ID).each { |object| object.should be_a_video }
+      Flickrie.media_from_set(SET_ID).first.id.should_not be_nil
+      Flickrie.photos_from_set(SET_ID).first.id.should_not be_nil
+      Flickrie.videos_from_set(SET_ID).first.id.should_not be_nil
     end
   end
 end
