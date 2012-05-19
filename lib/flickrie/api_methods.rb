@@ -150,7 +150,15 @@ module Flickrie
       response.body['photocounts']['photocount'].
         map { |info| MediaCount.new(info, params) }
     end
+    # Note that this will also count videos, if any,
+    # the method name is just to look prettier if you don't
+    # deal with videos. There is currently no way to exclude
+    # videos from the count.
     alias get_photos_counts get_media_counts
+    # Note that this will also count photos, if any,
+    # the method name is just to look prettier if you don't
+    # deal with photos. There is currently no way to exclude
+    # photos from the count.
     alias get_videos_counts get_media_counts
 
     # See Flickrie::Media#exif for details
@@ -164,12 +172,18 @@ module Flickrie
       Video.from_exif(response.body['photo'])
     end
 
-    # Returns instances of Flickrie::User
+    # ==== Example
+    #
+    #   photo = Flickrie.get_photo_favorites(24810948)
+    #   photo.favorites.first.username # => "John Smith"
     def get_photo_favorites(photo_id, params = {})
       response = client.get_media_favorites(photo_id, params)
       Photo.new(response.body['photo'])
     end
-    # Returns instances of Flickrie::User
+    # ==== Example
+    #
+    #   photo = Flickrie.get_video_favorites(371294792)
+    #   photo.favorites.first.username # => "John Smith"
     def get_video_favorites(video_id, params = {})
       response = client.get_media_favorites(video_id, params)
       Video.new(response.body['photo'])
@@ -179,7 +193,9 @@ module Flickrie
       response = client.get_media_info(media_id, params)
       Media.from_info(response.body['photo'])
     end
+    # Returns an instance of Flickrie::Photo
     alias get_photo_info get_media_info
+    # Returns an instance of Flickrie::Video
     alias get_video_info get_media_info
 
     # Returns an instance of Flickrie::Photo
@@ -222,7 +238,7 @@ module Flickrie
     end
 
     #--
-    # licenses
+    # photos.licenses
     #++
     # Returns an array of Flickrie::License
     def get_licenses(params = {})
