@@ -2,7 +2,7 @@
 
 ## Version 1.0.1
 
-- Transfered the documentation to YARD. See the readme for the updated link.
+- Transfered the documentation to YARD. [Documentation](http://rubydoc.info/gems/flickrie/)
 
 ## Version 1.0.0
 

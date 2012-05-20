@@ -133,7 +133,7 @@ So, in your ERB template you could do something like this (in Rails):
 ```
 
 You can see the full list of available methods and attributes in the
-[documentation](http://janko-m.github.com/flickrie/Flickrie.html).
+[documentation](http://rubydoc.info/gems/flickrie/).
 For photos (and videos) have a look at the `Flickrie::Media` module,
 because it's included into `Flickrie::Photo` and `Flickrie::Video`, and most
 of the attributes are there.
