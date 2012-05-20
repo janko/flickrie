@@ -1,20 +1,32 @@
 module Flickrie
   class Location
+    # @!parse attr_reader :latitude
     def latitude()  @info['latitude']  end
+    # @!parse attr_reader :longitude
     def longitude() @info['longitude'] end
+    # @!parse attr_reader :accuracy
     def accuracy()  @info['accuracy']  end
+    # @!parse attr_reader :context
     def context()   Integer(@info['context']) rescue nil end
 
+    # @!parse attr_reader :neighbourhood
     def neighbourhood() new_area('neighbourhood') end
+    # @!parse attr_reader :locality
     def locality()      new_area('locality')      end
+    # @!parse attr_reader :county
     def county()        new_area('county')        end
+    # @!parse attr_reader :region
     def region()        new_area('region')        end
+    # @!parse attr_reader :country
     def country()       new_area('country')       end
 
+    # @!parse attr_reader :place_id
     def place_id() @info['place_id'] end
+    # @!parse attr_reader :woeid
     def woeid()    @info['woeid']    end
 
     def [](key) @info[key] end
+    # @!parse attr_reader :hash
     def hash() @info end
 
     private

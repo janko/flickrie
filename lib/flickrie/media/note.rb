@@ -9,6 +9,7 @@ module Flickrie
       end
 
       def [](key) @info[key] end
+      # @!parse attr_reader :hash
       def hash() @info end
 
       private

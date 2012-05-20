@@ -2,8 +2,12 @@ require 'date'
 
 module Flickrie
   class MediaCount
+    # @!parse attr_reader :value
     def value() Integer(@info['count']) rescue nil end
 
+    # @return [Range]
+    #
+    # @!parse attr_reader :date_range
     def date_range
       dates =
         case @dates_kind
@@ -19,10 +23,13 @@ module Flickrie
     end
     alias time_interval date_range
 
+    # @!parse attr_reader :from
     def from() date_range.begin end
+    # @!parse attr_reader :to
     def to()   date_range.end   end
 
     def [](key) @info[key] end
+    # @!parse attr_reader :hash
     def hash() @info end
 
     private

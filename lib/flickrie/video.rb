@@ -1,22 +1,30 @@
 module Flickrie
-  # See Flickrie::Media for the other methods.
   class Video
     include Media
 
+    # @!parse attr_reader :ready?
     def ready?()   Integer(@video['ready']) == 1   rescue nil end
+    # @!parse attr_reader :failed?
     def failed?()  Integer(@video['failed']) == 1  rescue nil end
+    # @!parse attr_reader :pending?
     def pending?() Integer(@video['pending']) == 1 rescue nil end
 
+    # @!parse attr_reader :duration
     def duration() Integer(@video['duration']) rescue nil end
 
+    # @!parse attr_reader :width
     def width()  Integer(@video['width'])  rescue nil end
+    # @!parse attr_reader :height
     def height() Integer(@video['height']) rescue nil end
 
+    # @!parse attr_reader :source_url
     def source_url()          @video['source_url']          end
+    # @!parse attr_reader :download_url
     def download_url()        @video['download_url']        end
+    # @!parse attr_reader :mobile_download_url
     def mobile_download_url() @video['mobile_download_url'] end
 
-    # This fetches the #source_url, #download_url and the #mobile_download_url
+    # This fetches the {#source\_url}, {#download\_url} and the {#mobile\_download\_url}
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}
@@ -35,6 +43,7 @@ module Flickrie
       self
     end
 
+    # Same as calling `Flickrie.get_video_info(video.id)`.
     def get_info(params = {}, info = nil)
       super
       @video = @info['video']

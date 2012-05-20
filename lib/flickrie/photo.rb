@@ -1,5 +1,4 @@
 module Flickrie
-  # See Flickrie::Media for the other methods.
   class Photo
     include Media
 
@@ -16,6 +15,7 @@ module Flickrie
       'Original'   => 'o'
     }
 
+    # @!parse attr_reader :size
     def size() @size end
 
     def square!(number) @size = "Square #{number}"; self end
@@ -32,8 +32,7 @@ module Flickrie
     def large(number)  dup.large!(number)  end
     def original()     dup.original!       end
 
-    #--
-    # Alternate size methods
+    # @comment Alternate size methods
     def square75()   square(75)   end
     def square75!()  square!(75)  end
     def square150()  square(150)  end
@@ -58,13 +57,17 @@ module Flickrie
       SIZES.select { |_,v| @info["url_#{v}"] }.keys
     end
 
+    # @!parse attr_reader :width
     def width()  Integer(@info["width_#{size_abbr}"])  rescue nil end
+    # @!parse attr_reader :height
     def height() Integer(@info["height_#{size_abbr}"]) rescue nil end
+    # @!parse attr_reader :source_url
     def source_url() @info["url_#{size_abbr}"] end
 
+    # @!parse attr_reader :rotation
     def rotation() Integer(@info['rotation']) rescue nil end
 
-    # Same as calling <tt>Flickrie.get_photo_sizes(photo.id)</tt>
+    # Same as calling `Flickrie.get_photo_sizes(photo.id)`.
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}

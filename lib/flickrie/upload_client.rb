@@ -1,43 +1,7 @@
-require 'faraday_middleware'
+require 'faraday'
 
 module Flickrie
-  class << self
-    # :nodoc:
-    def upload_client
-      @upload_client ||= new_upload_client
-    end
-
-    def new_upload_client(access_token_hash = {})
-      UploadClient.new(upload_params) do |b|
-        b.use Middleware::Retry
-        b.use FaradayMiddleware::OAuth,
-          :consumer_key => api_key,
-          :consumer_secret => shared_secret,
-          :token => access_token_hash[:token] || access_token,
-          :token_secret => access_token_hash[:secret] || access_secret
-        b.request :multipart
-
-        b.use Middleware::UploadStatusCheck
-        b.use FaradayMiddleware::ParseXml
-        b.use Middleware::OAuthCheck
-
-        b.adapter :net_http
-      end
-    end
-
-    private
-
-    def upload_params
-      {
-        :url => 'http://api.flickr.com/services',
-        :request => {
-          :open_timeout => open_timeout || OPEN_TIMEOUT
-        }
-      }
-    end
-  end
-
-  class UploadClient < Faraday::Connection # :nodoc:
+  class UploadClient < Faraday::Connection
     def upload(media, params = {})
       file = get_file(media, params[:content_type])
       title = file.original_filename.match(/\.\w{3,4}$/).pre_match
@@ -76,7 +40,7 @@ module Flickrie
       %w[.wmv]                                => 'video/x-ms-wmv',
       %w[.flv .f4v .f4p .f4a .f4b]            => 'video/x-flv',
       %w[.avi]                                => 'video/avi'
-    }.freeze
+    }
 
     def get_file(object, content_type = nil)
       file, content_type, file_path =

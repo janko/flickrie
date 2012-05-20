@@ -45,7 +45,7 @@ You first need to install the gem.
 Then, if you're using Bundler in your project, put it into your `Gemfile`:
 
 ```ruby
-gem "flickrie"
+gem "flickrie", "~> 1.0.0"
 ```
 
 Then in your app you set the API key and shared secret (if you don't have them

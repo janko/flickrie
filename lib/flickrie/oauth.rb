@@ -7,7 +7,7 @@ module Flickrie
 
     private
 
-      def self.new_connection(request_token = nil) # :nodoc:
+      def self.new_connection(request_token = nil)
         Faraday.new(params) do |b|
           b.use Middleware::Retry
           b.use FaradayMiddleware::OAuth,
@@ -27,8 +27,8 @@ module Flickrie
         {
           :url => URL,
           :request => {
-            :open_timeout => Flickrie.open_timeout || OPEN_TIMEOUT,
-            :timeout => Flickrie.timeout || TIMEOUT
+            :open_timeout => Flickrie.open_timeout || DEFAULTS[:open_timeout],
+            :timeout => Flickrie.timeout || DEFAULTS[:timeout]
           }
         }
       end

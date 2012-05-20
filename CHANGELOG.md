@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 1.0.1
+
+- Transfered the documentation to YARD. See the readme for the updated link.
+
 ## Version 1.0.0
 
 ### Changes that are backwards compatible

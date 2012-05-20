@@ -1,0 +1,11 @@
+--charset    utf-8
+--readme     README.md
+--markup     markdown
+--title      "Flickrie documentation"
+--exclude    "lib/flickrie/middleware.rb"
+--exclude    "lib/flickrie/client.rb"
+--exclude    "lib/flickrie/upload_client.rb"
+--tag        api_method:"Flickr API method"
+--tag        comment
+--hide-tag   comment
+--no-private
