@@ -1,6 +1,11 @@
 module Flickrie
   class License
-    attr_reader :id, :name, :url
+    # @return [String]
+    attr_reader :id
+    # @return [String]
+    attr_reader :name
+    # @return [String]
+    attr_reader :url
 
     private
 

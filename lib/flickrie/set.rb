@@ -1,72 +1,85 @@
 module Flickrie
   class Set
-    # @!parse attr_reader :id
+    # @!parse attr_reader \
+    #   :id, :secret, :server, :farm, :title, :description,
+    #   :primary_media_id, :views_count, :comments_count,
+    #   :photos_count, :videos_count, :media_count, :owner,
+    #   :can_comment?, :needs_interstitial?, :visibility_can_see_set?,
+    #   :created_at, :updated_at, :url, :hash
+
+    # @return [String]
     def id()          @info['id']          end
-    # @!parse attr_reader :secret
+    # @return [String]
     def secret()      @info['secret']      end
-    # @!parse attr_reader :server
+    # @return [String]
     def server()      @info['server']      end
-    # @!parse attr_reader :farm
+    # @return [Fixnum]
     def farm()        @info['farm']        end
-    # @!parse attr_reader :title
+    # @return [String]
     def title()       @info['title']       end
-    # @!parse attr_reader :description
+    # @return [String]
     def description() @info['description'] end
 
-    # @!parse attr_reader :primary_media_id
+    # @return [String]
     def primary_media_id() @info['primary'] end
     alias primary_photo_id primary_media_id
     alias primary_video_id primary_media_id
 
-    # @!parse attr_reader :views_count
+    # @return [Fixnum]
     def views_count()    Integer(@info['count_views'])    rescue nil end
-    # @!parse attr_reader :comments_count
+    # @return [Fixnum]
     def comments_count() Integer(@info['count_comments']) rescue nil end
-    # @!parse attr_reader :photos_count
+    # @return [Fixnum]
     def photos_count()   Integer(@info['count_photos'])   rescue nil end
-    # @!parse attr_reader :videos_count
+    # @return [Fixnum]
     def videos_count()   Integer(@info['count_videos'])   rescue nil end
-    # @!parse attr_reader :media_count
+    # @return [Fixnum]
     def media_count
       photos_count + videos_count rescue nil
     end
 
     # @return [Flickrie::User]
-    #
-    # @!parse attr_reader :owner
     def owner() User.new('nsid' => @info['owner']) if @info['owner'] end
 
     # Same as calling `Flickrie.photos_from_set(set.id)`.
+    #
+    # @return [Array<Flickrie::Photo>]
     def photos(params = {}) Flickrie.photos_from_set(id, params) end
     # Same as calling `Flickrie.videos_from_set(set.id)`.
+    #
+    # @return [Array<Flickrie::Video>]
     def videos(params = {}) Flickrie.videos_from_set(id, params) end
     # Same as calling `Flickrie.media_from_set(set.id)`.
+    #
+    # @return [Array<Flickrie::Photo, Flickrie::Video>]
     def media(params = {})  Flickrie.media_from_set(id, params)  end
 
-    # @!parse attr_reader :can_comment?
+    # @return [Boolean]
     def can_comment?() Integer(@info['can_comment']) == 1 rescue nil end
 
     # @comment TODO: Figure out what this is
-    # @!parse attr_reader :needs_interstitial?
+    # @return [Boolean]
     def needs_interstitial?() Integer(@info['needs_interstitial']) == 1 rescue nil end
-    # @!parse attr_reader :visibility_can_see_set?
+    # @return [Boolean]
     def visibility_can_see_set?() Integer(@info['visibility_can_see_set']) == 1 rescue nil end
 
-    # @!parse attr_reader :created_at
+    # @return [Time]
     def created_at() Time.at(Integer(@info['date_create'])) rescue nil end
-    # @!parse attr_reader :updated_at
+    # @return [Time]
     def updated_at() Time.at(Integer(@info['date_update'])) rescue nil end
 
-    # @!parse attr_reader :url
+    # @return [String]
     def url
       "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}"
     end
 
     def [](key) @info[key] end
-    # @!parse attr_reader :hash
+    # @return [Hash]
     def hash() @info end
 
     # Same as calling `Flickrie.get_set_info(set.id)`
+    #
+    # @return [self]
     def get_info(info = nil)
       info ||= Flickrie.client.get_set_info(id).body['photoset']
       @info.update(info)

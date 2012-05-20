@@ -1,28 +1,39 @@
 module Flickrie
   module Media
     class Note
-      attr_reader :id, :author, :coordinates, :content,
-        :width, :height
+      # @!parse attr_reader \
+      #   :id, :author, :content, :coordinates, :width,
+      #   :height, :hash
+
+      # @return [String]
+      def id() @info['id'] end
+      # @return [Flickrie::User]
+      def author() User.new('nsid' => @info['author'], 'username' => @info['authorname']) end
+      # @return [String]
+      def content() @info['_content'] end
+      # Returns a 2-element array, representing a point.
+      #
+      # @return [Array<Fixnum>]
+      def coordinates() [@info['x'].to_i, @info['y'].to_i] end
+      # @return [Fixnum]
+      def width() @info['w'].to_i end
+      # @return [Fixnum]
+      def height() @info['h'].to_i end
 
       def to_s
-        @content
+        content
       end
 
       def [](key) @info[key] end
-      # @!parse attr_reader :hash
+      # @return [Fixnum]
       def hash() @info end
 
       private
 
-      def initialize(hash)
-        @id = hash['id']
-        @author = User.new \
-          'nsid' => hash['author'],
-          'username' => hash['authorname']
-        @content = hash['_content']
-        @coordinates = [hash['x'].to_i, hash['y'].to_i]
-        @width = hash['w'].to_i
-        @height = hash['h'].to_i
+      def initialize(info)
+        raise ArgumentError if info.nil?
+
+        @info = info
       end
     end
   end

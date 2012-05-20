@@ -2,26 +2,32 @@ require 'date'
 
 module Flickrie
   class User
-    # @!parse attr_reader :id
+    # @!parse attr_reader \
+    #   :id, :nsid, :username, :real_name, :location, :description,
+    #   :path_alias, :icon_server, :icon_farm, :buddy_icon_url,
+    #   :time_zone, :photos_url, :profile_url, :mobile_url,
+    #   :first_taken, :favorited_at, :media_count, :pro?, :hash
+
+    # @return [String]
     def id()           @info['id']          end
-    # @!parse attr_reader :nsid
+    # @return [String]
     def nsid()         @info['nsid']        end
-    # @!parse attr_reader :username
+    # @return [String]
     def username()     @info['username']    end
-    # @!parse attr_reader :real_name
+    # @return [String]
     def real_name()    @info['realname']    end
-    # @!parse attr_reader :location
+    # @return [String]
     def location()     @info['location']    end
-    # @!parse attr_reader :description
+    # @return [String]
     def description()  @info['description'] end
-    # @!parse attr_reader :path_alias
+    # @return [String]
     def path_alias()   @info['path_alias']  end
-    # @!parse attr_reader :icon_server
+    # @return [String]
     def icon_server()  @info['iconserver']  end
-    # @!parse attr_reader :icon_farm
+    # @return [Fixnum]
     def icon_farm()    @info['iconfarm']    end
 
-    # @!parse attr_reader :buddy_icon_url
+    # @return [String]
     def buddy_icon_url
       if icon_farm
         if icon_server.to_i > 0 && (nsid || id)
@@ -37,41 +43,45 @@ module Flickrie
     #     user.time_zone.offset # => "+01:00"
     #     user.time_zone.label  # => "Sarajevo, Skopje, Warsaw, Zagreb"
     #
-    # @!parse attr_reader :time_zone
+    # @return [Struct]
     def time_zone() Struct.new(:label, :offset).new(*@info['timezone'].values) rescue nil end
 
-    # @!parse attr_reader :photos_url
+    # @return [String]
     def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" end
-    # @!parse attr_reader :profile_url
+    # @return [String]
     def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" end
-    # @!parse attr_reader :mobile_url
+    # @return [String]
     def mobile_url()  @info['mobileurl'] end
 
-    # @!parse attr_reader :first_taken
+    # @return [Time]
     def first_taken() DateTime.parse(@info['photos']['firstdatetaken']).to_time rescue nil end
-    # @!parse attr_reader :first_uploaded
+    # @return [Time]
     def first_uploaded() Time.at(Integer(@info['photos']['firstdate'])) rescue nil end
 
-    # @!parse attr_reader :favorited_at
+    # @return [Time]
     def favorited_at() Time.at(Integer(@info['favedate'])) rescue nil end
 
-    # @!parse attr_reader :media_count
+    # @return [Fixnum]
     def media_count() Integer(@info['photos']['count']) rescue nil end
     alias photos_count media_count
     alias videos_count media_count
 
     # @comment TODO: public videos, media and without public
     # The same as calling `Flickrie.public_photos_from_user(user.nsid)`
+    #
+    # @return [Array<Flickrie::Photo>]
     def public_photos(params = {}) Flickrie.public_photos_from_user(nsid || id, params) end
 
-    # @!parse attr_reader :pro?
+    # @return [Boolean]
     def pro?() Integer(@info['ispro']) == 1 rescue nil end
 
     def [](key) @info[key] end
-    # @!parse attr_reader :hash
+    # @return [Hash]
     def hash() @info end
 
     # The same as calling `Flickrie.get_user_info(user.nsid)`
+    #
+    # @return [self]
     def get_info(params = {}, info = nil)
       info ||= Flickrie.client.get_user_info(nsid || id, params).body['person']
       @info.update(info)

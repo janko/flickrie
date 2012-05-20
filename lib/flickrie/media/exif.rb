@@ -1,6 +1,8 @@
 module Flickrie
   module Media
     class Exif
+      # @!parse attr_reader :hash
+
       # Gets exif. Example:
       #
       #     photo.exif.get('Model') # => 'Canon PowerShot G12'
@@ -20,7 +22,7 @@ module Flickrie
       end
 
       def [](key) @info[key] end
-      # @!parse attr_reader :hash
+      # @return [Hash]
       def hash() @info end
 
       private

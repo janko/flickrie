@@ -7,24 +7,36 @@ require 'date'
 
 module Flickrie
   module Media
-    # @!parse attr_reader :id
+    # @!parse attr_reader \
+    #   :id, :secret, :server, :farm, :title, :description,
+    #   :media_status, :path_alias, :camera, :exif, :views_count,
+    #   :comments_count, :location, :geo_permissions, :tags,
+    #   :machine_tags, :license, :posted_at, :uploaded_at,
+    #   :updated_at, :taken_at, :taken_at_granularity, :owner,
+    #   :safety_level, :safe?, :moderate?, :restricted?,
+    #   :url, :visibility, :primary?, :favorite?, :can_comment?,
+    #   :can_add_meta?, :can_everyone_comment?, :can_everyone_add_meta?,
+    #   :can_download?, :can_blog?, :can_print?, :can_share?,
+    #   :has_people?, :faved?, :notes, :favorites, :hash
+
+    # @return [String]
     def id()             @info['id']           end
-    # @!parse attr_reader :secret
+    # @return [String]
     def secret()         @info['secret']       end
-    # @!parse attr_reader :server
+    # @return [String]
     def server()         @info['server']       end
-    # @!parse attr_reader :farm
+    # @return [Fixnum]
     def farm()           @info['farm']         end
-    # @!parse attr_reader :title
+    # @return [String]
     def title()          @info['title']        end
-    # @!parse attr_reader :description
+    # @return [String]
     def description()    @info['description']  end
-    # @!parse attr_reader :media_status
+    # @return [String]
     def media_status()   @info['media_status'] end
-    # @!parse attr_reader :path_alias
+    # @return [String]
     def path_alias()     @info['pathalias']    end
 
-    # @!parse attr_reader :camera
+    # @return [String]
     def camera() @info['camera'] end
     # Returns exif of the photo/video. Example:
     #
@@ -35,66 +47,52 @@ module Flickrie
     #     photo.exif.get('X-Resolution')                   # => '180 dpi'
     #
     # @return [Flickrie::Media::Exif]
-    #
-    # @!parse attr_reader :exif
     def exif() Exif.new(@info['exif']) rescue nil end
 
-    # @!parse attr_reader :views_count
+    # @return [Fixnum]
     def views_count()    Integer(@info['views'])          rescue nil end
-    # @!parse attr_reader :comments_count
+    # @return [Fixnum]
     def comments_count() Integer(@info['comments_count']) rescue nil end
 
     # @return [Flickrie::Location]
-    #
-    # @!parse attr_reader :location
     def location() Location.new(@info['location']) rescue nil end
     # @return [Flickrie::Media::Visibility]
-    #
-    # @!parse attr_reader :geo_permissions
     def geo_permissions() Visibility.new(@info['geoperms']) rescue nil end
 
     # @return [Array<Flickrie::Media::Tag>]
-    #
-    # @!parse attr_reader :tags
     def tags() @info['tags'].map { |info| Tag.new(info) }     rescue nil end
     # @return [Array<Flickrie::Media::Tag>]
-    #
-    # @!parse attr_reader :machine_tags
     def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
 
     # @return [Flickrie::License]
-    # @!parse attr_reader :license
     def license() License.new(@info['license']) rescue nil end
 
-    # @!parse attr_reader :posted_at
+    # @return [Time]
     def posted_at()   Time.at(Integer(@info['dates']['posted']))           rescue nil end
-    # @!parse attr_reader :uploaded_at
+    # @return [Time]
     def uploaded_at() Time.at(Integer(@info['dates']['uploaded']))         rescue nil end
-    # @!parse attr_reader :updated_at
+    # @return [Time]
     def updated_at()  Time.at(Integer(@info['dates']['lastupdate']))       rescue nil end
-    # @!parse attr_reader :taken_at
+    # @return [Time]
     def taken_at()    DateTime.parse(@info['dates']['taken']).to_time      rescue nil end
-    # @!parse attr_reader :taken_at_granularity
+    # @return [Fixnum]
     def taken_at_granularity() Integer(@info['dates']['takengranularity']) rescue nil end
 
     # @return [Flickrie::User]
-    #
-    # @!parse attr_reader :owner
     def owner() User.new(@info['owner']) rescue nil end
 
-    # @!parse attr_reader :safety_level
+    # @return [Fixnum]
     def safety_level() Integer(@info['safety_level']) rescue nil end
 
-    # @!parse attr_reader :safe?
+    # @return [Boolean]
     def safe?()       safety_level <= 1 if safety_level end
-    # @!parse attr_reader :moderate?
+    # @return [Boolean]
     def moderate?()   safety_level == 2 if safety_level end
-    # @!parse attr_reader :restricted?
+    # @return [Boolean]
     def restricted?() safety_level == 3 if safety_level end
 
     # @comment TODO: Take care about the url from #get_info
-    #
-    # @!parse attr_reader :url
+    # @return [String]
     def url
       if owner and id
         "http://www.flickr.com/photos/#{owner.nsid}/#{id}"
@@ -104,56 +102,54 @@ module Flickrie
     end
 
     # @return [Flickrie::Media::Visibility]
-    #
-    # @!parse attr_reader :visibility
     def visibility() Visibility.new(@info['visibility']) rescue nil end
 
-    # @!parse attr_reader :primary?
+    # @return [Boolean]
     def primary?() Integer(@info['isprimary']) == 1 rescue nil end
 
-    # @!parse attr_reader :favorite?
+    # @return [Boolean]
     def favorite?() Integer(@info['isfavorite']) == 1 rescue nil end
 
-    # @!parse attr_reader :can_comment?
+    # @return [Boolean]
     def can_comment?()  Integer(@info['editability']['cancomment']) == 1 rescue nil end
-    # @!parse attr_reader :can_add_meta?
+    # @return [Boolean]
     def can_add_meta?() Integer(@info['editability']['canaddmeta']) == 1 rescue nil end
 
-    # @!parse attr_reader :can_everyone_comment?
+    # @return [Boolean]
     def can_everyone_comment?()  Integer(@info['publiceditability']['cancomment']) == 1 rescue nil end
-    # @!parse attr_reader :can_everyone_add_meta?
+    # @return [Boolean]
     def can_everyone_add_meta?() Integer(@info['publiceditability']['canaddmeta']) == 1 rescue nil end
 
-    # @!parse attr_reader :can_download?
+    # @return [Boolean]
     def can_download?() Integer(@info['usage']['candownload']) == 1 rescue nil end
-    # @!parse attr_reader :can_blog?
+    # @return [Boolean]
     def can_blog?()     Integer(@info['usage']['canblog']) == 1     rescue nil end
-    # @!parse attr_reader :can_print?
+    # @return [Boolean]
     def can_print?()    Integer(@info['usage']['canprint']) == 1    rescue nil end
-    # @!parse attr_reader :can_share?
+    # @return [Boolean]
     def can_share?()    Integer(@info['usage']['canshare']) == 1    rescue nil end
 
-    # @!parse attr_reader :has_people?
+    # @return [Boolean]
     def has_people?() Integer(@info['people']['haspeople']) == 1 rescue nil end
 
-    # @!parse attr_reader :faved?
+    # @return [Boolean]
     def faved?() Integer(@info['is_faved']) == 1 rescue nil end
 
     # @return [Array<Flickrie::Media::Note>]
-    #
-    # @!parse attr_reader :notes
     def notes() @info['notes']['note'].map { |hash| Note.new(hash) } rescue nil end
 
     # @return [Array<Flickrie::User>]
-    #
-    # @!parse attr_reader :favorites
     def favorites() @info['person'].map { |info| User.new(info) } rescue nil end
 
     def [](key) @info[key] end
-    # @!parse attr_reader :hash
+    # Returns the raw hash from the response. Useful if something isn't available by methods.
+    #
+    # @return [Hash]
     def hash() @info end
 
     # Same as calling `Flickrie.get_(photo|video)_info(id)`.
+    #
+    # @return [self]
     def get_info(params = {}, info = nil)
       info ||= Flickrie.client.get_media_info(id, params).body['photo']
       @info.update(info)
@@ -169,6 +165,8 @@ module Flickrie
     end
 
     # Same as calling `Flickrie.get_(photo|video)_info(id)`.
+    #
+    # @return [self]
     def get_exif(params = {}, info = nil)
       info ||= Flickrie.client.get_media_exif(id, params).body['photo']
       @info.update(info)
@@ -177,6 +175,8 @@ module Flickrie
     end
 
     # Same as calling `Flickrie.get_(photo|video)_info(id)`.
+    #
+    # @return [self]
     def get_favorites(params = {}, info = nil)
       info ||= Flickrie.client.get_media_favorites(id, params).body['photo']
       @info.update(info)

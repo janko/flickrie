@@ -156,6 +156,7 @@ module Flickrie
     #
     # @param media_id [String, Fixnum]
     # @param tags [String] A space delimited string with tags
+    # @return [nil]
     # @api_method [flickr.photos.addTags](http://www.flickr.com/services/api/flickr.photos.addTags.html)
     #
     # @note This method requires authentication with "write" permissions.
@@ -169,6 +170,7 @@ module Flickrie
     # Deletes the photo/video with the given ID.
     #
     # @param media_id [String, Fixnum]
+    # @return [nil]
     # @api_method [flickr.photos.delete](http://www.flickr.com/services/api/flickr.photos.delete.html)
     #
     # @note This method requires authentication with "delete" permissions.
@@ -385,6 +387,7 @@ module Flickrie
     # Remove the tag with the given ID
     #
     # @param tag_id [String]
+    # @return [nil]
     # @api_method [flickr.photos.removeTag](http://www.flickr.com/services/api/flickr.photos.removeTag.html)
     #
     # @note This method requires authentication with "write" permissions.
@@ -436,7 +439,7 @@ module Flickrie
     #     ticket_id = Flickrie.upload(photo)
     #     sleep(10)
     #
-    #     ticket = Flickrie.check_upload_tickects(ticket_id)
+    #     ticket = Flickrie.check_upload_tickets(ticket_id)
     #     if ticket.complete?
     #       puts "Photo was uploaded, and its ID is #{ticket.photo_id}"
     #     end

@@ -1,32 +1,49 @@
 module Flickrie
   class Location
-    # @!parse attr_reader :latitude
+    # @!parse attr_reader \
+    #   :latitude, :longitude, :accuracy, :context,
+    #   :neighbourhood, :locality, :county, :region,
+    #   :country, :place_id, :woeid, :hash
+
+    # @return [Fixnum]
     def latitude()  @info['latitude']  end
-    # @!parse attr_reader :longitude
+    # @return [Fixnum]
     def longitude() @info['longitude'] end
-    # @!parse attr_reader :accuracy
+    # @return [String]
     def accuracy()  @info['accuracy']  end
-    # @!parse attr_reader :context
+    # @return [Fixnum]
     def context()   Integer(@info['context']) rescue nil end
 
-    # @!parse attr_reader :neighbourhood
+    # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
+    #
+    # @return [Struct]
     def neighbourhood() new_area('neighbourhood') end
-    # @!parse attr_reader :locality
+    # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
+    #
+    # @return [Struct]
     def locality()      new_area('locality')      end
-    # @!parse attr_reader :county
+    # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
+    #
+    # @return [Struct]
     def county()        new_area('county')        end
-    # @!parse attr_reader :region
+    # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
+    #
+    # @return [Struct]
     def region()        new_area('region')        end
-    # @!parse attr_reader :country
+    # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
+    #
+    # @return [Struct]
     def country()       new_area('country')       end
 
-    # @!parse attr_reader :place_id
+    # @return [String]
     def place_id() @info['place_id'] end
-    # @!parse attr_reader :woeid
+    # @return [String]
     def woeid()    @info['woeid']    end
 
     def [](key) @info[key] end
-    # @!parse attr_reader :hash
+    # Returns the raw hash from the response. Useful if something isn't available by methods.
+    #
+    # @return [Hash]
     def hash() @info end
 
     private

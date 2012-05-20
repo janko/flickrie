@@ -1,6 +1,8 @@
 module Flickrie
   class Photo
     include Media
+    # @!parse attr_reader \
+    #   :size, :width, :height, :source_url, :rotation
 
     SIZES = {
       'Square 75'  => 'sq',
@@ -15,59 +17,94 @@ module Flickrie
       'Original'   => 'o'
     }
 
-    # @!parse attr_reader :size
+    # Returns the current Flickr size of the photo ("Medium 500", for example).
+    #
+    # @return [String]
     def size() @size end
 
+    # @return [self]
     def square!(number) @size = "Square #{number}"; self end
+    # @return [self]
     def thumbnail!()    @size = "Thumbnail";        self end
+    # @return [self]
     def small!(number)  @size = "Small #{number}";  self end
+    # @return [self]
     def medium!(number) @size = "Medium #{number}"; self end
+    # @return [self]
     def large!(number)  @size = "Large #{number}";  self end
+    # @return [self]
     def original!()     @size = "Original";         self end
 
+    # @return [self]
     def square(number) dup.square!(number) end
+    # @return [self]
     def thumbnail()    dup.thumbnail!      end
+    # @return [self]
     def small(number)  dup.small!(number)  end
+    # @return [self]
     def medium(number) dup.medium!(number) end
+    # @return [self]
     def large(number)  dup.large!(number)  end
+    # @return [self]
     def original()     dup.original!       end
 
     # @comment Alternate size methods
+    # @return [self]
     def square75()   square(75)   end
+    # @return [self]
     def square75!()  square!(75)  end
+    # @return [self]
     def square150()  square(150)  end
+    # @return [self]
     def square150!() square!(150) end
+    # @return [self]
     def small240()   small(240)   end
+    # @return [self]
     def small240!()  small!(240)  end
+    # @return [self]
     def small320()   small(320)   end
+    # @return [self]
     def small320!()  small!(320)  end
+    # @return [self]
     def medium500()  medium(500)  end
+    # @return [self]
     def medium500!() medium!(500) end
+    # @return [self]
     def medium640()  medium(640)  end
+    # @return [self]
     def medium640!() medium!(640) end
+    # @return [self]
     def medium800()  medium(800)  end
+    # @return [self]
     def medium800!() medium!(800) end
+    # @return [self]
     def large1024()  large(1024)  end
+    # @return [self]
     def large1024!() large!(1024) end
 
+    # @return [self]
     def largest!() @size = largest_size; self end
+    # @return [self]
     def largest()  dup.largest! end
 
+    # @return [Array<String>]
     def available_sizes
       SIZES.select { |_,v| @info["url_#{v}"] }.keys
     end
 
-    # @!parse attr_reader :width
+    # @return [Fixnum]
     def width()  Integer(@info["width_#{size_abbr}"])  rescue nil end
-    # @!parse attr_reader :height
+    # @return [Fixnum]
     def height() Integer(@info["height_#{size_abbr}"]) rescue nil end
-    # @!parse attr_reader :source_url
+    # @return [String]
     def source_url() @info["url_#{size_abbr}"] end
 
-    # @!parse attr_reader :rotation
+    # @return [Fixnum]
     def rotation() Integer(@info['rotation']) rescue nil end
 
     # Same as calling `Flickrie.get_photo_sizes(photo.id)`.
+    #
+    # @return [self]
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}

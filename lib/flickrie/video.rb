@@ -1,30 +1,35 @@
 module Flickrie
   class Video
     include Media
+    # @!parse attr_reader \
+    #   :ready?, :failed?, :pending?, :duration, :width, :height,
+    #   :source_url, :download_url, :mobile_download_url
 
-    # @!parse attr_reader :ready?
+    # @return [Boolean]
     def ready?()   Integer(@video['ready']) == 1   rescue nil end
-    # @!parse attr_reader :failed?
+    # @return [Boolean]
     def failed?()  Integer(@video['failed']) == 1  rescue nil end
-    # @!parse attr_reader :pending?
+    # @return [Boolean]
     def pending?() Integer(@video['pending']) == 1 rescue nil end
 
-    # @!parse attr_reader :duration
+    # @return [Fixnum]
     def duration() Integer(@video['duration']) rescue nil end
 
-    # @!parse attr_reader :width
+    # @return [Fixnum]
     def width()  Integer(@video['width'])  rescue nil end
-    # @!parse attr_reader :height
+    # @return [Fixnum]
     def height() Integer(@video['height']) rescue nil end
 
-    # @!parse attr_reader :source_url
+    # @return [String]
     def source_url()          @video['source_url']          end
-    # @!parse attr_reader :download_url
+    # @return [String]
     def download_url()        @video['download_url']        end
-    # @!parse attr_reader :mobile_download_url
+    # @return [String]
     def mobile_download_url() @video['mobile_download_url'] end
 
     # This fetches the {#source\_url}, {#download\_url} and the {#mobile\_download\_url}
+    #
+    # @return [self]
     def get_sizes(params = {}, info = nil)
       info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
       @info['usage'] ||= {}
@@ -44,6 +49,8 @@ module Flickrie
     end
 
     # Same as calling `Flickrie.get_video_info(video.id)`.
+    #
+    # @return [self]
     def get_info(params = {}, info = nil)
       super
       @video = @info['video']

@@ -1,25 +1,28 @@
 module Flickrie
   module Media
     class Tag
-      # @!parse attr_reader :id
+      # @!parse attr_reader \
+      #   :id, :raw, :content, :machine_tag?, :author, :hash
+
+      # @return [String]
       def id()      @info['id']       end
-      # @!parse attr_reader :raw
+      # @return [String]
       def raw()     @info['raw']      end
-      # @!parse attr_reader :content
+      # @return [String]
       def content() @info['_content'] end
 
-      # @!parse attr_reader :machine_tag?
+      # @return [Boolean]
       def machine_tag?
         @info['machine_tag'].to_i == 1 if @info['machine_tag']
       end
 
-      # @!parse attr_reader :author
+      # @return [Flickrie::User]
       def author
         User.new('nsid' => @info['author']) if @info['author']
       end
 
       def [](key) @info[key] end
-      # @!parse attr_reader :hash
+      # @return [Hash]
       def hash() @info end
 
       private
