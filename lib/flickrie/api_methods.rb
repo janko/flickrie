@@ -181,7 +181,7 @@ module Flickrie
 
     # Fetches photos and videos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
@@ -192,7 +192,7 @@ module Flickrie
     end
     # Fetches photos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
@@ -202,7 +202,7 @@ module Flickrie
     end
     # Fetches videos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
@@ -215,7 +215,7 @@ module Flickrie
     # given NSID.
     #
     # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_media_from_user_contacts(nsid, params = {})
       response = client.public_media_from_user_contacts(nsid, params)
@@ -225,7 +225,7 @@ module Flickrie
     # given NSID.
     #
     # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_photos_from_user_contacts(nsid, params = {})
       public_media_from_user_contacts(nsid, params).
@@ -235,7 +235,7 @@ module Flickrie
     # given NSID.
     #
     # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_videos_from_user_contacts(nsid, params = {})
       public_media_from_user_contacts(nsid, params).
@@ -271,7 +271,7 @@ module Flickrie
     #     count.date_range.begin # => 2011-01-03 01:00:00 +0100
     #     count.from             # => 2011-01-03 01:00:00 +0100
     #
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::MediaCount]
     # @api_method [flickr.photos.getCounts](http://www.flickr.com/services/api/flickr.photos.getCounts.html)
     def get_media_counts(params = {})
@@ -397,7 +397,7 @@ module Flickrie
 
     # Fetches photos and videos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below)
+    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_media(search_params = {})
@@ -406,7 +406,7 @@ module Flickrie
     end
     # Fetches photos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below)
+    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_photos(search_params = {})
@@ -414,7 +414,7 @@ module Flickrie
     end
     # Fetches videos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below)
+    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_videos(search_params = {})
@@ -474,7 +474,7 @@ module Flickrie
     # Fetches photos and videos from a set with the given ID.
     #
     # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def media_from_set(set_id, params = {})
@@ -484,7 +484,7 @@ module Flickrie
     # Fetches photos from a set with the given ID.
     #
     # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Photo>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def photos_from_set(set_id, params = {})
@@ -493,7 +493,7 @@ module Flickrie
     # Fetches videos from a set with the given ID.
     #
     # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below)
+    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Array<Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def videos_from_set(set_id, params = {})
