@@ -2,6 +2,7 @@ TODO.md
 Gemfile.lock
 pkg/
 wiki/
+doc/
 .DS_Store
 api_methods.md
 .bundle/
