@@ -57,4 +57,16 @@ describe Flickrie::User do
         end
     end
   end
+
+  context "getting media" do
+    it "should get the right kind of media", :vcr do
+      user = Flickrie::User.public_new('nsid' => USER_NSID)
+      user.public_photos.each { |object| object.should be_a_photo }
+      user.public_videos.each { |object| object.should be_a_video }
+      user.public_media.each  { |object| object.should be_a_media }
+      user.photos.each { |object| object.should be_a_photo }
+      user.videos.each { |object| object.should be_a_video }
+      user.media.each  { |object| object.should be_a_media }
+    end
+  end
 end
