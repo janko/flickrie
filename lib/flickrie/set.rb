@@ -83,8 +83,8 @@ module Flickrie
     # Same as calling `Flickrie.get_set_info(set.id)`
     #
     # @return [self]
-    def get_info(info = nil)
-      info ||= Flickrie.client.get_set_info(id).body['photoset']
+    def get_info(params = {}, info = nil)
+      info ||= Flickrie.client.get_set_info(id, params).body['photoset']
       @info.update(info)
 
       # Fixes
@@ -101,7 +101,7 @@ module Flickrie
     end
 
     def self.from_info(info)
-      new.get_info(info)
+      new.get_info({}, info)
     end
 
     def self.from_user(info, user_nsid)

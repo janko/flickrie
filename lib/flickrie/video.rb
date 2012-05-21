@@ -62,7 +62,7 @@ module Flickrie
 
     def initialize(info = {})
       super
-      @video = {}
+      @video = info['video'] || {}
     end
   end
 end

@@ -47,9 +47,9 @@ module Flickrie
     def time_zone() Struct.new(:label, :offset).new(*@info['timezone'].values) rescue nil end
 
     # @return [String]
-    def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" end
+    def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" if nsid || id end
     # @return [String]
-    def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" end
+    def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" if nsid || id end
     # @return [String]
     def mobile_url()  @info['mobileurl'] end
 
