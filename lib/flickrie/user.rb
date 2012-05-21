@@ -66,7 +66,7 @@ module Flickrie
     alias photos_count media_count
     alias videos_count media_count
 
-    # The same as calling `Flickrie.public_photos_from_user(user.nsid)`
+    # Same as calling `Flickrie.public_photos_from_user(user.nsid)`.
     #
     # @return [Array<Flickrie::Photo>]
     def public_photos(params = {})

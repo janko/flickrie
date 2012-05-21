@@ -27,7 +27,8 @@ module Flickrie
     # @return [String]
     def mobile_download_url() @video['mobile_download_url'] end
 
-    # This fetches the {#source\_url}, {#download\_url} and the {#mobile\_download\_url}
+    # This fetches the {#source\_url}, {#download\_url} and the {#mobile\_download\_url}.
+    # Same as calling `Flickrie.get_video_sizes(video.id)`
     #
     # @return [self]
     def get_sizes(params = {}, info = nil)
