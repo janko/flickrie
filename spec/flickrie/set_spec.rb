@@ -19,8 +19,7 @@ describe Flickrie::Set do
       :media_count => 98,
       :owner => {
         :nsid => USER_NSID
-      },
-      :can_comment? => false,
+      }
     }
   end
 
@@ -42,6 +41,7 @@ describe Flickrie::Set do
     # Other
     set.url.should_not be_empty
     set.views_count.should be_a_number
+    set.can_comment?.should be_a_boolean
   end
 
   context "get info" do

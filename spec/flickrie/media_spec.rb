@@ -83,18 +83,7 @@ describe Flickrie::Media do
       },
       :favorite? => false,
 
-      :can_comment? => false,
-      :can_add_meta? => false,
-      :can_everyone_comment? => true,
-      :can_everyone_add_meta? => false,
-
-      :can_download? => true,
-      :can_blog? => false,
-      :can_print? => false,
-      :can_share? => false,
-
       :has_people? => false,
-      :faved? => false,
       :notes => {
         :first => {
           :id => '72157629487842968',
@@ -124,13 +113,19 @@ describe Flickrie::Media do
             :comments_count, :location, :geo_permissions, :tags,
             :machine_tags, :license, :taken_at_granularity, :owner,
             :safety_level, :safe?, :moderate?, :restricted?, :visibility,
-            :favorite?, :can_comment?, :can_add_meta?, :can_everyone_comment?,
+            :favorite?, :has_people?, :notes
+          ].
             each do |attribute|
               media.send(attribute).should correspond_to(@attributes[attribute])
             end
+
+          # can change, so just checking the type
+          [
+            :can_comment?, :can_add_meta?, :can_everyone_comment?,
             :can_everyone_add_meta?, :can_download?, :can_blog?,
-            :can_print?, :can_share?, :has_people?, :notes
+            :can_print?, :can_share?
           ].
+            each { |attribute| media.send(attribute).should be_a_boolean }
 
           media.views_count.should be_a_number
 

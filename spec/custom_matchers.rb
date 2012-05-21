@@ -30,6 +30,10 @@ RSpec::Matchers.define :be_a_number do
   match { |object| object.instance_of?(Fixnum) }
 end
 
+RSpec::Matchers.define :be_a_boolean do
+  match { |object| object == true or object == false }
+end
+
 RSpec::Matchers.define :be_a_media do
   match do |object|
     object.instance_of?(Flickrie::Photo) \

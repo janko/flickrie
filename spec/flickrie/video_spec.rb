@@ -26,9 +26,9 @@ describe Flickrie::Video do
         Flickrie::Video.public_new('id' => VIDEO_ID).get_sizes
       ].
         each do |video|
-          video.can_download?.should be_true
-          video.can_blog?.should be_false
-          video.can_blog?.should be_false
+          [:can_download?, :can_blog?, :can_print?].each do |attribute|
+            video.send(attribute).should be_a_boolean
+          end
 
           video.source_url.should_not be_empty
           video.download_url.should_not be_empty

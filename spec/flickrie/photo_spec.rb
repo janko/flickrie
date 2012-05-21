@@ -58,9 +58,9 @@ describe Flickrie::Photo do
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_sizes
       ].
         each do |photo|
-          photo.can_download?.should be_true
-          photo.can_blog?.should be_false
-          photo.can_print?.should be_false
+          [:can_download?, :can_blog?, :can_print?].each do |attribute|
+            photo.send(attribute).should be_a_boolean
+          end
 
           test_sizes(photo)
           photo.available_sizes.should eq(SIZES)
