@@ -1,5 +1,18 @@
 # Flickrie changelog
 
+## Version 1.0.3
+
+- Before `Flickrie::User` had only the `#public_photos` method, now, I
+  just added the missing `#public_videos`, `#public_media`, `#photos`,
+  `#videos` and `#media`.
+
+- Fixed Flickr's bug with mixing up the width and the height of a photo
+  (not only in the API, but also on their website).
+
+## Version 1.0.2
+
+- Fix some mistakes in the documentation
+
 ## Version 1.0.1
 
 - Transfered the documentation to YARD. [Documentation](http://rubydoc.info/gems/flickrie/)
