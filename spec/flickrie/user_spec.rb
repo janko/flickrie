@@ -30,7 +30,7 @@ describe Flickrie::User do
       ].
         each do |user|
           @attributes.keys.each do |attribute|
-            test_recursively(user, attribute)
+            user.send(attribute).should correspond_to(@attributes[attribute])
           end
 
           [:profile_url, :mobile_url, :photos_url, :buddy_icon_url].each do |attribute|

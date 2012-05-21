@@ -7,32 +7,7 @@ rescue LoadError
 end
 require 'custom_matchers'
 
-module RSpecHelpers
-  def test_recursively(object, attribute, hash = nil)
-    expectation = hash || @attributes[attribute]
-    unless expectation.is_a?(Hash)
-      object.send(attribute).should eq(expectation)
-    else
-      iterate(object.send(attribute), expectation) do |actual, expected|
-        actual.should eq(expected)
-      end
-    end
-  end
-
-  def iterate(object, rest, &block)
-    rest.each do |key, value|
-      if value.is_a?(Hash)
-        iterate(object.send(key), value, &block)
-      else
-        yield [object.send(key), value]
-      end
-    end
-  end
-end
-
 RSpec.configure do |c|
-  c.include RSpecHelpers
-  c.include CustomMatchers
   c.before(:all) do
     Flickrie.api_key = ENV['FLICKR_API_KEY']
     Flickrie.shared_secret = ENV['FLICKR_SHARED_SECRET']
