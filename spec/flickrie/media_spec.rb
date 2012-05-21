@@ -133,14 +133,16 @@ describe Flickrie::Media do
             :can_print?, :can_share?, :has_people?, :notes
           ].
 
-          # other
-          media.url.empty?.should be_false
-          media['id'].should eq(PHOTO_ID)
 
           # time
           [:posted_at, :uploaded_at, :updated_at, :taken_at].each do |time_attribute|
             media.send(time_attribute).should be_an_instance_of(Time)
           end
+
+          # other
+          media.url.should_not be_empty
+          media['id'].should eq(PHOTO_ID)
+          media.hash['id'].should eq(PHOTO_ID)
         end
     end
   end
@@ -156,9 +158,6 @@ describe Flickrie::Media do
         end
 
       # the incomplete ones
-
-      # other
-      media.url.empty?.should be_false
       media.location.should correspond_to(@attributes[:location].except(:locality, :county, :region, :country))
       media.tags.first.should correspond_to(@attributes[:tags][:first].except(:author, :raw, :machine_tag?))
       media.owner.should correspond_to(@attributes[:owner].except(:real_name, :location))
@@ -167,6 +166,9 @@ describe Flickrie::Media do
       [:uploaded_at, :updated_at, :taken_at].each do |time_attribute|
         media.send(time_attribute).should be_an_instance_of(Time)
       end
+
+      # other
+      media.url.should_not be_empty
     end
   end
 
@@ -222,15 +224,23 @@ describe Flickrie::Media do
         Flickrie.public_media_from_user_contacts(USER_NSID, params).first
       ].
         each do |media|
-          media.id.should eq('7093101501')
-          media.secret.should eq('9337f28800')
-          media.server.should eq('7090')
-          media.farm.should eq(8)
-          media.owner.nsid.should eq(USER_NSID)
-          media.owner.username.should eq(USER_USERNAME)
-          media.title.should eq('IMG_0917')
-          test_recursively(media, :visibility)
-          media.media_status.should eq('ready')
+          attributes = {
+            :id => '7093101501',
+            :secret => '9337f28800',
+            :server => '7090',
+            :farm => 8,
+            :owner => {
+              :nsid => USER_NSID,
+              :username => USER_USERNAME
+            },
+            :title => 'IMG_0917',
+            :visibility => {:public? => true},
+            :media_status => 'ready'
+          }
+
+          attributes.keys.each do |attribute|
+            media.send(attribute).should correspond_to(attributes[attribute])
+          end
         end
     end
   end
@@ -239,22 +249,20 @@ describe Flickrie::Media do
     it "should have all attributes correctly set", :vcr do
       context = Flickrie.get_media_context(PHOTO_ID)
       context.count.should eq(98)
-      context.previous.title.should eq('IMG_0795')
-      context.previous.url.should_not be_empty
-      context.previous.faved?.should be_false
-    end
-  end
 
-  context "blank media" do
-    it "should have all attributes equal to nil" do
-      attributes = Flickrie::Media.instance_methods -
-        Object.instance_methods -
-        [:[], :get_info, :get_exif, :get_favorites]
-
-      media = Flickrie::Photo.public_new
-      attributes.each do |attribute|
-        media.send(attribute).should be_nil
+      attributes = {
+        :id => '6946978706',
+        :secret => 'b38270bbd6',
+        :server => '7216',
+        :farm => 8,
+        :title => 'IMG_0795',
+        :license => {:id => '0'},
+        :faved? => false
+      }
+      attributes.keys.each do |attribute|
+        context.previous.send(attribute).should correspond_to(attributes[attribute])
       end
+      context.previous.url.should_not be_empty
     end
   end
 
@@ -270,6 +278,19 @@ describe Flickrie::Media do
           photo.exif.get('X-Resolution', :data => 'clean').should eq('180 dpi')
           photo.exif.get('X-Resolution', :data => 'raw').should eq('180')
         end
+    end
+  end
+
+  context "blank media" do
+    it "should have all attributes equal to nil" do
+      attributes = Flickrie::Media.instance_methods -
+        Object.instance_methods -
+        [:[], :get_info, :get_exif, :get_favorites]
+
+      media = Flickrie::Photo.public_new
+      attributes.each do |attribute|
+        media.send(attribute).should be_nil
+      end
     end
   end
 end

@@ -9,9 +9,9 @@ describe Flickrie::Video do
       video.failed?.should be_false
       video.pending?.should be_false
 
-      video.duration.should eq(16)
-      video.width.should eq(352)
-      video.height.should eq(288)
+      video.duration.should == 16
+      video.width.should == 352
+      video.height.should == 288
 
       video.source_url.should be_nil
       video.download_url.should be_nil
@@ -39,14 +39,14 @@ describe Flickrie::Video do
 
   context "blank" do
     it "should have attributes equal to nil" do
+      attributes = Flickrie::Video.instance_methods -
+        Flickrie::Media.instance_methods -
+        Object.instance_methods -
+        [:get_info, :get_sizes, :[]]
       video = Flickrie::Video.public_new
-      [
-        :ready?, :failed?, :pending?, :duration, :width, :height,
-        :source_url, :download_url, :mobile_download_url
-      ].
-        each do |attribute|
-          video.send(attribute).should be_nil
-        end
+      attributes.each do |attribute|
+        video.send(attribute).should be_nil
+      end
     end
   end
 end

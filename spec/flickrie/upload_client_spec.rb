@@ -35,6 +35,9 @@ describe Flickrie::UploadClient do
 
       Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']
       expect { Flickrie.upload(PHOTO_PATH) }.to_not raise_error
+
+      photo = Flickrie.photos_from_user(USER_NSID).find { |photo| photo.title == "photo" }
+      Flickrie.delete_photo(photo.id)
     end
   end
 end

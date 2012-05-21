@@ -1,10 +1,7 @@
 # encoding: utf-8
 require 'flickrie'
 require 'vcr'
-begin
-  require 'debugger'
-rescue LoadError
-end
+begin require 'debugger'; rescue LoadError; end
 require 'custom_matchers'
 
 RSpec.configure do |c|
@@ -16,7 +13,7 @@ RSpec.configure do |c|
   end
   c.treat_symbols_as_metadata_keys_with_true_values = true
   c.around(:each, :vcr) do |example|
-    # This is just an automatization of naming the VCR cassettes
+    # If you want to tag an example with :vcr, you have to wrap it in a context block
     klass = example.metadata[:example_group][:example_group][:description_args].first
     folder = klass.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join('_')
     subfolder = example.metadata[:example_group][:description_args].first
@@ -31,8 +28,8 @@ VCR.configure do |c|
   c.hook_into :faraday
   c.default_cassette_options = {
     :record => :new_episodes,
-    :serialize_with => :syck,
-    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)]
+    :serialize_with => :syck, # So it doesn't output in binary form
+    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)] # Don't require the API key
   }
   c.filter_sensitive_data('API_KEY') { ENV['FLICKR_API_KEY'] }
   c.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
@@ -53,7 +50,7 @@ EXTRAS = %w[license date_upload date_taken owner_name
 # for copying:
 #   license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o
 
-klasses = [Flickrie::Set, Flickrie::Photo, Flickrie::Video, Flickrie::Location]
+klasses = [Flickrie::Set, Flickrie::Photo, Flickrie::Video, Flickrie::Location, Flickrie::User]
 klasses.each do |klass|
   klass.instance_eval do
     def public_new(*args)

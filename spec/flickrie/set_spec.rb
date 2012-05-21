@@ -36,9 +36,11 @@ describe Flickrie::Set do
       media.is_a?(Flickrie::Photo) or media.is_a?(Flickrie::Video)
     end.should be_true
 
+    # Time
     set.created_at.should be_an_instance_of(Time)
     set.updated_at.should be_an_instance_of(Time)
 
+    # Other
     set.url.should_not be_empty
   end
 
@@ -48,9 +50,7 @@ describe Flickrie::Set do
         Flickrie.get_set_info(SET_ID),
         Flickrie::Set.public_new('id' => SET_ID).get_info
       ].
-        each do |set|
-          test_common_attributes(set)
-        end
+        each { |set| test_common_attributes(set) }
     end
   end
 

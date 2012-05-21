@@ -83,7 +83,7 @@ describe Flickrie::Photo do
     end
   end
 
-  context "blank" do
+  context "blank photo" do
     it "should have all attributes equal to nil" do
       photo = Flickrie::Photo.public_new
 
