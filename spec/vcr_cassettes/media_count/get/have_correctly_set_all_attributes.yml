@@ -1,0 +1,73 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getCounts&taken_dates=2012-03-01+00%3A00%3A00+UTC%2C2012-05-05+00%3A00%3A00+UTC
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="6fb4aa03fb2f4a7b78023e1c31b635d8", oauth_signature="14XibvIY0fxtn5OUoKHc6L2Ys78%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337626774", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 21 May 2012 18:59:35 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www104.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "100"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photocounts\":{\"photocount\":[{\"count\":\"1\", \"fromdate\":\"2012-03-01 00:00:00\", \"todate\":\"2012-05-05 00:00:00\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 21 May 2012 18:59:35 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getCounts&dates=1330560000%2C1336176000
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="1e07b62f34c26a7603914cef938fc44a", oauth_signature="ZmXzz4qcEc9x%2FAGfbJParsFA3%2Fg%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1337626775", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 21 May 2012 18:59:37 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www135.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "95"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photocounts\":{\"photocount\":[{\"count\":\"98\", \"fromdate\":\"1330560000\", \"todate\":\"1336176000\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 21 May 2012 18:59:37 GMT
+recorded_with: VCR 2.1.1
