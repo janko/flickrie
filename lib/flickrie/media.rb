@@ -91,7 +91,7 @@ module Flickrie
     # @return [Boolean]
     def restricted?() safety_level == 3 if safety_level end
 
-    # @comment TODO: Take care about the url from #get_info
+    # TODO: Take care about the url from #get_info
     # @return [String]
     def url
       if owner and id
