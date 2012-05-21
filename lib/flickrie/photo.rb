@@ -93,9 +93,9 @@ module Flickrie
     end
 
     # @return [Fixnum]
-    def width()  Integer(@info["width_#{size_abbr}"])  rescue nil end
+    def width() flickr_size.min rescue nil end
     # @return [Fixnum]
-    def height() Integer(@info["height_#{size_abbr}"]) rescue nil end
+    def height() flickr_size.max rescue nil end
     # @return [String]
     def source_url() @info["url_#{size_abbr}"] end
 
@@ -147,6 +147,10 @@ module Flickrie
 
     def size_abbr
       SIZES[size]
+    end
+
+    def flickr_size
+      [Integer(@info["width_#{size_abbr}"]), Integer(@info["height_#{size_abbr}"])]
     end
   end
 end
