@@ -1,6 +1,6 @@
 # Flickrie changelog
 
-## Version 1.0.3
+## Version 1.1.0
 
 - Before `Flickrie::User` had only the `#public_photos` method, now, I
   just added the missing `#public_videos`, `#public_media`, `#photos`,

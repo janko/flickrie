@@ -31,7 +31,8 @@ downsize of this approach is that it may not be up to date when the
 Flickr API changes, but that's why I have **you** to open a new issue
 when you notice something isn't working :)
 
-The gem works on Ruby versions `1.9.2` and `1.9.3`.
+The gem works on Ruby versions `1.9.2` and `1.9.3`. Also, it follows
+[Semantic versioning](http://semver.org/).
 
 ## Examples of usage
 
