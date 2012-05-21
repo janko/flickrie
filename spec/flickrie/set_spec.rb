@@ -60,4 +60,17 @@ describe Flickrie::Set do
       set.visibility_can_see_set?.should be_true
     end
   end
+
+  context "blank set" do
+    it "should have all attributes equal to nil" do
+      attributes = Flickrie::Set.instance_methods -
+        Object.instance_methods -
+        [:photos, :videos, :media, :[], :get_info]
+      set = Flickrie::Set.public_new
+
+      attributes.each do |attribute|
+        set.send(attribute).should be_nil
+      end
+    end
+  end
 end

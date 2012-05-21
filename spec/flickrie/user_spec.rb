@@ -67,4 +67,18 @@ describe Flickrie::User do
       user.media.each  { |object| object.should be_a_media }
     end
   end
+
+  context "blank user" do
+    it "should have all attributes equal to nil" do
+      attributes = Flickrie::User.instance_methods -
+        Object.instance_methods -
+        [:public_photos, :public_videos, :public_media,
+         :photos, :videos, :media, :[], :get_info]
+      user = Flickrie::User.public_new
+
+      attributes.each do |attribute|
+        user.send(attribute).should be_nil
+      end
+    end
+  end
 end
