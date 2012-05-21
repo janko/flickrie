@@ -44,15 +44,21 @@ module Flickrie
     # Same as calling `Flickrie.photos_from_set(set.id)`.
     #
     # @return [Array<Flickrie::Photo>]
-    def photos(params = {}) Flickrie.photos_from_set(id, params) end
+    def photos(params = {})
+      Flickrie.photos_from_set(id, params)
+    end
     # Same as calling `Flickrie.videos_from_set(set.id)`.
     #
     # @return [Array<Flickrie::Video>]
-    def videos(params = {}) Flickrie.videos_from_set(id, params) end
+    def videos(params = {})
+      Flickrie.videos_from_set(id, params)
+    end
     # Same as calling `Flickrie.media_from_set(set.id)`.
     #
     # @return [Array<Flickrie::Photo, Flickrie::Video>]
-    def media(params = {})  Flickrie.media_from_set(id, params)  end
+    def media(params = {})
+      Flickrie.media_from_set(id, params)
+    end
 
     # @return [Boolean]
     def can_comment?() Integer(@info['can_comment']) == 1 rescue nil end
@@ -68,9 +74,7 @@ module Flickrie
     def updated_at() Time.at(Integer(@info['date_update'])) rescue nil end
 
     # @return [String]
-    def url
-      "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}"
-    end
+    def url() "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}" rescue nil end
 
     def [](key) @info[key] end
     # @return [Hash]
