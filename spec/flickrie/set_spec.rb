@@ -13,7 +13,6 @@ describe Flickrie::Set do
       :primary_media_id => PHOTO_ID,
       :primary_photo_id => PHOTO_ID,
       :primary_video_id => PHOTO_ID,
-      :views_count => 0,
       :comments_count => 0,
       :photos_count => 97,
       :videos_count => 1,
@@ -42,6 +41,7 @@ describe Flickrie::Set do
 
     # Other
     set.url.should_not be_empty
+    set.views_count.should be_a_number
   end
 
   context "get info" do

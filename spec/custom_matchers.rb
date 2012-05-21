@@ -26,6 +26,10 @@ RSpec::Matchers.define :correspond_to do |hash_or_value|
   end
 end
 
+RSpec::Matchers.define :be_a_number do
+  match { |object| object.instance_of?(Fixnum) }
+end
+
 RSpec::Matchers.define :be_a_media do
   match do |object|
     object.instance_of?(Flickrie::Photo) \

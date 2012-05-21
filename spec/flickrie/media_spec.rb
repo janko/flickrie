@@ -12,7 +12,6 @@ describe Flickrie::Media do
       :media_status => 'ready',
       :path_alias => nil,
       :camera => 'Canon PowerShot G12',
-      :views_count => 4,
       :comments_count => 1,
       :location => {
         :latitude => 45.807258,
@@ -121,7 +120,7 @@ describe Flickrie::Media do
       ].
         each do |media|
           [
-            :id, :secret, :server, :farm, :title, :description, :views_count,
+            :id, :secret, :server, :farm, :title, :description,
             :comments_count, :location, :geo_permissions, :tags,
             :machine_tags, :license, :taken_at_granularity, :owner,
             :safety_level, :safe?, :moderate?, :restricted?, :visibility,
@@ -133,6 +132,7 @@ describe Flickrie::Media do
             :can_print?, :can_share?, :has_people?, :notes
           ].
 
+          media.views_count.should be_a_number
 
           # time
           [:posted_at, :uploaded_at, :updated_at, :taken_at].each do |time_attribute|
@@ -150,7 +150,7 @@ describe Flickrie::Media do
   shared_context "common" do
     def test_common_attributes(media)
       [
-        :id, :secret, :server, :farm, :title, :media_status, :views_count,
+        :id, :secret, :server, :farm, :title, :media_status,
         :geo_permissions, :machine_tags, :license, :taken_at_granularity
       ].
         each do |attribute|
@@ -169,6 +169,7 @@ describe Flickrie::Media do
 
       # other
       media.url.should_not be_empty
+      media.views_count.should be_a_number
     end
   end
 
