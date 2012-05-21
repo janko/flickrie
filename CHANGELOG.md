@@ -1,5 +1,10 @@
 # Flickrie changelog
 
+## Version 1.1.1
+
+- Excluded unnecessary files from the release (1.4MB => 48KB).
+  Sorry :P
+
 ## Version 1.1.0
 
 - Before `Flickrie::User` had only the `#public_photos` method, now, I
