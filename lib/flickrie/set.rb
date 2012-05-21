@@ -57,7 +57,6 @@ module Flickrie
     # @return [Boolean]
     def can_comment?() Integer(@info['can_comment']) == 1 rescue nil end
 
-    # @comment TODO: Figure out what this is
     # @return [Boolean]
     def needs_interstitial?() Integer(@info['needs_interstitial']) == 1 rescue nil end
     # @return [Boolean]

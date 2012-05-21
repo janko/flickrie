@@ -5,7 +5,6 @@ SIZES = ['Square 75', 'Thumbnail', 'Square 150', 'Small 240', 'Small 320',
 
 describe Flickrie::Photo do
   def test_sizes(photo)
-    # TODO: simplify this
     # non-bang versions
     [
       [[photo.square(75), photo.square75],   ['Square 75', '75x75']],
