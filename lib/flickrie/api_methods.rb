@@ -436,7 +436,7 @@ module Flickrie
     # Fetches upload tickets with given IDs. Example:
     #
     #     photo = File.open("...")
-    #     ticket_id = Flickrie.upload(photo)
+    #     ticket_id = Flickrie.upload(photo, :async => 1)
     #     sleep(10)
     #
     #     ticket = Flickrie.check_upload_tickets(ticket_id)
