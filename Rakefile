@@ -4,11 +4,11 @@ Bundler::GemHelper.install_tasks
 task :default => :spec
 
 desc "Run the specs (use spec:name to run a single spec)"
-task :spec do |task, args|
+task :spec do
   system "rspec -Ispec"
 end
 
-Dir["spec/flickrie/*_spec.rb"].each do |spec|
+Dir["spec/**/*_spec.rb"].each do |spec|
   task_name = File.basename(spec)[/.+(?=_spec\.rb)/]
   task :"spec:#{task_name}" do
     system "rspec -Ispec #{spec}"
