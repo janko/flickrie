@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.summary      = gem.description
   gem.homepage     = "https://github.com/janko-m/flickrie"
 
-  gem.files        = Dir["lib/**/*.rb"] + ["flickrie.gemspec", "README.md", "LICENSE"]
+  gem.files        = Dir["lib/**/*.rb"] + ["README.md", "LICENSE"]
   gem.require_path = "lib"
   gem.test_files   = gem.files.grep(%r{^(test|spec|features)/})
 
