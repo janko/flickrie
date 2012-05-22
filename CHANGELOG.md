@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 1.1.2
+
+- Fixed documentation not displaying properly.
+
 ## Version 1.1.1
 
 - Excluded unnecessary files from the release (1.4MB => 48KB).
