@@ -38,7 +38,7 @@ describe Flickrie::Set do
 
     # Other
     set.url.should_not be_empty
-    set.views_count.should be_a_number
+    set.views_count.should be_a(Fixnum)
     set.can_comment?.should be_a_boolean
   end
 

@@ -127,7 +127,7 @@ describe Flickrie::Media do
           ].
             each { |attribute| media.send(attribute).should be_a_boolean }
 
-          media.views_count.should be_a_number
+          media.views_count.should be_a(Fixnum)
 
           # time
           [:posted_at, :uploaded_at, :updated_at, :taken_at].each do |time_attribute|
@@ -164,7 +164,7 @@ describe Flickrie::Media do
 
       # other
       media.url.should_not be_empty
-      media.views_count.should be_a_number
+      media.views_count.should be_a(Fixnum)
     end
   end
 
