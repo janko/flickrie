@@ -29,19 +29,3 @@ end
 RSpec::Matchers.define :be_a_boolean do
   match { |object| object == true or object == false }
 end
-
-RSpec::Matchers.define :be_a_media do
-  match do |object|
-    object.instance_of?(Flickrie::Photo) \
-      or
-    object.instance_of?(Flickrie::Video)
-  end
-end
-
-RSpec::Matchers.define :be_a_photo do
-  match { |object| object.instance_of?(Flickrie::Photo) }
-end
-
-RSpec::Matchers.define :be_a_video do
-  match { |object| object.instance_of?(Flickrie::Video) }
-end

@@ -28,9 +28,9 @@ describe Flickrie::Set do
       set.send(attribute).should correspond_to(@attributes[attribute])
     end
 
-    set.photos.each { |object| object.should be_a_photo }
-    set.videos.each { |object| object.should be_a_video }
-    set.media.each  { |object| object.should be_a_media }
+    set.photos.each { |object| object.should be_a(Flickrie::Photo) }
+    set.videos.each { |object| object.should be_a(Flickrie::Video) }
+    set.media.each  { |object| object.should be_a(Flickrie::Media) }
 
     # Time
     set.created_at.should be_an_instance_of(Time)
