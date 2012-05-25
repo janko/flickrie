@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 SIZES = ['Square 75', 'Thumbnail', 'Square 150', 'Small 240', 'Small 320',
-  'Medium 500', 'Medium 640', 'Medium 800', 'Large 1024']
+  'Medium 500', 'Medium 640', 'Medium 800', 'Large 1024', 'Large 1600',
+  'Large 2048']
 
 describe Flickrie::Photo do
   def non_bang_sizes(photo)
@@ -9,9 +10,11 @@ describe Flickrie::Photo do
       photo.square(75), photo.square(150), photo.thumbnail,
       photo.small(240), photo.small(320), photo.medium(500),
       photo.medium(640), photo.medium(800), photo.large(1024),
+      photo.large(1600), photo.large!(2048),
       photo.square75, photo.square150, photo.small240,
       photo.small320, photo.medium500, photo.medium640,
-      photo.medium800, photo.large1024, photo.largest
+      photo.medium800, photo.large1024, photo.large1600,
+      photo.large2048, photo.largest
     ]
   end
 
@@ -21,11 +24,14 @@ describe Flickrie::Photo do
       proc { photo.thumbnail! }, proc { photo.small!(240) },
       proc { photo.small!(320) }, proc { photo.medium!(500) },
       proc { photo.medium!(640) }, proc { photo.medium!(800) },
-      proc { photo.large!(1024) }, proc { photo.square75! },
-      proc { photo.square150! }, proc { photo.small240! },
-      proc { photo.small320! }, proc { photo.medium500! },
-      proc { photo.medium640! }, proc { photo.medium800! },
-      proc { photo.large1024! }, proc { photo.largest! }
+      proc { photo.large!(1024) }, proc { photo.large!(1600)},
+      proc { photo.large!(2048) },
+      proc { photo.square75! }, proc { photo.square150! },
+      proc { photo.small240! }, proc { photo.small320! },
+      proc { photo.medium500! }, proc { photo.medium640! },
+      proc { photo.medium800! }, proc { photo.large1024! },
+      proc { photo.large1600! }, proc { photo.large2048! },
+      proc { photo.largest! }
     ]
   end
 

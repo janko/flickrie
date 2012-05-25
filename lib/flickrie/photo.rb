@@ -14,6 +14,8 @@ module Flickrie
       'Medium 640' => 'z',
       'Medium 800' => 'c',
       'Large 1024' => 'l',
+      'Large 1600' => 'h',
+      'Large 2048' => 'k',
       'Original'   => 'o'
     }
 
@@ -80,7 +82,14 @@ module Flickrie
     # @return [self]
     def large1024()  large(1024)  end
     # @return [self]
+    def large1600()  large(1600)  end
+    # @return [self]
+    def large2048()  large(2048)  end
     def large1024!() large!(1024) end
+    # @return [self]
+    def large1600!() large!(1600) end
+    # @return [self]
+    def large2048!() large!(2048) end
 
     # @return [self]
     def largest!() @size = largest_size; self end
@@ -144,6 +153,8 @@ module Flickrie
         'Medium 640'   => FLICKR_SIZES['Medium 640'],
         'Medium 800'   => FLICKR_SIZES['Medium 800'],
         'Large'        => FLICKR_SIZES['Large 1024'],
+        'Large 1600'   => FLICKR_SIZES['Large 1600'],
+        'Large 2048'   => FLICKR_SIZES['Large 2048'],
         'Original'     => FLICKR_SIZES['Original']
       }
       hash['size'].each do |size_info|
