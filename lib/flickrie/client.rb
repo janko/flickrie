@@ -42,6 +42,10 @@ module Flickrie
         ensure_media({:user_id => nsid}.merge(params))
     end
 
+    def get_upload_status(params = {})
+      get 'flickr.people.getUploadStatus', params
+    end
+
     # photos
     def add_media_tags(media_id, tags, params = {})
       post 'flickr.photos.addTags',

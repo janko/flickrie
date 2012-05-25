@@ -153,6 +153,18 @@ module Flickrie
         select { |media| media.is_a?(Video) }
     end
 
+    # Returns the upload status of the user who is currently authenticated.
+    #
+    # @return [Flickrie::User]
+    # @api_method [flickr.people.getUploadStatus](http://www.flickr.com/services/api/flickr.people.getUploadStatus.html)
+    # @see Flickrie::User#upload_status
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_upload_status(params = {})
+      response = client.get_upload_status(params)
+      User.from_upload_status(response.body['user'])
+    end
+
     # Add tags to the photo/video with the given ID.
     #
     # @param media_id [String, Fixnum]

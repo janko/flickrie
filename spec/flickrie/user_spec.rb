@@ -68,6 +68,30 @@ describe Flickrie::User do
     end
   end
 
+  context "get upload status" do
+    it "should have the attributes", :vcr do
+      user = Flickrie.get_upload_status
+      attributes = {
+        :bandwidth => {
+          :maximum => 300.0,
+          :used => 23.9833984375,
+          :remaining => 276.0166015625,
+          :unlimited? => false
+        },
+        :maximum_photo_size => 30,
+        :maximum_video_size => 150,
+
+        :videos_uploaded => 0,
+        :videos_remaining => 2,
+
+        :sets_created => nil,
+        :sets_remaining => "lots"
+      }
+
+      user.upload_status.should correspond_to(attributes)
+    end
+  end
+
   context "blank user" do
     it "should have all attributes equal to nil" do
       attributes = Flickrie::User.instance_methods -

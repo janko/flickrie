@@ -1,4 +1,5 @@
 require 'date'
+require 'flickrie/user/upload_status'
 
 module Flickrie
   class User
@@ -6,7 +7,8 @@ module Flickrie
     #   :id, :nsid, :username, :real_name, :location, :description,
     #   :path_alias, :icon_server, :icon_farm, :buddy_icon_url,
     #   :time_zone, :photos_url, :profile_url, :mobile_url,
-    #   :first_taken, :favorited_at, :media_count, :pro?, :hash
+    #   :first_taken, :favorited_at, :media_count, :pro?, :hash,
+    #   :upload_status
 
     # @return [String]
     def id()           @info['id']          end
@@ -107,7 +109,12 @@ module Flickrie
     # @return [Boolean]
     def pro?() Integer(@info['ispro']) == 1 rescue nil end
 
-    def [](key) @info[key] end
+    # Returns the upload status of the user.
+    #
+    # @return [Flickrie::User::UploadStatus]
+    def upload_status() UploadStatus.new(@hash['upload_status']) rescue nil end
+
+    def [](key) @hash[key] end
     # @return [Hash]
     def hash() @info end
 
@@ -144,6 +151,16 @@ module Flickrie
     def self.from_find(info)
       info['username'] = info['username']['_content']
       new(info)
+    def self.from_upload_status(hash)
+      hash['username'] = hash['username']['_content']
+      hash['upload_status'] = {
+        'bandwidth' => hash.delete('bandwidth'),
+        'filesize' => hash.delete('filesize'),
+        'sets' => hash.delete('sets'),
+        'videosize' => hash.delete('videosize'),
+        'videos' => hash.delete('videos')
+      }
+      new(hash)
     end
 
     def self.from_test(info)
