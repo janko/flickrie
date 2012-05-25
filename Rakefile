@@ -5,13 +5,13 @@ task :default => :spec
 
 desc "Run the specs (use spec:name to run a single spec)"
 task :spec do
-  system "rspec -Ispec"
+  system "rspec"
 end
 
 Dir["spec/**/*_spec.rb"].each do |spec|
   task_name = File.basename(spec)[/.+(?=_spec\.rb)/]
   task :"spec:#{task_name}" do
-    system "rspec -Ispec #{spec}"
+    system "rspec #{spec}"
   end
 end
 
