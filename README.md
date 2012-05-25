@@ -1,8 +1,10 @@
-# Flickrie [![Build Status](https://secure.travis-ci.org/janko-m/flickrie.png)](http://travis-ci.org/janko-m/flickrie)
-
-## About
+# Flickrie
 
 This gem is a nice wrapper for the Flickr API with an object-oriented interface.
+
+[![Build Status](https://secure.travis-ci.org/janko-m/flickrie.png)](http://travis-ci.org/janko-m/flickrie)
+
+## About
 
 The reason why I did this gem is because the existing ones either weren't
 well maintained, or they weren't object oriented and provided a literal
