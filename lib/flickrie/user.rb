@@ -11,23 +11,23 @@ module Flickrie
     #   :upload_status
 
     # @return [String]
-    def id()           @info['id']          end
+    def id()           @hash['id']          end
     # @return [String]
-    def nsid()         @info['nsid']        end
+    def nsid()         @hash['nsid']        end
     # @return [String]
-    def username()     @info['username']    end
+    def username()     @hash['username']    end
     # @return [String]
-    def real_name()    @info['realname']    end
+    def real_name()    @hash['realname']    end
     # @return [String]
-    def location()     @info['location']    end
+    def location()     @hash['location']    end
     # @return [String]
-    def description()  @info['description'] end
+    def description()  @hash['description'] end
     # @return [String]
-    def path_alias()   @info['path_alias']  end
+    def path_alias()   @hash['path_alias']  end
     # @return [String]
-    def icon_server()  @info['iconserver']  end
+    def icon_server()  @hash['iconserver']  end
     # @return [Fixnum]
-    def icon_farm()    @info['iconfarm']    end
+    def icon_farm()    @hash['iconfarm']    end
 
     # @return [String]
     def buddy_icon_url
@@ -46,25 +46,25 @@ module Flickrie
     #     user.time_zone.label  # => "Sarajevo, Skopje, Warsaw, Zagreb"
     #
     # @return [Struct]
-    def time_zone() Struct.new(:label, :offset).new(*@info['timezone'].values) rescue nil end
+    def time_zone() Struct.new(:label, :offset).new(*@hash['timezone'].values) rescue nil end
 
     # @return [String]
-    def photos_url()  @info['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" if nsid || id end
+    def photos_url()  @hash['photosurl']  || "http://www.flickr.com/photos/#{nsid || id}" if nsid || id end
     # @return [String]
-    def profile_url() @info['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" if nsid || id end
+    def profile_url() @hash['profileurl'] || "http://www.flickr.com/people/#{nsid || id}" if nsid || id end
     # @return [String]
-    def mobile_url()  @info['mobileurl'] end
+    def mobile_url()  @hash['mobileurl'] end
 
     # @return [Time]
-    def first_taken() DateTime.parse(@info['photos']['firstdatetaken']).to_time rescue nil end
+    def first_taken() DateTime.parse(@hash['photos']['firstdatetaken']).to_time rescue nil end
     # @return [Time]
-    def first_uploaded() Time.at(Integer(@info['photos']['firstdate'])) rescue nil end
+    def first_uploaded() Time.at(Integer(@hash['photos']['firstdate'])) rescue nil end
 
     # @return [Time]
-    def favorited_at() Time.at(Integer(@info['favedate'])) rescue nil end
+    def favorited_at() Time.at(Integer(@hash['favedate'])) rescue nil end
 
     # @return [Fixnum]
-    def media_count() Integer(@info['photos']['count']) rescue nil end
+    def media_count() Integer(@hash['photos']['count']) rescue nil end
     alias photos_count media_count
     alias videos_count media_count
 
@@ -107,7 +107,7 @@ module Flickrie
     end
 
     # @return [Boolean]
-    def pro?() Integer(@info['ispro']) == 1 rescue nil end
+    def pro?() Integer(@hash['ispro']) == 1 rescue nil end
 
     # Returns the upload status of the user.
     #
@@ -116,41 +116,41 @@ module Flickrie
 
     def [](key) @hash[key] end
     # @return [Hash]
-    def hash() @info end
+    def hash() @hash end
 
     # The same as calling `Flickrie.get_user_info(user.nsid)`
     #
     # @return [self]
-    def get_info(params = {}, info = nil)
-      info ||= Flickrie.client.get_user_info(nsid || id, params).body['person']
-      @info.update(info)
-
-      %w[username realname location description profileurl
-         mobileurl photosurl].each do |attribute|
-        @info[attribute] = @info[attribute]['_content']
-      end
-      %w[count firstdatetaken firstdate].each do |photo_attribute|
-        @info['photos'][photo_attribute] = @info['photos'][photo_attribute]['_content']
-      end
+    def get_info(params = {})
+      hash = Flickrie.client.get_user_info(nsid || id, params).body['person']
+      self.class.fix_info(hash)
+      @hash.update(hash)
 
       self
     end
 
     private
 
-    def initialize(info = {})
-      raise ArgumentError if info.nil?
+    def initialize(hash = {})
+      raise ArgumentError if hash.nil?
 
-      @info = info
+      @hash = hash
     end
 
-    def self.from_info(info)
-      new.get_info({}, info)
+    def self.from_info(hash)
+      fix_info(hash)
+      new(hash)
     end
 
-    def self.from_find(info)
-      info['username'] = info['username']['_content']
-      new(info)
+    def self.from_find(hash)
+      hash['username'] = hash['username']['_content']
+      new(hash)
+    end
+
+    def self.from_test(hash)
+      from_find(hash)
+    end
+
     def self.from_upload_status(hash)
       hash['username'] = hash['username']['_content']
       hash['upload_status'] = {
@@ -163,8 +163,14 @@ module Flickrie
       new(hash)
     end
 
-    def self.from_test(info)
-      from_find(info)
+    def self.fix_info(hash)
+      %w[username realname location description profileurl
+         mobileurl photosurl].each do |attribute|
+        hash[attribute] = hash[attribute]['_content']
+      end
+      %w[count firstdatetaken firstdate].each do |photo_attribute|
+        hash['photos'][photo_attribute] = hash['photos'][photo_attribute]['_content']
+      end
     end
   end
 end
