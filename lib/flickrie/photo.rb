@@ -54,37 +54,39 @@ module Flickrie
     # @return [self]
     def square75()   square(75)   end
     # @return [self]
-    def square75!()  square!(75)  end
-    # @return [self]
     def square150()  square(150)  end
-    # @return [self]
-    def square150!() square!(150) end
     # @return [self]
     def small240()   small(240)   end
     # @return [self]
-    def small240!()  small!(240)  end
-    # @return [self]
     def small320()   small(320)   end
-    # @return [self]
-    def small320!()  small!(320)  end
     # @return [self]
     def medium500()  medium(500)  end
     # @return [self]
-    def medium500!() medium!(500) end
-    # @return [self]
     def medium640()  medium(640)  end
     # @return [self]
-    def medium640!() medium!(640) end
-    # @return [self]
     def medium800()  medium(800)  end
-    # @return [self]
-    def medium800!() medium!(800) end
     # @return [self]
     def large1024()  large(1024)  end
     # @return [self]
     def large1600()  large(1600)  end
     # @return [self]
     def large2048()  large(2048)  end
+
+    # @return [self]
+    def square75!()  square!(75)  end
+    # @return [self]
+    def square150!() square!(150) end
+    # @return [self]
+    def small240!()  small!(240)  end
+    # @return [self]
+    def small320!()  small!(320)  end
+    # @return [self]
+    def medium500!() medium!(500) end
+    # @return [self]
+    def medium640!() medium!(640) end
+    # @return [self]
+    def medium800!() medium!(800) end
+    # @return [self]
     def large1024!() large!(1024) end
     # @return [self]
     def large1600!() large!(1600) end
