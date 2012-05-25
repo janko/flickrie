@@ -2,7 +2,7 @@
 
 ## Version 1.2.0
 
-- Added 2 new Flickr sizes (`Large 1600` and `Large 2048`)
+- Added 2 new Flickr sizes (`Large 1600` and `Large 2048`).
 
 - The width and height is now back to normal again, Flickr didn't
   mix them up, I did (when a photo is rotated, its width and height
