@@ -89,29 +89,51 @@ module Flickrie
 
     # @return [Array<String>]
     def available_sizes
-      SIZES.select { |_,v| @info["url_#{v}"] }.keys
+      SIZES.select { |_,v| @hash["url_#{v}"] }.keys
     end
 
     # @return [Fixnum]
-    def width() flickr_size.min rescue nil end
+    def width() Integer(@hash["width_#{size_abbr}"]) rescue nil end
     # @return [Fixnum]
-    def height() flickr_size.max rescue nil end
+    def height() Integer(@hash["height_#{size_abbr}"]) rescue nil end
     # @return [String]
-    def source_url() @info["url_#{size_abbr}"] end
+    def source_url() @hash["url_#{size_abbr}"] end
 
     # @return [Fixnum]
-    def rotation() Integer(@info['rotation']) rescue nil end
+    def rotation() Integer(@hash['rotation']) rescue nil end
 
     # Same as calling `Flickrie.get_photo_sizes(photo.id)`.
     #
     # @return [self]
-    def get_sizes(params = {}, info = nil)
-      info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
-      @info['usage'] ||= {}
-      @info['usage'].update \
-        'canblog'     => info['canblog'],
-        'canprint'    => info['canprint'],
-        'candownload' => info['candownload']
+    def get_sizes(params = {})
+      hash = Flickrie.client.get_media_sizes(id, params).body['sizes']
+      self.class.fix_sizes(hash)
+      @hash.deep_merge!(hash)
+
+      largest!
+    end
+
+    private
+
+    def initialize(info = {})
+      super
+      @size = largest_size
+    end
+
+    def largest_size
+      available_sizes.last
+    end
+
+    def size_abbr
+      SIZES[size]
+    end
+
+    def self.fix_sizes(hash)
+      hash['usage'] = {
+        'canblog'     => hash['canblog'],
+        'canprint'    => hash['canprint'],
+        'candownload' => hash['candownload']
+      }
       flickr_sizes = {
         'Square'       => SIZES['Square 75'],
         'Large Square' => SIZES['Square 150'],
@@ -124,33 +146,12 @@ module Flickrie
         'Large'        => SIZES['Large 1024'],
         'Original'     => SIZES['Original']
       }
-      info['size'].each do |size_info|
+      hash['size'].each do |size_info|
         size_abbr = flickr_sizes[size_info['label']]
-        @info["width_#{size_abbr}"] = size_info['width']
-        @info["height_#{size_abbr}"] = size_info['height']
-        @info["url_#{size_abbr}"] = size_info['source']
+        hash["width_#{size_abbr}"] = size_info['width']
+        hash["height_#{size_abbr}"] = size_info['height']
+        hash["url_#{size_abbr}"] = size_info['source']
       end
-
-      largest!
-    end
-
-    private
-
-    def initialize(info = {}, size = nil)
-      super(info)
-      @size = size || largest_size
-    end
-
-    def largest_size
-      available_sizes.last
-    end
-
-    def size_abbr
-      SIZES[size]
-    end
-
-    def flickr_size
-      [Integer(@info["width_#{size_abbr}"]), Integer(@info["height_#{size_abbr}"])]
     end
   end
 end

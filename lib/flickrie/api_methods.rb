@@ -300,7 +300,7 @@ module Flickrie
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_photo_exif(photo_id, params = {})
       response = client.get_media_exif(photo_id, params)
-      Photo.from_exif(response.body['photo'])
+      Photo.new(response.body['photo'])
     end
     # Fetches the exif for the video with the given ID. Example:
     #
@@ -316,7 +316,7 @@ module Flickrie
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_video_exif(video_id, params = {})
       response = client.get_media_exif(video_id, params)
-      Video.from_exif(response.body['photo'])
+      Video.new(response.body['photo'])
     end
 
     # Fetches the list of users who favorited the photo with the given ID.

@@ -31,20 +31,11 @@ module Flickrie
     # Same as calling `Flickrie.get_video_sizes(video.id)`
     #
     # @return [self]
-    def get_sizes(params = {}, info = nil)
-      info ||= Flickrie.client.get_media_sizes(id, params).body['sizes']
-      @info['usage'] ||= {}
-      @info['usage'].update \
-        'canblog'     => info['canblog'],
-        'canprint'    => info['canprint'],
-        'candownload' => info['candownload']
-      info['size'].each do |hash|
-        case hash['label']
-        when 'Video Player' then @video['source_url'] = hash['source']
-        when 'Site MP4'     then @video['download_url'] = hash['source']
-        when 'Mobile MP4'   then @video['mobile_download_url'] = hash['source']
-        end
-      end
+    def get_sizes(params = {})
+      hash = Flickrie.client.get_media_sizes(id, params).body['sizes']
+      self.class.fix_sizes(hash)
+      @hash.deep_merge!(hash)
+      @video = @hash['video']
 
       self
     end
@@ -52,18 +43,34 @@ module Flickrie
     # Same as calling `Flickrie.get_video_info(video.id)`.
     #
     # @return [self]
-    def get_info(params = {}, info = nil)
+    def get_info(params = {})
       super
-      @video = @info['video']
+      @video = @hash['video']
 
       self
     end
 
     private
 
-    def initialize(info = {})
+    def initialize(hash = {})
       super
-      @video = info['video'] || {}
+      @video = hash['video'] || {}
+    end
+
+    def self.fix_sizes(hash)
+      hash['usage'] = {
+        'canblog'     => hash['canblog'],
+        'canprint'    => hash['canprint'],
+        'candownload' => hash['candownload']
+      }
+      hash['video'] ||= {}
+      hash['size'].each do |info|
+        case info['label']
+        when 'Video Player' then hash['video']['source_url'] = info['source']
+        when 'Site MP4'     then hash['video']['download_url'] = info['source']
+        when 'Mobile MP4'   then hash['video']['mobile_download_url'] = info['source']
+        end
+      end
     end
   end
 end

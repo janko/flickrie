@@ -4,51 +4,47 @@ SIZES = ['Square 75', 'Thumbnail', 'Square 150', 'Small 240', 'Small 320',
   'Medium 500', 'Medium 640', 'Medium 800', 'Large 1024']
 
 describe Flickrie::Photo do
-  def test_sizes(photo)
-    # non-bang versions
+  def non_bang_sizes(photo)
     [
-      [[photo.square(75), photo.square75],   ['Square 75', '75x75']],
-      [[photo.thumbnail],                    ['Thumbnail', '75x100']],
-      [[photo.square(150), photo.square150], ['Square 150', '150x150']],
-      [[photo.small(240), photo.small240],   ['Small 240', '180x240']],
-      [[photo.small(320), photo.small320],   ['Small 320', '240x320']],
-      [[photo.medium(500), photo.medium500], ['Medium 500', '375x500']],
-      [[photo.medium(640), photo.medium640], ['Medium 640', '480x640']],
-      [[photo.medium(800), photo.medium800], ['Medium 800', '600x800']],
-      [[photo.large(1024), photo.large1024], ['Large 1024', '768x1024']]
-    ].
-      each do |photos, expected_values|
-        flickr_size, size = expected_values
-        photos.each do |photo|
-          photo.size.should eq(flickr_size)
-          [photo.width, photo.height].join('x').should eq(size)
-          photo.source_url.should_not be_empty
-        end
-      end
+      photo.square(75), photo.square(150), photo.thumbnail,
+      photo.small(240), photo.small(320), photo.medium(500),
+      photo.medium(640), photo.medium(800), photo.large(1024),
+      photo.square75, photo.square150, photo.small240,
+      photo.small320, photo.medium500, photo.medium640,
+      photo.medium800, photo.large1024, photo.largest
+    ]
+  end
 
-    # bang versions
+  def bang_sizes(photo)
     [
-      [[proc { photo.square!(75) }, proc { photo.square75! }],   ['Square 75', '75x75']],
-      [[proc { photo.thumbnail! }],                              ['Thumbnail', '75x100']],
-      [[proc { photo.square!(150) }, proc { photo.square150! }], ['Square 150', '150x150']],
-      [[proc { photo.small!(240) }, proc { photo.small240! }],   ['Small 240', '180x240']],
-      [[proc { photo.small!(320) }, proc { photo.small320! }],   ['Small 320', '240x320']],
-      [[proc { photo.medium!(500) }, proc { photo.medium500! }], ['Medium 500', '375x500']],
-      [[proc { photo.medium!(640) }, proc { photo.medium640! }], ['Medium 640', '480x640']],
-      [[proc { photo.medium!(800) }, proc { photo.medium800! }], ['Medium 800', '600x800']],
-      [[proc { photo.large!(1024) }, proc { photo.large1024! }], ['Large 1024', '768x1024']]
-    ].
-      each do |blocks, expected_values|
-        flickr_size, size = expected_values
-        blocks.each do |block|
-          result_photo = block.call
-          [result_photo, photo].each do |photo|
-            photo.size.should eq(flickr_size)
-            [photo.width, photo.height].join('x').should eq(size)
-            photo.source_url.should_not be_empty
-          end
-        end
+      proc { photo.square!(75) }, proc { photo.square!(150) },
+      proc { photo.thumbnail! }, proc { photo.small!(240) },
+      proc { photo.small!(320) }, proc { photo.medium!(500) },
+      proc { photo.medium!(640) }, proc { photo.medium!(800) },
+      proc { photo.large!(1024) }, proc { photo.square75! },
+      proc { photo.square150! }, proc { photo.small240! },
+      proc { photo.small320! }, proc { photo.medium500! },
+      proc { photo.medium640! }, proc { photo.medium800! },
+      proc { photo.large1024! }, proc { photo.largest! }
+    ]
+  end
+
+  def test_sizes(photo)
+    non_bang_sizes(photo).each do |photo|
+      [:size, :width, :height, :source_url].each do |attr|
+        photo.send(attr).should_not be_nil
       end
+    end
+
+    bang_sizes(photo).each do |photo_proc|
+      result_photo = photo_proc.call
+      [:size, :width, :height, :source_url].each do |attr|
+        photo.send(attr).should_not be_nil
+      end
+      [:size, :width, :height, :source_url].each do |attr|
+        result_photo.send(attr).should_not be_nil
+      end
+    end
   end
 
   context "get sizes" do
@@ -87,46 +83,24 @@ describe Flickrie::Photo do
     it "should have all attributes equal to nil" do
       photo = Flickrie::Photo.public_new
 
-      photo.width.should be_nil
-      photo.height.should be_nil
-      photo.source_url.should be_nil
-      photo.rotation.should be_nil
+      [:width, :height, :source_url, :rotation, :size].each do |attr|
+        photo.send(attr).should be_nil
+      end
+
       photo.available_sizes.should be_empty
-      photo.size.should be_nil
 
-      [
-        photo.square(75), photo.square(150), photo.thumbnail,
-        photo.small(240), photo.small(320), photo.medium(500),
-        photo.medium(640), photo.medium(800), photo.large(1024),
-        photo.original, photo.square75, photo.square150,
-        photo.small240, photo.small320, photo.medium500,
-        photo.medium640, photo.medium800, photo.large1024,
-        photo.largest
-      ].
-        each do |photo|
-          photo.source_url.should be_nil
-          photo.width.should be_nil
-          photo.height.should be_nil
-        end
+      non_bang_sizes(photo).each do |photo|
+        photo.source_url.should be_nil
+        photo.width.should be_nil
+        photo.height.should be_nil
+      end
 
-      [
-        proc { photo.square!(75) }, proc { photo.square!(150) },
-        proc { photo.thumbnail! }, proc { photo.small!(240) },
-        proc { photo.small!(320) }, proc { photo.medium!(500) },
-        proc { photo.medium!(640) }, proc { photo.medium!(800) },
-        proc { photo.large!(1024) }, proc { photo.original! },
-        proc { photo.square75! }, proc { photo.square150! },
-        proc { photo.small240! }, proc { photo.small320! },
-        proc { photo.medium500! }, proc { photo.medium640! },
-        proc { photo.medium800! }, proc { photo.large1024! },
-        proc { photo.largest! }
-      ].
-        each do |prok|
-          prok.call
-          photo.source_url.should be_nil
-          photo.width.should be_nil
-          photo.height.should be_nil
-        end
+      bang_sizes(photo).each do |photo_proc|
+        photo_proc.call
+        photo.source_url.should be_nil
+        photo.width.should be_nil
+        photo.height.should be_nil
+      end
     end
   end
 end
