@@ -4,7 +4,7 @@ module Flickrie
     # @!parse attr_reader \
     #   :size, :width, :height, :source_url, :rotation
 
-    SIZES = {
+    FLICKR_SIZES = {
       'Square 75'  => 'sq',
       'Thumbnail'  => 't',
       'Square 150' => 'q',
@@ -89,7 +89,7 @@ module Flickrie
 
     # @return [Array<String>]
     def available_sizes
-      SIZES.select { |_,v| @hash["url_#{v}"] }.keys
+      FLICKR_SIZES.select { |_,v| @hash["url_#{v}"] }.keys
     end
 
     # @return [Fixnum]
@@ -125,7 +125,7 @@ module Flickrie
     end
 
     def size_abbr
-      SIZES[size]
+      FLICKR_SIZES[size]
     end
 
     def self.fix_sizes(hash)
@@ -135,16 +135,16 @@ module Flickrie
         'candownload' => hash['candownload']
       }
       flickr_sizes = {
-        'Square'       => SIZES['Square 75'],
-        'Large Square' => SIZES['Square 150'],
-        'Thumbnail'    => SIZES['Thumbnail'],
-        'Small'        => SIZES['Small 240'],
-        'Small 320'    => SIZES['Small 320'],
-        'Medium'       => SIZES['Medium 500'],
-        'Medium 640'   => SIZES['Medium 640'],
-        'Medium 800'   => SIZES['Medium 800'],
-        'Large'        => SIZES['Large 1024'],
-        'Original'     => SIZES['Original']
+        'Square'       => FLICKR_SIZES['Square 75'],
+        'Large Square' => FLICKR_SIZES['Square 150'],
+        'Thumbnail'    => FLICKR_SIZES['Thumbnail'],
+        'Small'        => FLICKR_SIZES['Small 240'],
+        'Small 320'    => FLICKR_SIZES['Small 320'],
+        'Medium'       => FLICKR_SIZES['Medium 500'],
+        'Medium 640'   => FLICKR_SIZES['Medium 640'],
+        'Medium 800'   => FLICKR_SIZES['Medium 800'],
+        'Large'        => FLICKR_SIZES['Large 1024'],
+        'Original'     => FLICKR_SIZES['Original']
       }
       hash['size'].each do |size_info|
         size_abbr = flickr_sizes[size_info['label']]
