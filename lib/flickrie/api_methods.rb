@@ -10,6 +10,7 @@ require 'flickrie/video'
 require 'flickrie/set'
 require 'flickrie/media_count'
 require 'flickrie/ticket'
+require 'flickrie/core_ext'
 
 module Flickrie
   module ApiMethods
