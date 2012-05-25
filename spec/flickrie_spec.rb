@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Flickrie do
   context "a new credential is filled in" do
     it "should reset the client", :vcr do
