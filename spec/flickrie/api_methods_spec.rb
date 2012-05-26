@@ -112,6 +112,12 @@ describe Flickrie::ApiMethods do
       Flickrie.search_photos(:user_id => USER_NSID).first.id.should_not be_nil
       Flickrie.search_videos(:user_id => USER_NSID).first.id.should_not be_nil
     end
+
+    it "should get not in set", :vcr do
+      Flickrie.media_not_in_set.each  { |object| object.should be_a(Flickrie::Media) }
+      Flickrie.photos_not_in_set.each { |object| object.should be_a(Flickrie::Photo) }
+      Flickrie.videos_not_in_set.each { |object| object.should be_a(Flickrie::Video) }
+    end
   end
 
   context "photosets" do

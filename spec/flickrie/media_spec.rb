@@ -277,6 +277,18 @@ describe Flickrie::Media do
     end
   end
 
+  context "get not in set" do
+    include_examples "extras"
+    let(:media) { Flickrie.media_not_in_set(:extras => EXTRAS).first }
+
+    test "other attributes", :vcr do
+      [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
+      media.owner.nsid.should == USER_NSID
+    end
+  end
+
   context "blank media" do
     it "should have all attributes equal to nil" do
       attributes = Flickrie::Media.instance_methods -

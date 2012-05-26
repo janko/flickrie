@@ -55,6 +55,10 @@ module Flickrie
           count, previous_photo, next_photo
       end
 
+      def from_not_in_set(hash)
+        from_user(hash)
+      end
+
       def fix_extras(hash)
         if hash['iconserver'] or hash['iconfarm']
           hash['owner'] ||= {}

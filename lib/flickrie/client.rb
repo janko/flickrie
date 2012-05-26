@@ -90,6 +90,10 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def media_not_in_set(params = {})
+      get 'flickr.photos.getNotInSet', ensure_media(params)
+    end
+
     def get_media_sizes(media_id, params = {})
       get 'flickr.photos.getSizes',
         {:photo_id => media_id}.merge(params)

@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getNotInSet&extras=license%2Cdate_upload%2Cdate_taken%2Cowner_name%2Cicon_server%2Coriginal_format%2Clast_update%2Cgeo%2Ctags%2Cmachine_tags%2Co_dims%2Cviews%2Cmedia%2Cpath_alias%2Curl_sq%2Curl_q%2Curl_t%2Curl_s%2Curl_n%2Curl_m%2Curl_z%2Curl_c%2Curl_l%2Curl_h%2C%2Curl_k%2Curl_o%2Cmedia
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="f87e552943acec9caa8c4391f1202573", oauth_signature="KXYk5E72852DdWqAD2kTaC2zizk%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338062081", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Sat, 26 May 2012 19:54:41 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www86.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "684"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":100, \"total\":\"1\", \"photo\":[{\"id\":\"6946979188\", \"owner\":\"67131352@N04\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"title\":\"IMG_0796\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"license\":\"0\", \"dateupload\":\"1334832745\", \"datetaken\":\"2011-03-20 17:00:05\", \"datetakengranularity\":\"0\", \"ownername\":\"Janko Marohni\\u0107\", \"iconserver\":\"5464\", \"iconfarm\":6, \"lastupdate\":\"1337626699\", \"latitude\":45.807258, \"longitude\":15.967599, \"accuracy\":\"11\", \"context\":0, \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\", \"geo_is_family\":0, \"geo_is_friend\":0, \"geo_is_contact\":0, \"geo_is_public\":1, \"tags\":\"luka\", \"machine_tags\":\"\", \"views\":\"5\", \"media\":\"photo\", \"media_status\":\"ready\", \"pathalias\":null, \"url_sq\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_s.jpg\", \"height_sq\":75, \"width_sq\":75, \"url_q\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_q.jpg\", \"height_q\":\"150\", \"width_q\":\"150\", \"url_t\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_t.jpg\", \"height_t\":\"100\", \"width_t\":\"75\", \"url_s\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_m.jpg\", \"height_s\":\"240\", \"width_s\":\"180\", \"url_n\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_n.jpg\", \"height_n\":240, \"width_n\":\"320\", \"url_m\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b.jpg\", \"height_m\":\"500\", \"width_m\":\"375\", \"url_z\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_z.jpg\", \"height_z\":\"640\", \"width_z\":\"480\", \"url_c\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_c.jpg\", \"height_c\":600, \"width_c\":\"800\", \"url_l\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_b.jpg\", \"height_l\":\"1024\", \"width_l\":\"768\", \"url_h\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_3219ddaa99_h.jpg\", \"height_h\":\"1600\", \"width_h\":1200, \"url_k\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_b7dd05a1d3_k.jpg\", \"height_k\":\"2048\", \"width_k\":1536}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Sat, 26 May 2012 19:54:42 GMT
+recorded_with: VCR 2.1.1

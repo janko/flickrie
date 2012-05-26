@@ -370,6 +370,38 @@ module Flickrie
     alias get_photo_info get_media_info
     alias get_video_info get_media_info
 
+    # Fetches photos and videos from the authenticated user
+    # that are not in any set.
+    #
+    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def media_not_in_set(params = {})
+      response = client.media_not_in_set(params)
+      Media.from_not_in_set(response.body['photos'])
+    end
+    # Fetches photos from the authenticated user
+    # that are not in any set.
+    #
+    # @return [Array<Flickrie::Photo>]
+    # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def photos_not_in_set(params = {})
+      media_not_in_set(params.merge(:media => "photos"))
+    end
+    # Fetches videos from the authenticated user
+    # that are not in any set.
+    #
+    # @return [Array<Flickrie::Video>]
+    # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def videos_not_in_set(params = {})
+      media_not_in_set(params.merge(:media => "videos"))
+    end
+
     # Fetches the sizes of the photo with the given ID. Example:
     #
     #     photo = Flickrie.get_photo_sizes(242348)
