@@ -232,8 +232,8 @@ default.
 
 ## Issues
 
-Please, feel free to post any issues that you're having, I will be happy
-to help. I will also be happy if you let me know about any bugs.
+Please, feel free to post any issues that you're having. You can also
+post feature requests.
 
 ## Cedits
 
@@ -283,6 +283,10 @@ basis of this gem.
 ## Changelog
 
 You can see the changelog [here](https://github.com/janko-m/flickrie/blob/master/CHANGELOG.md).
+
+## Social
+
+You can follow me on Twitter, I'm **@m_janko**.
 
 ## License
 
