@@ -8,3 +8,4 @@ api_methods.md
 .bundle/
 .rspec
 .yardoc/
+credentials.rb
