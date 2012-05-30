@@ -289,6 +289,16 @@ describe Flickrie::Media do
     end
   end
 
+  it "has #short_url", :vcr do
+    media = Flickrie.get_media_info(MEDIA_ID)
+    connection = Faraday.new(media.short_url) do |b|
+      b.use FaradayMiddleware::FollowRedirects, :limit => 5
+      b.adapter :net_http
+    end
+    response = connection.get
+    response.status.should == 200
+  end
+
   context "blank media" do
     it "should have all attributes equal to nil" do
       attributes = Flickrie::Media.instance_methods -

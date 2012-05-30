@@ -18,7 +18,7 @@ module Flickrie
     #   :url, :visibility, :primary?, :favorite?, :can_comment?,
     #   :can_add_meta?, :can_everyone_comment?, :can_everyone_add_meta?,
     #   :can_download?, :can_blog?, :can_print?, :can_share?,
-    #   :has_people?, :faved?, :notes, :favorites, :hash
+    #   :has_people?, :faved?, :notes, :favorites, :hash, :short_url
 
     # @return [String]
     def id()             @hash['id']           end
@@ -100,6 +100,10 @@ module Flickrie
         "http://www.flickr.com" + @hash['url']
       end
     end
+    # @return [String]
+    def short_url
+      "http://flic.kr/p/#{to_base58(id)}" rescue nil
+    end
 
     # @return [Flickrie::Media::Visibility]
     def visibility() Visibility.new(@hash['visibility']) rescue nil end
@@ -180,6 +184,20 @@ module Flickrie
 
     def initialize(hash = {})
       @hash = hash
+    end
+
+    private
+
+    BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'.chars.to_a.freeze
+
+    def to_base58(id)
+      id = Integer(id)
+      begin
+        id, remainder = id.divmod(58)
+        result = BASE58_ALPHABET[remainder] + (result || '')
+      end while id > 0
+
+      result
     end
   end
 end
