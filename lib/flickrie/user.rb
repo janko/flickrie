@@ -70,38 +70,38 @@ module Flickrie
 
     # Same as calling `Flickrie.public_photos_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     def public_photos(params = {})
       Flickrie.public_photos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.public_videos_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     def public_videos(params = {})
       Flickrie.public_videos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.public_media_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def public_media(params = {})
       Flickrie.public_media_from_user(nsid || id, params)
     end
 
     # Same as calling `Flickrie.photos_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     def photos(params = {})
       Flickrie.photos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.videos_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     def videos(params = {})
       Flickrie.videos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.media_from_user(user.nsid)`.
     #
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def media(params = {})
       Flickrie.media_from_user(nsid || id, params)
     end

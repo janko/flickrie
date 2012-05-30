@@ -43,19 +43,19 @@ module Flickrie
 
     # Same as calling `Flickrie.photos_from_set(set.id)`.
     #
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     def photos(params = {})
       Flickrie.photos_from_set(id, params)
     end
     # Same as calling `Flickrie.videos_from_set(set.id)`.
     #
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     def videos(params = {})
       Flickrie.videos_from_set(id, params)
     end
     # Same as calling `Flickrie.media_from_set(set.id)`.
     #
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def media(params = {})
       Flickrie.media_from_set(id, params)
     end

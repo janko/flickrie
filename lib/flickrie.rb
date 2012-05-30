@@ -61,6 +61,30 @@ module Flickrie
     #   [omniauth-flickr](https://github.com/timbreitkreutz/omniauth-flickr) strategy
     attr_accessor :access_token, :access_secret
 
+    # If you're in a web application, and you want pagination with
+    # [will_paginate](https://github.com/mislav/will_paginate), you can specify it here.
+    #
+    #     Flickrie.pagination = :will_paginate
+    #
+    # Now let's assume you have a collection of photos
+    #
+    #     @photos = Flickrie.photos_from_set(2734243, :per_page => 20, :page => params[:page])
+    #
+    # This collection is now paginated. You can now call in your ERB template:
+    #
+    # ```erb
+    # <%= will_paginate @photos %>
+    # ```
+    #
+    # If you're using this, be sure to include the 'will_paginate' gem in your
+    # `Gemfile`.
+    #
+    # {Flickrie::Collection} has some basic pagination attributes by itself,
+    # these are independent of any pagination library.
+    #
+    # @see Flickrie::Collection
+    attr_accessor :pagination
+
     [
       :api_key, :shared_secret, :timeout,
       :open_timeout, :access_token, :access_secret
@@ -155,7 +179,6 @@ end
 require 'flickrie/api_methods'
 
 module Flickrie
+  autoload :Collection, 'flickrie/collection'
   extend ApiMethods
 end
-
-require 'flickrie/instance'

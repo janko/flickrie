@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photosets.getPhotos&photoset_id=72157629851991663&per_page=8&page=1&media=photos&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="31f7830020a71a54949ec3a39836cd47", oauth_signature="mBCiytvbj9Vp6WkvTzDo9oPSVrw%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338377668", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 11:34:28 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www6.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "407"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photoset\":{\"id\":\"72157629851991663\", \"primary\":\"6946979188\", \"owner\":\"67131352@N04\", \"ownername\":\"Janko Marohni\\u0107\", \"photo\":[{\"id\":\"6946979188\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"title\":\"IMG_0796\", \"isprimary\":\"1\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"6946978706\", \"secret\":\"b38270bbd6\", \"server\":\"7216\", \"farm\":8, \"title\":\"IMG_0795\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"7093049187\", \"secret\":\"90f36603c4\", \"server\":\"5112\", \"farm\":6, \"title\":\"IMG_0794\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"6946977782\", \"secret\":\"05dfb214aa\", \"server\":\"7114\", \"farm\":8, \"title\":\"IMG_0793\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"7093048115\", \"secret\":\"7d2981a52c\", \"server\":\"5194\", \"farm\":6, \"title\":\"IMG_0792\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"7093047507\", \"secret\":\"9ab0da63ee\", \"server\":\"7087\", \"farm\":8, \"title\":\"IMG_0791\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"6946975780\", \"secret\":\"e151ae3cc7\", \"server\":\"5234\", \"farm\":6, \"title\":\"IMG_0790\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"7093046043\", \"secret\":\"cb8c98e700\", \"server\":\"5465\", \"farm\":6, \"title\":\"IMG_0789\", \"isprimary\":\"0\", \"media\":\"photo\", \"media_status\":\"ready\"}], \"page\":\"1\", \"per_page\":\"8\", \"perpage\":\"8\", \"pages\":13, \"total\":\"97\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 11:34:28 GMT
+recorded_with: VCR 2.1.1

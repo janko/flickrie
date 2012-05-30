@@ -93,7 +93,7 @@ module Flickrie
     # Fetches photos and videos from the Flickr user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -104,7 +104,7 @@ module Flickrie
     # Fetches photos from the Flickr user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -115,7 +115,7 @@ module Flickrie
     # Fetches videos from the Flickr user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -128,7 +128,7 @@ module Flickrie
     # NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_media_from_user(nsid, params = {})
       response = client.public_media_from_user(nsid, params)
@@ -137,7 +137,7 @@ module Flickrie
     # Fetches public photos from the Flickr user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_photos_from_user(nsid, params = {})
       public_media_from_user(nsid, params).
@@ -146,7 +146,7 @@ module Flickrie
     # Fetches public videos from the Flickr user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_videos_from_user(nsid, params = {})
       public_media_from_user(nsid, params).
@@ -197,7 +197,7 @@ module Flickrie
     # Fetches photos and videos from contacts of the user who authenticated.
     #
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -208,7 +208,7 @@ module Flickrie
     # Fetches photos from contacts of the user who authenticated.
     #
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -218,7 +218,7 @@ module Flickrie
     # Fetches videos from contacts of the user who authenticated.
     #
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -231,6 +231,7 @@ module Flickrie
     #
     # @param nsid [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_media_from_user_contacts(nsid, params = {})
       response = client.public_media_from_user_contacts(nsid, params)
@@ -241,6 +242,7 @@ module Flickrie
     #
     # @param nsid [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_photos_from_user_contacts(nsid, params = {})
       public_media_from_user_contacts(nsid, params).
@@ -251,6 +253,7 @@ module Flickrie
     #
     # @param nsid [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_videos_from_user_contacts(nsid, params = {})
       public_media_from_user_contacts(nsid, params).
@@ -373,7 +376,7 @@ module Flickrie
     # Fetches photos and videos from the authenticated user
     # that are not in any set.
     #
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -384,7 +387,7 @@ module Flickrie
     # Fetches photos from the authenticated user
     # that are not in any set.
     #
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -394,7 +397,7 @@ module Flickrie
     # Fetches videos from the authenticated user
     # that are not in any set.
     #
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -446,7 +449,7 @@ module Flickrie
     # Fetches photos and videos matching a certain criteria.
     #
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_media(search_params = {})
       response = client.search_media(search_params)
@@ -455,7 +458,7 @@ module Flickrie
     # Fetches photos matching a certain criteria.
     #
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_photos(search_params = {})
       search_media(search_params.merge(:media => 'photos'))
@@ -463,7 +466,7 @@ module Flickrie
     # Fetches videos matching a certain criteria.
     #
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_videos(search_params = {})
       search_media(search_params.merge(:media => 'videos'))
@@ -512,7 +515,7 @@ module Flickrie
     # Fetches sets from a user with the given NSID.
     #
     # @param nsid [String]
-    # @return [Array<Flickrie::Set>]
+    # @return [Flickrie::Collection<Flickrie::Set>]
     # @api_method [flickr.photosets.getList](http://www.flickr.com/services/api/flickr.photosets.getList.html)
     def sets_from_user(nsid, params = {})
       response = client.sets_from_user(nsid, params)
@@ -523,7 +526,7 @@ module Flickrie
     #
     # @param set_id [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def media_from_set(set_id, params = {})
       response = client.media_from_set(set_id, params)
@@ -533,7 +536,7 @@ module Flickrie
     #
     # @param set_id [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def photos_from_set(set_id, params = {})
       media_from_set(set_id, params.merge(:media => 'photos'))
@@ -542,7 +545,7 @@ module Flickrie
     #
     # @param set_id [String]
     # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
-    # @return [Array<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def videos_from_set(set_id, params = {})
       media_from_set(set_id, params.merge(:media => 'videos'))
