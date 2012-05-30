@@ -250,6 +250,7 @@ basis of this gem.
 "flickr.people.getInfo"                 -> Flickrie.get_user_info
 "flickr.people.getPhotos"               -> Flickrie.photos_from_user
 "flickr.people.getPublicPhotos"         -> Flickrie.public_photos_from_user
+"flickr.people.getUploadStatus"         -> Flickrie.get_upload_status
 
 # photos
 "flickr.photos.addTags"                 -> Flickrie.add_photo_tags
@@ -261,6 +262,7 @@ basis of this gem.
 "flickr.photos.getExif"                 -> Flickrie.get_photo_exif
 "flickr.photos.getFavorites"            -> Flickrie.get_photo_favorites
 "flickr.photos.getInfo"                 -> Flickrie.get_photo_info
+"flickr.photos.getNotInSet"             -> Flickrie.photos_not_in_set
 "flickr.photos.getSizes"                -> Flickrie.get_photo_sizes
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
 "flickr.photos.search"                  -> Flickrie.search_photos
