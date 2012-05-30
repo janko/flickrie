@@ -7,7 +7,7 @@ module Flickrie
   # (you can evem use it with [will_paginate](https://github.com/mislav/will_paginate),
   # see {Flickrie.pagination}). It also has the method {#find} which finds by ID
   # (just like ActiveRecord).
-  class Collection < (defined?(WillPaginate) ? WillPaginate::Collection : Array)
+  class Collection < (Flickrie.pagination == :will_paginate ? WillPaginate::Collection : Array)
     attr_reader :current_page, :per_page, :total_entries, :total_pages
 
     def initialize(params)
