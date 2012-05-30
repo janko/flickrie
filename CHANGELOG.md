@@ -15,8 +15,7 @@
   See [`Flickrie.pagination`](http://rubydoc.info/gems/flickrie/Flickrie#pagination-class_method)
   for more details.
 
-- Covered `flickr.photos.getNoInSet` and
-  `flickr.people.getUploadStatus`.
+- Covered `flickr.photos.getNotInSet` and `flickr.people.getUploadStatus`.
 
 ## Version 1.2.0
 
