@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'flickrie'
 require 'vcr'
-begin require 'debugger'; rescue LoadError; end
 require 'custom_matchers'
 
 RSpec.configure do |c|
@@ -11,15 +10,7 @@ RSpec.configure do |c|
     Flickrie.access_token = ENV['FLICKR_ACCESS_TOKEN']
     Flickrie.access_secret = ENV['FLICKR_ACCESS_SECRET']
   end
-  c.treat_symbols_as_metadata_keys_with_true_values = true
-  c.around(:each, :vcr) do |example|
-    # If you want to tag an example with :vcr, you have to wrap it in a context block
-    klass = example.metadata[:example_group][:example_group][:description_args].first
-    folder = klass.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join('_')
-    subfolder = example.metadata[:example_group][:description_args].first
-    cassette_name = example.metadata[:description_args].first.match(/^should /).post_match
-    VCR.use_cassette("#{folder}/#{subfolder}/#{cassette_name}") { example.call }
-  end
+  c.treat_symbols_as_metadata_keys_with_true_values = true # For VCR
   c.fail_fast = true
 end
 
@@ -27,12 +18,16 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :faraday
   c.default_cassette_options = {
-    :record => :new_episodes,
-    :serialize_with => :syck, # So it doesn't output in binary form
-    :match_requests_on => [:method, VCR.request_matchers.uri_without_param(:api_key)] # Don't require the API key
+    :record => :new_episodes, # Records new HTTP requests if any.
+    :serialize_with => :syck, # Don't output in binary form (only in Ruby 1.9.3-p125).
+    :match_requests_on => [
+      :method,
+      VCR.request_matchers.uri_without_param(:api_key) # Don't require the API key.
+    ]
   }
-  c.filter_sensitive_data('API_KEY') { ENV['FLICKR_API_KEY'] }
+  c.filter_sensitive_data('API_KEY')      { ENV['FLICKR_API_KEY'] }
   c.filter_sensitive_data('ACCESS_TOKEN') { ENV['FLICKR_ACCESS_TOKEN'] }
+  c.configure_rspec_metadata! # Enables tagging RSpec examples with `:vcr`.
 end
 
 PHOTO_PATH = File.expand_path('../files/photo.jpg', __FILE__).freeze
@@ -43,29 +38,14 @@ SET_ID = '72157629851991663'.freeze
 USER_NSID = '67131352@N04'.freeze
 USER_USERNAME = 'Janko Marohnić'.freeze
 USER_EMAIL = 'janko.marohnic@gmail.com'.freeze
-EXTRAS = %w[license date_upload date_taken owner_name
-  icon_server original_format last_update geo tags machine_tags
-  o_dims views media path_alias url_sq url_q url_t url_s url_n
-  url_m url_z url_c url_l url_h, url_k url_o].join(',').freeze
-# for copying:
-#   license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_o
+EXTRAS = 'license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo,tags,machine_tags,o_dims,views,media,path_alias,url_sq,url_q,url_t,url_s,url_n,url_m,url_z,url_c,url_l,url_h,url_k,url_o'.freeze
 
+# The `#initialize` methods are private, so this creates a public version.
 klasses = [Flickrie::Set, Flickrie::Photo, Flickrie::Video, Flickrie::Location, Flickrie::User]
 klasses.each do |klass|
   klass.instance_eval do
     def public_new(*args)
       new(*args)
     end
-  end
-end
-
-class Hash
-  def except!(*keys)
-    keys.each { |key| delete(key) }
-    self
-  end
-
-  def except(*keys)
-    self.dup.except!(*keys)
   end
 end

@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Flickrie::Set do
+describe :Set do
   before(:all) do
     @attributes = {
       :id => SET_ID,
@@ -42,19 +42,23 @@ describe Flickrie::Set do
     set.can_comment?.should be_a_boolean
   end
 
-  context "get info" do
-    it "should have all attributes correctly set", :vcr do
+  context "get info", :vcr do
+    let(:sets) {
       [
         Flickrie.get_set_info(SET_ID),
         Flickrie::Set.public_new('id' => SET_ID).get_info
-      ].
-        each { |set| test_common_attributes(set) }
+      ]
+    }
+
+    it "has correct attributes" do
+      sets.each { |set| test_common_attributes(set) }
     end
   end
 
-  context "from user" do
-    it "should have all attributes correctly set", :vcr do
-      set = Flickrie.sets_from_user(USER_NSID).find { |set| set.id == SET_ID }
+  context "from user", :vcr do
+    let(:set) { Flickrie.sets_from_user(USER_NSID).find { |set| set.id == SET_ID } }
+
+    it "has correct attributes" do
       test_common_attributes(set)
       set.needs_interstitial?.should be_false
       set.visibility_can_see_set?.should be_true
@@ -62,11 +66,12 @@ describe Flickrie::Set do
   end
 
   context "blank set" do
-    it "should have all attributes equal to nil" do
+    let(:set) { Flickrie::Set.public_new }
+
+    it "has all attributes equal to nil" do
       attributes = Flickrie::Set.instance_methods -
         Object.instance_methods -
         [:photos, :videos, :media, :[], :get_info]
-      set = Flickrie::Set.public_new
 
       attributes.each do |attribute|
         set.send(attribute).should be_nil

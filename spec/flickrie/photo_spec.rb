@@ -4,7 +4,7 @@ SIZES = ['Square 75', 'Thumbnail', 'Square 150', 'Small 240', 'Small 320',
   'Medium 500', 'Medium 640', 'Medium 800', 'Large 1024', 'Large 1600',
   'Large 2048']
 
-describe Flickrie::Photo do
+describe :Photo do
   def non_bang_sizes(photo)
     [
       photo.square(75), photo.square(150), photo.thumbnail,
@@ -53,42 +53,49 @@ describe Flickrie::Photo do
     end
   end
 
-  context "get sizes" do
-    it "should have attributes correctly set", :vcr do
+  context "get sizes", :vcr do
+    let(:photos) {
       [
         Flickrie.get_photo_sizes(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_sizes
-      ].
-        each do |photo|
-          [:can_download?, :can_blog?, :can_print?].each do |attribute|
-            photo.send(attribute).should be_a_boolean
-          end
+      ]
+    }
 
-          test_sizes(photo)
-          photo.available_sizes.should eq(SIZES)
+    it "has correct attributes" do
+      photos.each do |photo|
+        [:can_download?, :can_blog?, :can_print?].each do |attribute|
+          photo.send(attribute).should be_a_boolean
         end
+
+        test_sizes(photo)
+        photo.available_sizes.should eq(SIZES)
+      end
     end
   end
 
-  context "search" do
-    it "should have all sizes available", :vcr do
-      photo = Flickrie.search_photos(:user_id => USER_NSID, :extras => EXTRAS).
+  context "search", :vcr do
+    let(:photo) {
+      Flickrie.search_photos(:user_id => USER_NSID, :extras => EXTRAS).
         find { |photo| photo.id == PHOTO_ID }
+    }
+
+    it "has all sizes available" do
       photo.available_sizes.should eq(SIZES)
     end
   end
 
-  context "get info" do
-    it "should have all attributes correctly set", :vcr do
-      photo = Flickrie.get_photo_info(PHOTO_ID)
+  context "get info", :vcr do
+    let(:photo) { Flickrie.get_photo_info(PHOTO_ID) }
+
+    it "has correct attributes" do
       photo.rotation.should eq(90)
     end
   end
 
   context "blank photo" do
-    it "should have all attributes equal to nil" do
-      photo = Flickrie::Photo.public_new
+    let(:photo) { Flickrie::Photo.public_new }
 
+    it "should have all attributes equal to nil" do
       [:width, :height, :source_url, :rotation, :size].each do |attr|
         photo.send(attr).should be_nil
       end

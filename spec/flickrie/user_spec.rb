@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Flickrie::User do
+describe :User do
   before(:all) do
     @attributes = {
       :id => USER_NSID,
@@ -20,45 +20,52 @@ describe Flickrie::User do
     }
   end
 
-  context "get info" do
-    it "should have all attributes correctly set", :vcr do
+  context "get info", :vcr do
+    let(:users) {
       [
         Flickrie.get_user_info(USER_NSID),
         Flickrie::User.public_new('nsid' => USER_NSID).get_info
-      ].
-        each do |user|
-          @attributes.keys.each do |attribute|
-            user.send(attribute).should correspond_to(@attributes[attribute])
-          end
+      ]
+    }
 
-          [:profile_url, :mobile_url, :photos_url, :buddy_icon_url].each do |attribute|
-            user.send(attribute).should_not be_empty
-          end
-
-          [:first_taken, :first_uploaded].each do |time_attribute|
-            user.send(time_attribute).should be_an_instance_of(Time)
-          end
+    it "has correct attributes" do
+      users.each do |user|
+        @attributes.keys.each do |attribute|
+          user.send(attribute).should correspond_to(@attributes[attribute])
         end
+
+        [:profile_url, :mobile_url, :photos_url, :buddy_icon_url].each do |attribute|
+          user.send(attribute).should_not be_empty
+        end
+
+        [:first_taken, :first_uploaded].each do |time_attribute|
+          user.send(time_attribute).should be_an_instance_of(Time)
+        end
+      end
     end
   end
 
-  context "find by username or email" do
-    it "should have all attributes correctly set", :vcr do
+  context "find by username or email", :vcr do
+    let(:users) {
       [
         Flickrie.find_user_by_username(USER_USERNAME),
         Flickrie.find_user_by_email(USER_EMAIL)
-      ].
-        each do |user|
-          user.id.should == USER_NSID
-          user.nsid.should == USER_NSID
-          user.username.should == USER_USERNAME
-        end
+      ]
+    }
+
+    it "has correct attributes" do
+      users.each do |user|
+        user.id.should == USER_NSID
+        user.nsid.should == USER_NSID
+        user.username.should == USER_USERNAME
+      end
     end
   end
 
-  context "getting media" do
-    it "should get the right kind of media", :vcr do
-      user = Flickrie::User.public_new('nsid' => USER_NSID)
+  context "getting media", :vcr do
+    let(:user) { Flickrie::User.public_new('nsid' => USER_NSID) }
+
+    it "gets the right kind of media" do
       user.public_photos.each { |object| object.should be_a(Flickrie::Photo) }
       user.public_videos.each { |object| object.should be_a(Flickrie::Video) }
       user.public_media.each  { |object| object.should be_a(Flickrie::Media) }
@@ -68,14 +75,15 @@ describe Flickrie::User do
     end
   end
 
-  context "get upload status" do
-    it "should have the attributes", :vcr do
-      user = Flickrie.get_upload_status
+  context "get upload status", :vcr do
+    let(:user) { Flickrie.get_upload_status }
+
+    it "has correct attributes" do
       attributes = {
         :bandwidth => {
           :maximum => 300.0,
-          :used => 23.9833984375,
-          :remaining => 276.0166015625,
+          :used => 24.294921875,
+          :remaining => 275.705078125,
           :unlimited? => false
         },
         :maximum_photo_size => 30,
@@ -93,12 +101,13 @@ describe Flickrie::User do
   end
 
   context "blank user" do
-    it "should have all attributes equal to nil" do
+    let(:user) { Flickrie::User.public_new }
+
+    it "has all attributes equal to nil" do
       attributes = Flickrie::User.instance_methods -
         Object.instance_methods -
         [:public_photos, :public_videos, :public_media,
          :photos, :videos, :media, :[], :get_info]
-      user = Flickrie::User.public_new
 
       attributes.each do |attribute|
         user.send(attribute).should be_nil

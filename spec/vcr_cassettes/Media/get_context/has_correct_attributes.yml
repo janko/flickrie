@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getContext&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="17d3b803c730f2c2bdd014c0db92a953", oauth_signature="crNi6Q6r6ipMuLnoD2e7%2FVZhUCM%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338373588", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:26:29 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www126.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "285"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"count\":{\"_content\":98}, \"prevphoto\":{\"id\":\"6946978706\", \"secret\":\"b38270bbd6\", \"server\":\"7216\", \"farm\":8, \"title\":\"IMG_0795\", \"url\":\"\\/photos\\/67131352@N04\\/6946978706\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7216\\/6946978706_b38270bbd6_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"nextphoto\":{\"id\":\"6946979704\", \"secret\":\"74513ff732\", \"server\":\"7234\", \"farm\":8, \"title\":\"IMG_0797\", \"url\":\"\\/photos\\/67131352@N04\\/6946979704\\/in\\/photostream\\/\", \"thumb\":\"http:\\/\\/farm8.staticflickr.com\\/7234\\/6946979704_74513ff732_s.jpg\", \"media\":\"photo\", \"license\":\"0\", \"is_faved\":0}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:26:29 GMT
+recorded_with: VCR 2.1.1

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Flickrie::License do
+describe :License do
   context "get" do
-    it "should have all attributes correctly set", :vcr do
-      licenses = Flickrie.get_licenses
+    let(:licenses) { Flickrie.get_licenses }
 
+    it "has correct attributes", :vcr do
       licenses.each do |license|
         ('0'..'8').should cover(license.id)
         license.name.should be_an_instance_of(String)

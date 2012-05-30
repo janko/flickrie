@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getInfo&photo_id=7093038981
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="2bf528e0962ba0cdaeef732394d90a6b", oauth_signature="fwZEYW98JvsFAnrk7w7eN5baVTU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338377216", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 11:26:57 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www116.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "859"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photo\":{\"id\":\"7093038981\", \"secret\":\"9a616b9f6e\", \"server\":\"5457\", \"farm\":6, \"dateuploaded\":\"1334832295\", \"isfavorite\":0, \"license\":\"0\", \"safety_level\":\"0\", \"rotation\":0, \"owner\":{\"nsid\":\"67131352@N04\", \"username\":\"Janko Marohni\\u0107\", \"realname\":\"Janko Marohni\\u0107\", \"location\":\"Zagreb, Croatia\", \"iconserver\":\"5464\", \"iconfarm\":6}, \"title\":{\"_content\":\"5 meter backflip\"}, \"description\":{\"_content\":\"Description\"}, \"visibility\":{\"ispublic\":1, \"isfriend\":0, \"isfamily\":0}, \"dates\":{\"posted\":\"1334832295\", \"taken\":\"2012-04-19 03:44:55\", \"takengranularity\":\"0\", \"lastupdate\":\"1338374855\"}, \"permissions\":{\"permcomment\":3, \"permaddmeta\":2}, \"views\":\"1\", \"editability\":{\"cancomment\":1, \"canaddmeta\":1}, \"publiceditability\":{\"cancomment\":1, \"canaddmeta\":0}, \"usage\":{\"candownload\":1, \"canblog\":1, \"canprint\":1, \"canshare\":0}, \"comments\":{\"_content\":\"1\"}, \"notes\":{\"note\":[]}, \"people\":{\"haspeople\":0}, \"tags\":{\"tag\":[{\"id\":\"67099213-7093038981-5987\", \"author\":\"67131352@N04\", \"raw\":\"Tag\", \"_content\":\"tag\", \"machine_tag\":0}]}, \"location\":{\"latitude\":45.809537, \"longitude\":15.970344, \"accuracy\":\"11\", \"context\":\"0\", \"locality\":{\"_content\":\"Zagreb\", \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"county\":{\"_content\":\"Zagreb\", \"place_id\":\"306dHrhQV7o6jm.ZUQ\", \"woeid\":\"15022257\"}, \"region\":{\"_content\":\"Grad Zagreb\", \"place_id\":\"Js1DU.pTUrpBCIKhVw\", \"woeid\":\"20070170\"}, \"country\":{\"_content\":\"Croatia\", \"place_id\":\"FunRCI5TUb6a6soTyw\", \"woeid\":\"23424843\"}, \"place_id\":\"00j4IylZV7scWik\", \"woeid\":\"851128\"}, \"geoperms\":{\"ispublic\":1, \"iscontact\":0, \"isfriend\":0, \"isfamily\":0}, \"urls\":{\"url\":[{\"type\":\"photopage\", \"_content\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/7093038981\\/\"}]}, \"media\":\"video\", \"video\":{\"ready\":1, \"failed\":0, \"pending\":0, \"duration\":\"16\", \"width\":\"352\", \"height\":\"288\"}}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 11:26:58 GMT
+recorded_with: VCR 2.1.1

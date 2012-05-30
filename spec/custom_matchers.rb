@@ -20,10 +20,6 @@ RSpec::Matchers.define :correspond_to do |hash_or_value|
       end
     end
   end
-
-  failure_message_for_should do |actual|
-    "expected: #{expected.first}\n got: #{actual}\n"
-  end
 end
 
 RSpec::Matchers.define :be_a_boolean do

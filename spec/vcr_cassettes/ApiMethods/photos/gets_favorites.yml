@@ -1,0 +1,73 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getFavorites&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="58b1deebd2910b3a4de650bbb1000004", oauth_signature="Y9CAdUhjlcPTnlwhF6FHH%2F7OtWE%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338374976", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:49:36 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www136.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "134"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photo\":{\"person\":[], \"id\":\"6946979188\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"page\":1, \"pages\":0, \"perpage\":10, \"total\":\"0\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:49:36 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getFavorites&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c9a5244daad13cd1825f912ad2402a37", oauth_signature="QQ74ojMykMp4wH%2B%2BbAw2fIU7tNw%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338374976", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:49:36 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www190.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "134"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photo\":{\"person\":[], \"id\":\"6946979188\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"page\":1, \"pages\":0, \"perpage\":10, \"total\":\"0\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:49:36 GMT
+recorded_with: VCR 2.1.1

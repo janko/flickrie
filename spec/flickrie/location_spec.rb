@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe Flickrie::Location do
+describe :Location do
   context "blank" do
-    it "should have all attributes equal to nil" do
-      location = Flickrie::Location.public_new
+    let(:location) { Flickrie::Location.public_new }
+
+    it "has all attributes equal to nil" do
       attributes = location.methods - Object.instance_methods - [:[]]
       attributes.each do |attribute|
         location.send(attribute).should be_nil
@@ -12,7 +13,7 @@ describe Flickrie::Location do
   end
 
   context "accessing areas" do
-    it "should have #to_s defined on them" do
+    it "has #to_s defined on them" do
       location = Flickrie::Location.public_new \
         'neighbourhood' => {
           '_content' => 'A gangsta ghetto, yo'

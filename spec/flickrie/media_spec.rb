@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Flickrie::Media do
+describe :Media do
   before(:all) do
     @attributes = {
       :id => PHOTO_ID,
@@ -100,57 +100,59 @@ describe Flickrie::Media do
     }
   end
 
-  context "get info" do
-    it "should have all attributes correctly set", :vcr do
+  context "get info", :vcr do
+    let(:media) {
       [
         Flickrie.get_media_info(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_info,
         Flickrie::Video.public_new('id' => PHOTO_ID).get_info
-      ].
-        each do |media|
-          [
-            :id, :secret, :server, :farm, :title, :description,
-            :comments_count, :location, :geo_permissions, :tags,
-            :machine_tags, :license, :taken_at_granularity, :owner,
-            :safety_level, :safe?, :moderate?, :restricted?, :visibility,
-            :favorite?, :has_people?, :notes
-          ].
-            each do |attribute|
-              media.send(attribute).should correspond_to(@attributes[attribute])
-            end
+      ]
+    }
 
-          # can change, so just checking the type
-          [
-            :can_comment?, :can_add_meta?, :can_everyone_comment?,
-            :can_everyone_add_meta?, :can_download?, :can_blog?,
-            :can_print?, :can_share?
-          ].
-            each { |attribute| media.send(attribute).should be_a_boolean }
-
-          media.views_count.should be_a(Fixnum)
-
-          # time
-          [:posted_at, :uploaded_at, :updated_at, :taken_at].each do |time_attribute|
-            media.send(time_attribute).should be_an_instance_of(Time)
+    it "has correct attributes" do
+      media.each do |media|
+        [
+          :id, :secret, :server, :farm, :title, :description,
+          :comments_count, :location, :geo_permissions, :tags,
+          :machine_tags, :license, :taken_at_granularity, :owner,
+          :safety_level, :safe?, :moderate?, :restricted?, :visibility,
+          :favorite?, :has_people?, :notes
+        ].
+          each do |attribute|
+            media.send(attribute).should correspond_to(@attributes[attribute])
           end
 
-          # other
-          media.url.should_not be_empty
-          media['id'].should eq(PHOTO_ID)
-          media.hash['id'].should eq(PHOTO_ID)
+        # can change, so just checking the type
+        [
+          :can_comment?, :can_add_meta?, :can_everyone_comment?,
+          :can_everyone_add_meta?, :can_download?, :can_blog?,
+          :can_print?, :can_share?
+        ].
+          each { |attribute| media.send(attribute).should be_a_boolean }
+
+        media.views_count.should be_a(Fixnum)
+
+        # time
+        [:posted_at, :uploaded_at, :updated_at, :taken_at].each do |time_attribute|
+          media.send(time_attribute).should be_an_instance_of(Time)
         end
+
+        # other
+        media.url.should_not be_empty
+        media['id'].should eq(PHOTO_ID)
+        media.hash['id'].should eq(PHOTO_ID)
+      end
     end
   end
 
-  shared_context "common" do
-    def test_common_attributes(media)
-      [
-        :id, :secret, :server, :farm, :title, :media_status,
-        :geo_permissions, :machine_tags, :license, :taken_at_granularity
-      ].
-        each do |attribute|
-          media.send(attribute).should correspond_to(@attributes[attribute])
-        end
+  context "extras", :vcr do
+    let(:media) { Flickrie.media_from_set(SET_ID, :extras => EXTRAS).first }
+
+    it "has correct attributes" do
+      complete = [:media_status, :geo_permissions, :machine_tags, :license, :taken_at_granularity]
+      complete.each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
 
       # the incomplete ones
       media.location.should correspond_to(@attributes[:location].except(:locality, :county, :region, :country))
@@ -163,87 +165,92 @@ describe Flickrie::Media do
       end
 
       # other
-      media.url.should_not be_empty
       media.views_count.should be_a(Fixnum)
     end
   end
 
-  context "from set" do
-    include_context "common"
+  context "from set", :vcr do
+    let(:media) { Flickrie.media_from_set(SET_ID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
 
-    it "should have all attributes correctly set", :vcr do
-      media = Flickrie.media_from_set(SET_ID, :extras => EXTRAS).
-        find { |media| media.id == PHOTO_ID }
-      test_common_attributes(media)
+    it "has correct attributes" do
+      [:id, :secret, :server, :farm, :title].each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
       media.primary?.should be_true
+      media.url.should_not be_empty
+      media.owner.nsid.should == USER_NSID
     end
   end
 
-  context "from user" do
-    include_context "common"
+  context "from user", :vcr do
+    let(:media) { Flickrie.media_from_user(USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
 
-    it "should have all attributes correctly set", :vcr do
-      media = Flickrie.media_from_user(USER_NSID, :extras => EXTRAS).
-        find { |media| media.id == PHOTO_ID }
-      test_common_attributes(media)
-      media.visibility.should correspond_to(@attributes[:visibility])
+    it "has correct attributes" do
+      [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
+      media.owner.nsid.should == USER_NSID
     end
   end
 
-  context "public from user" do
-    include_context "common"
+  context "public from user", :vcr do
+    let(:media) { Flickrie.public_media_from_user(USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
 
-    it "should have all attributes correctly set", :vcr do
-      media = Flickrie.public_media_from_user(USER_NSID, :extras => EXTRAS).
-        find { |media| media.id == PHOTO_ID }
-      test_common_attributes(media)
-      media.visibility.should correspond_to(@attributes[:visibility])
+    it "has correct attributes" do
+      [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
+      media.owner.nsid.should == USER_NSID
     end
   end
 
-  context "search" do
-    include_context "common"
+  context "search", :vcr do
+    let(:media) { Flickrie.search_media(:user_id => USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
 
-    it "should have all attributes correctly set", :vcr do
-      media = Flickrie.search_media(:user_id => USER_NSID, :extras => EXTRAS).
-        find { |media| media.id == PHOTO_ID }
-      test_common_attributes(media)
-      media.visibility.should correspond_to(@attributes[:visibility])
+    it "has correct attributes" do
+      [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
+        media.send(attribute).should correspond_to(@attributes[attribute])
+      end
+      media.owner.nsid.should == USER_NSID
     end
   end
 
-  context "from contacts" do
-    it "should have all attributes correctly set", :vcr do
+  context "from contacts", :vcr do
+    let(:media) {
       params = {:include_self => 1, :single_photo => 1}
       [
         Flickrie.media_from_contacts(params).first,
         Flickrie.public_media_from_user_contacts(USER_NSID, params).first
-      ].
-        each do |media|
-          attributes = {
-            :id => '7093101501',
-            :secret => '9337f28800',
-            :server => '7090',
-            :farm => 8,
-            :owner => {
-              :nsid => USER_NSID,
-              :username => USER_USERNAME
-            },
-            :title => 'IMG_0917',
-            :visibility => {:public? => true},
-            :media_status => 'ready'
-          }
+      ]
+    }
 
-          attributes.keys.each do |attribute|
-            media.send(attribute).should correspond_to(attributes[attribute])
-          end
+    it "has correct attributes" do
+      media.each do |media|
+        attributes = {
+          :id => '7093101501',
+          :secret => '9337f28800',
+          :server => '7090',
+          :farm => 8,
+          :owner => {
+            :nsid => USER_NSID,
+            :username => USER_USERNAME
+          },
+          :title => 'IMG_0917',
+          :visibility => {:public? => true},
+          :media_status => 'ready'
+        }
+
+        attributes.keys.each do |attribute|
+          media.send(attribute).should correspond_to(attributes[attribute])
         end
+      end
     end
   end
 
-  context "get context" do
-    it "should have all attributes correctly set", :vcr do
-      context = Flickrie.get_media_context(PHOTO_ID)
+  context "get context", :vcr do
+    let(:context) { Flickrie.get_media_context(PHOTO_ID) }
+
+    it "has correct attributes" do
       context.count.should eq(98)
 
       attributes = {
@@ -262,26 +269,28 @@ describe Flickrie::Media do
     end
   end
 
-  context "get exif" do
-    it "should get exif correctly", :vcr do
+  context "get exif", :vcr do
+    let(:media) {
       [
         Flickrie.get_photo_exif(PHOTO_ID),
         Flickrie::Photo.public_new('id' => PHOTO_ID).get_exif
-      ].
-        each do |photo|
-          photo.camera.should eq('Canon PowerShot G12')
-          photo.exif.get('X-Resolution').should eq('180 dpi')
-          photo.exif.get('X-Resolution', :data => 'clean').should eq('180 dpi')
-          photo.exif.get('X-Resolution', :data => 'raw').should eq('180')
-        end
+      ]
+    }
+
+    it "has correct attributes" do
+      media.each do |media|
+        media.camera.should eq('Canon PowerShot G12')
+        media.exif.get('X-Resolution').should eq('180 dpi')
+        media.exif.get('X-Resolution', :data => 'clean').should eq('180 dpi')
+        media.exif.get('X-Resolution', :data => 'raw').should eq('180')
+      end
     end
   end
 
-  context "get not in set" do
-    include_examples "extras"
+  context "get not in set", :vcr do
     let(:media) { Flickrie.media_not_in_set(:extras => EXTRAS).first }
 
-    test "other attributes", :vcr do
+    it "has correct attributes", :vcr do
       [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
         media.send(attribute).should correspond_to(@attributes[attribute])
       end
@@ -300,12 +309,13 @@ describe Flickrie::Media do
   end
 
   context "blank media" do
-    it "should have all attributes equal to nil" do
+    let(:media) { Flickrie::Photo.public_new }
+
+    it "has attributes equal to nil" do
       attributes = Flickrie::Media.instance_methods -
         Object.instance_methods -
         [:[], :get_info, :get_exif, :get_favorites]
 
-      media = Flickrie::Photo.public_new
       attributes.each do |attribute|
         media.send(attribute).should be_nil
       end

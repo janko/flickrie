@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Flickrie::Collection do
+describe :Collection do
   let(:photos) { Flickrie.photos_from_set(SET_ID, :per_page => 8, :page => 1) }
   let(:photo_id) { '6946978706' }
 

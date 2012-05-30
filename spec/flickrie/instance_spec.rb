@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Flickrie::Instance do
-  context "client is already initialized" do
-    it "should be able to call API methods", :vcr do
+describe :Instance do
+  context "client is already initialized", :vcr do
+    it "is able to call API methods" do
       # this is to see if the client and upload_client were reset
       Flickrie.get_photo_info(PHOTO_ID)
       id = Flickrie.upload(PHOTO_PATH)

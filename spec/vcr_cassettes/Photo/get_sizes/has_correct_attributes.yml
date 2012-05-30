@@ -1,0 +1,73 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getSizes&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="86d1c22fdd6f40f11c6bf2e97c53efd6", oauth_signature="4avxzPTMp%2FNKrKU8BMrmFPD%2BAZg%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338376610", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 11:16:51 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www43.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "440"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"sizes\":{\"canblog\":1, \"canprint\":1, \"candownload\":1, \"size\":[{\"label\":\"Square\", \"width\":75, \"height\":75, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_s.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/sq\\/\", \"media\":\"photo\"}, {\"label\":\"Large Square\", \"width\":\"150\", \"height\":\"150\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_q.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/q\\/\", \"media\":\"photo\"}, {\"label\":\"Thumbnail\", \"width\":\"75\", \"height\":\"100\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_t.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/t\\/\", \"media\":\"photo\"}, {\"label\":\"Small\", \"width\":\"180\", \"height\":\"240\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_m.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/s\\/\", \"media\":\"photo\"}, {\"label\":\"Small 320\", \"width\":\"320\", \"height\":240, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_n.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/n\\/\", \"media\":\"photo\"}, {\"label\":\"Medium\", \"width\":\"375\", \"height\":\"500\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/m\\/\", \"media\":\"photo\"}, {\"label\":\"Medium 640\", \"width\":\"480\", \"height\":\"640\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_z.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/z\\/\", \"media\":\"photo\"}, {\"label\":\"Medium 800\", \"width\":\"800\", \"height\":600, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_c.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/c\\/\", \"media\":\"photo\"}, {\"label\":\"Large\", \"width\":\"768\", \"height\":\"1024\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_b.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/l\\/\", \"media\":\"photo\"}, {\"label\":\"Large 1600\", \"width\":1200, \"height\":\"1600\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_3219ddaa99_h.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/h\\/\", \"media\":\"photo\"}, {\"label\":\"Large 2048\", \"width\":1536, \"height\":\"2048\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_b7dd05a1d3_k.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/k\\/\", \"media\":\"photo\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 11:16:51 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getSizes&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5fd696c46f32a57fc6913091d5d9cb1e", oauth_signature="aSIViYfNR99tyrnCKBze5k6sR0U%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338376611", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 11:16:51 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www127.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "440"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"sizes\":{\"canblog\":1, \"canprint\":1, \"candownload\":1, \"size\":[{\"label\":\"Square\", \"width\":75, \"height\":75, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_s.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/sq\\/\", \"media\":\"photo\"}, {\"label\":\"Large Square\", \"width\":\"150\", \"height\":\"150\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_q.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/q\\/\", \"media\":\"photo\"}, {\"label\":\"Thumbnail\", \"width\":\"75\", \"height\":\"100\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_t.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/t\\/\", \"media\":\"photo\"}, {\"label\":\"Small\", \"width\":\"180\", \"height\":\"240\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_m.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/s\\/\", \"media\":\"photo\"}, {\"label\":\"Small 320\", \"width\":\"320\", \"height\":240, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_n.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/n\\/\", \"media\":\"photo\"}, {\"label\":\"Medium\", \"width\":\"375\", \"height\":\"500\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/m\\/\", \"media\":\"photo\"}, {\"label\":\"Medium 640\", \"width\":\"480\", \"height\":\"640\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_z.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/z\\/\", \"media\":\"photo\"}, {\"label\":\"Medium 800\", \"width\":\"800\", \"height\":600, \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_c.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/c\\/\", \"media\":\"photo\"}, {\"label\":\"Large\", \"width\":\"768\", \"height\":\"1024\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_25bb44852b_b.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/l\\/\", \"media\":\"photo\"}, {\"label\":\"Large 1600\", \"width\":1200, \"height\":\"1600\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_3219ddaa99_h.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/h\\/\", \"media\":\"photo\"}, {\"label\":\"Large 2048\", \"width\":1536, \"height\":\"2048\", \"source\":\"http:\\/\\/farm8.staticflickr.com\\/7049\\/6946979188_b7dd05a1d3_k.jpg\", \"url\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/sizes\\/k\\/\", \"media\":\"photo\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 11:16:51 GMT
+recorded_with: VCR 2.1.1

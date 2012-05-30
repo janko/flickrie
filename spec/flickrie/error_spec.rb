@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Flickrie::Error do
-  context "a request was made and failed" do
-    it "should be raised", :vcr do
+describe :Error do
+  context "a request was made and failed", :vcr do
+    it "is raised" do
       Flickrie.api_key = nil
-      expect { Flickrie.get_licenses }.to raise_error(described_class)
-      expect { Flickrie.upload(PHOTO_PATH) }.to raise_error(described_class)
+      expect { Flickrie.get_licenses }.to raise_error(Flickrie::Error)
+      expect { Flickrie.upload(PHOTO_PATH) }.to raise_error(Flickrie::Error)
     end
 
-    it "should have #code attribute present", :vcr do
+    it "has #code attribute present" do
       Flickrie.api_key = nil
       begin
         Flickrie.get_licenses

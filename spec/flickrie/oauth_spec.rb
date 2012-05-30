@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Flickrie::OAuth do
-  context "incorrect credentials" do
-    it "should raise exceptions", :vcr do
+describe :OAuth do
+  context "incorrect credentials", :vcr do
+    it "raises exceptions" do
       Flickrie.api_key = "foo"
       Flickrie.shared_secret = "foo"
 

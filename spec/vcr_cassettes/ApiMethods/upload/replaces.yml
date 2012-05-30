@@ -1,0 +1,126 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/upload
+    body: 
+      encoding: ASCII-8BIT
+      string: "#<Faraday::CompositeReadIO:0x007fb7ec3e8090>"
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="0e144582f6870a45fa0288c4a6804195", oauth_signature="oAfgPiFzOpTmS0tEEErF2bV3hC4%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338374838", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      Content-Type: 
+      - multipart/form-data;boundary=-----------RubyMultipartPost
+      Content-Length: 
+      - "47086"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:47:18 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      connection: 
+      - close
+      content-length: 
+      - "93"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www204.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-type: 
+      - text/xml; charset=utf-8
+    body: 
+      encoding: US-ASCII
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <rsp stat="ok">
+        <photoid>7301023052</photoid>
+        </rsp>
+
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:47:23 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/replace
+    body: 
+      encoding: ASCII-8BIT
+      string: "#<Faraday::CompositeReadIO:0x007fb7ec4bd010>"
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c9159669c244732471db4876f83798a4", oauth_signature="HFIsfOtqXXtI9SNq46b63XcbiAw%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338374843", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+      Content-Type: 
+      - multipart/form-data;boundary=-----------RubyMultipartPost
+      Content-Length: 
+      - "47181"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:47:23 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      connection: 
+      - close
+      content-length: 
+      - "107"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www25.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-type: 
+      - text/xml; charset=utf-8
+    body: 
+      encoding: US-ASCII
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <rsp stat="fail">
+        	<err code="1" msg="Not a pro account" />
+        </rsp>
+
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:47:24 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.delete&photo_id=7301023052
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="d3557e05146d7b270ba602c51e13dc86", oauth_signature="%2B6o8Z1z1s3F3xrQ5FKqYtE29sCo%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338374844", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Wed, 30 May 2012 10:47:24 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www145.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Wed, 30 May 2012 10:47:25 GMT
+recorded_with: VCR 2.1.1
