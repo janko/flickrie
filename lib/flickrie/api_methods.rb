@@ -1,17 +1,3 @@
-require 'flickrie/middleware'
-require 'flickrie/client'
-require 'flickrie/upload_client'
-require 'flickrie/oauth'
-require 'flickrie/license'
-require 'flickrie/user'
-require 'flickrie/media'
-require 'flickrie/photo'
-require 'flickrie/video'
-require 'flickrie/set'
-require 'flickrie/media_count'
-require 'flickrie/ticket'
-require 'flickrie/core_ext'
-
 module Flickrie
   module ApiMethods
     # For uploading photos and videos to Flickr. Example:

@@ -177,8 +177,20 @@ module Flickrie
 end
 
 require 'flickrie/api_methods'
+require 'flickrie/core_ext'
 
 module Flickrie
   autoload :Collection, 'flickrie/collection'
+  autoload :License,    'flickrie/license'
+  autoload :User,       'flickrie/user'
+  autoload :Media,      'flickrie/media'
+  autoload :Photo,      'flickrie/photo'
+  autoload :Video,      'flickrie/video'
+  autoload :Set,        'flickrie/set'
+  autoload :MediaCount, 'flickrie/media_count'
+  autoload :Ticket,     'flickrie/ticket'
+  autoload :Instance,   'flickrie/instance'
+  autoload :OAuth,      'flickrie/oauth'
+
   extend ApiMethods
 end
