@@ -1,5 +1,23 @@
 # Flickrie changelog
 
+## Version 1.3.0
+
+- Implemented short URLs for photos and videos (`#short_url`).
+
+- When fetching multiple objects (can be photos, sets, users, or
+  whatever), if now returns an instance of `Flickrie::Collection`.
+  This is basically an `Array` with a few extra features. See
+  [`Flickrie::Collection`](http://rubydoc.info/gems/flickrie/Flickrie/Collection)
+  for more details.
+
+- Implemented pagination. Sorry it took so long. But it's really cool,
+  you can even use [will_paginate](https://github.com/mislav/will_paginate) with it.
+  See [`Flickrie.pagination`](http://rubydoc.info/gems/flickrie/Flickrie#pagination-class_method)
+  for more details.
+
+- Covered `flickr.photos.getNoInSet` and
+  `flickr.people.getUploadStatus`.
+
 ## Version 1.2.0
 
 - Added 2 new Flickr sizes (`Large 1600` and `Large 2048`).
@@ -76,7 +94,7 @@
 
 ## Version 0.7.3
 
-- Covered "flickr.people.getPhotos" (I released it as a patch because
+- Covered `flickr.people.getPhotos` (I released it as a patch because
   it's important).
 
 ## Version 0.7.2
