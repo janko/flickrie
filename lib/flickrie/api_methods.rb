@@ -243,7 +243,7 @@ module Flickrie
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_videos_from_user_contacts(nsid, params = {})
       public_media_from_user_contacts(nsid, params).
-        select { |media| media.is_a?(Photo) }
+        select { |media| media.is_a?(Video) }
     end
 
     # Fetches context of the photo/video with the given ID. Example:
@@ -403,7 +403,7 @@ module Flickrie
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_photo_sizes(photo_id, params = {})
       response = client.get_media_sizes(photo_id, params)
-      Photo.from_sizes(response.body['sizes'])
+      Photo.from_sizes(response.body['sizes'].merge('id' => photo_id.to_s))
     end
     # Fetches the sizes of the video with the given ID. Example:
     #
@@ -415,7 +415,7 @@ module Flickrie
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_video_sizes(video_id, params = {})
       response = client.get_media_sizes(video_id, params)
-      Video.from_sizes(response.body['sizes'])
+      Video.from_sizes(response.body['sizes'].merge('id' => video_id.to_s))
     end
 
     # Remove the tag with the given ID

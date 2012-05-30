@@ -5,6 +5,7 @@ module Flickrie
       def from_set(hash)
         hash['photo'].map! do |individual_hash|
           individual_hash['owner'] = {
+            'id' => hash['owner'],
             'nsid' => hash['owner'],
             'username' => hash['ownername'],
           }
@@ -24,6 +25,7 @@ module Flickrie
       def from_user(hash)
         hash['photo'].map! do |individual_hash|
           individual_hash['owner'] = {
+            'id' => individual_hash['owner'],
             'nsid' => individual_hash.delete('owner'),
             'username' => individual_hash.delete('ownername')
           }
