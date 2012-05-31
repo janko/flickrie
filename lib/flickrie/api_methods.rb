@@ -643,6 +643,19 @@ module Flickrie
       search_media({:media => 'videos'}.merge(params))
     end
 
+    # Sets the content type of a photo/video.
+    #
+    # @param media_id [String, Fixnum]
+    # @param content_type [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photos.setContentType](http://www.flickr.com/services/api/flickr.photos.setContentType.html)
+    def set_media_content_type(media_id, content_type, params = {})
+      client.set_media_content_type(media_id, content_type, params)
+      nil
+    end
+    alias set_photo_content_type set_media_content_type
+    alias set_video_content_type set_media_content_type
+
     # Fetches all available types of licenses.
     #
     # @return [Array<Flickrie::License>]

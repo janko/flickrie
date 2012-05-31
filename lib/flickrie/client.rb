@@ -138,6 +138,11 @@ module Flickrie
       get 'flickr.photos.search', ensure_media(params)
     end
 
+    def set_media_content_type(media_id, content_type, params = {})
+      post 'flickr.photos.setContentType',
+        {:photo_id => media_id, :content_type => content_type}.merge(params)
+    end
+
     # photos.upload
     def check_upload_tickets(tickets, params = {})
       get 'flickr.photos.upload.checkTickets',

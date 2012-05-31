@@ -252,6 +252,12 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       videos.first.id.should_not be_nil
     end
+
+    it "sets content type" do
+      Flickrie.set_media_content_type(MEDIA_ID, 1)
+      Flickrie.set_photo_content_type(PHOTO_ID, 1)
+      Flickrie.set_video_content_type(VIDEO_ID, 1)
+    end
   end
 
   context "photosets", :vcr do

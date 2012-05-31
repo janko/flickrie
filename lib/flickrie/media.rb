@@ -147,6 +147,9 @@ module Flickrie
     # @return [Array<Flickrie::Media::Note>]
     def notes() @hash['notes']['note'].map { |info| Note.new(info) } rescue nil end
 
+    # @return [Integer]
+    def content_type() Integer(@hash['content_type']) rescue nil end
+
     # @return [Flickrie::Collection<Flickrie::User>]
     def favorites
       collection = @hash['person'].map { |info| User.new(info) }
