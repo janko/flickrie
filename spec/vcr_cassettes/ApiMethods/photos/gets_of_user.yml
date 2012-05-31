@@ -1,0 +1,108 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.getPhotosOf&user_id=67131352%40N04&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="4fd1d7aa619babc60d38696cefcd9bbb", oauth_signature="zTaCvMn7KZ11ZLz0hczw4D86MA0%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338483779", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 17:03:00 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www149.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "208"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":20, \"total\":\"1\", \"photo\":[{\"id\":\"7093058053\", \"owner\":\"67131352@N04\", \"secret\":\"0aea023b71\", \"server\":\"7220\", \"farm\":8, \"title\":\"IMG_0853\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 17:03:01 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.getPhotosOf&user_id=67131352%40N04&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="da8110c4127382dbf8abbc6a5abb88f6", oauth_signature="tHNXbollql7W%2BgDrKe%2FO%2FW4sysY%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338483781", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 17:03:01 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www146.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "208"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":20, \"total\":\"1\", \"photo\":[{\"id\":\"7093058053\", \"owner\":\"67131352@N04\", \"secret\":\"0aea023b71\", \"server\":\"7220\", \"farm\":8, \"title\":\"IMG_0853\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 17:03:01 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.people.getPhotosOf&user_id=67131352%40N04&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="a7840390cb541a1cec7da78a3ac9f562", oauth_signature="xPZ9ESVExGVcSd5HJv6FYtKhfLw%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338483781", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 17:03:02 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www147.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "208"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":20, \"total\":\"1\", \"photo\":[{\"id\":\"7093058053\", \"owner\":\"67131352@N04\", \"secret\":\"0aea023b71\", \"server\":\"7220\", \"farm\":8, \"title\":\"IMG_0853\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 17:03:02 GMT
+recorded_with: VCR 2.1.1

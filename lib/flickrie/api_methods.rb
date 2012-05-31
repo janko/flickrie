@@ -108,6 +108,32 @@ module Flickrie
       media_from_user(nsid, params).select { |media| media.is_a?(Video) }
     end
 
+    # Fetches photos and videos containing a Flickr user with the given NSID.
+    #
+    # @param nsid [String]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
+    def media_of_user(nsid, params = {})
+      response = client.media_of_user(nsid, params)
+      Media.of_user(response.body['photos'])
+    end
+    # Fetches photos containing a Flickr user with the given NSID.
+    #
+    # @param nsid [String]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
+    # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
+    def photos_of_user(nsid, params = {})
+      media_of_user(nsid, params).select { |media| media.is_a?(Photo) }
+    end
+    # Fetches videos containing a Flickr user with the given NSID.
+    #
+    # @param nsid [String]
+    # @return [Flickrie::Collection<Flickrie::Video>]
+    # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
+    def videos_of_user(nsid, params = {})
+      media_of_user(nsid, params).select { |media| media.is_a?(Video) }
+    end
+
     # Fetches public photos and videos from the Flickr user with the given
     # NSID.
     #

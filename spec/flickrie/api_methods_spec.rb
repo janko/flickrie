@@ -168,6 +168,20 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       # videos.first.id.should_not be_nil
     end
+
+    it "gets of user" do
+      media = Flickrie.media_of_user(USER_NSID)
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.photos_of_user(USER_NSID)
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.videos_of_user(USER_NSID)
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      # videos.first.id.should_not be_nil
+    end
   end
 
   context "photosets", :vcr do

@@ -249,6 +249,7 @@ basis of this gem.
 "flickr.people.findByUsername"          -> Flickrie.find_user_by_username
 "flickr.people.getInfo"                 -> Flickrie.get_user_info
 "flickr.people.getPhotos"               -> Flickrie.photos_from_user
+"flickr.people.getPhotosOf"             -> Flickrie.photos_of_user
 "flickr.people.getPublicPhotos"         -> Flickrie.public_photos_from_user
 "flickr.people.getUploadStatus"         -> Flickrie.get_upload_status
 

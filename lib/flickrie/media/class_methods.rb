@@ -65,6 +65,10 @@ module Flickrie
         from_user(hash)
       end
 
+      def of_user(hash)
+        from_user(hash)
+      end
+
       def fix_extras(hash)
         if hash['iconserver'] or hash['iconfarm']
           hash['owner'] ||= {}
