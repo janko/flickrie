@@ -1,5 +1,13 @@
 # Flickrie changelog
 
+## Version 1.3.1
+
+- Fix `Flickrie::Collection` using `will_paginate` if available,
+  not only when it's set with `Flickrie.pagination`.
+
+- Fix some collections still being a simple `Array`, instead of
+  `Flickrie::Collection`.
+
 ## Version 1.3.0
 
 - Implemented short URLs for photos and videos (`#short_url`).
