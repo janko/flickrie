@@ -1,6 +1,6 @@
 # Flickrie changelog
 
-## Version 1.4.0
+## Version 1.4.1
 
 - Covered a bunch more methods, making the "photos" and "people" sections
   practically finished:
@@ -20,6 +20,11 @@ flickr.photos.setPerms
 flickr.photos.setSafetyLevel
 flickr.photos.setTags
 ```
+
+## Version 1.4.0
+
+- Accidentally released `1.4.1` instead of this one, so there is no
+  `1.4.0` :P
 
 ## Version 1.3.1
 
