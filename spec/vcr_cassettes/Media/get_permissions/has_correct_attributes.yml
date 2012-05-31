@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getPerms&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c26b79af4d4e2abc575c306115606713", oauth_signature="xm2mFy0rPXyOb%2FU155Kb570Dm7k%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338484838", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 17:20:39 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www58.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "112"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"perms\":{\"id\":\"6946979188\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"permcomment\":3, \"permaddmeta\":2}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 17:20:40 GMT
+recorded_with: VCR 2.1.1

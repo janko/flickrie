@@ -99,6 +99,11 @@ module Flickrie
       get 'flickr.photos.getNotInSet', ensure_media(params)
     end
 
+    def get_media_permissions(media_id, params = {})
+      get 'flickr.photos.getPerms',
+        {:photo_id => media_id}.merge(params)
+    end
+
     def get_media_sizes(media_id, params = {})
       get 'flickr.photos.getSizes',
         {:photo_id => media_id}.merge(params)

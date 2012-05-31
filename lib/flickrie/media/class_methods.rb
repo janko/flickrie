@@ -69,6 +69,15 @@ module Flickrie
         from_user(hash)
       end
 
+      def from_perms(hash)
+        fix_visibility(hash)
+        hash['permissions'] = {
+          'permcomment' => hash.delete('permcomment'),
+          'permaddmeta' => hash.delete('permaddmeta')
+        }
+        new(hash)
+      end
+
       def fix_extras(hash)
         if hash['iconserver'] or hash['iconfarm']
           hash['owner'] ||= {}

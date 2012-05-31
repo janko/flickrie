@@ -413,6 +413,27 @@ module Flickrie
       media_not_in_set({:media => "videos"}.merge(params))
     end
 
+    # Gets permissions of a photo with the given ID.
+    #
+    # @return [Flickrie::Photo]
+    # @api_method [flickr.photos.getPerms](http://www.flickr.com/services/api/flickr.photos.getPerms.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_photo_permissions(photo_id, params = {})
+      response = client.get_media_permissions(photo_id, params)
+      Photo.from_perms(response.body['perms'])
+    end
+    # Gets permissions of a video with the given ID.
+    #
+    # @return [Flickrie::Video]
+    # @api_method [flickr.photos.getPerms](http://www.flickr.com/services/api/flickr.photos.getPerms.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_video_permissions(video_id, params = {})
+      response = client.get_media_permissions(video_id, params)
+      Video.from_perms(response.body['perms'])
+    end
+
     # Fetches the sizes of the photo with the given ID. Example:
     #
     #     photo = Flickrie.get_photo_sizes(242348)

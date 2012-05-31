@@ -298,6 +298,17 @@ describe :Media do
     end
   end
 
+  context "get permissions", :vcr do
+    let(:media) { Flickrie.get_photo_permissions(PHOTO_ID) }
+
+    it "has correct attributes", :vcr do
+      media.id.should == PHOTO_ID
+      media.visibility.should correspond_to(@attributes[:visibility])
+      media.perm_comment.should == 3
+      media.perm_add_meta.should == 2
+    end
+  end
+
   it "has #short_url", :vcr do
     media = Flickrie.get_media_info(MEDIA_ID)
     connection = Faraday.new(media.short_url) do |b|
