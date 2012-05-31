@@ -282,6 +282,12 @@ describe :ApiMethods do
       Flickrie.set_photo_safety_level(MEDIA_ID, :safety_level => 1)
       Flickrie.set_video_safety_level(MEDIA_ID, :safety_level => 1)
     end
+
+    it "sets tags" do
+      Flickrie.set_media_tags(MEDIA_ID, 'luka')
+      Flickrie.set_photo_tags(MEDIA_ID, 'luka')
+      Flickrie.set_video_tags(MEDIA_ID, 'luka')
+    end
   end
 
   context "photosets", :vcr do

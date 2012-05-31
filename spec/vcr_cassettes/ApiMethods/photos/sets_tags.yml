@@ -1,0 +1,108 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setTags&photo_id=6946979188&tags=luka
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5a0123807883a0f62b9a57999a490454", oauth_signature="dwFgNBgnNtisfnYPj5p9DohAcPs%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338493205", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:40:05 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www81.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:40:06 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setTags&photo_id=6946979188&tags=luka
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="a2df87abdcd3f2c20bb84490d27b5be8", oauth_signature="KCfitx%2FB5TttgR1qrgsGop%2F%2Ftic%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338493206", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:40:06 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www66.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:40:06 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setTags&photo_id=6946979188&tags=luka
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c21facb4a416f7d4be4846bda17c8b48", oauth_signature="9PVWYlmhtaIvpRkfoD2THSoTrVY%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338493206", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:40:06 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www168.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:40:07 GMT
+recorded_with: VCR 2.1.1

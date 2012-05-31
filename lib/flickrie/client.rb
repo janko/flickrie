@@ -163,6 +163,11 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def set_media_tags(media_id, tags, params = {})
+      post 'flickr.photos.setTags',
+        {:photo_id => media_id, :tags => tags}.merge(params)
+    end
+
     # photos.upload
     def check_upload_tickets(tickets, params = {})
       get 'flickr.photos.upload.checkTickets',

@@ -714,6 +714,20 @@ module Flickrie
     alias set_photo_safety_level set_media_safety_level
     alias set_video_safety_level set_media_safety_level
 
+    # Sets tags for a photo/video.
+    #
+    # @params media_id [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photos.setTags](http://www.flickr.com/services/api/flickr.photos.setTags.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def set_media_tags(media_id, tags, params = {})
+      client.set_media_tags(media_id, tags, params)
+      nil
+    end
+    alias set_photo_tags set_media_tags
+    alias set_video_tags set_media_tags
+
     # Fetches all available types of licenses.
     #
     # @return [Array<Flickrie::License>]
