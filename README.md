@@ -1,8 +1,16 @@
 # Flickrie
 
+[![Build Status](https://secure.travis-ci.org/janko-m/flickrie.png)](http://travis-ci.org/janko-m/flickrie)
+
 This gem is a nice wrapper for the Flickr API with an object-oriented interface.
 
-[![Build Status](https://secure.travis-ci.org/janko-m/flickrie.png)](http://travis-ci.org/janko-m/flickrie)
+- GitHub page: [https://github.com/janko-m/flickrie](https://github.com/janko-m/flickrie)
+
+- Documentation: [http://rubydoc.info/gems/flickrie](http://rubydoc.info/gems/flickrie/)
+
+- Wiki: [https://github.com/janko-m/flickrie/wiki](https://github.com/janko-m/flickrie/wiki)
+
+- Flickr API page: [http://www.flickr.com/services/api](http://www.flickr.com/services/api/)
 
 ## About
 
