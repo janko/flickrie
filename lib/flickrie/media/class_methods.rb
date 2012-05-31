@@ -3,7 +3,7 @@ module Flickrie
     # @private
     module ClassMethods
       def from_set(hash)
-        hash['photo'].map! do |individual_hash|
+        collection = hash.delete('photo').map do |media_hash|
           media_hash['owner'] = {
             'id' => hash['owner'],
             'nsid' => hash['owner'],
@@ -13,8 +13,7 @@ module Flickrie
           new(media_hash)
         end
 
-        Collection.new :array => hash.delete('photo'),
-                       :pagination => hash
+        Collection.new(hash).replace(collection)
       end
 
       def from_info(hash)
@@ -23,7 +22,7 @@ module Flickrie
       end
 
       def from_user(hash)
-        hash['photo'].map! do |individual_hash|
+        collection = hash.delete('photo').map do |media_hash|
           media_hash['owner'] = {
             'id' => media_hash['owner'],
             'nsid' => media_hash.delete('owner'),
@@ -34,8 +33,7 @@ module Flickrie
           new(media_hash)
         end
 
-        Collection.new :array => hash.delete('photo'),
-                       :pagination => hash
+        Collection.new(hash).replace(collection)
       end
 
       def from_sizes(hash)

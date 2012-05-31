@@ -102,13 +102,13 @@ module Flickrie
       new(hash)
     end
 
-      info.map do |info|
     def self.fix_info(hash)
       hash['title'] = hash['title']['_content']
       hash['description'] = hash['description']['_content']
     end
 
     def self.from_user(hash, user_nsid)
+      collection = hash.delete('photoset').map do |set_hash|
         set_hash['count_photos'] = set_hash.delete('photos')
         set_hash['count_videos'] = set_hash.delete('videos')
         set_hash['title'] = set_hash['title']['_content']
@@ -117,6 +117,8 @@ module Flickrie
 
         new(set_hash)
       end
+
+      Collection.new(hash).replace(collection)
     end
   end
 end

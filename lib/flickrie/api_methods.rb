@@ -501,7 +501,7 @@ module Flickrie
     # @api_method [flickr.photosets.getList](http://www.flickr.com/services/api/flickr.photosets.getList.html)
     def sets_from_user(nsid, params = {})
       response = client.sets_from_user(nsid, params)
-      Set.from_user(response.body['photosets']['photoset'], nsid)
+      Set.from_user(response.body['photosets'], nsid)
     end
 
     # Fetches photos and videos from a set with the given ID.

@@ -142,8 +142,13 @@ module Flickrie
     # @return [Array<Flickrie::Media::Note>]
     def notes() @hash['notes']['note'].map { |info| Note.new(info) } rescue nil end
 
-    # @return [Array<Flickrie::User>]
-    def favorites() @hash['person'].map { |info| User.new(info) } rescue nil end
+    # @return [Flickrie::Collection<Flickrie::User>]
+    def favorites
+      collection = @hash['person'].map { |info| User.new(info) }
+      Collection.new(@hash).replace(collection)
+    rescue
+      nil
+    end
 
     def [](key) @hash[key] end
     # Returns the raw hash from the response. Useful if something isn't available by methods.
