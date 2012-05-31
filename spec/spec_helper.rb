@@ -18,7 +18,6 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :faraday
   c.default_cassette_options = {
-    :record => :new_episodes, # Records new HTTP requests if any.
     :serialize_with => :syck, # Don't output in binary form (only in Ruby 1.9.3-p125).
     :match_requests_on => [
       :method,
