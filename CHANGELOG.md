@@ -1,5 +1,26 @@
 # Flickrie changelog
 
+## Version 1.4.0
+
+- Covered a bunch more methods, making the "photos" and "people" sections
+  practically finished:
+
+```
+flickr.people.getPhotosOf
+flickr.photos.getPerms
+flickr.photos.getRecent
+flickr.photos.getUntagged
+flickr.photos.getWithGeoData
+flickr.photos.getWithoutGeoData
+flickr.photos.recentlyUpdated
+flickr.photos.setContentType
+flickr.photos.setDates
+flickr.photos.setMeta
+flickr.photos.setPerms
+flickr.photos.setSafetyLevel
+flickr.photos.setTags
+```
+
 ## Version 1.3.1
 
 - Fix `Flickrie::Collection` using `will_paginate` if available,
