@@ -457,6 +457,36 @@ module Flickrie
       get_recent_media(params).select { |media| media.is_a?(Video) }
     end
 
+    # Fetches photos and videos from the authenticated user that have no
+    # tags.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.getUntagged](http://www.flickr.com/services/api/flickr.photos.getUntagged.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_untagged_media(params = {})
+      response = client.get_untagged_media({:media => 'all'}.merge(params))
+      Media.from_untagged(response.body['photos'])
+    end
+    # Fetches photos from the authenticated user that have no tags.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo>]
+    # @api_method [flickr.photos.getUntagged](http://www.flickr.com/services/api/flickr.photos.getUntagged.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_untagged_photos(params = {})
+      get_untagged_media({:media => 'photos'}.merge(params))
+    end
+    # Fetches videos from the authenticated user that have no tags.
+    #
+    # @return [Flickrie::Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.getUntagged](http://www.flickr.com/services/api/flickr.photos.getUntagged.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_untagged_videos(params = {})
+      get_untagged_media({:media => 'videos'}.merge(params))
+    end
+
     # Fetches the sizes of the photo with the given ID. Example:
     #
     #     photo = Flickrie.get_photo_sizes(242348)

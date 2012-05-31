@@ -82,6 +82,10 @@ module Flickrie
         from_user(hash)
       end
 
+      def from_untagged(hash)
+        from_user(hash)
+      end
+
       #------------------------------------------------------------
 
       def fix_extras(hash)

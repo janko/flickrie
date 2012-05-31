@@ -267,6 +267,7 @@ basis of this gem.
 "flickr.photos.getPerms"                -> Flickrie.get_photo_permissions
 "flickr.photos.getRecent"               -> Flickrie.get_recent_photos
 "flickr.photos.getSizes"                -> Flickrie.get_photo_sizes
+"flickr.photos.getUntagged"             -> Flickrie.get_untagged_photos
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
 "flickr.photos.search"                  -> Flickrie.search_photos
 

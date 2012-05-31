@@ -113,6 +113,10 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def get_untagged_media(params = {})
+      get 'flickr.photos.getUntagged', ensure_media(params)
+    end
+
     def remove_media_tag(tag_id, params = {})
       post 'flickr.photos.removeTag',
         {:tag_id => tag_id}.merge(params)

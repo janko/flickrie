@@ -196,6 +196,20 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       # videos.first.id.should_not be_nil
     end
+
+    it "gets untagged" do
+      media = Flickrie.get_untagged_media
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.get_untagged_photos
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.get_untagged_videos
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      # videos.first.id.should_not be_nil
+    end
   end
 
   context "photosets", :vcr do
