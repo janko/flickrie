@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 1.4.2
+
+- Update documentation
+
 ## Version 1.4.1
 
 - Covered a bunch more methods, making the "photos" and "people" sections
