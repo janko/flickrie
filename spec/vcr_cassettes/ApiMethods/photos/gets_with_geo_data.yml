@@ -1,0 +1,108 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getWithGeoData&media=all&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5f5754ecb0b1b5400e96e4dd4a525ca0", oauth_signature="bM7mULi%2F07TMdAFVd2dF6VC%2BKvI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338487709", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 18:08:29 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www224.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "262"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":100, \"total\":\"2\", \"photo\":[{\"id\":\"6946979188\", \"owner\":\"67131352@N04\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"title\":\"IMG_0796\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}, {\"id\":\"7093038981\", \"owner\":\"67131352@N04\", \"secret\":\"9a616b9f6e\", \"server\":\"5457\", \"farm\":6, \"title\":\"5 meter backflip\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"video\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 18:08:29 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getWithGeoData&media=photos&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="b1c286fbfc5f5751142063f8e01c5c2b", oauth_signature="HLkdZ57AHZopHc%2BN9k33OrTwD14%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338487709", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 18:08:30 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www207.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "208"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":100, \"total\":\"1\", \"photo\":[{\"id\":\"6946979188\", \"owner\":\"67131352@N04\", \"secret\":\"25bb44852b\", \"server\":\"7049\", \"farm\":8, \"title\":\"IMG_0796\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"photo\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 18:08:30 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.getWithGeoData&media=videos&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="3772097f160d07f725f9184a9d0503aa", oauth_signature="ZFUtKTmg7HvC4MSQRDP3f3eY7%2B4%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338487710", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 18:08:30 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www213.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "213"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":1, \"perpage\":100, \"total\":\"1\", \"photo\":[{\"id\":\"7093038981\", \"owner\":\"67131352@N04\", \"secret\":\"9a616b9f6e\", \"server\":\"5457\", \"farm\":6, \"title\":\"5 meter backflip\", \"ispublic\":1, \"isfriend\":0, \"isfamily\":0, \"media\":\"video\", \"media_status\":\"ready\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 18:08:30 GMT
+recorded_with: VCR 2.1.1

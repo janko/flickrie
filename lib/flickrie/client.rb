@@ -117,6 +117,14 @@ module Flickrie
       get 'flickr.photos.getUntagged', ensure_media(params)
     end
 
+    def get_media_with_geo_data(params = {})
+      get 'flickr.photos.getWithGeoData', ensure_media(params)
+    end
+
+    def get_media_without_geo_data(params = {})
+      get 'flickr.photos.getWithoutGeoData', ensure_media(params)
+    end
+
     def remove_media_tag(tag_id, params = {})
       post 'flickr.photos.removeTag',
         {:tag_id => tag_id}.merge(params)

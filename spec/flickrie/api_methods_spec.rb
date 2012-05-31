@@ -210,6 +210,34 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       # videos.first.id.should_not be_nil
     end
+
+    it "gets with geo data" do
+      media = Flickrie.get_media_with_geo_data
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.get_photos_with_geo_data
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.get_videos_with_geo_data
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      videos.first.id.should_not be_nil
+    end
+
+    it "gets without geo data" do
+      media = Flickrie.get_media_without_geo_data
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.get_photos_without_geo_data
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.get_videos_without_geo_data
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      videos.first.id.should_not be_nil
+    end
   end
 
   context "photosets", :vcr do

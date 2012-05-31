@@ -457,6 +457,33 @@ module Flickrie
       get_recent_media(params).select { |media| media.is_a?(Video) }
     end
 
+    # Fetches the sizes of the photo with the given ID. Example:
+    #
+    #     photo = Flickrie.get_photo_sizes(242348)
+    #     photo.medium!(500)
+    #     photo.size       # => "Medium 500"
+    #     photo.source_url # => "http://farm8.staticflickr.com/7090/7093101501_9337f28800.jpg"
+    #
+    # @param photo_id [String, Fixnum]
+    # @return [Flickrie::Photo]
+    # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
+    def get_photo_sizes(photo_id, params = {})
+      response = client.get_media_sizes(photo_id, params)
+      Photo.from_sizes(response.body['sizes'].merge('id' => photo_id.to_s))
+    end
+    # Fetches the sizes of the video with the given ID. Example:
+    #
+    #     video = Flickrie.get_video_sizes(438492)
+    #     video.download_url # => "..."
+    #
+    # @param video_id [String, Fixnum]
+    # @return [Flickrie::Video]
+    # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
+    def get_video_sizes(video_id, params = {})
+      response = client.get_media_sizes(video_id, params)
+      Video.from_sizes(response.body['sizes'].merge('id' => video_id.to_s))
+    end
+
     # Fetches photos and videos from the authenticated user that have no
     # tags.
     #
@@ -487,31 +514,63 @@ module Flickrie
       get_untagged_media({:media => 'videos'}.merge(params))
     end
 
-    # Fetches the sizes of the photo with the given ID. Example:
+    # Fetches geo-tagged photos and videos from the authenticated user.
     #
-    #     photo = Flickrie.get_photo_sizes(242348)
-    #     photo.medium!(500)
-    #     photo.size       # => "Medium 500"
-    #     photo.source_url # => "http://farm8.staticflickr.com/7090/7093101501_9337f28800.jpg"
+    # @return [Flickrie:Collection<Flickrie:Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
     #
-    # @param photo_id [String, Fixnum]
-    # @return [Flickrie::Photo]
-    # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
-    def get_photo_sizes(photo_id, params = {})
-      response = client.get_media_sizes(photo_id, params)
-      Photo.from_sizes(response.body['sizes'].merge('id' => photo_id.to_s))
+    # @note This method requires authentication with "read" permissions.
+    def get_media_with_geo_data(params = {})
+      response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
+      Media.from_geo_data(response.body['photos'])
     end
-    # Fetches the sizes of the video with the given ID. Example:
+    # Fetches geo-tagged photos from the authenticated user.
     #
-    #     video = Flickrie.get_video_sizes(438492)
-    #     video.download_url # => "..."
+    # @return [Flickrie:Collection<Flickrie:Photo>]
+    # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
     #
-    # @param video_id [String, Fixnum]
-    # @return [Flickrie::Video]
-    # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
-    def get_video_sizes(video_id, params = {})
-      response = client.get_media_sizes(video_id, params)
-      Video.from_sizes(response.body['sizes'].merge('id' => video_id.to_s))
+    # @note This method requires authentication with "read" permissions.
+    def get_photos_with_geo_data(params = {})
+      get_media_with_geo_data({:media => 'photos'}.merge(params))
+    end
+    # Fetches geo-tagged videos from the authenticated user.
+    #
+    # @return [Flickrie:Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_videos_with_geo_data(params = {})
+      get_media_with_geo_data({:media => 'videos'}.merge(params))
+    end
+
+    # Fetches photos and videos from the authenticated user that are not
+    # geo-tagged.
+    #
+    # @return [Flickrie:Collection<Flickrie:Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_media_without_geo_data(params = {})
+      response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
+      Media.from_geo_data(response.body['photos'])
+    end
+    # Fetches photos from the authenticated user that are not geo-tagged.
+    #
+    # @return [Flickrie:Collection<Flickrie:Photo>]
+    # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_photos_without_geo_data(params = {})
+      get_media_with_geo_data({:media => 'photos'}.merge(params))
+    end
+    # Fetches videos from the authenticated user that are not geo-tagged.
+    #
+    # @return [Flickrie:Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_videos_without_geo_data(params = {})
+      get_media_with_geo_data({:media => 'videos'}.merge(params))
     end
 
     # Remove the tag with the given ID
