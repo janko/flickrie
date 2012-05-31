@@ -69,11 +69,14 @@
 - The request will now be retried once more if it timeouts
 
 - In authentication:
-** you can now call `request_token.authorize_url` instead of `request_token.get_authorization_url`.
-** you can now call `request_token.get_access_token(code)` instead of `Flickrie::OAuth.get_access_token(code, request_token)`.
-** you also get the infomation about the user who just authenticated,
-    which you can then access with `access_token.user_info`
-    (it's a Hash with keys `:fullname`, `:user_nsid` and `:username`)
+
+ - you can now call `request_token.authorize_url` instead of `request_token.get_authorization_url`.
+
+ - you can now call `request_token.get_access_token(code)` instead of `Flickrie::OAuth.get_access_token(code, request_token)`.
+
+ - you also get the infomation about the user who just authenticated,
+   which you can then access with `access_token.user_info`
+   (it's a Hash with keys `:fullname`, `:user_nsid` and `:username`)
 
 - When calling `Flickrie.get_photos_counts`, the `Flickrie::MediaCount`
   now also has attributes `#time_interval` (alias for `#date_range`),
