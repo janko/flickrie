@@ -182,6 +182,20 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       # videos.first.id.should_not be_nil
     end
+
+    it "gets recent" do
+      media = Flickrie.get_recent_media
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.get_recent_photos
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.get_recent_videos
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      # videos.first.id.should_not be_nil
+    end
   end
 
   context "photosets", :vcr do

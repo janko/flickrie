@@ -104,6 +104,10 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def get_recent_media(params = {})
+      get 'flickr.photos.getRecent', ensure_media(params)
+    end
+
     def get_media_sizes(media_id, params = {})
       get 'flickr.photos.getSizes',
         {:photo_id => media_id}.merge(params)

@@ -78,6 +78,12 @@ module Flickrie
         new(hash)
       end
 
+      def from_recent(hash)
+        from_user(hash)
+      end
+
+      #------------------------------------------------------------
+
       def fix_extras(hash)
         if hash['iconserver'] or hash['iconfarm']
           hash['owner'] ||= {}

@@ -434,6 +434,29 @@ module Flickrie
       Video.from_perms(response.body['perms'])
     end
 
+    # Fetches the latest photos and videos uploaded to Flickr.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.getRecent](http://www.flickr.com/services/api/flickr.photos.getRecent.html)
+    def get_recent_media(params = {})
+      response = client.get_recent_media(params)
+      Media.from_recent(response.body['photos'])
+    end
+    # Fetches the latest photos uploaded to Flickr.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo>]
+    # @api_method [flickr.photos.getRecent](http://www.flickr.com/services/api/flickr.photos.getRecent.html)
+    def get_recent_photos(params = {})
+      get_recent_media(params).select { |media| media.is_a?(Photo) }
+    end
+    # Fetches the latest videos uploaded to Flickr.
+    #
+    # @return [Flickrie::Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.getRecent](http://www.flickr.com/services/api/flickr.photos.getRecent.html)
+    def get_recent_videos(params = {})
+      get_recent_media(params).select { |media| media.is_a?(Video) }
+    end
+
     # Fetches the sizes of the photo with the given ID. Example:
     #
     #     photo = Flickrie.get_photo_sizes(242348)
