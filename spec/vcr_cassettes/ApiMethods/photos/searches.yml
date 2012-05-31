@@ -2,7 +2,7 @@
 http_interactions: 
 - request: 
     method: get
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&user_id=67131352%40N04&extras=media
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&media=all&user_id=67131352%40N04&extras=media
     body: 
       encoding: US-ASCII
       string: ""
@@ -37,7 +37,7 @@ http_interactions:
   recorded_at: Wed, 30 May 2012 10:49:40 GMT
 - request: 
     method: get
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&user_id=67131352%40N04&media=photos&extras=media
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&media=photos&user_id=67131352%40N04&extras=media
     body: 
       encoding: US-ASCII
       string: ""
@@ -72,7 +72,7 @@ http_interactions:
   recorded_at: Wed, 30 May 2012 10:49:40 GMT
 - request: 
     method: get
-    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&user_id=67131352%40N04&media=videos&extras=media
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.search&media=videos&user_id=67131352%40N04&extras=media
     body: 
       encoding: US-ASCII
       string: ""

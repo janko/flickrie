@@ -363,7 +363,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def media_not_in_set(params = {})
-      response = client.media_not_in_set(params)
+      response = client.media_not_in_set({:media => 'all'}.merge(params))
       Media.from_not_in_set(response.body['photos'])
     end
     # Fetches photos from the authenticated user
@@ -374,7 +374,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def photos_not_in_set(params = {})
-      media_not_in_set(params.merge(:media => "photos"))
+      media_not_in_set({:media => "photos"}.merge(params))
     end
     # Fetches videos from the authenticated user
     # that are not in any set.
@@ -384,7 +384,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def videos_not_in_set(params = {})
-      media_not_in_set(params.merge(:media => "videos"))
+      media_not_in_set({:media => "videos"}.merge(params))
     end
 
     # Fetches the sizes of the photo with the given ID. Example:
@@ -433,8 +433,8 @@ module Flickrie
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
-    def search_media(search_params = {})
-      response = client.search_media(search_params)
+    def search_media(params = {})
+      response = client.search_media({:media => 'all'}.merge(params))
       Media.from_search(response.body['photos'])
     end
     # Fetches photos matching a certain criteria.
@@ -442,16 +442,16 @@ module Flickrie
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
-    def search_photos(search_params = {})
-      search_media(search_params.merge(:media => 'photos'))
+    def search_photos(params = {})
+      search_media({:media => 'photos'}.merge(params))
     end
     # Fetches videos matching a certain criteria.
     #
     # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
-    def search_videos(search_params = {})
-      search_media(search_params.merge(:media => 'videos'))
+    def search_videos(params = {})
+      search_media({:media => 'videos'}.merge(params))
     end
 
     # Fetches all available types of licenses.
@@ -511,7 +511,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def media_from_set(set_id, params = {})
-      response = client.media_from_set(set_id, params)
+      response = client.media_from_set(set_id, {:media => 'all'}.merge(params))
       Media.from_set(response.body['photoset'])
     end
     # Fetches photos from a set with the given ID.
@@ -521,7 +521,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def photos_from_set(set_id, params = {})
-      media_from_set(set_id, params.merge(:media => 'photos'))
+      media_from_set(set_id, {:media => 'photos'}.merge(params))
     end
     # Fetches videos from a set with the given ID.
     #
@@ -530,7 +530,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def videos_from_set(set_id, params = {})
-      media_from_set(set_id, params.merge(:media => 'videos'))
+      media_from_set(set_id, {:media => 'videos'}.merge(params))
     end
 
     # Tests if the authentication was successful. If it was, it
