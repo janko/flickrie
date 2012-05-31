@@ -25,7 +25,7 @@ just some of the reason I decided to make this gem.
 The method names here aren't called the same as Flickr's API methods
 (and they can't be), but they follow a pattern which
 shouldn't be too difficult to predict. Take a look at the ["Currently covered API
-methods"](https://github.com/janko-m/flickrie#currently-covered-api-methods) section of this readme.
+methods"](#currently-covered-api-methods) section of this readme.
 
 Also, some attribute names that you get from the response are changed.
 So, for example, the `last_update` attribute is called `updated_at`,
@@ -53,7 +53,7 @@ You first need to install the gem.
 Then, if you're using Bundler in your project, put it into your `Gemfile`:
 
 ```ruby
-gem "flickrie", "~> 1.0.0"
+gem "flickrie", "~> 1.4"
 ```
 
 Then in your app you set the API key and shared secret (if you don't have them
