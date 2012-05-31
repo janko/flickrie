@@ -258,6 +258,12 @@ describe :ApiMethods do
       Flickrie.set_photo_content_type(PHOTO_ID, 1)
       Flickrie.set_video_content_type(VIDEO_ID, 1)
     end
+
+    it "sets dates" do
+      Flickrie.set_media_dates(MEDIA_ID, :date_taken_granularity => 0)
+      Flickrie.set_photo_dates(MEDIA_ID, :date_taken_granularity => 0)
+      Flickrie.set_video_dates(MEDIA_ID, :date_taken_granularity => 0)
+    end
   end
 
   context "photosets", :vcr do

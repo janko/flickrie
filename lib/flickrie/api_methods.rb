@@ -649,12 +649,28 @@ module Flickrie
     # @param content_type [String, Fixnum]
     # @return [nil]
     # @api_method [flickr.photos.setContentType](http://www.flickr.com/services/api/flickr.photos.setContentType.html)
+    #
+    # @note This method requires authentication with "write" permissions.
     def set_media_content_type(media_id, content_type, params = {})
       client.set_media_content_type(media_id, content_type, params)
       nil
     end
     alias set_photo_content_type set_media_content_type
     alias set_video_content_type set_media_content_type
+
+    # Sets dates for a photo/video.
+    #
+    # @param media_id [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photos.setDates](http://www.flickr.com/services/api/flickr.photos.setDates.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def set_media_dates(media_id, params = {})
+      client.set_media_dates(media_id, params)
+      nil
+    end
+    alias set_photo_dates set_media_dates
+    alias set_video_dates set_media_dates
 
     # Fetches all available types of licenses.
     #
