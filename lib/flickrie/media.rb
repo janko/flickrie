@@ -134,9 +134,9 @@ module Flickrie
     def can_share?()    Integer(@hash['usage']['canshare']) == 1    rescue nil end
 
     # @return [Boolean]
-    def perm_comment()  Integer(@hash['permissions']['permcomment']) rescue nil end
+    def commenting_permissions()  Integer(@hash['permissions']['permcomment']) rescue nil end
     # @return [Boolean]
-    def perm_add_meta() Integer(@hash['permissions']['permaddmeta']) rescue nil end
+    def adding_meta_permissions() Integer(@hash['permissions']['permaddmeta']) rescue nil end
 
     # @return [Boolean]
     def has_people?() Integer(@hash['people']['haspeople']) == 1 rescue nil end

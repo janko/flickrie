@@ -304,8 +304,8 @@ describe :Media do
     it "has correct attributes", :vcr do
       media.id.should == PHOTO_ID
       media.visibility.should correspond_to(@attributes[:visibility])
-      media.perm_comment.should == 3
-      media.perm_add_meta.should == 2
+      media.commenting_permissions.should == 3
+      media.adding_meta_permissions.should == 2
     end
   end
 

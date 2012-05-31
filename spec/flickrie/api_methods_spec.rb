@@ -270,6 +270,12 @@ describe :ApiMethods do
       Flickrie.set_photo_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
       Flickrie.set_video_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
     end
+
+    it "sets permissions" do
+      Flickrie.set_media_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
+      Flickrie.set_photo_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
+      Flickrie.set_video_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
+    end
   end
 
   context "photosets", :vcr do

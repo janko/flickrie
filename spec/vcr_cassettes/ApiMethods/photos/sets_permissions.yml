@@ -1,0 +1,108 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setPerms&photo_id=6946979188&is_public=1&is_friend=0&is_family=0&perm_comment=3&perm_addmeta=2
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="5a010b6bc4526bf62f3add0b94de7dd4", oauth_signature="%2FuTsu%2FIPvJlg7wvne8ICHqqq7gg%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338491872", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:17:53 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www78.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "94"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"photoid\":{\"_content\":\"6946979188\", \"secret\":\"25bb44852b\", \"originalsecret\":\"\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:17:53 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setPerms&photo_id=6946979188&is_public=1&is_friend=0&is_family=0&perm_comment=3&perm_addmeta=2
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="1972acd819168375497f3acabead2a75", oauth_signature="E5pD6b6WcEKogbzpPVKfTxAtEog%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338491873", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:17:53 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www203.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "94"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"photoid\":{\"_content\":\"6946979188\", \"secret\":\"25bb44852b\", \"originalsecret\":\"\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:17:54 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.setPerms&photo_id=6946979188&is_public=1&is_friend=0&is_family=0&perm_comment=3&perm_addmeta=2
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="d207301fd83d1e437a9d369ec8da359b", oauth_signature="UreC6cYKLwvk6ej2Nyne0W3ZxT8%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1338491874", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Thu, 31 May 2012 19:17:54 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www173.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "94"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"photoid\":{\"_content\":\"6946979188\", \"secret\":\"25bb44852b\", \"originalsecret\":\"\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Thu, 31 May 2012 19:17:54 GMT
+recorded_with: VCR 2.1.1
