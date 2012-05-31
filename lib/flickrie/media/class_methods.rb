@@ -4,13 +4,13 @@ module Flickrie
     module ClassMethods
       def from_set(hash)
         hash['photo'].map! do |individual_hash|
-          individual_hash['owner'] = {
+          media_hash['owner'] = {
             'id' => hash['owner'],
             'nsid' => hash['owner'],
             'username' => hash['ownername'],
           }
-          fix_extras(individual_hash)
-          new(individual_hash)
+          fix_extras(media_hash)
+          new(media_hash)
         end
 
         Collection.new :array => hash.delete('photo'),
@@ -24,14 +24,14 @@ module Flickrie
 
       def from_user(hash)
         hash['photo'].map! do |individual_hash|
-          individual_hash['owner'] = {
-            'id' => individual_hash['owner'],
-            'nsid' => individual_hash.delete('owner'),
-            'username' => individual_hash.delete('ownername')
+          media_hash['owner'] = {
+            'id' => media_hash['owner'],
+            'nsid' => media_hash.delete('owner'),
+            'username' => media_hash.delete('ownername')
           }
-          fix_extras(individual_hash)
-          fix_visibility(individual_hash)
-          new(individual_hash)
+          fix_extras(media_hash)
+          fix_visibility(media_hash)
+          new(media_hash)
         end
 
         Collection.new :array => hash.delete('photo'),
@@ -48,8 +48,8 @@ module Flickrie
       end
 
       def from_contacts(hash)
-        hash['photo'].each do |individual_hash|
-          individual_hash['ownername'] = individual_hash.delete('username')
+        hash['photo'].each do |media_hash|
+          media_hash['ownername'] = media_hash.delete('username')
         end
 
         from_user(hash)

@@ -95,8 +95,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def photos_from_user(nsid, params = {})
-      media_from_user(nsid, params).
-        select { |media| media.is_a?(Photo) }
+      media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
     end
     # Fetches videos from the Flickr user with the given NSID.
     #
@@ -106,8 +105,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def videos_from_user(nsid, params = {})
-      media_from_user(nsid, params).
-        select { |media| media.is_a?(Video) }
+      media_from_user(nsid, params).select { |media| media.is_a?(Video) }
     end
 
     # Fetches public photos and videos from the Flickr user with the given
@@ -126,8 +124,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_photos_from_user(nsid, params = {})
-      public_media_from_user(nsid, params).
-        select { |media| media.is_a?(Photo) }
+      public_media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
     end
     # Fetches public videos from the Flickr user with the given NSID.
     #
@@ -135,8 +132,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_videos_from_user(nsid, params = {})
-      public_media_from_user(nsid, params).
-        select { |media| media.is_a?(Video) }
+      public_media_from_user(nsid, params).select { |media| media.is_a?(Video) }
     end
 
     # Returns the upload status of the user who is currently authenticated.
