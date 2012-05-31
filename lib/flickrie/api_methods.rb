@@ -573,6 +573,36 @@ module Flickrie
       get_media_with_geo_data({:media => 'videos'}.merge(params))
     end
 
+    # Fetches photos and videos from the authenticated user that have
+    # recently been updated.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def recently_updated_media(params = {})
+      response = client.recently_updated_media(params)
+      Media.from_recently_updated(response.body['photos'])
+    end
+    # Fetches photos from the authenticated user that have recently been updated.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo>]
+    # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def recently_updated_photos(params = {})
+      recently_updated_media(params).select { |media| media.is_a?(Photo) }
+    end
+    # Fetches videos from the authenticated user that have recently been updated.
+    #
+    # @return [Flickrie::Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def recently_updated_videos(params = {})
+      recently_updated_media(params).select { |media| media.is_a?(Video) }
+    end
+
     # Remove the tag with the given ID
     #
     # @param tag_id [String]

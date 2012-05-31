@@ -238,6 +238,20 @@ describe :ApiMethods do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       videos.first.id.should_not be_nil
     end
+
+    it "gets recently updated" do
+      media = Flickrie.recently_updated_media(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      media.each { |object| object.should be_a(Flickrie::Media) }
+      media.first.id.should_not be_nil
+
+      photos = Flickrie.recently_updated_photos(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      photos.each { |object| object.should be_a(Flickrie::Photo) }
+      photos.first.id.should_not be_nil
+
+      videos = Flickrie.recently_updated_videos(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      videos.each { |object| object.should be_a(Flickrie::Video) }
+      videos.first.id.should_not be_nil
+    end
   end
 
   context "photosets", :vcr do

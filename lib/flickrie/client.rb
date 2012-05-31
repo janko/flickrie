@@ -125,6 +125,10 @@ module Flickrie
       get 'flickr.photos.getWithoutGeoData', ensure_media(params)
     end
 
+    def recently_updated_media(params = {})
+      get 'flickr.photos.recentlyUpdated', ensure_media(params)
+    end
+
     def remove_media_tag(tag_id, params = {})
       post 'flickr.photos.removeTag',
         {:tag_id => tag_id}.merge(params)

@@ -270,6 +270,7 @@ basis of this gem.
 "flickr.photos.getUntagged"             -> Flickrie.get_untagged_photos
 "flickr.photos.getWithGeoData"          -> Flickrie.get_photos_with_geo_data
 "flickr.photos.getWithoutGeoData"       -> Flickrie.get_photos_without_geo_data
+"flickr.photos.recentlyUpdated"         -> Flickrie.recently_updated_photos
 "flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
 "flickr.photos.search"                  -> Flickrie.search_photos
 
