@@ -275,6 +275,7 @@ basis of this gem.
 "flickr.photos.search"                  -> Flickrie.search_photos
 "flickr.photos.setContentType"          -> Flickrie.set_photo_content_type
 "flickr.photos.setDates"                -> Flickrie.set_photo_dates
+"flickr.photos.setMeta"                 -> Flickrie.set_photo_meta
 
 # photos.licenses
 "flickr.photos.licenses.getInfo"        -> Flickrie.get_licenses

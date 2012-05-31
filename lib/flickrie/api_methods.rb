@@ -672,6 +672,20 @@ module Flickrie
     alias set_photo_dates set_media_dates
     alias set_video_dates set_media_dates
 
+    # Sets meta information for a photo/video.
+    #
+    # @param media_id [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photos.setMeta](http://www.flickr.com/services/api/flickr.photos.setMeta.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def set_media_meta(media_id, params = {})
+      client.set_media_meta(media_id, params)
+      nil
+    end
+    alias set_photo_meta set_media_meta
+    alias set_video_meta set_media_meta
+
     # Fetches all available types of licenses.
     #
     # @return [Array<Flickrie::License>]

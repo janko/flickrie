@@ -264,6 +264,12 @@ describe :ApiMethods do
       Flickrie.set_photo_dates(MEDIA_ID, :date_taken_granularity => 0)
       Flickrie.set_video_dates(MEDIA_ID, :date_taken_granularity => 0)
     end
+
+    it "sets meta" do
+      Flickrie.set_media_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
+      Flickrie.set_photo_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
+      Flickrie.set_video_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
+    end
   end
 
   context "photosets", :vcr do
