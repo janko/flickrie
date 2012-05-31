@@ -158,6 +158,11 @@ module Flickrie
         {:photo_id => media_id}.merge(params)
     end
 
+    def set_media_safety_level(media_id, params = {})
+      post 'flickr.photos.setSafetyLevel',
+        {:photo_id => media_id}.merge(params)
+    end
+
     # photos.upload
     def check_upload_tickets(tickets, params = {})
       get 'flickr.photos.upload.checkTickets',

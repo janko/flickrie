@@ -700,6 +700,20 @@ module Flickrie
     alias set_photo_permissions set_media_permissions
     alias set_video_permissions set_media_permissions
 
+    # Sets the safety level of a photo/video.
+    #
+    # @param media_id [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photos.setSafetyLevel](http://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def set_media_safety_level(media_id, params = {})
+      client.set_media_safety_level(media_id, params)
+      nil
+    end
+    alias set_photo_safety_level set_media_safety_level
+    alias set_video_safety_level set_media_safety_level
+
     # Fetches all available types of licenses.
     #
     # @return [Array<Flickrie::License>]

@@ -276,6 +276,12 @@ describe :ApiMethods do
       Flickrie.set_photo_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
       Flickrie.set_video_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
     end
+
+    it "sets safety level" do
+      Flickrie.set_media_safety_level(MEDIA_ID, :safety_level => 1)
+      Flickrie.set_photo_safety_level(MEDIA_ID, :safety_level => 1)
+      Flickrie.set_video_safety_level(MEDIA_ID, :safety_level => 1)
+    end
   end
 
   context "photosets", :vcr do

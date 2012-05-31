@@ -277,6 +277,7 @@ basis of this gem.
 "flickr.photos.setDates"                -> Flickrie.set_photo_dates
 "flickr.photos.setMeta"                 -> Flickrie.set_photo_meta
 "flickr.photos.setPerms"                -> Flickrie.set_photo_permissions
+"flickr.photos.setSafetyLevel"          -> Flickrie.set_photo_safety_level
 
 # photos.licenses
 "flickr.photos.licenses.getInfo"        -> Flickrie.get_licenses
