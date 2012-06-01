@@ -50,7 +50,6 @@ module Flickrie
     # @return [self]
     def original()     dup.original!       end
 
-    # @comment Alternate size methods
     # @return [self]
     def square75()   square(75)   end
     # @return [self]
