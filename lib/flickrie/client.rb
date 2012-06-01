@@ -189,6 +189,12 @@ module Flickrie
         {:photo_id => media_id, :license_id => license_id}.merge(params)
     end
 
+    # photos.transform
+    def rotate_media(media_id, degrees, params = {})
+      post 'flickr.photos.transform.rotate',
+        {:photo_id => media_id, :degrees => degrees}.merge(params)
+    end
+
     # photosets
     def get_set_info(set_id, params = {})
       get 'flickr.photosets.getInfo',

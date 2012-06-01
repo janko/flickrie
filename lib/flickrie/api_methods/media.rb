@@ -644,11 +644,8 @@ module Flickrie
     #
     # @return [nil]
     # @api_method [flickr.photos.licenses.setLicense](http://www.flickr.com/services/api/flickr.photos.licenses.setLicense.html)
-<<<<<<< HEAD
     #
     # @note This method requires authentication with "write" permissions.
-=======
->>>>>>> 4cdc287... Split API methods into multiple files
     def set_media_license(media_id, license_id, params = {})
       client.set_media_license(media_id, license_id, params)
       nil
@@ -656,7 +653,6 @@ module Flickrie
     alias set_photo_license set_media_license
     alias set_video_license set_media_license
 
-<<<<<<< HEAD
     # Rotates a photo/video.
     #
     # @return [nil]
@@ -670,8 +666,6 @@ module Flickrie
     alias rotate_photo rotate_media
     alias rotate_video rotate_media
 
-=======
->>>>>>> 4cdc287... Split API methods into multiple files
     # Fetches photos and videos from a set with the given ID.
     #
     # @param set_id [String]

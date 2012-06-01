@@ -294,6 +294,12 @@ describe :ApiMethods do
       Flickrie.set_photo_license(MEDIA_ID, 0)
       Flickrie.set_video_license(MEDIA_ID, 0)
     end
+
+    it "rotates" do
+      Flickrie.rotate_media(MEDIA_ID, 90)
+      Flickrie.rotate_photo(MEDIA_ID, 90)
+      Flickrie.rotate_video(MEDIA_ID, 180)
+    end
   end
 
   context "photosets", :vcr do
