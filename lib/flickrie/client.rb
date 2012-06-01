@@ -184,6 +184,11 @@ module Flickrie
       get 'flickr.photos.licenses.getInfo', params
     end
 
+    def set_media_license(media_id, license_id, params = {})
+      post 'flickr.photos.licenses.setLicense',
+        {:photo_id => media_id, :license_id => license_id}.merge(params)
+    end
+
     # photosets
     def get_set_info(set_id, params = {})
       get 'flickr.photosets.getInfo',

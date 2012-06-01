@@ -288,6 +288,12 @@ describe :ApiMethods do
       Flickrie.set_photo_tags(MEDIA_ID, 'luka')
       Flickrie.set_video_tags(MEDIA_ID, 'luka')
     end
+
+    it "sets license" do
+      Flickrie.set_media_license(MEDIA_ID, 0)
+      Flickrie.set_photo_license(MEDIA_ID, 0)
+      Flickrie.set_video_license(MEDIA_ID, 0)
+    end
   end
 
   context "photosets", :vcr do

@@ -288,6 +288,7 @@ basis of this gem.
 
 # photos.licenses
 "flickr.photos.licenses.getInfo"        -> Flickrie.get_licenses
+"flickr.photos.licenses.setLicense"     -> Flickrie.set_photo_license
 
 # photos.upload
 "flickr.photos.upload.checkTickets"     -> Flickrie.check_upload_tickets
