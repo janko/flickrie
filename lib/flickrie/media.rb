@@ -168,10 +168,8 @@ module Flickrie
     #
     # @return [self]
     def get_info(params = {})
-      hash = Flickrie.client.get_media_info(id, params).body['photo']
-      self.class.fix_info(hash)
-      @hash.deep_merge!(hash)
-
+      media = Flickrie.send("get_#{media_type}_info", id, params)
+      @hash.deep_merge!(media.hash)
       self
     end
 
@@ -179,9 +177,8 @@ module Flickrie
     #
     # @return [self]
     def get_exif(params = {})
-      hash = Flickrie.client.get_media_exif(id, params).body['photo']
-      @hash.deep_merge!(hash)
-
+      media = Flickrie.send("get_#{media_type}_exif", id, params)
+      @hash.deep_merge!(media.hash)
       self
     end
 
@@ -189,9 +186,8 @@ module Flickrie
     #
     # @return [self]
     def get_favorites(params = {})
-      hash = Flickrie.client.get_media_favorites(id, params).body['photo']
-      @hash.deep_merge!(hash)
-
+      media = Flickrie.send("get_#{media_type}_favorites", id, params)
+      @hash.deep_merge!(media.hash)
       self
     end
 
@@ -200,6 +196,10 @@ module Flickrie
     end
 
     private
+
+    def media_type
+      self.class.name.split('::').last.downcase
+    end
 
     BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'.chars.to_a.freeze
 

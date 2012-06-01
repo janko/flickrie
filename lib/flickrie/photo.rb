@@ -117,10 +117,8 @@ module Flickrie
     #
     # @return [self]
     def get_sizes(params = {})
-      hash = Flickrie.client.get_media_sizes(id, params).body['sizes']
-      self.class.fix_sizes(hash)
-      @hash.deep_merge!(hash)
-
+      photo = Flickrie.get_photo_sizes(id, params)
+      @hash.deep_merge!(photo.hash)
       largest!
     end
 
@@ -137,34 +135,6 @@ module Flickrie
 
     def size_abbr
       FLICKR_SIZES[size]
-    end
-
-    def self.fix_sizes(hash)
-      hash['usage'] = {
-        'canblog'     => hash['canblog'],
-        'canprint'    => hash['canprint'],
-        'candownload' => hash['candownload']
-      }
-      flickr_sizes = {
-        'Square'       => FLICKR_SIZES['Square 75'],
-        'Large Square' => FLICKR_SIZES['Square 150'],
-        'Thumbnail'    => FLICKR_SIZES['Thumbnail'],
-        'Small'        => FLICKR_SIZES['Small 240'],
-        'Small 320'    => FLICKR_SIZES['Small 320'],
-        'Medium'       => FLICKR_SIZES['Medium 500'],
-        'Medium 640'   => FLICKR_SIZES['Medium 640'],
-        'Medium 800'   => FLICKR_SIZES['Medium 800'],
-        'Large'        => FLICKR_SIZES['Large 1024'],
-        'Large 1600'   => FLICKR_SIZES['Large 1600'],
-        'Large 2048'   => FLICKR_SIZES['Large 2048'],
-        'Original'     => FLICKR_SIZES['Original']
-      }
-      hash['size'].each do |size_info|
-        size_abbr = flickr_sizes[size_info['label']]
-        hash["width_#{size_abbr}"] = size_info['width']
-        hash["height_#{size_abbr}"] = size_info['height']
-        hash["url_#{size_abbr}"] = size_info['source']
-      end
     end
   end
 end
