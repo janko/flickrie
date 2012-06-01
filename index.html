@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Flickrie : An object-oriented wrapper for the Flickr API." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Flickrie</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/janko-m/flickrie">View on GitHub</a>
+
+          <h1 id="project_title">Flickrie</h1>
+          <h2 id="project_tagline">An object-oriented wrapper for the Flickr API.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/janko-m/flickrie/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/janko-m/flickrie/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>Installation</h3>
+
+<pre><code>$ gem install flickrie
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>Single photo:</p>
+
+<div class="highlight">
+<pre><span class="n">photo</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">get_photo_info</span><span class="p">(</span><span class="mi">1337</span><span class="p">)</span> <span class="c1">#=&gt; 1337 is the photo's ID</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">title</span>       <span class="c1">#=&gt; "Rock climbing"</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">has_people?</span> <span class="c1">#=&gt; true</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">updated_at</span>  <span class="c1">#=&gt; 2012-06-01 23:27:40 +0200</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">views_count</span> <span class="c1">#=&gt; 4</span>
+</pre>
+</div>
+
+
+<p>Multiple photos:</p>
+
+<div class="highlight">
+<pre><span class="n">photos</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">photos_from_set</span><span class="p">(</span><span class="mi">28473</span><span class="p">,</span> <span class="ss">:include_sizes</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+<span class="n">photo</span> <span class="o">=</span> <span class="n">photos</span><span class="o">.</span><span class="n">first</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">small</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt;</span>
+</pre>
+</div>
+
+
+<p><img src="http://farm8.staticflickr.com/7094/7316710626_cf80b743d9_n.jpg" alt="painting"></p>
+
+<div class="highlight">
+<pre><span class="n">photo</span><span class="o">.</span><span class="n">medium</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt;</span>
+</pre>
+</div>
+
+
+<p><img src="http://farm8.staticflickr.com/7094/7316710626_cf80b743d9.jpg" alt="painting"></p>
+
+<p>Videos:</p>
+
+<div class="highlight">
+<pre><span class="n">video</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">get_video_info</span><span class="p">(</span><span class="mi">42374</span><span class="p">)</span>
+<span class="n">video</span><span class="o">.</span><span class="n">duration</span> <span class="c1">#=&gt; 34</span>
+<span class="n">video</span><span class="o">.</span><span class="n">ready?</span>   <span class="c1">#=&gt; true</span>
+</pre>
+</div>
+
+
+<p>Pagination:</p>
+
+<div class="highlight">
+<pre><span class="n">photos</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">photos_from_set</span><span class="p">(</span><span class="mi">32445</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">photos</span><span class="o">.</span><span class="n">per_page</span>      <span class="c1">#=&gt; 20</span>
+<span class="n">photos</span><span class="o">.</span><span class="n">current_page</span>  <span class="c1">#=&gt; 3</span>
+<span class="n">photos</span><span class="o">.</span><span class="n">total_pages</span>   <span class="c1">#=&gt; 7</span>
+<span class="n">photos</span><span class="o">.</span><span class="n">total_entries</span> <span class="c1">#=&gt; 140</span>
+</pre>
+</div>
+
+
+<p>Sets:</p>
+
+<div class="highlight">
+<pre><span class="n">set</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">get_set_info</span><span class="p">(</span><span class="mi">23345</span><span class="p">)</span>
+<span class="n">set</span><span class="o">.</span><span class="n">created_at</span>               <span class="c1">#=&gt; 2012-06-01 23:27:40 +0200</span>
+<span class="n">set</span><span class="o">.</span><span class="n">photos</span>                   <span class="c1"># makes an HTTP request</span>
+<span class="n">set</span><span class="o">.</span><span class="n">photos</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">restricted?</span> <span class="c1">#=&gt; true</span>
+</pre>
+</div>
+
+
+<h3>Other Info</h3>
+
+<p>These are just some of the features. If you like what you see, download the gem and have fun. Be sure to visit the <a href="https://github.com/janko-m/flickrie">GitHub page</a> for additional links and more examples. Waiting for your feedback :)</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Flickrie maintained by <a href="https://github.com/janko-m">janko-m</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
