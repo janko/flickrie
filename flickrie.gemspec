@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email        = "janko.marohnic@gmail.com"
   gem.description  = %q{This gem wraps the Flickr API with a nice object-oriented interface.}
   gem.summary      = gem.description
-  gem.homepage     = "https://github.com/janko-m/flickrie"
+  gem.homepage     = "http://janko-m.github.com/flickrie/"
 
   gem.files        = Dir["lib/**/*.rb"] + ["README.md", "LICENSE", ".yardopts"]
   gem.require_path = "lib"

@@ -2,6 +2,8 @@
 
 This gem is a nice wrapper for the Flickr API with an object-oriented interface.
 
+- Homepage: [http://janko-m.github.com/flickrie/](http://janko-m.github.com/flickrie/)
+
 - GitHub page: [https://github.com/janko-m/flickrie](https://github.com/janko-m/flickrie)
 
 - Documentation: [http://rubydoc.info/github/janko-m/flickrie](http://rubydoc.info/github/janko-m/flickrie/)
