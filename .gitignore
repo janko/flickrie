@@ -9,3 +9,4 @@ api_methods.md
 .rspec
 .yardoc/
 credentials.rb
+web/
