@@ -8,6 +8,11 @@
   you can now just pass `:include_sizes => true`, and that will do the
   same thing.
 
+- Covered `flickr.photos.transform.rotate` and `flickr.photos.licenses.setLicense`.
+
+- New homepage for the project. Check it out:
+  [http://janko-m.github.com/flickrie/](http://janko-m.github.com/flickrie/).
+
 ## Version 1.4.2
 
 - Update documentation
