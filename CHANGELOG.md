@@ -1,5 +1,13 @@
 # Flickrie changelog
 
+## Version 1.5.0
+
+- When you're using an API method for fetching photos which has the
+  `:extras` parameter, instead of passing
+  `:extras => 'url_sq,url_t,url_q,url_s,url_n,url_m,url_z,url_c,url_l,url_h,url_k,url_o'`,
+  you can now just pass `:include_sizes => true`, and that will do the
+  same thing.
+
 ## Version 1.4.2
 
 - Update documentation

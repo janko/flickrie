@@ -3,6 +3,11 @@ require 'faraday'
 module Flickrie
   class Client < Faraday::Connection
     def get(method, params = {})
+      if params.delete(:include_sizes)
+        urls = Photo::FLICKR_SIZES.values.map { |s| "url_#{s}" }.join(',')
+        params[:extras] = [params[:extras], urls].compact.join(',')
+      end
+
       super() do |req|
         req.params[:method] = method
         req.params.update(params)
