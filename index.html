@@ -30,7 +30,7 @@
 <h3>About</h3>
 
 <p>Your first thought is probably:</p>
-<blockquote>There is already a library for that, you moron. It's called 'flickraw', and it's quite popular.</blockquote>
+<blockquote>There is already a library for that, you moron, it's called "flickraw".</blockquote>
 <p>Well, I'm here to show you in which ways I think this library is better.</p>
 
 <p>Firstly, this library is object-oriented. This is a big advantage, because your code will be much more elegant and prettier. OO also makes room for smart methods that Flickr doesn't provide.</p>
@@ -48,7 +48,8 @@ Parsed:
 
 <p>Thirdly, the attributes are renamed to names we're used to. So, the <code>#lastupdate</code> attribute is renamed to <code>#updated_at</code>. The boolean attributes are also converted to predicate methods, so now instead of having an attribute <code>#ispro</code> which returns 1 (true) or 0 (false), you have <code>#pro?</code> which returns true or false.</p>
 
-<p>Your question may now be: "But wouldn't things break if Flickr changes its API a little, for example renames some attributes?". Yes, but if Flickr does that, your code will break anyways.</p>
+<p>Now you're probably thinking:</p>
+<blockquote>Whoa, this library seems like some hardcore shit. Show me some usage examples.</blockquote>
 
 <h3>Installation</h3>
 
@@ -74,7 +75,7 @@ Parsed:
 <div class="highlight">
 <pre><span class="n">photos</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">photos_from_set</span><span class="p">(</span><span class="mi">28473</span><span class="p">,</span> <span class="ss">:include_sizes</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
 <span class="n">photo</span> <span class="o">=</span> <span class="n">photos</span><span class="o">.</span><span class="n">first</span>
-<span class="n">photo</span><span class="o">.</span><span class="n">small</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt;</span>
+<span class="n">photo</span><span class="o">.</span><span class="n">small</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt; "http://farm8.staticflickr.com/7094/7316710626_cf80b743d9_n.jpg"</span>
 </pre>
 </div>
 
@@ -82,7 +83,7 @@ Parsed:
 <p><img src="http://farm8.staticflickr.com/7094/7316710626_cf80b743d9_n.jpg" alt="painting"></p>
 
 <div class="highlight">
-<pre><span class="n">photo</span><span class="o">.</span><span class="n">medium</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt;</span>
+<pre><span class="n">photo</span><span class="o">.</span><span class="n">medium</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt; "http://farm8.staticflickr.com/7094/7316710626_cf80b743d9.jpg"</span>
 </pre>
 </div>
 
