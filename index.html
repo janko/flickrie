@@ -26,7 +26,27 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>Installation</h3>
+
+<h3>About</h3>
+
+<p>Your first thought is probably:</p>
+<blockquote>There is already a library for that, you moron. It's called 'flickraw', and it's quite popular.</blockquote>
+<p>Well, I'm here to show you in which ways I think this library is better.</p>
+<p>Firstly, this library is object-oriented (unlike flickraw). This is a big advantage, because your code will be much more elegant and prettier. OO also makes room for smart methods that Flickr doesn't provide.</p>
+<p>Secondly, this library parses the response from Flickr. I'll demonstrate what I mean by this:</p>
+
+Not parsed:
+<div class="highlight">
+  <pre><code><span class="n">photo</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1">#=&gt; "2011-03-20 17:00:05"</span></code></pre>
+</div>
+Parsed:
+<div class="highlight">
+  <pre><code><span class="n">photo</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1">#=&gt; 2011-03-20 17:00:05 +0000</span></code></pre>
+</div>
+
+<p>See the difference? One is a <code>String</code>, and the other is a <code>Time</code> object. A developer would probably want the <code>Time</code> object, because then he can work with that. The goal is to take care of these little things internally, so that the developer can concentrate on more important things.</p>
+
+<h3>Installation</h3>
 
 <pre><code>$ gem install flickrie
 </code></pre>
@@ -97,8 +117,6 @@
 </pre>
 </div>
 
-
-<h3>Like it?</h3>
 
 <p>These are just some of the features. If you like what you see, just download the gem and have fun. Be sure to visit the <a href="https://github.com/janko-m/flickrie">GitHub page</a> for additional links and more examples. Waiting for your feedback :)</p>
       </section>
