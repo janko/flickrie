@@ -531,7 +531,6 @@ module Flickrie
 
     # Fetches photos and videos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_media(params = {})
@@ -540,7 +539,6 @@ module Flickrie
     end
     # Fetches photos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_photos(params = {})
@@ -548,7 +546,6 @@ module Flickrie
     end
     # Fetches videos matching a certain criteria.
     #
-    # @param search_params [Hash] Options for searching (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_videos(params = {})
