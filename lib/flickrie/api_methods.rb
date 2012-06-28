@@ -516,7 +516,7 @@ module Flickrie
 
     # Fetches geo-tagged photos and videos from the authenticated user.
     #
-    # @return [Flickrie:Collection<Flickrie:Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -526,7 +526,7 @@ module Flickrie
     end
     # Fetches geo-tagged photos from the authenticated user.
     #
-    # @return [Flickrie:Collection<Flickrie:Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -535,7 +535,7 @@ module Flickrie
     end
     # Fetches geo-tagged videos from the authenticated user.
     #
-    # @return [Flickrie:Collection<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getWithGeoData](http://www.flickr.com/services/api/flickr.photos.getWithGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -546,7 +546,7 @@ module Flickrie
     # Fetches photos and videos from the authenticated user that are not
     # geo-tagged.
     #
-    # @return [Flickrie:Collection<Flickrie:Photo, Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -556,7 +556,7 @@ module Flickrie
     end
     # Fetches photos from the authenticated user that are not geo-tagged.
     #
-    # @return [Flickrie:Collection<Flickrie:Photo>]
+    # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
@@ -565,7 +565,7 @@ module Flickrie
     end
     # Fetches videos from the authenticated user that are not geo-tagged.
     #
-    # @return [Flickrie:Collection<Flickrie::Video>]
+    # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getWithoutGeoData](http://www.flickr.com/services/api/flickr.photos.getWithoutGeoData.html)
     #
     # @note This method requires authentication with "read" permissions.
