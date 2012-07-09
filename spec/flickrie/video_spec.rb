@@ -49,7 +49,7 @@ describe :Video do
   end
 
   context "blank" do
-    let(:video) { Flickrie::Video.public_new }
+    let(:video) { Flickrie::Video.public_new({}) }
 
     it "should have attributes equal to nil" do
       attributes = Flickrie::Video.instance_methods -

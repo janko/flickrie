@@ -66,7 +66,7 @@ describe :Set do
   end
 
   context "blank set" do
-    let(:set) { Flickrie::Set.public_new }
+    let(:set) { Flickrie::Set.public_new({}) }
 
     it "has all attributes equal to nil" do
       attributes = Flickrie::Set.instance_methods -

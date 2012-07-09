@@ -93,7 +93,7 @@ describe :Photo do
   end
 
   context "blank photo" do
-    let(:photo) { Flickrie::Photo.public_new }
+    let(:photo) { Flickrie::Photo.public_new({}) }
 
     it "should have all attributes equal to nil" do
       [:width, :height, :source_url, :rotation, :size].each do |attr|

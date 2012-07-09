@@ -1,8 +1,14 @@
 require 'spec_helper'
 
+class Flickrie::Location
+  def self.public_new(*args)
+    new(*args)
+  end
+end
+
 describe :Location do
   context "blank" do
-    let(:location) { Flickrie::Location.public_new }
+    let(:location) { Flickrie::Location.public_new({}) }
 
     it "has all attributes equal to nil" do
       attributes = location.methods - Object.instance_methods - [:[]]

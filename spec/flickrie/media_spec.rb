@@ -320,7 +320,7 @@ describe :Media do
   end
 
   context "blank media" do
-    let(:media) { Flickrie::Photo.public_new }
+    let(:media) { Flickrie::Photo.public_new({}) }
 
     it "has attributes equal to nil" do
       attributes = Flickrie::Media.instance_methods -

@@ -101,7 +101,7 @@ describe :User do
   end
 
   context "blank user" do
-    let(:user) { Flickrie::User.public_new }
+    let(:user) { Flickrie::User.public_new({}) }
 
     it "has all attributes equal to nil" do
       attributes = Flickrie::User.instance_methods -
