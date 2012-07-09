@@ -201,16 +201,24 @@ module Flickrie
       self.class.name.split('::').last.downcase
     end
 
-    BASE58_ALPHABET = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'.chars.to_a.freeze
-
-    def to_base58(id)
-      id = Integer(id)
-      begin
-        id, remainder = id.divmod(58)
-        result = BASE58_ALPHABET[remainder] + (result || '')
-      end while id > 0
-
-      result
+    module ClassMethods
+      def new_collection(hash, api_caller)
+        collection = hash.delete('photo').map { |info| new(info, api_caller) }
+        Collection.new(hash).replace(collection)
+      end
     end
+    extend ClassMethods
+
+    # @private
+    def self.included(klass)
+      klass.extend(ClassMethods)
+    end
+
+    # @private
+    def self.new(hash, api_caller)
+      eval(hash['media'].capitalize).new(hash, api_caller)
+    end
+
+    include Base58
   end
 end

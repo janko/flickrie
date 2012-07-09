@@ -115,6 +115,7 @@ module Flickrie
   autoload :Ticket,       'flickrie/ticket'
   autoload :Instance,     'flickrie/instance'
   autoload :OAuth,        'flickrie/oauth'
+  autoload :Base58,       'flickrie/base58'
 
   extend ApiMethods
 end

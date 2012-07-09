@@ -325,7 +325,7 @@ describe :Media do
     it "has attributes equal to nil" do
       attributes = Flickrie::Media.instance_methods -
         Object.instance_methods -
-        [:[], :get_info, :get_exif, :get_favorites]
+        [:[], :get_info, :get_exif, :get_favorites, :to_base58]
 
       attributes.each do |attribute|
         media.send(attribute).should be_nil
