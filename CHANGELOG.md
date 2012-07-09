@@ -1,5 +1,11 @@
 # Flickrie changelog
 
+## Version 1.5.1
+
+- Fixed a bug where methods like `Flickrie::User#get_info` were still
+  using the global access token instead of the local one belonging to
+  a specific `Flickrie::Instance`.
+
 ## Version 1.5.0
 
 - When you're using an API method for fetching photos which has the
