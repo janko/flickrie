@@ -1,5 +1,5 @@
 require 'date'
-require 'flickrie/user/upload_status'
+require 'flickrie/objects/user/upload_status'
 
 module Flickrie
   class User

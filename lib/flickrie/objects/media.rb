@@ -1,8 +1,8 @@
-require 'flickrie/media/visibility'
-require 'flickrie/media/note'
-require 'flickrie/media/tag'
-require 'flickrie/media/exif'
-require 'flickrie/location'
+require 'flickrie/objects/media/visibility'
+require 'flickrie/objects/media/note'
+require 'flickrie/objects/media/tag'
+require 'flickrie/objects/media/exif'
+require 'flickrie/objects/location'
 require 'date'
 
 module Flickrie
