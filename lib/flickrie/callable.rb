@@ -5,11 +5,6 @@ require 'faraday_middleware'
 
 module Flickrie
   module Callable
-    DEFAULTS = {
-      :open_timeout => 3,
-      :timeout => 4
-    }
-
     # This is for manual use (for example, if I haven't covered something yet, and you really need it).
     # Here's an example:
     #
