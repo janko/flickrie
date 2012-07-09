@@ -53,7 +53,7 @@ module Flickrie
     # @api_method [flickr.people.findByEmail](http://www.flickr.com/services/api/flickr.people.findByEmail.html)
     def find_user_by_email(email, params = {})
       response = client.find_user_by_email(email, params)
-      User.from_find(response.body['user'])
+      User.new(response.body['user'], self)
     end
 
     # Fetches the Flickr user with the given username.
@@ -63,7 +63,7 @@ module Flickrie
     # @api_method [flickr.people.findByUsername](http://www.flickr.com/services/api/flickr.people.findByUsername.html)
     def find_user_by_username(username, params = {})
       response = client.find_user_by_username(username, params)
-      User.from_find(response.body['user'])
+      User.new(response.body['user'], self)
     end
 
     # Fetches photos and videos from the Flickr user with the given NSID.
@@ -75,7 +75,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def media_from_user(nsid, params = {})
       response = client.media_from_user(nsid, params)
-      Media.from_user(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the Flickr user with the given NSID.
     #
@@ -105,7 +105,7 @@ module Flickrie
     # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
     def media_of_user(nsid, params = {})
       response = client.media_of_user(nsid, params)
-      Media.of_user(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos containing a Flickr user with the given NSID.
     #
@@ -132,7 +132,7 @@ module Flickrie
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def public_media_from_user(nsid, params = {})
       response = client.public_media_from_user(nsid, params)
-      Media.from_user(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches public photos from the Flickr user with the given NSID.
     #
@@ -158,7 +158,7 @@ module Flickrie
     # @api_method [flickr.people.getInfo](http://www.flickr.com/services/api/flickr.people.getInfo.html)
     def get_user_info(nsid, params = {})
       response = client.get_user_info(nsid, params)
-      User.from_info(response.body['person'])
+      User.new(response.body['person'], self)
     end
 
     # Returns the upload status of the user who is currently authenticated.
@@ -170,7 +170,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_upload_status(params = {})
       response = client.get_upload_status(params)
-      User.from_upload_status(response.body['user'])
+      User.new(response.body['user'], self)
     end
 
     # Add tags to the photo/video with the given ID.
@@ -211,7 +211,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def media_from_contacts(params = {})
       response = client.media_from_contacts(params)
-      Media.from_contacts(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from contacts of the user who authenticated.
     #
@@ -243,7 +243,7 @@ module Flickrie
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def public_media_from_user_contacts(nsid, params = {})
       response = client.public_media_from_user_contacts(nsid, params)
-      Media.from_contacts(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches public photos from contacts of the user with the
     # given NSID.
@@ -280,7 +280,7 @@ module Flickrie
     # @api_method [flickr.photos.getContext](http://www.flickr.com/services/api/flickr.photos.getContext.html)
     def get_media_context(media_id, params = {})
       response = client.get_media_context(media_id, params)
-      Media.from_context(response.body)
+      MediaContext.new(response.body, self)
     end
     alias get_photo_context get_media_context
     alias get_video_context get_media_context
@@ -301,10 +301,8 @@ module Flickrie
     # @return [Flickrie::MediaCount]
     # @api_method [flickr.photos.getCounts](http://www.flickr.com/services/api/flickr.photos.getCounts.html)
     def get_media_counts(params = {})
-      response = client.get_media_counts \
-        MediaCount.ensure_utc(params)
-      response.body['photocounts']['photocount'].
-        map { |info| MediaCount.new(info, params) }
+      response = client.get_media_counts(params)
+      MediaCount.new_collection(response.body['photocounts'])
     end
     alias get_photos_counts get_media_counts
     alias get_videos_counts get_media_counts
@@ -323,7 +321,7 @@ module Flickrie
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_photo_exif(photo_id, params = {})
       response = client.get_media_exif(photo_id, params)
-      Photo.new(response.body['photo'])
+      Photo.new(response.body['photo'], self)
     end
     # Fetches the exif for the video with the given ID. Example:
     #
@@ -339,7 +337,7 @@ module Flickrie
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_video_exif(video_id, params = {})
       response = client.get_media_exif(video_id, params)
-      Video.new(response.body['photo'])
+      Video.new(response.body['photo'], self)
     end
 
     # Fetches the list of users who favorited the photo with the given ID.
@@ -353,7 +351,7 @@ module Flickrie
     # @api_method [flickr.photos.getFavorites](http://www.flickr.com/services/api/flickr.photos.getFavorites.html)
     def get_photo_favorites(photo_id, params = {})
       response = client.get_media_favorites(photo_id, params)
-      Photo.new(response.body['photo'])
+      Photo.new(response.body['photo'], self)
     end
     # Fetches the list of users who favorited the video with the given ID.
     # Example:
@@ -366,7 +364,7 @@ module Flickrie
     # @api_method [flickr.photos.getFavorites](http://www.flickr.com/services/api/flickr.photos.getFavorites.html)
     def get_video_favorites(video_id, params = {})
       response = client.get_media_favorites(video_id, params)
-      Video.new(response.body['photo'])
+      Video.new(response.body['photo'], self)
     end
 
     # Fetches info of the photo/video with the given ID.
@@ -376,7 +374,7 @@ module Flickrie
     # @api_method [flickr.photos.getInfo](http://www.flickr.com/services/api/flickr.photos.getInfo.html)
     def get_media_info(media_id, params = {})
       response = client.get_media_info(media_id, params)
-      Media.from_info(response.body['photo'])
+      Media.new(response.body['photo'], self)
     end
     alias get_photo_info get_media_info
     alias get_video_info get_media_info
@@ -390,7 +388,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def media_not_in_set(params = {})
       response = client.media_not_in_set({:media => 'all'}.merge(params))
-      Media.from_not_in_set(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user
     # that are not in any set.
@@ -421,7 +419,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_photo_permissions(photo_id, params = {})
       response = client.get_media_permissions(photo_id, params)
-      Photo.from_perms(response.body['perms'])
+      Photo.new(response.body['perms'], self)
     end
     # Gets permissions of a video with the given ID.
     #
@@ -431,7 +429,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_video_permissions(video_id, params = {})
       response = client.get_media_permissions(video_id, params)
-      Video.from_perms(response.body['perms'])
+      Video.new(response.body['perms'], self)
     end
 
     # Fetches the latest photos and videos uploaded to Flickr.
@@ -440,7 +438,7 @@ module Flickrie
     # @api_method [flickr.photos.getRecent](http://www.flickr.com/services/api/flickr.photos.getRecent.html)
     def get_recent_media(params = {})
       response = client.get_recent_media(params)
-      Media.from_recent(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches the latest photos uploaded to Flickr.
     #
@@ -469,7 +467,7 @@ module Flickrie
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_photo_sizes(photo_id, params = {})
       response = client.get_media_sizes(photo_id, params)
-      Photo.from_sizes(response.body['sizes'].merge('id' => photo_id.to_s))
+      Photo.new(response.body['sizes'], self)
     end
     # Fetches the sizes of the video with the given ID. Example:
     #
@@ -481,7 +479,7 @@ module Flickrie
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_video_sizes(video_id, params = {})
       response = client.get_media_sizes(video_id, params)
-      Video.from_sizes(response.body['sizes'].merge('id' => video_id.to_s))
+      Video.new(response.body['sizes'], self)
     end
 
     # Fetches photos and videos from the authenticated user that have no
@@ -493,7 +491,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_untagged_media(params = {})
       response = client.get_untagged_media({:media => 'all'}.merge(params))
-      Media.from_untagged(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user that have no tags.
     #
@@ -522,7 +520,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_media_with_geo_data(params = {})
       response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
-      Media.from_geo_data(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches geo-tagged photos from the authenticated user.
     #
@@ -552,7 +550,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def get_media_without_geo_data(params = {})
       response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
-      Media.from_geo_data(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user that are not geo-tagged.
     #
@@ -582,7 +580,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def recently_updated_media(params = {})
       response = client.recently_updated_media(params)
-      Media.from_recently_updated(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user that have recently been updated.
     #
@@ -623,7 +621,7 @@ module Flickrie
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_media(params = {})
       response = client.search_media({:media => 'all'}.merge(params))
-      Media.from_search(response.body['photos'])
+      Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos matching a certain criteria.
     #
@@ -788,7 +786,7 @@ module Flickrie
     # @api_method [flickr.photosets.getInfo](http://www.flickr.com/services/api/flickr.photosets.getInfo.html)
     def get_set_info(set_id, params = {})
       response = client.get_set_info(set_id, params)
-      Set.from_info(response.body['photoset'])
+      Set.new(response.body['photoset'], self)
     end
 
     # Fetches sets from a user with the given NSID.
@@ -798,7 +796,7 @@ module Flickrie
     # @api_method [flickr.photosets.getList](http://www.flickr.com/services/api/flickr.photosets.getList.html)
     def sets_from_user(nsid, params = {})
       response = client.sets_from_user(nsid, params)
-      Set.from_user(response.body['photosets'], nsid)
+      Set.new_collection(response.body['photosets'], self)
     end
 
     # Fetches photos and videos from a set with the given ID.
@@ -809,7 +807,7 @@ module Flickrie
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def media_from_set(set_id, params = {})
       response = client.media_from_set(set_id, {:media => 'all'}.merge(params))
-      Media.from_set(response.body['photoset'])
+      Media.new_collection(response.body['photoset'], self)
     end
     # Fetches photos from a set with the given ID.
     #
@@ -839,7 +837,7 @@ module Flickrie
     # @note This method requires authentication with "read" permissions.
     def test_login(params = {})
       response = client.test_login(params)
-      User.from_test(response.body['user'])
+      User.new(response.body['user'], self)
     end
   end
 end

@@ -9,15 +9,14 @@ module Flickrie
 
     # @return [Range]
     def date_range
-      dates =
-        case @dates_kind
-        when "mysql timestamp"
-          [DateTime.parse(@info['fromdate']).to_time,
-           DateTime.parse(@info['todate']).to_time]
-        when "unix timestamp"
-          [Time.at(Integer(@info['fromdate'])),
-           Time.at(Integer(@info['todate']))]
+      dates = []
+      ['fromdate', 'todate'].each do |key|
+        if @hash[key] == @hash[key].to_i.to_s
+          dates << Time.at(Integer(@hash[key]))
+        else
+          dates << DateTime.parse(@hash[key]).to_time
         end
+      end
 
       dates.first..dates.last
     end
@@ -36,19 +35,12 @@ module Flickrie
 
     private
 
-    def initialize(info, params)
-      @info = info
-      @dates_kind = (params[:dates].nil? ? "mysql timestamp" : "unix timestamp")
+    def initialize(hash)
+      @hash = hash
     end
 
-    def self.ensure_utc(params)
-      params.dup.tap do |hash|
-        if hash[:taken_dates].is_a?(String)
-          hash[:taken_dates] = hash[:taken_dates].split(',').
-            map { |date| DateTime.parse(date) }.
-            map(&:to_time).map(&:getutc).join(',')
-        end
-      end
+    def self.new_collection(hash)
+      hash['photocount'].map { |info| new(info) }
     end
   end
 end

@@ -32,8 +32,7 @@ module Flickrie
     #
     # @return [self]
     def get_sizes(params = {})
-      video = Flickrie.get_video_sizes(id, params)
-      @hash.deep_merge!(video.hash)
+      @hash.deep_merge!(@api_caller.get_video_sizes(id, params).hash)
       @video = @hash['video']
       self
     end
@@ -49,7 +48,7 @@ module Flickrie
 
     private
 
-    def initialize(hash = {})
+    def initialize(*args)
       super
       @video = @hash['video'] || {}
     end

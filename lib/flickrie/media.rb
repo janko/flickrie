@@ -1,4 +1,3 @@
-require 'flickrie/media/class_methods'
 require 'flickrie/media/visibility'
 require 'flickrie/media/note'
 require 'flickrie/media/tag'
@@ -61,7 +60,7 @@ module Flickrie
     def geo_permissions() Visibility.new(@hash['geoperms']) rescue nil end
 
     # @return [Array<Flickrie::Media::Tag>]
-    def tags() @hash['tags'].map { |info| Tag.new(info) }     rescue nil end
+    def tags() @hash['tags'].map { |info| Tag.new(info, @api_caller) }     rescue nil end
     # @return [Array<Flickrie::Media::Tag>]
     def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
 
@@ -80,7 +79,7 @@ module Flickrie
     def taken_at_granularity() Integer(@hash['dates']['takengranularity']) rescue nil end
 
     # @return [Flickrie::User]
-    def owner() User.new(@hash['owner']) rescue nil end
+    def owner() User.new(@hash['owner'], @api_caller) if @hash['owner'] end
 
     # @return [Fixnum]
     def safety_level() Integer(@hash['safety_level']) rescue nil end
@@ -145,14 +144,14 @@ module Flickrie
     def faved?() Integer(@hash['is_faved']) == 1 rescue nil end
 
     # @return [Array<Flickrie::Media::Note>]
-    def notes() @hash['notes']['note'].map { |info| Note.new(info) } rescue nil end
+    def notes() @hash['notes']['note'].map { |info| Note.new(info, @api_caller) } rescue nil end
 
     # @return [Integer]
     def content_type() Integer(@hash['content_type']) rescue nil end
 
     # @return [Flickrie::Collection<Flickrie::User>]
     def favorites
-      collection = @hash['person'].map { |info| User.new(info) }
+      collection = @hash['person'].map { |info| User.new(info, @api_caller) }
       Collection.new(@hash).replace(collection)
     rescue
       nil
@@ -168,8 +167,7 @@ module Flickrie
     #
     # @return [self]
     def get_info(params = {})
-      media = Flickrie.send("get_#{media_type}_info", id, params)
-      @hash.deep_merge!(media.hash)
+      @hash.deep_merge!(@api_caller.send("get_#{media_type}_info", id, params).hash)
       self
     end
 
@@ -177,8 +175,7 @@ module Flickrie
     #
     # @return [self]
     def get_exif(params = {})
-      media = Flickrie.send("get_#{media_type}_exif", id, params)
-      @hash.deep_merge!(media.hash)
+      @hash.deep_merge!(@api_caller.send("get_#{media_type}_exif", id, params).hash)
       self
     end
 
@@ -186,13 +183,13 @@ module Flickrie
     #
     # @return [self]
     def get_favorites(params = {})
-      media = Flickrie.send("get_#{media_type}_favorites", id, params)
-      @hash.deep_merge!(media.hash)
+      @hash.deep_merge!(@api_caller.send("get_#{media_type}_favorites", id, params).hash)
       self
     end
 
-    def initialize(hash = {})
+    def initialize(hash, api_caller)
       @hash = hash
+      @api_caller = api_caller
     end
 
     private

@@ -69,3 +69,5 @@ module Flickrie
     end
   end
 end
+
+require 'flickrie/middleware/fix_flickr_data'

@@ -39,25 +39,25 @@ module Flickrie
     end
 
     # @return [Flickrie::User]
-    def owner() User.new('nsid' => @hash['owner']) if @hash['owner'] end
+    def owner() User.new({'nsid' => @hash['owner']}, @api_caller) if @hash['owner'] end
 
     # Same as calling `Flickrie.photos_from_set(set.id)`.
     #
     # @return [Flickrie::Collection<Flickrie::Photo>]
     def photos(params = {})
-      Flickrie.photos_from_set(id, params)
+      @api_caller.photos_from_set(id, params)
     end
     # Same as calling `Flickrie.videos_from_set(set.id)`.
     #
     # @return [Flickrie::Collection<Flickrie::Video>]
     def videos(params = {})
-      Flickrie.videos_from_set(id, params)
+      @api_caller.videos_from_set(id, params)
     end
     # Same as calling `Flickrie.media_from_set(set.id)`.
     #
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def media(params = {})
-      Flickrie.media_from_set(id, params)
+      @api_caller.media_from_set(id, params)
     end
 
     # @return [Boolean]
@@ -84,40 +84,19 @@ module Flickrie
     #
     # @return [self]
     def get_info(params = {})
-      hash ||= Flickrie.client.get_set_info(id, params).body['photoset']
-      self.class.fix_info(hash)
-      @hash.update(hash)
-
+      @hash.deep_merge!(@api_caller.get_set_info(id, params).hash)
       self
     end
 
     private
 
-    def initialize(hash = {})
+    def initialize(hash, api_caller)
       @hash = hash
+      @api_caller = api_caller
     end
 
-    def self.from_info(hash)
-      fix_info(hash)
-      new(hash)
-    end
-
-    def self.fix_info(hash)
-      hash['title'] = hash['title']['_content']
-      hash['description'] = hash['description']['_content']
-    end
-
-    def self.from_user(hash, user_nsid)
-      collection = hash.delete('photoset').map do |set_hash|
-        set_hash['count_photos'] = set_hash.delete('photos')
-        set_hash['count_videos'] = set_hash.delete('videos')
-        set_hash['title'] = set_hash['title']['_content']
-        set_hash['description'] = set_hash['description']['_content']
-        set_hash['owner'] = user_nsid
-
-        new(set_hash)
-      end
-
+    def self.new_collection(hash, api_caller)
+      collection = hash.delete('photoset').map { |info| new(info, api_caller) }
       Collection.new(hash).replace(collection)
     end
   end

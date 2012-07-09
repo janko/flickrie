@@ -116,14 +116,13 @@ module Flickrie
     #
     # @return [self]
     def get_sizes(params = {})
-      photo = Flickrie.get_photo_sizes(id, params)
-      @hash.deep_merge!(photo.hash)
+      @hash.deep_merge!(@api_caller.get_photo_sizes(id, params).hash)
       largest!
     end
 
     private
 
-    def initialize(info = {})
+    def initialize(*args)
       super
       @size = largest_size
     end

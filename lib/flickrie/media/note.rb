@@ -8,7 +8,7 @@ module Flickrie
       # @return [String]
       def id() @hash['id'] end
       # @return [Flickrie::User]
-      def author() User.new('nsid' => @info['author'], 'username' => @info['authorname']) end
+      def author() User.new({'nsid' => @hash['author'], 'username' => @hash['authorname']}, @api_caller) end
       # @return [String]
       def content() @hash['_content'] end
       # Returns a 2-element array, representing a point.
@@ -30,10 +30,9 @@ module Flickrie
 
       private
 
-      def initialize(info)
-        raise ArgumentError if info.nil?
-
-        @info = info
+      def initialize(hash, api_caller)
+        @hash = hash
+        @api_caller = api_caller
       end
     end
   end

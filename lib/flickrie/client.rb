@@ -80,7 +80,7 @@ module Flickrie
     end
 
     def get_media_counts(params = {})
-      get 'flickr.photos.getCounts', params
+      get 'flickr.photos.getCounts', ensure_utc(params)
     end
 
     def get_media_exif(media_id, params = {})
@@ -219,6 +219,16 @@ module Flickrie
     def ensure_media(params)
       params.dup.tap do |dup_params|
         dup_params[:extras] = [dup_params[:extras], 'media'].compact.join(',')
+      end
+    end
+
+    def ensure_utc(params)
+      params.dup.tap do |hash|
+        if hash[:taken_dates].is_a?(String)
+          hash[:taken_dates] = hash[:taken_dates].split(',').
+            map { |date| DateTime.parse(date) }.
+            map(&:to_time).map(&:getutc).join(',')
+        end
       end
     end
   end

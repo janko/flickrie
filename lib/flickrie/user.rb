@@ -72,38 +72,38 @@ module Flickrie
     #
     # @return [Flickrie::Collection<Flickrie::Photo>]
     def public_photos(params = {})
-      Flickrie.public_photos_from_user(nsid || id, params)
+      @api_caller.public_photos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.public_videos_from_user(user.nsid)`.
     #
     # @return [Flickrie::Collection<Flickrie::Video>]
     def public_videos(params = {})
-      Flickrie.public_videos_from_user(nsid || id, params)
+      @api_caller.public_videos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.public_media_from_user(user.nsid)`.
     #
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def public_media(params = {})
-      Flickrie.public_media_from_user(nsid || id, params)
+      @api_caller.public_media_from_user(nsid || id, params)
     end
 
     # Same as calling `Flickrie.photos_from_user(user.nsid)`.
     #
     # @return [Flickrie::Collection<Flickrie::Photo>]
     def photos(params = {})
-      Flickrie.photos_from_user(nsid || id, params)
+      @api_caller.photos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.videos_from_user(user.nsid)`.
     #
     # @return [Flickrie::Collection<Flickrie::Video>]
     def videos(params = {})
-      Flickrie.videos_from_user(nsid || id, params)
+      @api_caller.videos_from_user(nsid || id, params)
     end
     # Same as calling `Flickrie.media_from_user(user.nsid)`.
     #
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     def media(params = {})
-      Flickrie.media_from_user(nsid || id, params)
+      @api_caller.media_from_user(nsid || id, params)
     end
 
     # @return [Boolean]
@@ -122,55 +122,15 @@ module Flickrie
     #
     # @return [self]
     def get_info(params = {})
-      hash = Flickrie.client.get_user_info(nsid || id, params).body['person']
-      self.class.fix_info(hash)
-      @hash.update(hash)
-
+      @hash.deep_merge!(@api_caller.get_user_info(nsid || id, params).hash)
       self
     end
 
     private
 
-    def initialize(hash = {})
-      raise ArgumentError if hash.nil?
-
+    def initialize(hash, api_caller)
       @hash = hash
-    end
-
-    def self.from_info(hash)
-      fix_info(hash)
-      new(hash)
-    end
-
-    def self.from_find(hash)
-      hash['username'] = hash['username']['_content']
-      new(hash)
-    end
-
-    def self.from_test(hash)
-      from_find(hash)
-    end
-
-    def self.from_upload_status(hash)
-      hash['username'] = hash['username']['_content']
-      hash['upload_status'] = {
-        'bandwidth' => hash.delete('bandwidth'),
-        'filesize' => hash.delete('filesize'),
-        'sets' => hash.delete('sets'),
-        'videosize' => hash.delete('videosize'),
-        'videos' => hash.delete('videos')
-      }
-      new(hash)
-    end
-
-    def self.fix_info(hash)
-      %w[username realname location description profileurl
-         mobileurl photosurl].each do |attribute|
-        hash[attribute] = hash[attribute]['_content']
-      end
-      %w[count firstdatetaken firstdate].each do |photo_attribute|
-        hash['photos'][photo_attribute] = hash['photos'][photo_attribute]['_content']
-      end
+      @api_caller = api_caller
     end
   end
 end

@@ -18,7 +18,7 @@ module Flickrie
 
       # @return [Flickrie::User]
       def author
-        User.new('nsid' => @info['author']) if @info['author']
+        User.new({'nsid' => @hash['author']}, @api_caller) if @hash['author']
       end
 
       def [](key) @hash[key] end
@@ -27,8 +27,9 @@ module Flickrie
 
       private
 
-      def initialize(info)
-        @info = info
+      def initialize(hash, api_caller)
+        @hash = hash
+        @api_caller = api_caller
       end
 
       def to_s
