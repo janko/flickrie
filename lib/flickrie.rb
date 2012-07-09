@@ -1,7 +1,4 @@
-require 'flickrie/client'
-require 'flickrie/upload_client'
-require 'flickrie/middleware'
-require 'faraday_middleware'
+require 'flickrie/callable'
 
 module Flickrie
   DEFAULTS = {
@@ -85,6 +82,8 @@ module Flickrie
     # @see Flickrie::Collection
     attr_accessor :pagination
 
+    # This is basically `attr_writer` with resetting the client. This is because client is cached,
+    # so it wouldn't pick up the attribute being set. This is mainly for the console.
     [
       :api_key, :shared_secret, :timeout,
       :open_timeout, :access_token, :access_secret
@@ -96,83 +95,7 @@ module Flickrie
         end
       end
 
-    # This is for manual use (for example, if I haven't covered something yet, and you really need it).
-    # Here's an example:
-    #
-    #     response = Flickrie.client.get "flickr.photos.getInfo", :photo_id => 8423943
-    #     response.body['photo']['id']          # => 8423943
-    #     response.body['photo']['description'] # => "..."
-    #
-    #     Flickrie.client.post "flickr.photos.licenses.setLicense", :photo_id => 1241497, :license_id => 2
-    #
-    # For the full list of available API methods, see [this page](http://www.flickr.com/services/api/).
-    #
-    # @return [HTTP response] A Faraday HTTP response
-    def client
-      @client ||= new_client
-    end
-
-    # @private
-    def new_client(access_token = {})
-      params = {
-        :url => 'http://api.flickr.com/services/rest',
-        :params => {
-          :format => 'json',
-          :nojsoncallback => '1',
-          :api_key => api_key
-        },
-        :request => {
-          :open_timeout => open_timeout || DEFAULTS[:open_timeout],
-          :timeout => timeout || DEFAULTS[:timeout]
-        }
-      }
-
-      Client.new(params) do |b|
-        b.use Middleware::Retry
-        b.use FaradayMiddleware::OAuth,
-          :consumer_key => api_key,
-          :consumer_secret => shared_secret,
-          :token => access_token[:token] || self.access_token,
-          :token_secret => access_token[:secret] || self.access_secret
-
-        b.use Middleware::StatusCheck
-        b.use FaradayMiddleware::ParseJson
-        b.use Middleware::OAuthCheck
-
-        b.adapter :net_http
-      end
-    end
-
-    # @private
-    def upload_client
-      @upload_client ||= new_upload_client
-    end
-
-    # @private
-    def new_upload_client(access_token = {})
-      params = {
-        :url => 'http://api.flickr.com/services',
-        :request => {
-          :open_timeout => open_timeout || DEFAULTS[:open_timeout]
-        }
-      }
-
-      UploadClient.new(params) do |b|
-        b.use Middleware::Retry
-        b.use FaradayMiddleware::OAuth,
-          :consumer_key => api_key,
-          :consumer_secret => shared_secret,
-          :token => access_token[:token] || self.access_token,
-          :token_secret => access_token[:secret] || self.access_secret
-        b.request :multipart
-
-        b.use Middleware::UploadStatusCheck
-        b.use FaradayMiddleware::ParseXml
-        b.use Middleware::OAuthCheck
-
-        b.adapter :net_http
-      end
-    end
+    include Callable
   end
 end
 

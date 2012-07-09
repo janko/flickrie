@@ -2,6 +2,15 @@ module Flickrie
   class Instance
     attr_reader :access_token, :access_secret
 
+    def self.delegate(*attributes)
+      attributes.each do |attribute|
+        define_method(attribute) do
+          Flickrie.send(attribute)
+        end
+      end
+    end
+    delegate :api_key, :shared_secret, :open_timeout, :timeout, :pagination
+
     # Initializes a new authenticated instance. Example:
     #
     #     flickrie = Flickrie::Instance.new("ACCESS_TOKEN", "ACCESS_SECRET")
@@ -10,21 +19,7 @@ module Flickrie
       @access_token, @access_secret = access_token, access_secret
     end
 
-    # See {Flickrie.client} for more info.
-    def client
-      @client ||= Flickrie.new_client(access_token_hash)
-    end
-
+    include Callable
     include ApiMethods
-
-    private
-
-    def upload_client
-      @upload_client ||= Flickrie.new_upload_client(access_token_hash)
-    end
-
-    def access_token_hash
-      {:token => access_token, :secret => access_secret}
-    end
   end
 end
