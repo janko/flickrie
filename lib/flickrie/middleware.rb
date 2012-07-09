@@ -12,7 +12,7 @@ module Flickrie
   end
 
   # Internal
-  module Middleware # :nodoc:
+  module Middleware
     class StatusCheck < Faraday::Response::Middleware
       def on_complete(env)
         if env[:body]['stat'] != 'ok'
