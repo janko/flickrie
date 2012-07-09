@@ -5,15 +5,15 @@ module Flickrie
       #   :id, :raw, :content, :machine_tag?, :author, :hash
 
       # @return [String]
-      def id()      @info['id']       end
+      def id()      @hash['id']       end
       # @return [String]
-      def raw()     @info['raw']      end
+      def raw()     @hash['raw']      end
       # @return [String]
-      def content() @info['_content'] end
+      def content() @hash['_content'] end
 
       # @return [Boolean]
       def machine_tag?
-        @info['machine_tag'].to_i == 1 if @info['machine_tag']
+        @hash['machine_tag'].to_i == 1 if @hash['machine_tag']
       end
 
       # @return [Flickrie::User]
@@ -21,9 +21,9 @@ module Flickrie
         User.new('nsid' => @info['author']) if @info['author']
       end
 
-      def [](key) @info[key] end
+      def [](key) @hash[key] end
       # @return [Hash]
-      def hash() @info end
+      def hash() @hash end
 
       private
 

@@ -6,27 +6,27 @@ module Flickrie
       #   :height, :hash
 
       # @return [String]
-      def id() @info['id'] end
+      def id() @hash['id'] end
       # @return [Flickrie::User]
       def author() User.new('nsid' => @info['author'], 'username' => @info['authorname']) end
       # @return [String]
-      def content() @info['_content'] end
+      def content() @hash['_content'] end
       # Returns a 2-element array, representing a point.
       #
       # @return [Array<Fixnum>]
-      def coordinates() [@info['x'].to_i, @info['y'].to_i] end
+      def coordinates() [@hash['x'].to_i, @hash['y'].to_i] end
       # @return [Fixnum]
-      def width() @info['w'].to_i end
+      def width() @hash['w'].to_i end
       # @return [Fixnum]
-      def height() @info['h'].to_i end
+      def height() @hash['h'].to_i end
 
       def to_s
         content
       end
 
-      def [](key) @info[key] end
+      def [](key) @hash[key] end
       # @return [Fixnum]
-      def hash() @info end
+      def hash() @hash end
 
       private
 

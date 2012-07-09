@@ -6,13 +6,13 @@ module Flickrie
     #   :country, :place_id, :woeid, :hash
 
     # @return [Fixnum]
-    def latitude()  @info['latitude']  end
+    def latitude()  @hash['latitude']  end
     # @return [Fixnum]
-    def longitude() @info['longitude'] end
+    def longitude() @hash['longitude'] end
     # @return [String]
-    def accuracy()  @info['accuracy']  end
+    def accuracy()  @hash['accuracy']  end
     # @return [Fixnum]
-    def context()   Integer(@info['context']) rescue nil end
+    def context()   Integer(@hash['context']) rescue nil end
 
     # Returns a struct with attributes `#name`, `#place_id` and `#woeid`
     #
@@ -36,31 +36,31 @@ module Flickrie
     def country()       new_area('country')       end
 
     # @return [String]
-    def place_id() @info['place_id'] end
+    def place_id() @hash['place_id'] end
     # @return [String]
-    def woeid()    @info['woeid']    end
+    def woeid()    @hash['woeid']    end
 
-    def [](key) @info[key] end
+    def [](key) @hash[key] end
     # Returns the raw hash from the response. Useful if something isn't available by methods.
     #
     # @return [Hash]
-    def hash() @info end
+    def hash() @hash end
 
     private
 
-    def initialize(info = {})
-      raise ArgumentError if info.nil?
-      @info = info
+    def initialize(hash)
+      raise ArgumentError if hash.nil?
+      @hash = hash
     end
 
     def new_area(area_name)
-      if @info[area_name]
+      if @hash[area_name]
         area_class = Class.new(Struct.new(:name, :place_id, :woeid)) do
           def to_s
             name
           end
         end
-        info = @info[area_name]
+        info = @hash[area_name]
         area_class.new(info['_content'], info['place_id'], info['woeid'])
       end
     end

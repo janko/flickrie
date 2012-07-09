@@ -5,24 +5,23 @@ module Flickrie
       #   :public?, :friends?, :family?, :contacts?, :hash
 
       # @return [Boolean]
-      def public?()   @info['ispublic'].to_i == 1 if @info['ispublic']   end
+      def public?()   @hash['ispublic'].to_i == 1 if @hash['ispublic']   end
       # @return [Boolean]
-      def friends?()  @info['isfriend'].to_i == 1 if @info['isfriend']   end
+      def friends?()  @hash['isfriend'].to_i == 1 if @hash['isfriend']   end
       # @return [Boolean]
-      def family?()   @info['isfamily'].to_i == 1 if @info['isfamily']   end
+      def family?()   @hash['isfamily'].to_i == 1 if @hash['isfamily']   end
       # @return [Boolean]
-      def contacts?() @info['iscontact'].to_i == 1 if @info['iscontact'] end
+      def contacts?() @hash['iscontact'].to_i == 1 if @hash['iscontact'] end
 
-      def [](key) @info[key] end
+      def [](key) @hash[key] end
       # @return [Hash]
-      def hash() @info end
+      def hash() @hash end
 
       private
 
-      def initialize(info)
-        raise ArgumentError if info.nil?
-
-        @info = info
+      def initialize(hash)
+        raise ArgumentError if hash.nil?
+        @hash = hash
       end
     end
   end

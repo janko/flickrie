@@ -51,7 +51,7 @@ module Flickrie
 
     def initialize(hash = {})
       super
-      @video = hash['video'] || {}
+      @video = @hash['video'] || {}
     end
   end
 end

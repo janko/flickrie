@@ -5,7 +5,7 @@ module Flickrie
     # @!parse attr_reader \
     #   :value, :date_range, :from, :to, :hash
 
-    def value() Integer(@info['count']) rescue nil end
+    def value() Integer(@hash['count']) rescue nil end
 
     # @return [Range]
     def date_range
@@ -28,11 +28,11 @@ module Flickrie
     # @return [Time]
     def to()   date_range.end   end
 
-    def [](key) @info[key] end
+    def [](key) @hash[key] end
     # Returns the raw hash from the response. Useful if something isn't available by methods.
     #
     # @return [Hash]
-    def hash() @info end
+    def hash() @hash end
 
     private
 
