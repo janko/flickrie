@@ -18,20 +18,20 @@ module Flickrie
         case flickr_method
         # people
         when 'flickr.people.findByUsername'
-          data['user']['username'] = data['user']['username']['_content']
+          data['user']['username'] = data['user']['username']['_content'] rescue nil
         when 'flickr.people.findByEmail'
-          data['user']['username'] = data['user']['username']['_content']
+          data['user']['username'] = data['user']['username']['_content'] rescue nil
         when 'flickr.people.getInfo'
           %w[username realname location description profileurl mobileurl photosurl].each do |attribute|
-            data['person'][attribute] = data['person'][attribute]['_content']
+            data['person'][attribute] = data['person'][attribute]['_content'] rescue nil
           end
           %w[count firstdatetaken firstdate].each do |photo_attribute|
-            data['person']['photos'][photo_attribute] = data['person']['photos'][photo_attribute]['_content']
+            data['person']['photos'][photo_attribute] = data['person']['photos'][photo_attribute]['_content'] rescue nil
           end
         when 'flickr.test.login'
-          data['user']['username'] = data['user']['username']['_content']
+          data['user']['username'] = data['user']['username']['_content'] rescue nil
         when 'flickr.people.getUploadStatus'
-          data['user']['username'] = data['user']['username']['_content']
+          data['user']['username'] = data['user']['username']['_content'] rescue nil
           data['user']['upload_status'] = {
             'bandwidth' => data['user'].delete('bandwidth'),
             'filesize' => data['user'].delete('filesize'),
@@ -46,10 +46,10 @@ module Flickrie
         when 'flickr.people.getPublicPhotos'
           fix_common!(data)
         when 'flickr.photos.getInfo'
-          data['photo']['title'] = data['photo']['title']['_content']
-          data['photo']['description'] = data['photo']['description']['_content']
-          data['photo']['comments_count'] = data['photo'].delete('comments')['_content']
-          data['photo']['dates']['uploaded'] = data['photo'].delete('dateuploaded')
+          data['photo']['title'] = data['photo']['title']['_content'] rescue nil
+          data['photo']['description'] = data['photo']['description']['_content'] rescue nil
+          data['photo']['comments_count'] = data['photo'].delete('comments')['_content'] rescue nil
+          data['photo']['dates']['uploaded'] = data['photo'].delete('dateuploaded') rescue nil
           data['photo']['tags'] = data['photo']['tags']['tag']
         when 'flickr.photosets.getPhotos'
           data['photoset']['photo'].map! do |media_hash|
@@ -135,14 +135,14 @@ module Flickrie
 
         # photosets
         when 'flickr.photosets.getInfo'
-          data['photoset']['title'] = data['photoset']['title']['_content']
-          data['photoset']['description'] = data['photoset']['description']['_content']
+          data['photoset']['title'] = data['photoset']['title']['_content'] rescue nil
+          data['photoset']['description'] = data['photoset']['description']['_content'] rescue nil
         when 'flickr.photosets.getList'
           data['photosets']['photoset'].map! do |set_hash|
             set_hash['count_photos'] = set_hash.delete('photos')
             set_hash['count_videos'] = set_hash.delete('videos')
-            set_hash['title'] = set_hash['title']['_content']
-            set_hash['description'] = set_hash['description']['_content']
+            set_hash['title'] = set_hash['title']['_content'] rescue nil
+            set_hash['description'] = set_hash['description']['_content'] rescue nil
             set_hash['owner'] = query['user_id'].first
             set_hash
           end
