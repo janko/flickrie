@@ -1,5 +1,10 @@
 # Flickrie changelog
 
+## Version 1.5.2
+
+- Fixed a bug when error would be raised if a certain (unimportant)
+  attribute wouldn't exist.
+
 ## Version 1.5.1
 
 - Fixed a bug where methods like `Flickrie::User#get_info` were still
