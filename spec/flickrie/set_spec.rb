@@ -65,6 +65,15 @@ describe :Set do
     end
   end
 
+  context "create", :vcr do
+    let(:set) { Flickrie.create_set(:title => "Bla", :primary_photo_id => MEDIA_ID) }
+
+    it "has correct attributes" do
+      set.id.should_not be_empty
+      set.url.should_not be_empty
+    end
+  end
+
   context "blank set" do
     let(:set) { Flickrie::Set.public_new({}) }
 

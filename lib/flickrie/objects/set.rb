@@ -74,7 +74,13 @@ module Flickrie
     def updated_at() Time.at(Integer(@hash['date_update'])) rescue nil end
 
     # @return [String]
-    def url() "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}" rescue nil end
+    def url
+      if @hash['url']
+        @hash['url']
+      elsif owner
+        "http://www.flickr.com/photos/#{owner.nsid}/sets/#{id}"
+      end
+    end
 
     def [](key) @hash[key] end
     # @return [Hash]

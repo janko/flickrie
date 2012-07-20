@@ -792,6 +792,17 @@ module Flickrie
     alias add_photo_to_set add_media_to_set
     alias add_video_to_set add_media_to_set
 
+    # Creates a new set.
+    #
+    # @return [Flickrie::Set]
+    # @api_method [flickr.photosets.create](http://www.flickr.com/services/api/flickr.photosets.create.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def create_set(params = {})
+      response = client.create_set(params)
+      Set.new(response.body['photoset'], self)
+    end
+
     # Edits photos/videos of a set with the given ID.
     #
     # @param set_id [Fixnum, String]
