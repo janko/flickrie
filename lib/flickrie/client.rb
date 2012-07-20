@@ -250,6 +250,11 @@ module Flickrie
         {:photoset_id => set_id, :photo_ids => media_ids}.merge(params)
     end
 
+    def set_primary_media_to_set(set_id, media_id, params = {})
+      post 'flickr.photosets.setPrimaryPhoto',
+        {:photoset_id => set_id, :photo_id => media_id}.merge(params)
+    end
+
     # test
     def test_login(params = {})
       get 'flickr.test.login', params

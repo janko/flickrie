@@ -936,6 +936,20 @@ module Flickrie
     alias reorder_photos_in_set reorder_media_in_set
     alias reorder_videos_in_set reorder_media_in_set
 
+    # Sets set's primary photo/video.
+    #
+    # @param set_id [Fixnum, String]
+    # @param media_id [String]
+    # @api_method [flickr.photosets.setPrimaryPhoto](http://www.flickr.com/services/api/flickr.photosets.setPrimaryPhoto.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def set_primary_media_to_set(set_id, media_id, params = {})
+      client.set_primary_media_to_set(set_id, media_id, params)
+      nil
+    end
+    alias set_primary_photo_to_set set_primary_media_to_set
+    alias set_primary_video_to_set set_primary_media_to_set
+
     # Tests if the authentication was successful. If it was, it
     # returns info of the user who just authenticated.
     #

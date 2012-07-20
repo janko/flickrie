@@ -345,5 +345,9 @@ describe :ApiMethods, :vcr do
     it "reorders media" do
       expect { Flickrie.reorder_media_in_set(SET_ID, MEDIA_ID) }.to_not raise_error
     end
+
+    it "sets primary media" do
+      expect { Flickrie.set_primary_media_to_set(SET_ID, MEDIA_ID) }.to_not raise_error
+    end
   end
 end
