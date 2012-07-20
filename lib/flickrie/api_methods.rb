@@ -815,6 +815,18 @@ module Flickrie
       nil
     end
 
+    # Modifies metadata of a set.
+    #
+    # @param set_id [Fixnum, String]
+    # @return [nil]
+    # @api_method [flickr.photosets.editMeta](http://www.flickr.com/services/api/flickr.photosets.editMeta.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def edit_set_metadata(set_id, params = {})
+      client.edit_set_metadata(set_id, params)
+      nil
+    end
+
     # Edits photos/videos of a set with the given ID.
     #
     # @param set_id [Fixnum, String]

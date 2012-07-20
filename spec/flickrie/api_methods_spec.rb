@@ -311,6 +311,10 @@ describe :ApiMethods, :vcr do
       expect { Flickrie.delete_set(72157630665647968) }.to_not raise_error
     end
 
+    it "edits meta" do
+      expect { Flickrie.edit_set_metadata(SET_ID, :title => "Speleologija") }.to_not raise_error
+    end
+
     it "edits media" do
       expect { Flickrie.edit_set_media(72157630665363720, :primary_photo_id => 7093101501, :photo_ids => "7093101501,7316710626") }.to_not raise_error
     end

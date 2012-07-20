@@ -207,6 +207,10 @@ module Flickrie
       post 'flickr.photosets.delete', {:photoset_id => set_id}.merge(params)
     end
 
+    def edit_set_metadata(set_id, params = {})
+      post 'flickr.photosets.editMeta', {:photoset_id => set_id}.merge(params)
+    end
+
     def edit_set_photos(set_id, params = {})
       post 'flickr.photosets.editPhotos',
         {:photoset_id => set_id}.merge(params)
