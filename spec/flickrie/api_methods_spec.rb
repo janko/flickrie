@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe :ApiMethods do
-  context "upload", :vcr do
+describe :ApiMethods, :vcr do
+  context "upload" do
     it "uploads" do
       photo_id = Flickrie.upload(PHOTO_PATH)
       expect { Flickrie.delete_photo(photo_id) }.to_not raise_error
@@ -28,7 +28,7 @@ describe :ApiMethods do
     end
   end
 
-  context "people", :vcr do
+  context "people" do
     it "gets media from user" do
       media = Flickrie.media_from_user(USER_NSID)
       media.each { |object| object.should be_a(Flickrie::Media) }
@@ -59,7 +59,7 @@ describe :ApiMethods do
   end
 
   # Here I test the media/photo/video aliases of the API methods (because I don't test them elsewhere)
-  context "photos", :vcr do
+  context "photos" do
     it "adds and remove tags" do
       %w[media photo video].each do |word|
         id = eval "#{word.upcase}_ID"
@@ -302,7 +302,6 @@ describe :ApiMethods do
     end
   end
 
-  context "photosets", :vcr do
   context "photosets" do
     it "adds media" do
       expect { Flickrie.add_media_to_set(72157630665363720, PHOTO_ID) }.to_not raise_error
