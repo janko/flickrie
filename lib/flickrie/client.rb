@@ -245,6 +245,11 @@ module Flickrie
         {:photoset_id => set_id, :photo_ids => media_ids}.merge(params)
     end
 
+    def reorder_media_in_set(set_id, media_ids, params = {})
+      post 'flickr.photosets.reorderPhotos',
+        {:photoset_id => set_id, :photo_ids => media_ids}.merge(params)
+    end
+
     # test
     def test_login(params = {})
       get 'flickr.test.login', params

@@ -922,6 +922,20 @@ module Flickrie
     alias remove_photos_from_set remove_media_from_set
     alias remove_videos_from_set remove_media_from_set
 
+    # Reorders photos/videos inside a set.
+    #
+    # @param set_id [Fixnum, String]
+    # @param media_ids [String]
+    # @api_method [flickr.photosets.reorderPhotos](http://www.flickr.com/services/api/flickr.photosets.reorderPhotos.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def reorder_media_in_set(set_id, media_ids, params = {})
+      client.reorder_media_in_set(set_id, media_ids, params)
+      nil
+    end
+    alias reorder_photos_in_set reorder_media_in_set
+    alias reorder_videos_in_set reorder_media_in_set
+
     # Tests if the authentication was successful. If it was, it
     # returns info of the user who just authenticated.
     #
