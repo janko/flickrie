@@ -194,6 +194,11 @@ module Flickrie
     end
 
     # photosets
+    def add_media_to_set(set_id, media_id, params = {})
+      post 'flickr.photosets.addPhoto',
+        {:photoset_id => set_id, :photo_id => media_id}.merge(params)
+    end
+
     def get_set_info(set_id, params = {})
       get 'flickr.photosets.getInfo',
         {:photoset_id => set_id}.merge(params)

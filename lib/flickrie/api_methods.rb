@@ -779,6 +779,19 @@ module Flickrie
         map { |info| Ticket.new(info) }
     end
 
+    # Adds existing photo/video to a set with the given ID.
+    #
+    # @param set_id [Fixnum, String]
+    # @return [nil]
+    # @api_method [flickr.photosets.addPhoto](http://www.flickr.com/services/api/flickr.photosets.addPhoto.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def add_media_to_set(set_id, media_id, params = {})
+      client.add_media_to_set(set_id, media_id, params)
+    end
+    alias add_photo_to_set add_media_to_set
+    alias add_video_to_set add_media_to_set
+
     # Fetches information about the set with the given ID.
     #
     # @param set_id [String, Fixnum]

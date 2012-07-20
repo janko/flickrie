@@ -303,6 +303,11 @@ describe :ApiMethods do
   end
 
   context "photosets", :vcr do
+  context "photosets" do
+    it "adds media" do
+      expect { Flickrie.add_media_to_set(72157630665363720, PHOTO_ID) }.to_not raise_error
+    end
+
     it "gets media" do
       media = Flickrie.media_from_set(SET_ID)
       media.each { |object| object.should be_a(Flickrie::Media) }
