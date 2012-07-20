@@ -319,6 +319,14 @@ describe :Media do
     response.status.should == 200
   end
 
+  context "get set context", :vcr do
+    it "has correct attributes" do
+      context = Flickrie.get_set_context(SET_ID, MEDIA_ID)
+      context.previous.should be_nil
+      context.next.should be_a(Flickrie::Photo)
+    end
+  end
+
   context "blank media" do
     let(:media) { Flickrie::Photo.public_new({}) }
 

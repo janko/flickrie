@@ -9,8 +9,8 @@ module Flickrie
 
     def initialize(hash, api_caller)
       count = hash['count']['_content'].to_i
-      previous = Media.new(hash['prevphoto'], api_caller) rescue nil
-      next_ = Media.new(hash['nextphoto'], api_caller) rescue nil
+      previous = hash['prevphoto']['id'].to_i > 0 ? Media.new(hash['prevphoto'], api_caller) : nil
+      next_ = hash['nextphoto']['id'].to_i > 0 ? Media.new(hash['nextphoto'], api_caller) : nil
       @count, @previous, @next = count, previous, next_
     end
   end

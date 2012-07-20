@@ -841,6 +841,12 @@ module Flickrie
     alias edit_set_photos edit_set_media
     alias edit_set_videos edit_set_media
 
+    # Returns next and previous photos/videos for a photo/video in a set
+    def get_set_context(set_id, media_id, params = {})
+      response = client.get_set_context(set_id, media_id, params)
+      MediaContext.new(response.body, self)
+    end
+
     # Fetches information about the set with the given ID.
     #
     # @param set_id [String, Fixnum]

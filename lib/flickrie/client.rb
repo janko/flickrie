@@ -216,6 +216,11 @@ module Flickrie
         {:photoset_id => set_id}.merge(params)
     end
 
+    def get_set_context(set_id, media_id, params = {})
+      get 'flickr.photosets.getContext',
+        {:photoset_id => set_id, :photo_id => media_id}.merge(params)
+    end
+
     def get_set_info(set_id, params = {})
       get 'flickr.photosets.getInfo',
         {:photoset_id => set_id}.merge(params)
