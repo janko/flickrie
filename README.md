@@ -296,9 +296,20 @@ basis of this gem.
 "flickr.photos.upload.checkTickets"     -> Flickrie.check_upload_tickets
 
 # photosets
+"flickr.photosets.addPhoto"             -> Flickrie.add_photo_to_set
+"flickr.photosets.create"               -> Flickrie.create_set
+"flickr.photosets.delete"               -> Flickrie.delete_set
+"flickr.photosets.editMeta"             -> Flickrie.edit_set_metadata
+"flickr.photosets.editPhotos"           -> Flickrie.edit_set_photos
+"flickr.photosets.getContext"           -> Flickrie.get_set_context
 "flickr.photosets.getInfo"              -> Flickrie.get_set_info
 "flickr.photosets.getList"              -> Flickrie.sets_from_user
 "flickr.photosets.getPhotos"            -> Flickrie.photos_from_set
+"flickr.photosets.orderSets"            -> Flickrie.order_sets
+"flickr.photosets.removePhoto"          -> Flickrie.remove_photos_from_set
+"flickr.photosets.removePhotos"         -> Flickrie.remove_photos_from_set
+"flickr.photosets.reorderPhotos"        -> Flickrie.reorder_photos_in_set
+"flickr.photosets.setPrimaryPhoto"      -> Flickrie.set_primary_photo_to_set
 
 # test
 "flickr.test.login"                     -> Flickrie.test_login

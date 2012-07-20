@@ -1,5 +1,23 @@
 # Flickrie changelog
 
+## Version 1.6.0
+
+- Cover some more API methods, finishing the part with sets:
+
+```
+flickr.photosets.setPrimaryPhoto
+flickr.photosets.reorderPhotos
+flickr.photosets.removePhoto
+flickr.photosets.removePhotos
+flickr.photosets.orderSets
+flickr.photosets.getContext
+flickr.photosets.editMeta
+flickr.photosets.delete
+flickr.photosets.create
+flickr.photosets.editPhotos
+flickr.photosets.addPhoto
+```
+
 ## Version 1.5.2
 
 - Fixed a bug when error would be raised if a certain (unimportant)
