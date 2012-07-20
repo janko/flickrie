@@ -896,6 +896,17 @@ module Flickrie
       media_from_set(set_id, {:media => 'videos'}.merge(params))
     end
 
+    # Sets the order of sets belonging to the authenticated user.
+    #
+    # @param set_ids [String, Fixnum]
+    # @return [nil]
+    # @api_method [flickr.photosets.orderSets](http://www.flickr.com/services/api/flickr.photosets.orderSets.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def order_sets(set_ids, params = {})
+      client.order_sets(set_ids, params)
+      nil
+    end
     # Tests if the authentication was successful. If it was, it
     # returns info of the user who just authenticated.
     #

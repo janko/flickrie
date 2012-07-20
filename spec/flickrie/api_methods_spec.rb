@@ -332,5 +332,9 @@ describe :ApiMethods, :vcr do
       videos.each { |object| object.should be_a(Flickrie::Video) }
       videos.first.id.should_not be_nil
     end
+
+    it "orders" do
+      expect { Flickrie.order_sets(SET_ID) }.to_not raise_error
+    end
   end
 end

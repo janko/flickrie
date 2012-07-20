@@ -236,6 +236,9 @@ module Flickrie
         ensure_media({:photoset_id => set_id}.merge(params))
     end
 
+    def order_sets(set_ids, params = {})
+      post 'flickr.photosets.orderSets', {:photoset_ids => set_ids}.merge(params)
+    end
     # test
     def test_login(params = {})
       get 'flickr.test.login', params
