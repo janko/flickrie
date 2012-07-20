@@ -792,6 +792,20 @@ module Flickrie
     alias add_photo_to_set add_media_to_set
     alias add_video_to_set add_media_to_set
 
+    # Edits photos/videos of a set with the given ID.
+    #
+    # @param set_id [Fixnum, String]
+    # @return [nil]
+    # @api_method [flickr.photosets.editPhotos](http://www.flickr.com/services/api/flickr.photosets.editPhotos.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def edit_set_media(set_id, params = {})
+      client.edit_set_photos(set_id, params)
+      nil
+    end
+    alias edit_set_photos edit_set_media
+    alias edit_set_videos edit_set_media
+
     # Fetches information about the set with the given ID.
     #
     # @param set_id [String, Fixnum]
