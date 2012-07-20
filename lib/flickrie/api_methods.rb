@@ -803,6 +803,18 @@ module Flickrie
       Set.new(response.body['photoset'], self)
     end
 
+    # Deletes a set.
+    #
+    # @param set_id [Fixnum, String]
+    # @return [nil]
+    # @api_method [flickr.photosets.delete](http://www.flickr.com/services/api/flickr.photosets.delete.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def delete_set(set_id, params = {})
+      client.delete_set(set_id, params)
+      nil
+    end
+
     # Edits photos/videos of a set with the given ID.
     #
     # @param set_id [Fixnum, String]
