@@ -239,6 +239,12 @@ module Flickrie
     def order_sets(set_ids, params = {})
       post 'flickr.photosets.orderSets', {:photoset_ids => set_ids}.merge(params)
     end
+
+    def remove_media_from_set(set_id, media_ids, params = {})
+      post 'flickr.photosets.removePhotos',
+        {:photoset_id => set_id, :photo_ids => media_ids}.merge(params)
+    end
+
     # test
     def test_login(params = {})
       get 'flickr.test.login', params

@@ -907,6 +907,21 @@ module Flickrie
       client.order_sets(set_ids, params)
       nil
     end
+
+    # Removes photos/videos from a set.
+    #
+    # @param set_id [Fixnum, String]
+    # @param media_ids [String]
+    # @api_method [flickr.photosets.removePhotos](http://www.flickr.com/services/api/flickr.photosets.removePhotos.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def remove_media_from_set(set_id, media_ids, params = {})
+      client.remove_media_from_set(set_id, media_ids, params)
+      nil
+    end
+    alias remove_photos_from_set remove_media_from_set
+    alias remove_videos_from_set remove_media_from_set
+
     # Tests if the authentication was successful. If it was, it
     # returns info of the user who just authenticated.
     #

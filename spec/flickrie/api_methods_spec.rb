@@ -336,5 +336,10 @@ describe :ApiMethods, :vcr do
     it "orders" do
       expect { Flickrie.order_sets(SET_ID) }.to_not raise_error
     end
+
+    it "removes media" do
+      expect { Flickrie.remove_media_from_set(72157630666246536, 7316710626) }.to_not raise_error
+      expect { Flickrie.remove_media_from_set(72157630666246536, "7316710626,7093101501") }.to_not raise_error
+    end
   end
 end
