@@ -29,24 +29,38 @@
 
 <h3>About</h3>
 
-<p>Your first thought is probably:</p>
-<blockquote>There is already a library for that, you moron, it's called "flickraw".</blockquote>
-<p>Well, I'm here to show you in which ways I think this library is better.</p>
+<p>Your first words are probably:</p>
+<blockquote>There is already a gem for that.</blockquote>
 
-<p>Firstly, this library is object-oriented. This is a big advantage, because your code will be much more elegant and much prettier. OO also makes room for smart methods that Flickr doesn't provide.</p>
+<p>
+This documentation will try its best to justify to you why
+this gem is <strong>not</strong> "just another Flickr API wrapper".
+</p>
 
-<p>Secondly, this library parses the response from Flickr. I'll demonstrate what I mean by this:</p>
-Not parsed:
-<div class="highlight">
-  <pre><code><span class="n">photo</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1">#=&gt; "2011-03-20 17:00:05"</span></code></pre>
-</div>
-Parsed:
-<div class="highlight">
-  <pre><code><span class="n">photo</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1">#=&gt; 2011-03-20 17:00:05 +0000</span></code></pre>
-</div>
-<p>See the difference? One is a <code>String</code>, and the other is a <code>Time</code> object. A developer would probably want the <code>Time</code> object, because that's something he can work with. The goal is to take care of these little things internally, so that the developer can concentrate on more important things.</p>
+<p>
+Firstly, this library is object-oriented. This is a big advantage, because your
+code will be much more elegant and much prettier. OO also makes room for
+additional methods that Flickr doesn't provide, which do the API-specific logic
+for you.
+</p>
 
-<p>Thirdly, the attributes are renamed to names we're used to. So, the <code>#lastupdate</code> attribute is renamed to <code>#updated_at</code>. The boolean attributes are also converted to predicate methods, so now instead of having an attribute <code>#ispro</code> which returns 1 (true) or 0 (false), you have <code>#pro?</code> which returns true or false.</p>
+<p>
+Secondly, this library parses the JSON response from Flickr. What I mean is,
+JSON has to represent objects like dates and booleans in a way that is not
+native to Ruby. With this library, <em>date</em> attributes like <code>#updated_at</code>,
+instead of returning <code>String</code>s, will return <code>Time</code> objects,
+which is something you can work with. And boolean attributes like <code>#ispro</code>,
+instead of returning <code>1</code> (true) and <code>0</code> (false),
+will return <code>true</code> or <code>false</code>.
+This library attempts to take care of all these little things internally,
+so that you as a developer can concentrate on more important things.
+</p>
+
+<p>
+Thirdly, the attributes are renamed to names you're used to. For example,
+the <code>#lastupdate</code> attribute is renamed to <code>#updated_at</code>,
+and the <code>#ispro</code> attribute is renamed to <code>#pro?</code>.
+</p>
 
 <p>Now you're probably thinking:</p>
 <blockquote>Whoa, this library seems like some hardcore shit. Show me some usage examples.</blockquote>
@@ -73,7 +87,10 @@ Parsed:
 <p>Multiple photos:</p>
 
 <div class="highlight">
-<pre><span class="n">photos</span> <span class="o">=</span> <span class="no">Flickrie</span><span class="o">.</span><span class="n">photos_from_set</span><span class="p">(</span><span class="mi">28473</span><span class="p">,</span> <span class="ss">:include_sizes</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+<pre><span class="n">photos</span> <span class="o">=</span> <span
+class="no">Flickrie</span><span class="o">.</span><span
+class="n">photos_from_set</span><span class="p">(</span><span
+class="mi">28473</span><span class="p">,</span> <span class="ss">include_sizes:</span> <span class="kp">true</span><span class="p">)</span>
 <span class="n">photo</span> <span class="o">=</span> <span class="n">photos</span><span class="o">.</span><span class="n">first</span>
 <span class="n">photo</span><span class="o">.</span><span class="n">small</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span><span class="o">.</span><span class="n">source_url</span> <span class="c1">#=&gt; "http://farm8.staticflickr.com/7094/7316710626_cf80b743d9_n.jpg"</span>
 </pre>
@@ -133,7 +150,7 @@ Parsed:
 </div>
 
 
-<p>These are just some of the features. If you like what you see, just download the gem and have fun. Be sure to visit the <a href="https://github.com/janko-m/flickrie">GitHub page</a> for additional links and more examples. Feedback is welcome :)</p>
+<p>These are just some of the features. Be sure to visit the <a href="https://github.com/janko-m/flickrie">GitHub page</a> for additional links and more examples. Feedback is welcome :)</p>
       </section>
     </div>
 
