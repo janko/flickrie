@@ -19,7 +19,6 @@ module Flickrie
       @access_token, @access_secret = access_token, access_secret
     end
 
-    include Callable
     include ApiMethods
   end
 end

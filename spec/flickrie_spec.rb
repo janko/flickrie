@@ -6,12 +6,13 @@ describe :Flickrie do
       Flickrie.api_key = nil
       expect { Flickrie.get_licenses }.to raise_error(Flickrie::Error)
       expect { Flickrie.upload(PHOTO_PATH) }.to raise_error(Flickrie::Error)
-      Flickrie.api_key = ENV['FLICKR_API_KEY']
-      expect { Flickrie.get_licenses }.to_not raise_error(Flickrie::Error)
-      expect { Flickrie.upload(PHOTO_PATH) }.to_not raise_error(Flickrie::Error)
-
-      photo = Flickrie.photos_from_user(USER_NSID).find { |photo| photo.title == "photo" }
-      Flickrie.delete_photo(photo.id)
     end
+  end
+
+  it "should have all methods written down", :vcr do
+    my_methods = Flickrie::FLICKR_API_METHODS.keys
+    flickr_methods = Flickrie.get_methods
+
+    (flickr_methods - my_methods).should be_empty
   end
 end

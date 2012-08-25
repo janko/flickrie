@@ -255,6 +255,10 @@ module Flickrie
         {:photoset_id => set_id, :photo_id => media_id}.merge(params)
     end
 
+    def get_methods(params = {})
+      get 'flickr.reflection.getMethods', params
+    end
+
     # test
     def test_login(params = {})
       get 'flickr.test.login', params

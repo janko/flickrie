@@ -146,6 +146,9 @@ module Flickrie
             set_hash['owner'] = query['user_id'].first
             set_hash
           end
+
+        when 'flickr.reflection.getMethods'
+          data['methods']['method'].map! { |hash| hash["_content"] }
         end
       end
 

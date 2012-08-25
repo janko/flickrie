@@ -109,7 +109,8 @@ module Flickrie
     # @return [Boolean]
     def pro?() Integer(@hash['ispro']) == 1 rescue nil end
 
-    # Returns the upload status of the user.
+    # Returns the upload status of the user (obtained by calling
+    # Flickrie.get_upload_status).
     #
     # @return [Flickrie::User::UploadStatus]
     def upload_status() UploadStatus.new(@hash['upload_status']) rescue nil end

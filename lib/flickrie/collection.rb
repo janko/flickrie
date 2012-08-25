@@ -27,8 +27,7 @@ module Flickrie
 
   # You can think of this as a richer Array. It defines some pagination attributes
   # (you can even use it with [will_paginate](https://github.com/mislav/will_paginate),
-  # see {Flickrie.pagination}). It also has the method {#find} which finds by ID
-  # (just like ActiveRecord).
+  # see {Flickrie.pagination}), and some other useful methods.
   class Collection
     # @!parse attr_reader :current_page, :per_page, :total_entries, :total_pages
 

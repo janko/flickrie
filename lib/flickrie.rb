@@ -1,4 +1,6 @@
 require 'flickrie/callable'
+require 'flickrie/deprecatable'
+require 'flickrie/flickr_api_methods'
 
 module Flickrie
   DEFAULTS = {
@@ -94,8 +96,6 @@ module Flickrie
           @client = @upload_client = nil
         end
       end
-
-    include Callable
   end
 end
 
@@ -119,4 +119,8 @@ module Flickrie
   autoload :Base58,       'flickrie/base58'
 
   extend ApiMethods
+
+  def self.lookup_method(method)
+    FLICKR_API_METHODS[method]
+  end
 end

@@ -1,5 +1,9 @@
 module Flickrie
   module ApiMethods
+
+    include Callable
+    extend Deprecatable
+
     # For uploading photos and videos to Flickr. Example:
     #
     #     path = File.expand_path("photo.jpg")
@@ -48,7 +52,6 @@ module Flickrie
 
     # Fetches the Flickr user with the given email.
     #
-    # @param email [String]
     # @return [Flickrie::User]
     # @api_method [flickr.people.findByEmail](http://www.flickr.com/services/api/flickr.people.findByEmail.html)
     def find_user_by_email(email, params = {})
@@ -58,7 +61,6 @@ module Flickrie
 
     # Fetches the Flickr user with the given username.
     #
-    # @param username [String]
     # @return [Flickrie::User]
     # @api_method [flickr.people.findByUsername](http://www.flickr.com/services/api/flickr.people.findByUsername.html)
     def find_user_by_username(username, params = {})
@@ -68,92 +70,91 @@ module Flickrie
 
     # Fetches photos and videos from the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def media_from_user(nsid, params = {})
+    def get_media_from_user(nsid, params = {})
       response = client.media_from_user(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :media_from_user, :get_media_from_user
     # Fetches photos from the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def photos_from_user(nsid, params = {})
-      media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
+    def get_photos_from_user(nsid, params = {})
+      get_media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :photos_from_user, :get_photos_from_user
     # Fetches videos from the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPhotos](http://www.flickr.com/services/api/flickr.people.getPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def videos_from_user(nsid, params = {})
-      media_from_user(nsid, params).select { |media| media.is_a?(Video) }
+    def get_videos_from_user(nsid, params = {})
+      get_media_from_user(nsid, params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :videos_from_user, :get_videos_from_user
 
     # Fetches photos and videos containing a Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
-    def media_of_user(nsid, params = {})
+    def get_media_of_user(nsid, params = {})
       response = client.media_of_user(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :media_of_user, :get_media_of_user
     # Fetches photos containing a Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
-    def photos_of_user(nsid, params = {})
-      media_of_user(nsid, params).select { |media| media.is_a?(Photo) }
+    def get_photos_of_user(nsid, params = {})
+      get_media_of_user(nsid, params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :photos_of_user, :get_photos_of_user
     # Fetches videos containing a Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
-    def videos_of_user(nsid, params = {})
-      media_of_user(nsid, params).select { |media| media.is_a?(Video) }
+    def get_videos_of_user(nsid, params = {})
+      get_media_of_user(nsid, params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :videos_of_user, :get_videos_of_user
 
     # Fetches public photos and videos from the Flickr user with the given
     # NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
-    def public_media_from_user(nsid, params = {})
+    def get_public_media_from_user(nsid, params = {})
       response = client.public_media_from_user(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :public_media_from_user, :get_public_media_from_user
     # Fetches public photos from the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
-    def public_photos_from_user(nsid, params = {})
-      public_media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
+    def get_public_photos_from_user(nsid, params = {})
+      get_public_media_from_user(nsid, params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :public_photos_from_user, :get_public_photos_from_user
     # Fetches public videos from the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
-    def public_videos_from_user(nsid, params = {})
-      public_media_from_user(nsid, params).select { |media| media.is_a?(Video) }
+    def get_public_videos_from_user(nsid, params = {})
+      get_public_media_from_user(nsid, params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :public_videos_from_user, :get_public_videos_from_user
 
     # Fetches the Flickr user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::User]
     # @api_method [flickr.people.getInfo](http://www.flickr.com/services/api/flickr.people.getInfo.html)
     def get_user_info(nsid, params = {})
@@ -175,22 +176,23 @@ module Flickrie
 
     # Add tags to the photo/video with the given ID.
     #
-    # @param media_id [String, Fixnum]
     # @param tags [String] A space delimited string with tags
     # @return [nil]
     # @api_method [flickr.photos.addTags](http://www.flickr.com/services/api/flickr.photos.addTags.html)
     #
     # @note This method requires authentication with "write" permissions.
-    def add_media_tags(media_id, tags, params = {})
+    def tag_media(media_id, tags, params = {})
       client.add_media_tags(media_id, tags, params)
       nil
     end
-    alias add_photo_tags add_media_tags
-    alias add_video_tags add_media_tags
+    deprecated_alias :add_media_tags, :tag_media
+    alias tag_photo tag_media
+    deprecated_alias :add_photo_tags, :tag_photo
+    alias tag_video tag_media
+    deprecated_alias :add_video_tags, :tag_video
 
     # Deletes the photo/video with the given ID.
     #
-    # @param media_id [String, Fixnum]
     # @return [nil]
     # @api_method [flickr.photos.delete](http://www.flickr.com/services/api/flickr.photos.delete.html)
     #
@@ -204,69 +206,64 @@ module Flickrie
 
     # Fetches photos and videos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def media_from_contacts(params = {})
+    def get_media_from_contacts(params = {})
       response = client.media_from_contacts(params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :media_from_contacts, :get_media_from_contacts
     # Fetches photos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def photos_from_contacts(params = {})
-      media_from_contacts(params).select { |media| media.is_a?(Photo) }
+    def get_photos_from_contacts(params = {})
+      get_media_from_contacts(params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :photos_from_contacts, :get_photos_from_contacts
     # Fetches videos from contacts of the user who authenticated.
     #
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPhotos.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def videos_from_contacts(params = {})
-      media_from_contacts(params).select { |media| media.is_a?(Video) }
+    def get_videos_from_contacts(params = {})
+      get_media_from_contacts(params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :videos_from_contacts, :get_videos_from_contacts
 
     # Fetches public photos and videos from contacts of the user with the
     # given NSID.
     #
-    # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
-    def public_media_from_user_contacts(nsid, params = {})
+    def get_public_media_from_contacts(nsid, params = {})
       response = client.public_media_from_user_contacts(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :public_media_from_user_contacts, :get_public_media_from_contacts
     # Fetches public photos from contacts of the user with the
     # given NSID.
     #
-    # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
-    def public_photos_from_user_contacts(nsid, params = {})
-      public_media_from_user_contacts(nsid, params).
-        select { |media| media.is_a?(Photo) }
+    def get_public_photos_from_contacts(nsid, params = {})
+      get_public_media_from_contacts(nsid, params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :public_photos_from_user_contacts, :get_public_photos_from_contacts
     # Fetches public videos from contacts of the user with the
     # given NSID.
     #
-    # @param nsid [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
-    def public_videos_from_user_contacts(nsid, params = {})
-      public_media_from_user_contacts(nsid, params).
-        select { |media| media.is_a?(Video) }
+    def get_public_videos_from_contacts(nsid, params = {})
+      get_public_media_from_contacts(nsid, params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :public_videos_from_user_contacts, :get_public_videos_from_contacts
 
     # Fetches context of the photo/video with the given ID. Example:
     #
@@ -275,8 +272,7 @@ module Flickrie
     #     context.previous # => #<Photo: id=2433240, ...>
     #     context.next     # => #<Video: id=1282404, ...>
     #
-    # @param media_id [String, Fixnum]
-    # @return [Struct]
+    # @return [Flickrie::MediaContext]
     # @api_method [flickr.photos.getContext](http://www.flickr.com/services/api/flickr.photos.getContext.html)
     def get_media_context(media_id, params = {})
       response = client.get_media_context(media_id, params)
@@ -297,7 +293,6 @@ module Flickrie
     #     count.date_range.begin # => 2011-01-03 01:00:00 +0100
     #     count.from             # => 2011-01-03 01:00:00 +0100
     #
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::MediaCount]
     # @api_method [flickr.photos.getCounts](http://www.flickr.com/services/api/flickr.photos.getCounts.html)
     def get_media_counts(params = {})
@@ -386,10 +381,11 @@ module Flickrie
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def media_not_in_set(params = {})
+    def get_media_not_in_set(params = {})
       response = client.media_not_in_set({:media => 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :media_not_in_set, :get_media_not_in_set
     # Fetches photos from the authenticated user
     # that are not in any set.
     #
@@ -397,9 +393,10 @@ module Flickrie
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def photos_not_in_set(params = {})
-      media_not_in_set({:media => "photos"}.merge(params))
+    def get_photos_not_in_set(params = {})
+      get_media_not_in_set({:media => "photos"}.merge(params))
     end
+    deprecated_alias :photos_not_in_set, :get_photos_not_in_set
     # Fetches videos from the authenticated user
     # that are not in any set.
     #
@@ -407,9 +404,10 @@ module Flickrie
     # @api_method [flickr.photos.getNotInSet](http://www.flickr.com/services/api/flickr.photos.getNotInSet.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def videos_not_in_set(params = {})
-      media_not_in_set({:media => "videos"}.merge(params))
+    def get_videos_not_in_set(params = {})
+      get_media_not_in_set({:media => "videos"}.merge(params))
     end
+    deprecated_alias :videos_not_in_set, :get_videos_not_in_set
 
     # Gets permissions of a photo with the given ID.
     #
@@ -578,28 +576,31 @@ module Flickrie
     # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def recently_updated_media(params = {})
+    def get_recently_updated_media(params = {})
       response = client.recently_updated_media(params)
       Media.new_collection(response.body['photos'], self)
     end
+    deprecated_alias :recently_updated_media, :get_recently_updated_media
     # Fetches photos from the authenticated user that have recently been updated.
     #
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def recently_updated_photos(params = {})
+    def get_recently_updated_photos(params = {})
       recently_updated_media(params).select { |media| media.is_a?(Photo) }
     end
+    deprecated_alias :recently_updated_photos, :get_recently_updated_photos
     # Fetches videos from the authenticated user that have recently been updated.
     #
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.recentlyUpdated](http://www.flickr.com/services/api/flickr.photos.recentlyUpdated.html)
     #
     # @note This method requires authentication with "read" permissions.
-    def recently_updated_videos(params = {})
+    def get_recently_updated_videos(params = {})
       recently_updated_media(params).select { |media| media.is_a?(Video) }
     end
+    deprecated_alias :recently_updated_videos, :get_recently_updated_videos
 
     # Remove the tag with the given ID
     #
@@ -608,12 +609,15 @@ module Flickrie
     # @api_method [flickr.photos.removeTag](http://www.flickr.com/services/api/flickr.photos.removeTag.html)
     #
     # @note This method requires authentication with "write" permissions.
-    def remove_media_tag(tag_id, params = {})
+    def untag_media(tag_id, params = {})
       client.remove_media_tag(tag_id, params)
       nil
     end
-    alias remove_photo_tag remove_media_tag
-    alias remove_video_tag remove_media_tag
+    deprecated_alias :remove_media_tag, :untag_media
+    alias untag_photo untag_media
+    deprecated_alias :remove_photo_tag, :untag_photo
+    alias untag_video untag_media
+    deprecated_alias :remove_video_tag, :untag_video
 
     # Fetches photos and videos matching a certain criteria.
     #
@@ -842,6 +846,9 @@ module Flickrie
     alias edit_set_videos edit_set_media
 
     # Returns next and previous photos/videos for a photo/video in a set
+    #
+    # @return [Flickrie::MediaContext]
+    # @api_method [flickr.photosets.getContext](http://www.flickr.com/services/api/flickr.photosets.getContext.html)
     def get_set_context(set_id, media_id, params = {})
       response = client.get_set_context(set_id, media_id, params)
       MediaContext.new(response.body, self)
@@ -849,7 +856,6 @@ module Flickrie
 
     # Fetches information about the set with the given ID.
     #
-    # @param set_id [String, Fixnum]
     # @return [Flickrie::Set]
     # @api_method [flickr.photosets.getInfo](http://www.flickr.com/services/api/flickr.photosets.getInfo.html)
     def get_set_info(set_id, params = {})
@@ -859,46 +865,43 @@ module Flickrie
 
     # Fetches sets from a user with the given NSID.
     #
-    # @param nsid [String]
     # @return [Flickrie::Collection<Flickrie::Set>]
     # @api_method [flickr.photosets.getList](http://www.flickr.com/services/api/flickr.photosets.getList.html)
-    def sets_from_user(nsid, params = {})
+    def get_sets_from_user(nsid, params = {})
       response = client.sets_from_user(nsid, params)
       Set.new_collection(response.body['photosets'], self)
     end
+    deprecated_alias :sets_from_user, :get_sets_from_user
 
     # Fetches photos and videos from a set with the given ID.
     #
-    # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
-    def media_from_set(set_id, params = {})
+    def get_media_from_set(set_id, params = {})
       response = client.media_from_set(set_id, {:media => 'all'}.merge(params))
       Media.new_collection(response.body['photoset'], self)
     end
+    deprecated_alias :media_from_set, :get_media_from_set
     # Fetches photos from a set with the given ID.
     #
-    # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
-    def photos_from_set(set_id, params = {})
-      media_from_set(set_id, {:media => 'photos'}.merge(params))
+    def get_photos_from_set(set_id, params = {})
+      get_media_from_set(set_id, {:media => 'photos'}.merge(params))
     end
+    deprecated_alias :photos_from_set, :get_photos_from_set
     # Fetches videos from a set with the given ID.
     #
-    # @param set_id [String]
-    # @param params [Hash] Options for this API method (see the link below under "Flickr API method")
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
-    def videos_from_set(set_id, params = {})
-      media_from_set(set_id, {:media => 'videos'}.merge(params))
+    def get_videos_from_set(set_id, params = {})
+      get_media_from_set(set_id, {:media => 'videos'}.merge(params))
     end
+    deprecated_alias :videos_from_set, :get_videos_from_set
 
     # Sets the order of sets belonging to the authenticated user.
     #
-    # @param set_ids [String, Fixnum]
+    # @param set_ids [String] A comma delimited list of set IDs
     # @return [nil]
     # @api_method [flickr.photosets.orderSets](http://www.flickr.com/services/api/flickr.photosets.orderSets.html)
     #
@@ -910,8 +913,8 @@ module Flickrie
 
     # Removes photos/videos from a set.
     #
-    # @param set_id [Fixnum, String]
-    # @param media_ids [String]
+    # @param media_ids [String] A comma delimited list of photo/video IDs
+    # @return [nil]
     # @api_method [flickr.photosets.removePhotos](http://www.flickr.com/services/api/flickr.photosets.removePhotos.html)
     #
     # @note This method requires authentication with "write" permissions.
@@ -924,8 +927,8 @@ module Flickrie
 
     # Reorders photos/videos inside a set.
     #
-    # @param set_id [Fixnum, String]
-    # @param media_ids [String]
+    # @param media_ids [String] A comma delimited list of photo/video IDs
+    # @return [nil]
     # @api_method [flickr.photosets.reorderPhotos](http://www.flickr.com/services/api/flickr.photosets.reorderPhotos.html)
     #
     # @note This method requires authentication with "write" permissions.
@@ -938,17 +941,28 @@ module Flickrie
 
     # Sets set's primary photo/video.
     #
-    # @param set_id [Fixnum, String]
-    # @param media_id [String]
+    # @return [nil]
     # @api_method [flickr.photosets.setPrimaryPhoto](http://www.flickr.com/services/api/flickr.photosets.setPrimaryPhoto.html)
     #
     # @note This method requires authentication with "write" permissions.
-    def set_primary_media_to_set(set_id, media_id, params = {})
+    def set_set_primary_media(set_id, media_id, params = {})
       client.set_primary_media_to_set(set_id, media_id, params)
       nil
     end
-    alias set_primary_photo_to_set set_primary_media_to_set
-    alias set_primary_video_to_set set_primary_media_to_set
+    deprecated_alias :set_primary_media_to_set, :set_set_primary_media
+    alias set_set_primary_photo set_set_primary_media
+    deprecated_alias :set_primary_photo_to_set, :set_set_primary_photo
+    alias set_set_primary_video set_set_primary_media
+    deprecated_alias :set_primary_video_to_set, :set_set_primary_video
+
+    # Fetches the list of all API methods.
+    #
+    # @return [Array<String>]
+    # @api_method [flickr.reflection.getMethods](http://www.flickr.com/services/api/flickr.reflection.getMethods.html)
+    def get_methods(params = {})
+      response = client.get_methods(params)
+      response.body["methods"]["method"]
+    end
 
     # Tests if the authentication was successful. If it was, it
     # returns info of the user who just authenticated.

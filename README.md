@@ -206,12 +206,7 @@ It's not nearly as pretty, but at least you can get to the data for the
 time being. Notice that the `:api_key` parameter is always passed in by
 default.
 
-## Issues
-
-Please, feel free to post any issues that you're having. You can also
-post feature requests.
-
-## Cedits
+## Credits
 
 Special thanks to @**mislav**, my brother, he helped me really a lot
 with getting started with Ruby, and with the basis of this gem.
@@ -223,72 +218,6 @@ You can see the changelog [here](https://github.com/janko-m/flickrie/blob/master
 ## Social
 
 You can follow me on Twitter, I'm [@m_janko](https://twitter.com/m_janko).
-
-## Currently covered API methods
-
-```ruby
-# people
-"flickr.people.findByEmail"             -> Flickrie.find_user_by_email
-"flickr.people.findByUsername"          -> Flickrie.find_user_by_username
-"flickr.people.getInfo"                 -> Flickrie.get_user_info
-"flickr.people.getPhotos"               -> Flickrie.photos_from_user
-"flickr.people.getPhotosOf"             -> Flickrie.photos_of_user
-"flickr.people.getPublicPhotos"         -> Flickrie.public_photos_from_user
-"flickr.people.getUploadStatus"         -> Flickrie.get_upload_status
-
-# photos
-"flickr.photos.addTags"                 -> Flickrie.add_photo_tags
-"flickr.photos.delete"                  -> Flickrie.delete_photo
-"flickr.photos.getContactsPhotos"       -> Flickrie.photos_from_contacts
-"flickr.photos.getContactsPublicPhotos" -> Flickrie.public_photos_from_user_contacts
-"flickr.photos.getContext"              -> Flickrie.get_photo_context
-"flickr.photos.getCounts"               -> Flickrie.get_photos_counts
-"flickr.photos.getExif"                 -> Flickrie.get_photo_exif
-"flickr.photos.getFavorites"            -> Flickrie.get_photo_favorites
-"flickr.photos.getInfo"                 -> Flickrie.get_photo_info
-"flickr.photos.getNotInSet"             -> Flickrie.photos_not_in_set
-"flickr.photos.getPerms"                -> Flickrie.get_photo_permissions
-"flickr.photos.getRecent"               -> Flickrie.get_recent_photos
-"flickr.photos.getSizes"                -> Flickrie.get_photo_sizes
-"flickr.photos.getUntagged"             -> Flickrie.get_untagged_photos
-"flickr.photos.getWithGeoData"          -> Flickrie.get_photos_with_geo_data
-"flickr.photos.getWithoutGeoData"       -> Flickrie.get_photos_without_geo_data
-"flickr.photos.recentlyUpdated"         -> Flickrie.recently_updated_photos
-"flickr.photos.removeTag"               -> Flickrie.remove_photo_tag
-"flickr.photos.search"                  -> Flickrie.search_photos
-"flickr.photos.setContentType"          -> Flickrie.set_photo_content_type
-"flickr.photos.setDates"                -> Flickrie.set_photo_dates
-"flickr.photos.setMeta"                 -> Flickrie.set_photo_meta
-"flickr.photos.setPerms"                -> Flickrie.set_photo_permissions
-"flickr.photos.setSafetyLevel"          -> Flickrie.set_photo_safety_level
-"flickr.photos.setTags"                 -> Flickrie.set_photo_tags
-
-# photos.licenses
-"flickr.photos.licenses.getInfo"        -> Flickrie.get_licenses
-"flickr.photos.licenses.setLicense"     -> Flickrie.set_photo_license
-
-# photos.upload
-"flickr.photos.upload.checkTickets"     -> Flickrie.check_upload_tickets
-
-# photosets
-"flickr.photosets.addPhoto"             -> Flickrie.add_photo_to_set
-"flickr.photosets.create"               -> Flickrie.create_set
-"flickr.photosets.delete"               -> Flickrie.delete_set
-"flickr.photosets.editMeta"             -> Flickrie.edit_set_metadata
-"flickr.photosets.editPhotos"           -> Flickrie.edit_set_photos
-"flickr.photosets.getContext"           -> Flickrie.get_set_context
-"flickr.photosets.getInfo"              -> Flickrie.get_set_info
-"flickr.photosets.getList"              -> Flickrie.sets_from_user
-"flickr.photosets.getPhotos"            -> Flickrie.photos_from_set
-"flickr.photosets.orderSets"            -> Flickrie.order_sets
-"flickr.photosets.removePhoto"          -> Flickrie.remove_photos_from_set
-"flickr.photosets.removePhotos"         -> Flickrie.remove_photos_from_set
-"flickr.photosets.reorderPhotos"        -> Flickrie.reorder_photos_in_set
-"flickr.photosets.setPrimaryPhoto"      -> Flickrie.set_primary_photo_to_set
-
-# test
-"flickr.test.login"                     -> Flickrie.test_login
-```
 
 ## License
 
