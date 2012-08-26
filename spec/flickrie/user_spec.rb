@@ -3,20 +3,20 @@ require 'spec_helper'
 describe :User do
   before(:all) do
     @attributes = {
-      :id => USER_NSID,
-      :nsid => USER_NSID,
-      :username => USER_USERNAME,
-      :real_name => USER_USERNAME,
-      :location => "Zagreb, Croatia",
-      :time_zone => {
-        :label => "Sarajevo, Skopje, Warsaw, Zagreb",
-        :offset => "+01:00"
+      id: USER_NSID,
+      nsid: USER_NSID,
+      username: USER_USERNAME,
+      real_name: USER_USERNAME,
+      location: "Zagreb, Croatia",
+      time_zone: {
+        label: "Sarajevo, Skopje, Warsaw, Zagreb",
+        offset: "+01:00"
       },
-      :description => "I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.",
-      :icon_server => "5464",
-      :icon_farm => 6,
+      description: "I'm a programmer, and I'm gonna program a badass Ruby library for Flickr.",
+      icon_server: "5464",
+      icon_farm: 6,
       :pro? => false,
-      :media_count => 98
+      media_count: 98
     }
   end
 
@@ -80,20 +80,20 @@ describe :User do
 
     it "has correct attributes" do
       attributes = {
-        :bandwidth => {
-          :maximum => 300.0,
-          :used => 24.294921875,
-          :remaining => 275.705078125,
+        bandwidth: {
+          maximum: 300.0,
+          used: 24.294921875,
+          remaining: 275.705078125,
           :unlimited? => false
         },
-        :maximum_photo_size => 30,
-        :maximum_video_size => 150,
+        maximum_photo_size: 30,
+        maximum_video_size: 150,
 
-        :videos_uploaded => 0,
-        :videos_remaining => 2,
+        videos_uploaded: 0,
+        videos_remaining: 2,
 
-        :sets_created => nil,
-        :sets_remaining => "lots"
+        sets_created: nil,
+        sets_remaining: "lots"
       }
 
       user.upload_status.should correspond_to(attributes)

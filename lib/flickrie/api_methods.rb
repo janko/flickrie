@@ -7,19 +7,19 @@ module Flickrie
     # For uploading photos and videos to Flickr. Example:
     #
     #     path = File.expand_path("photo.jpg")
-    #     photo_id = Flickrie.upload(path, :title => "Me and Jessica", :description => "...")
+    #     photo_id = Flickrie.upload(path, title: "Me and Jessica", description: "...")
     #     photo = Flickrie.get_photo_info(photo_id)
     #     photo.title # => "Me and Jessica"
     #
-    # If the `:async => 1` option is passed, returns the ticket ID (see {#check\_upload\_tickets}).
+    # If the `async: 1` option is passed, returns the ticket ID (see {#check\_upload\_tickets}).
     #
     # @param media [File, String] A file or a path to the file you want to upload
     # @param params [Hash] Options for uploading (see [this page](http://www.flickr.com/services/api/upload.api.html))
-    # @return [String] New photo's ID, or ticket's ID, if `:async => 1` is passed
+    # @return [String] New photo's ID, or ticket's ID, if `async: 1` is passed
     #
     # @note This method requires authentication with "write" permissions.
     def upload(media, params = {})
-      response = upload_client.upload(media, params)
+      response = make_request(media, params)
       if params[:async] == 1
         response.body['rsp']['ticketid']
       else
@@ -33,16 +33,16 @@ module Flickrie
     #     photo_id = 42374 # ID of the photo to be replaced
     #     id = Flickrie.replace(path, photo_id)
     #
-    # If the `:async => 1` option is passed, returns the ticket ID (see {#check\_upload\_tickets}).
+    # If the `async: 1` option is passed, returns the ticket ID (see {#check\_upload\_tickets}).
     #
     # @param media [File, String] A file or a path to the file you want to upload
     # @param media_id [String, Fixnum] The ID of the photo/video to be replaced
     # @param params [Hash] Options for replacing (see [this page](http://www.flickr.com/services/api/replace.api.html))
-    # @return [String] New photo's ID, or ticket's ID, if `:async => 1` is passed
+    # @return [String] New photo's ID, or ticket's ID, if `async: 1` is passed
     #
     # @note This method requires authentication with "write" permissions.
     def replace(media, media_id, params = {})
-      response = upload_client.replace(media, media_id, params)
+      response = make_request(media, media_id, params)
       if params[:async] == 1
         response.body['rsp']['ticketid']
       else
@@ -55,7 +55,7 @@ module Flickrie
     # @return [Flickrie::User]
     # @api_method [flickr.people.findByEmail](http://www.flickr.com/services/api/flickr.people.findByEmail.html)
     def find_user_by_email(email, params = {})
-      response = client.find_user_by_email(email, params)
+      response = make_request(email, params)
       User.new(response.body['user'], self)
     end
 
@@ -64,7 +64,7 @@ module Flickrie
     # @return [Flickrie::User]
     # @api_method [flickr.people.findByUsername](http://www.flickr.com/services/api/flickr.people.findByUsername.html)
     def find_user_by_username(username, params = {})
-      response = client.find_user_by_username(username, params)
+      response = make_request(username, params)
       User.new(response.body['user'], self)
     end
 
@@ -75,7 +75,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_media_from_user(nsid, params = {})
-      response = client.media_from_user(nsid, params)
+      response = make_request(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :media_from_user, :get_media_from_user
@@ -105,7 +105,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPhotosOf](http://www.flickr.com/services/api/flickr.people.getPhotosOf.html)
     def get_media_of_user(nsid, params = {})
-      response = client.media_of_user(nsid, params)
+      response = make_request(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :media_of_user, :get_media_of_user
@@ -132,7 +132,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.people.getPublicPhotos](http://www.flickr.com/services/api/flickr.people.getPublicPhotos.html)
     def get_public_media_from_user(nsid, params = {})
-      response = client.public_media_from_user(nsid, params)
+      response = make_request(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :public_media_from_user, :get_public_media_from_user
@@ -158,7 +158,7 @@ module Flickrie
     # @return [Flickrie::User]
     # @api_method [flickr.people.getInfo](http://www.flickr.com/services/api/flickr.people.getInfo.html)
     def get_user_info(nsid, params = {})
-      response = client.get_user_info(nsid, params)
+      response = make_request(nsid, params)
       User.new(response.body['person'], self)
     end
 
@@ -170,7 +170,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_upload_status(params = {})
-      response = client.get_upload_status(params)
+      response = make_request(params)
       User.new(response.body['user'], self)
     end
 
@@ -182,7 +182,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def tag_media(media_id, tags, params = {})
-      client.add_media_tags(media_id, tags, params)
+      make_request(media_id, tags, params)
       nil
     end
     deprecated_alias :add_media_tags, :tag_media
@@ -198,7 +198,7 @@ module Flickrie
     #
     # @note This method requires authentication with "delete" permissions.
     def delete_media(media_id, params = {})
-      client.delete_media(media_id, params)
+      make_request(media_id, params)
       nil
     end
     alias delete_photo delete_media
@@ -211,7 +211,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_media_from_contacts(params = {})
-      response = client.media_from_contacts(params)
+      response = make_request(params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :media_from_contacts, :get_media_from_contacts
@@ -242,7 +242,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getContactsPublicPhotos](http://www.flickr.com/services/api/flickr.photos.getContactsPublicPhotos.html)
     def get_public_media_from_contacts(nsid, params = {})
-      response = client.public_media_from_user_contacts(nsid, params)
+      response = make_request(nsid, params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :public_media_from_user_contacts, :get_public_media_from_contacts
@@ -275,7 +275,7 @@ module Flickrie
     # @return [Flickrie::MediaContext]
     # @api_method [flickr.photos.getContext](http://www.flickr.com/services/api/flickr.photos.getContext.html)
     def get_media_context(media_id, params = {})
-      response = client.get_media_context(media_id, params)
+      response = make_request(media_id, params)
       MediaContext.new(response.body, self)
     end
     alias get_photo_context get_media_context
@@ -285,7 +285,7 @@ module Flickrie
     #
     #     require 'date'
     #     dates = [DateTime.parse("3rd Jan 2011").to_time, DateTime.parse("11th Aug 2011").to_time]
-    #     counts = Flickrie.get_media_counts(:taken_dates => dates.map(&:to_i).join(','))
+    #     counts = Flickrie.get_media_counts(taken_dates: dates.map(&:to_i).join(','))
     #
     #     count = counts.first
     #     count.value            # => 24
@@ -296,7 +296,7 @@ module Flickrie
     # @return [Flickrie::MediaCount]
     # @api_method [flickr.photos.getCounts](http://www.flickr.com/services/api/flickr.photos.getCounts.html)
     def get_media_counts(params = {})
-      response = client.get_media_counts(params)
+      response = make_request(params)
       MediaCount.new_collection(response.body['photocounts'])
     end
     alias get_photos_counts get_media_counts
@@ -307,15 +307,15 @@ module Flickrie
     #     photo = Flickrie.get_photo_exif(27234987)
     #     photo.exif.get('Model') # => 'Canon PowerShot G12'
     #
-    #     photo.exif.get('X-Resolution', :data => 'raw')   # => '180'
-    #     photo.exif.get('X-Resolution', :data => 'clean') # => '180 dpi'
+    #     photo.exif.get('X-Resolution', data: 'raw')   # => '180'
+    #     photo.exif.get('X-Resolution', data: 'clean') # => '180 dpi'
     #     photo.exif.get('X-Resolution')                   # => '180 dpi'
     #
     # @param photo_id [String, Fixnum]
     # @return [Flickrie::Photo]
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_photo_exif(photo_id, params = {})
-      response = client.get_media_exif(photo_id, params)
+      response = make_request(photo_id, params)
       Photo.new(response.body['photo'], self)
     end
     # Fetches the exif for the video with the given ID. Example:
@@ -323,15 +323,15 @@ module Flickrie
     #     video = Flickrie.get_video_exif(27234987)
     #     video.exif.get('Model') # => 'Canon PowerShot G12'
     #
-    #     video.exif.get('X-Resolution', :data => 'raw')   # => '180'
-    #     video.exif.get('X-Resolution', :data => 'clean') # => '180 dpi'
+    #     video.exif.get('X-Resolution', data: 'raw')   # => '180'
+    #     video.exif.get('X-Resolution', data: 'clean') # => '180 dpi'
     #     video.exif.get('X-Resolution')                   # => '180 dpi'
     #
     # @param video_id [String, Fixnum]
     # @return [Flickrie::Video]
     # @api_method [flickr.photos.getExif](http://www.flickr.com/services/api/flickr.photos.getExif.html)
     def get_video_exif(video_id, params = {})
-      response = client.get_media_exif(video_id, params)
+      response = make_request(video_id, params)
       Video.new(response.body['photo'], self)
     end
 
@@ -345,7 +345,7 @@ module Flickrie
     # @return [Flickrie::Photo]
     # @api_method [flickr.photos.getFavorites](http://www.flickr.com/services/api/flickr.photos.getFavorites.html)
     def get_photo_favorites(photo_id, params = {})
-      response = client.get_media_favorites(photo_id, params)
+      response = make_request(photo_id, params)
       Photo.new(response.body['photo'], self)
     end
     # Fetches the list of users who favorited the video with the given ID.
@@ -358,7 +358,7 @@ module Flickrie
     # @return [Flickrie::Video]
     # @api_method [flickr.photos.getFavorites](http://www.flickr.com/services/api/flickr.photos.getFavorites.html)
     def get_video_favorites(video_id, params = {})
-      response = client.get_media_favorites(video_id, params)
+      response = make_request(video_id, params)
       Video.new(response.body['photo'], self)
     end
 
@@ -368,7 +368,7 @@ module Flickrie
     # @return [Flickrie::Photo, Flickrie::Video]
     # @api_method [flickr.photos.getInfo](http://www.flickr.com/services/api/flickr.photos.getInfo.html)
     def get_media_info(media_id, params = {})
-      response = client.get_media_info(media_id, params)
+      response = make_request(media_id, params)
       Media.new(response.body['photo'], self)
     end
     alias get_photo_info get_media_info
@@ -382,7 +382,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_media_not_in_set(params = {})
-      response = client.media_not_in_set({:media => 'all'}.merge(params))
+      response = make_request({media: 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :media_not_in_set, :get_media_not_in_set
@@ -394,7 +394,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_photos_not_in_set(params = {})
-      get_media_not_in_set({:media => "photos"}.merge(params))
+      get_media_not_in_set({media: "photos"}.merge(params))
     end
     deprecated_alias :photos_not_in_set, :get_photos_not_in_set
     # Fetches videos from the authenticated user
@@ -405,7 +405,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_videos_not_in_set(params = {})
-      get_media_not_in_set({:media => "videos"}.merge(params))
+      get_media_not_in_set({media: "videos"}.merge(params))
     end
     deprecated_alias :videos_not_in_set, :get_videos_not_in_set
 
@@ -416,7 +416,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_photo_permissions(photo_id, params = {})
-      response = client.get_media_permissions(photo_id, params)
+      response = make_request(photo_id, params)
       Photo.new(response.body['perms'], self)
     end
     # Gets permissions of a video with the given ID.
@@ -426,7 +426,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_video_permissions(video_id, params = {})
-      response = client.get_media_permissions(video_id, params)
+      response = make_request(video_id, params)
       Video.new(response.body['perms'], self)
     end
 
@@ -435,7 +435,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.getRecent](http://www.flickr.com/services/api/flickr.photos.getRecent.html)
     def get_recent_media(params = {})
-      response = client.get_recent_media(params)
+      response = make_request(params)
       Media.new_collection(response.body['photos'], self)
     end
     # Fetches the latest photos uploaded to Flickr.
@@ -464,7 +464,7 @@ module Flickrie
     # @return [Flickrie::Photo]
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_photo_sizes(photo_id, params = {})
-      response = client.get_media_sizes(photo_id, params)
+      response = make_request(photo_id, params)
       Photo.new(response.body['sizes'], self)
     end
     # Fetches the sizes of the video with the given ID. Example:
@@ -476,7 +476,7 @@ module Flickrie
     # @return [Flickrie::Video]
     # @api_method [flickr.photos.getSizes](http://www.flickr.com/services/api/flickr.photos.getSizes.html)
     def get_video_sizes(video_id, params = {})
-      response = client.get_media_sizes(video_id, params)
+      response = make_request(video_id, params)
       Video.new(response.body['sizes'], self)
     end
 
@@ -488,7 +488,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_untagged_media(params = {})
-      response = client.get_untagged_media({:media => 'all'}.merge(params))
+      response = make_request({media: 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user that have no tags.
@@ -498,7 +498,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_untagged_photos(params = {})
-      get_untagged_media({:media => 'photos'}.merge(params))
+      get_untagged_media({media: 'photos'}.merge(params))
     end
     # Fetches videos from the authenticated user that have no tags.
     #
@@ -507,7 +507,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_untagged_videos(params = {})
-      get_untagged_media({:media => 'videos'}.merge(params))
+      get_untagged_media({media: 'videos'}.merge(params))
     end
 
     # Fetches geo-tagged photos and videos from the authenticated user.
@@ -517,7 +517,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_media_with_geo_data(params = {})
-      response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
+      response = make_request({media: 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
     # Fetches geo-tagged photos from the authenticated user.
@@ -527,7 +527,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_photos_with_geo_data(params = {})
-      get_media_with_geo_data({:media => 'photos'}.merge(params))
+      get_media_with_geo_data({media: 'photos'}.merge(params))
     end
     # Fetches geo-tagged videos from the authenticated user.
     #
@@ -536,7 +536,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_videos_with_geo_data(params = {})
-      get_media_with_geo_data({:media => 'videos'}.merge(params))
+      get_media_with_geo_data({media: 'videos'}.merge(params))
     end
 
     # Fetches photos and videos from the authenticated user that are not
@@ -547,7 +547,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_media_without_geo_data(params = {})
-      response = client.get_media_with_geo_data({:media => 'all'}.merge(params))
+      response = make_request({media: 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos from the authenticated user that are not geo-tagged.
@@ -557,7 +557,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_photos_without_geo_data(params = {})
-      get_media_with_geo_data({:media => 'photos'}.merge(params))
+      get_media_with_geo_data({media: 'photos'}.merge(params))
     end
     # Fetches videos from the authenticated user that are not geo-tagged.
     #
@@ -566,7 +566,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_videos_without_geo_data(params = {})
-      get_media_with_geo_data({:media => 'videos'}.merge(params))
+      get_media_with_geo_data({media: 'videos'}.merge(params))
     end
 
     # Fetches photos and videos from the authenticated user that have
@@ -577,7 +577,7 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def get_recently_updated_media(params = {})
-      response = client.recently_updated_media(params)
+      response = make_request(params)
       Media.new_collection(response.body['photos'], self)
     end
     deprecated_alias :recently_updated_media, :get_recently_updated_media
@@ -610,7 +610,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def untag_media(tag_id, params = {})
-      client.remove_media_tag(tag_id, params)
+      make_request(tag_id, params)
       nil
     end
     deprecated_alias :remove_media_tag, :untag_media
@@ -624,7 +624,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_media(params = {})
-      response = client.search_media({:media => 'all'}.merge(params))
+      response = make_request({media: 'all'}.merge(params))
       Media.new_collection(response.body['photos'], self)
     end
     # Fetches photos matching a certain criteria.
@@ -632,14 +632,14 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_photos(params = {})
-      search_media({:media => 'photos'}.merge(params))
+      search_media({media: 'photos'}.merge(params))
     end
     # Fetches videos matching a certain criteria.
     #
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photos.search](http://www.flickr.com/services/api/flickr.photos.search.html)
     def search_videos(params = {})
-      search_media({:media => 'videos'}.merge(params))
+      search_media({media: 'videos'}.merge(params))
     end
 
     # Sets the content type of a photo/video.
@@ -651,7 +651,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_content_type(media_id, content_type, params = {})
-      client.set_media_content_type(media_id, content_type, params)
+      make_request(media_id, content_type, params)
       nil
     end
     alias set_photo_content_type set_media_content_type
@@ -665,7 +665,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_dates(media_id, params = {})
-      client.set_media_dates(media_id, params)
+      make_request(media_id, params)
       nil
     end
     alias set_photo_dates set_media_dates
@@ -679,7 +679,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_meta(media_id, params = {})
-      client.set_media_meta(media_id, params)
+      make_request(media_id, params)
       nil
     end
     alias set_photo_meta set_media_meta
@@ -693,7 +693,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_permissions(media_id, params = {})
-      client.set_media_permissions(media_id, params)
+      make_request(media_id, params)
       nil
     end
     alias set_photo_permissions set_media_permissions
@@ -707,7 +707,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_safety_level(media_id, params = {})
-      client.set_media_safety_level(media_id, params)
+      make_request(media_id, params)
       nil
     end
     alias set_photo_safety_level set_media_safety_level
@@ -721,7 +721,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_tags(media_id, tags, params = {})
-      client.set_media_tags(media_id, tags, params)
+      make_request(media_id, tags, params)
       nil
     end
     alias set_photo_tags set_media_tags
@@ -732,7 +732,7 @@ module Flickrie
     # @return [Array<Flickrie::License>]
     # @api_method [flickr.photos.licenses.getInfo](http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html)
     def get_licenses(params = {})
-      response = client.get_licenses(params)
+      response = make_request(params)
       License.from_hash(response.body['licenses']['license'])
     end
 
@@ -743,7 +743,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_media_license(media_id, license_id, params = {})
-      client.set_media_license(media_id, license_id, params)
+      make_request(media_id, license_id, params)
       nil
     end
     alias set_photo_license set_media_license
@@ -756,7 +756,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def rotate_media(media_id, degrees, params = {})
-      client.rotate_media(media_id, degrees, params)
+      make_request(media_id, degrees, params)
       nil
     end
     alias rotate_photo rotate_media
@@ -765,7 +765,7 @@ module Flickrie
     # Fetches upload tickets with given IDs. Example:
     #
     #     photo = File.open("...")
-    #     ticket_id = Flickrie.upload(photo, :async => 1)
+    #     ticket_id = Flickrie.upload(photo, async: 1)
     #     sleep(10)
     #
     #     ticket = Flickrie.check_upload_tickets(ticket_id)
@@ -778,7 +778,7 @@ module Flickrie
     # @api_method [flickr.photos.upload.checkTickets](http://www.flickr.com/services/api/flickr.photos.upload.checkTickets.html)
     def check_upload_tickets(tickets, params = {})
       ticket_ids = tickets.join(',') rescue tickets
-      response = client.check_upload_tickets(ticket_ids, params)
+      response = make_request(ticket_ids, params)
       response.body['uploader']['ticket'].
         map { |info| Ticket.new(info) }
     end
@@ -791,7 +791,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def add_media_to_set(set_id, media_id, params = {})
-      client.add_media_to_set(set_id, media_id, params)
+      make_request(set_id, media_id, params)
     end
     alias add_photo_to_set add_media_to_set
     alias add_video_to_set add_media_to_set
@@ -803,7 +803,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def create_set(params = {})
-      response = client.create_set(params)
+      response = make_request(params)
       Set.new(response.body['photoset'], self)
     end
 
@@ -815,7 +815,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def delete_set(set_id, params = {})
-      client.delete_set(set_id, params)
+      make_request(set_id, params)
       nil
     end
 
@@ -827,7 +827,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def edit_set_metadata(set_id, params = {})
-      client.edit_set_metadata(set_id, params)
+      make_request(set_id, params)
       nil
     end
 
@@ -839,7 +839,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def edit_set_media(set_id, params = {})
-      client.edit_set_photos(set_id, params)
+      make_request(set_id, params)
       nil
     end
     alias edit_set_photos edit_set_media
@@ -850,7 +850,7 @@ module Flickrie
     # @return [Flickrie::MediaContext]
     # @api_method [flickr.photosets.getContext](http://www.flickr.com/services/api/flickr.photosets.getContext.html)
     def get_set_context(set_id, media_id, params = {})
-      response = client.get_set_context(set_id, media_id, params)
+      response = make_request(set_id, media_id, params)
       MediaContext.new(response.body, self)
     end
 
@@ -859,7 +859,7 @@ module Flickrie
     # @return [Flickrie::Set]
     # @api_method [flickr.photosets.getInfo](http://www.flickr.com/services/api/flickr.photosets.getInfo.html)
     def get_set_info(set_id, params = {})
-      response = client.get_set_info(set_id, params)
+      response = make_request(set_id, params)
       Set.new(response.body['photoset'], self)
     end
 
@@ -868,7 +868,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Set>]
     # @api_method [flickr.photosets.getList](http://www.flickr.com/services/api/flickr.photosets.getList.html)
     def get_sets_from_user(nsid, params = {})
-      response = client.sets_from_user(nsid, params)
+      response = make_request(nsid, params)
       Set.new_collection(response.body['photosets'], self)
     end
     deprecated_alias :sets_from_user, :get_sets_from_user
@@ -878,7 +878,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def get_media_from_set(set_id, params = {})
-      response = client.media_from_set(set_id, {:media => 'all'}.merge(params))
+      response = make_request(set_id, {media: 'all'}.merge(params))
       Media.new_collection(response.body['photoset'], self)
     end
     deprecated_alias :media_from_set, :get_media_from_set
@@ -887,7 +887,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Photo>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def get_photos_from_set(set_id, params = {})
-      get_media_from_set(set_id, {:media => 'photos'}.merge(params))
+      get_media_from_set(set_id, {media: 'photos'}.merge(params))
     end
     deprecated_alias :photos_from_set, :get_photos_from_set
     # Fetches videos from a set with the given ID.
@@ -895,7 +895,7 @@ module Flickrie
     # @return [Flickrie::Collection<Flickrie::Video>]
     # @api_method [flickr.photosets.getPhotos](http://www.flickr.com/services/api/flickr.photosets.getPhotos.html)
     def get_videos_from_set(set_id, params = {})
-      get_media_from_set(set_id, {:media => 'videos'}.merge(params))
+      get_media_from_set(set_id, {media: 'videos'}.merge(params))
     end
     deprecated_alias :videos_from_set, :get_videos_from_set
 
@@ -907,7 +907,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def order_sets(set_ids, params = {})
-      client.order_sets(set_ids, params)
+      make_request(set_ids, params)
       nil
     end
 
@@ -919,7 +919,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def remove_media_from_set(set_id, media_ids, params = {})
-      client.remove_media_from_set(set_id, media_ids, params)
+      make_request(set_id, media_ids, params)
       nil
     end
     alias remove_photos_from_set remove_media_from_set
@@ -933,7 +933,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def reorder_media_in_set(set_id, media_ids, params = {})
-      client.reorder_media_in_set(set_id, media_ids, params)
+      make_request(set_id, media_ids, params)
       nil
     end
     alias reorder_photos_in_set reorder_media_in_set
@@ -946,7 +946,7 @@ module Flickrie
     #
     # @note This method requires authentication with "write" permissions.
     def set_set_primary_media(set_id, media_id, params = {})
-      client.set_primary_media_to_set(set_id, media_id, params)
+      make_request(set_id, media_id, params)
       nil
     end
     deprecated_alias :set_primary_media_to_set, :set_set_primary_media
@@ -960,7 +960,7 @@ module Flickrie
     # @return [Array<String>]
     # @api_method [flickr.reflection.getMethods](http://www.flickr.com/services/api/flickr.reflection.getMethods.html)
     def get_methods(params = {})
-      response = client.get_methods(params)
+      response = make_request(params)
       response.body["methods"]["method"]
     end
 
@@ -972,8 +972,19 @@ module Flickrie
     #
     # @note This method requires authentication with "read" permissions.
     def test_login(params = {})
-      response = client.test_login(params)
+      response = make_request(params)
       User.new(response.body['user'], self)
+    end
+
+    private
+
+    def make_request(*args)
+      method = caller.first[/`.*'/][1..-2]
+      if ["upload", "replace"].include?(method)
+        upload_client.send(method, *args)
+      else
+        client.send(method, *args)
+      end
     end
   end
 end

@@ -7,9 +7,9 @@ describe :Video do
       :failed? => false,
       :pending? => false,
 
-      :duration => 16,
-      :width => 352,
-      :height => 288
+      duration: 16,
+      width: 352,
+      height: 288
     }
   end
 

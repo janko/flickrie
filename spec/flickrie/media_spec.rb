@@ -3,79 +3,79 @@ require 'spec_helper'
 describe :Media do
   before(:all) do
     @attributes = {
-      :id => PHOTO_ID,
-      :secret => '25bb44852b',
-      :server => '7049',
-      :farm => 8,
-      :title => 'IMG_0796',
-      :description => 'Test',
-      :media_status => 'ready',
-      :path_alias => nil,
-      :camera => 'Canon PowerShot G12',
-      :comments_count => 1,
-      :location => {
-        :latitude => 45.807258,
-        :longitude => 15.967599,
-        :accuracy => '11',
-        :context => 0,
-        :neighbourhood => nil,
-        :locality => {
-          :name => 'Zagreb',
-          :place_id => '00j4IylZV7scWik',
-          :woeid => '851128'
+      id: PHOTO_ID,
+      secret: '25bb44852b',
+      server: '7049',
+      farm: 8,
+      title: 'IMG_0796',
+      description: 'Test',
+      media_status: 'ready',
+      path_alias: nil,
+      camera: 'Canon PowerShot G12',
+      comments_count: 1,
+      location: {
+        latitude: 45.807258,
+        longitude: 15.967599,
+        accuracy: '11',
+        context: 0,
+        neighbourhood: nil,
+        locality: {
+          name: 'Zagreb',
+          place_id: '00j4IylZV7scWik',
+          woeid: '851128'
         },
-        :county => {
-          :name => 'Zagreb',
-          :place_id => '306dHrhQV7o6jm.ZUQ',
-          :woeid => '15022257'
+        county: {
+          name: 'Zagreb',
+          place_id: '306dHrhQV7o6jm.ZUQ',
+          woeid: '15022257'
         },
-        :region => {
-          :name => 'Grad Zagreb',
-          :place_id => 'Js1DU.pTUrpBCIKhVw',
-          :woeid => '20070170'
+        region: {
+          name: 'Grad Zagreb',
+          place_id: 'Js1DU.pTUrpBCIKhVw',
+          woeid: '20070170'
         },
-        :country => {
-          :name => 'Croatia',
-          :place_id => 'FunRCI5TUb6a6soTyw',
-          :woeid => '23424843'
+        country: {
+          name: 'Croatia',
+          place_id: 'FunRCI5TUb6a6soTyw',
+          woeid: '23424843'
         },
-        :place_id => '00j4IylZV7scWik',
-        :woeid => '851128'
+        place_id: '00j4IylZV7scWik',
+        woeid: '851128'
       },
-      :geo_permissions => {
+      geo_permissions: {
         :public? => true,
         :contacts? => false,
         :friends? => false,
         :family? => false
       },
-      :tags => {
-        :first => {
-          :content => 'luka',
-          :author => {
-            :nsid => USER_NSID
+      tags: {
+        first: {
+          content: 'luka',
+          author: {
+            nsid: USER_NSID
           },
-          :raw => 'luka',
+          raw: 'luka',
           :machine_tag? => false
         }
       },
-      :machine_tags => [],
-      :license => {:id => '0'},
-      :taken_at_granularity => 0,
-      :owner => {
-        :nsid => USER_NSID,
-        :username => USER_USERNAME,
-        :real_name => USER_USERNAME,
-        :location => "Zagreb, Croatia",
-        :icon_server => "5464",
-        :icon_farm => 6
+      machine_tags: [],
+      license: {id: '0'},
+      taken_at_granularity: 0,
+      owner: {
+        nsid: USER_NSID,
+        username: USER_USERNAME,
+        real_name: USER_USERNAME,
+        location: "Zagreb, Croatia",
+        icon_server: "5464",
+        icon_farm: 6
       },
 
-      :safety_level => 0,
+      safety_level: 0,
       :safe? => true,
       :moderate? => false,
       :restricted? => false,
 
-      :visibility => {
+      visibility: {
         :public? => true,
         :family? => false,
         :friends? => false,
@@ -84,17 +84,17 @@ describe :Media do
       :favorite? => false,
 
       :has_people? => false,
-      :notes => {
-        :first => {
-          :id => '72157629487842968',
-          :author => {
-            :nsid => USER_NSID,
-            :username => USER_USERNAME
+      notes: {
+        first: {
+          id: '72157629487842968',
+          author: {
+            nsid: USER_NSID,
+            username: USER_USERNAME
           },
-          :coordinates => [316, 0],
-          :width => 59,
-          :height => 50,
-          :content => 'Test'
+          coordinates: [316, 0],
+          width: 59,
+          height: 50,
+          content: 'Test'
         }
       }
     }
@@ -146,7 +146,7 @@ describe :Media do
   end
 
   context "extras", :vcr do
-    let(:media) { Flickrie.media_from_set(SET_ID, :extras => EXTRAS).first }
+    let(:media) { Flickrie.media_from_set(SET_ID, extras: EXTRAS).first }
 
     it "has correct attributes" do
       complete = [:media_status, :geo_permissions, :machine_tags, :license, :taken_at_granularity]
@@ -170,7 +170,7 @@ describe :Media do
   end
 
   context "from set", :vcr do
-    let(:media) { Flickrie.media_from_set(SET_ID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
+    let(:media) { Flickrie.media_from_set(SET_ID, extras: EXTRAS).find { |media| media.id == PHOTO_ID } }
 
     it "has correct attributes" do
       [:id, :secret, :server, :farm, :title].each do |attribute|
@@ -183,7 +183,7 @@ describe :Media do
   end
 
   context "from user", :vcr do
-    let(:media) { Flickrie.media_from_user(USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
+    let(:media) { Flickrie.media_from_user(USER_NSID, extras: EXTRAS).find { |media| media.id == PHOTO_ID } }
 
     it "has correct attributes" do
       [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
@@ -194,7 +194,7 @@ describe :Media do
   end
 
   context "public from user", :vcr do
-    let(:media) { Flickrie.public_media_from_user(USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
+    let(:media) { Flickrie.public_media_from_user(USER_NSID, extras: EXTRAS).find { |media| media.id == PHOTO_ID } }
 
     it "has correct attributes" do
       [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
@@ -205,7 +205,7 @@ describe :Media do
   end
 
   context "search", :vcr do
-    let(:media) { Flickrie.search_media(:user_id => USER_NSID, :extras => EXTRAS).find { |media| media.id == PHOTO_ID } }
+    let(:media) { Flickrie.search_media(user_id: USER_NSID, extras: EXTRAS).find { |media| media.id == PHOTO_ID } }
 
     it "has correct attributes" do
       [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
@@ -217,7 +217,7 @@ describe :Media do
 
   context "from contacts", :vcr do
     let(:media) {
-      params = {:include_self => 1, :single_photo => 1}
+      params = {include_self: 1, single_photo: 1}
       [
         Flickrie.media_from_contacts(params).first,
         Flickrie.public_media_from_user_contacts(USER_NSID, params).first
@@ -227,17 +227,17 @@ describe :Media do
     it "has correct attributes" do
       media.each do |media|
         attributes = {
-          :id => '7093101501',
-          :secret => '9337f28800',
-          :server => '7090',
-          :farm => 8,
-          :owner => {
-            :nsid => USER_NSID,
-            :username => USER_USERNAME
+          id: '7093101501',
+          secret: '9337f28800',
+          server: '7090',
+          farm: 8,
+          owner: {
+            nsid: USER_NSID,
+            username: USER_USERNAME
           },
-          :title => 'IMG_0917',
-          :visibility => {:public? => true},
-          :media_status => 'ready'
+          title: 'IMG_0917',
+          visibility: {:public? => true},
+          media_status: 'ready'
         }
 
         attributes.keys.each do |attribute|
@@ -254,12 +254,12 @@ describe :Media do
       context.count.should eq(98)
 
       attributes = {
-        :id => '6946978706',
-        :secret => 'b38270bbd6',
-        :server => '7216',
-        :farm => 8,
-        :title => 'IMG_0795',
-        :license => {:id => '0'},
+        id: '6946978706',
+        secret: 'b38270bbd6',
+        server: '7216',
+        farm: 8,
+        title: 'IMG_0795',
+        license: {id: '0'},
         :faved? => false
       }
       attributes.keys.each do |attribute|
@@ -281,14 +281,14 @@ describe :Media do
       media.each do |media|
         media.camera.should eq('Canon PowerShot G12')
         media.exif.get('X-Resolution').should eq('180 dpi')
-        media.exif.get('X-Resolution', :data => 'clean').should eq('180 dpi')
-        media.exif.get('X-Resolution', :data => 'raw').should eq('180')
+        media.exif.get('X-Resolution', data: 'clean').should eq('180 dpi')
+        media.exif.get('X-Resolution', data: 'raw').should eq('180')
       end
     end
   end
 
   context "get not in set", :vcr do
-    let(:media) { Flickrie.media_not_in_set(:extras => EXTRAS).first }
+    let(:media) { Flickrie.media_not_in_set(extras: EXTRAS).first }
 
     it "has correct attributes", :vcr do
       [:id, :secret, :server, :farm, :title, :visibility].each do |attribute|
@@ -312,7 +312,7 @@ describe :Media do
   it "has #short_url", :vcr do
     media = Flickrie.get_media_info(MEDIA_ID)
     connection = Faraday.new(media.short_url) do |b|
-      b.use FaradayMiddleware::FollowRedirects, :limit => 5
+      b.use FaradayMiddleware::FollowRedirects, limit: 5
       b.adapter :net_http
     end
     response = connection.get

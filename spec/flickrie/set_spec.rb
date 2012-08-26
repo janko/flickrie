@@ -4,21 +4,21 @@ require 'spec_helper'
 describe :Set do
   before(:all) do
     @attributes = {
-      :id => SET_ID,
-      :secret => '25bb44852b',
-      :server => '7049',
-      :farm => 8,
-      :title => 'Speleologija',
-      :description => 'Slike sa škole speleologije Velebit.',
-      :primary_media_id => PHOTO_ID,
-      :primary_photo_id => PHOTO_ID,
-      :primary_video_id => PHOTO_ID,
-      :comments_count => 0,
-      :photos_count => 97,
-      :videos_count => 1,
-      :media_count => 98,
-      :owner => {
-        :nsid => USER_NSID
+      id: SET_ID,
+      secret: '25bb44852b',
+      server: '7049',
+      farm: 8,
+      title: 'Speleologija',
+      description: 'Slike sa škole speleologije Velebit.',
+      primary_media_id: PHOTO_ID,
+      primary_photo_id: PHOTO_ID,
+      primary_video_id: PHOTO_ID,
+      comments_count: 0,
+      photos_count: 97,
+      videos_count: 1,
+      media_count: 98,
+      owner: {
+        nsid: USER_NSID
       }
     }
   end
@@ -66,7 +66,7 @@ describe :Set do
   end
 
   context "create", :vcr do
-    let(:set) { Flickrie.create_set(:title => "Bla", :primary_photo_id => MEDIA_ID) }
+    let(:set) { Flickrie.create_set(title: "Bla", primary_photo_id: MEDIA_ID) }
 
     it "has correct attributes" do
       set.id.should_not be_empty

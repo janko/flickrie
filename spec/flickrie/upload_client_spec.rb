@@ -4,7 +4,7 @@ describe :UploadClient do
   context "content type", :vcr do
     it "passes the content type" do
       photo_path = File.expand_path("../../files/photo.bla", __FILE__)
-      photo_id = Flickrie.upload(photo_path, :content_type => "image/jpeg")
+      photo_id = Flickrie.upload(photo_path, content_type: "image/jpeg")
       Flickrie.photos_from_user(USER_NSID).map(&:id).should include(photo_id)
       Flickrie.delete_photo(photo_id)
     end

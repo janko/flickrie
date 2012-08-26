@@ -75,7 +75,7 @@ describe :Photo do
 
   context "search", :vcr do
     let(:photo) {
-      Flickrie.search_photos(:user_id => USER_NSID, :extras => EXTRAS).
+      Flickrie.search_photos(user_id: USER_NSID, extras: EXTRAS).
         find { |photo| photo.id == PHOTO_ID }
     }
 

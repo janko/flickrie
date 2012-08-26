@@ -4,8 +4,8 @@ require 'flickrie/flickr_api_methods'
 
 module Flickrie
   DEFAULTS = {
-    :open_timeout => 3,
-    :timeout => 4
+    open_timeout: 3,
+    timeout: 4
   }
 
   class << self
@@ -67,7 +67,7 @@ module Flickrie
     #
     # Now let's assume you have a collection of photos
     #
-    #     @photos = Flickrie.photos_from_set(2734243, :per_page => 20, :page => params[:page])
+    #     @photos = Flickrie.photos_from_set(2734243, per_page: 20, page: params[:page])
     #
     # This collection is now paginated. You can now call in your ERB template:
     #

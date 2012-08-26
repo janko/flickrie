@@ -18,8 +18,8 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :faraday
   c.default_cassette_options = {
-    :serialize_with => :syck, # Don't output in binary form (only in Ruby 1.9.3-p125).
-    :match_requests_on => [
+    serialize_with: :syck, # Don't output in binary form (only in Ruby 1.9.3-p125).
+    match_requests_on: [
       :method,
       VCR.request_matchers.uri_without_param(:api_key) # Don't require the API key.
     ]

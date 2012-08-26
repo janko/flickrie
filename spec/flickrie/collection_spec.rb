@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe :Collection do
-  let(:photos) { Flickrie.photos_from_set(SET_ID, :per_page => 8, :page => 1) }
+  let(:photos) { Flickrie.photos_from_set(SET_ID, per_page: 8, page: 1) }
   let(:photo_id) { '6946978706' }
 
   context "without will_paginate", :vcr do

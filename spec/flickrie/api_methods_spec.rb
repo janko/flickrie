@@ -8,7 +8,7 @@ describe :ApiMethods, :vcr do
     end
 
     it "uploads asynchronously" do
-      ticket_id = Flickrie.upload(PHOTO_PATH, :async => 1)
+      ticket_id = Flickrie.upload(PHOTO_PATH, async: 1)
       ticket = Flickrie.check_upload_tickets(ticket_id).first
       until ticket.complete?
         ticket = Flickrie.check_upload_tickets(ticket_id).first
@@ -76,7 +76,7 @@ describe :ApiMethods, :vcr do
     end
 
     it "gets from contacts" do
-      params = {:include_self => 1, :single_photo => 1}
+      params = {include_self: 1, single_photo: 1}
 
       media = Flickrie.media_from_contacts(params)
       media.each { |object| object.should be_a(Flickrie::Media) }
@@ -92,7 +92,7 @@ describe :ApiMethods, :vcr do
     end
 
     it "gets public from user contacts" do
-      params = {:include_self => 1, :single_photo => 1}
+      params = {include_self: 1, single_photo: 1}
 
       media = Flickrie.public_media_from_user_contacts(USER_NSID, params)
       media.each { |object| object.should be_a(Flickrie::Media) }
@@ -115,9 +115,9 @@ describe :ApiMethods, :vcr do
 
     it "gets counts" do
       dates = [DateTime.parse("19th May 2009"), DateTime.parse("19th May 2012")]
-      Flickrie.get_media_counts(:taken_dates => dates.join(',')).first.value.should_not be_nil
-      Flickrie.get_photos_counts(:taken_dates => dates.join(',')).first.value.should_not be_nil
-      Flickrie.get_videos_counts(:taken_dates => dates.join(',')).first.value.should_not be_nil
+      Flickrie.get_media_counts(taken_dates: dates.join(',')).first.value.should_not be_nil
+      Flickrie.get_photos_counts(taken_dates: dates.join(',')).first.value.should_not be_nil
+      Flickrie.get_videos_counts(taken_dates: dates.join(',')).first.value.should_not be_nil
     end
 
     it "gets exif" do
@@ -142,15 +142,15 @@ describe :ApiMethods, :vcr do
     end
 
     it "searches" do
-      media = Flickrie.search_media(:user_id => USER_NSID)
+      media = Flickrie.search_media(user_id: USER_NSID)
       media.each { |object| object.should be_a(Flickrie::Media) }
       media.first.id.should_not be_nil
 
-      photos = Flickrie.search_photos(:user_id => USER_NSID)
+      photos = Flickrie.search_photos(user_id: USER_NSID)
       photos.each { |object| object.should be_a(Flickrie::Photo) }
       photos.first.id.should_not be_nil
 
-      videos = Flickrie.search_videos(:user_id => USER_NSID)
+      videos = Flickrie.search_videos(user_id: USER_NSID)
       videos.each { |object| object.should be_a(Flickrie::Video) }
       videos.first.id.should_not be_nil
     end
@@ -240,15 +240,15 @@ describe :ApiMethods, :vcr do
     end
 
     it "gets recently updated" do
-      media = Flickrie.recently_updated_media(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      media = Flickrie.recently_updated_media(min_date: DateTime.parse("1st May 2011").to_time.to_i)
       media.each { |object| object.should be_a(Flickrie::Media) }
       media.first.id.should_not be_nil
 
-      photos = Flickrie.recently_updated_photos(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      photos = Flickrie.recently_updated_photos(min_date: DateTime.parse("1st May 2011").to_time.to_i)
       photos.each { |object| object.should be_a(Flickrie::Photo) }
       photos.first.id.should_not be_nil
 
-      videos = Flickrie.recently_updated_videos(:min_date => DateTime.parse("1st May 2011").to_time.to_i)
+      videos = Flickrie.recently_updated_videos(min_date: DateTime.parse("1st May 2011").to_time.to_i)
       videos.each { |object| object.should be_a(Flickrie::Video) }
       videos.first.id.should_not be_nil
     end
@@ -260,27 +260,27 @@ describe :ApiMethods, :vcr do
     end
 
     it "sets dates" do
-      Flickrie.set_media_dates(MEDIA_ID, :date_taken_granularity => 0)
-      Flickrie.set_photo_dates(MEDIA_ID, :date_taken_granularity => 0)
-      Flickrie.set_video_dates(MEDIA_ID, :date_taken_granularity => 0)
+      Flickrie.set_media_dates(MEDIA_ID, date_taken_granularity: 0)
+      Flickrie.set_photo_dates(MEDIA_ID, date_taken_granularity: 0)
+      Flickrie.set_video_dates(MEDIA_ID, date_taken_granularity: 0)
     end
 
     it "sets meta" do
-      Flickrie.set_media_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
-      Flickrie.set_photo_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
-      Flickrie.set_video_meta(MEDIA_ID, :title => "IMG_0796", :description => "Test")
+      Flickrie.set_media_meta(MEDIA_ID, title: "IMG_0796", description: "Test")
+      Flickrie.set_photo_meta(MEDIA_ID, title: "IMG_0796", description: "Test")
+      Flickrie.set_video_meta(MEDIA_ID, title: "IMG_0796", description: "Test")
     end
 
     it "sets permissions" do
-      Flickrie.set_media_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
-      Flickrie.set_photo_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
-      Flickrie.set_video_permissions(MEDIA_ID, :is_public => 1, :is_friend => 0, :is_family => 0, :perm_comment => 3, :perm_addmeta => 2)
+      Flickrie.set_media_permissions(MEDIA_ID, is_public: 1, is_friend: 0, is_family: 0, perm_comment: 3, perm_addmeta: 2)
+      Flickrie.set_photo_permissions(MEDIA_ID, is_public: 1, is_friend: 0, is_family: 0, perm_comment: 3, perm_addmeta: 2)
+      Flickrie.set_video_permissions(MEDIA_ID, is_public: 1, is_friend: 0, is_family: 0, perm_comment: 3, perm_addmeta: 2)
     end
 
     it "sets safety level" do
-      Flickrie.set_media_safety_level(MEDIA_ID, :safety_level => 1)
-      Flickrie.set_photo_safety_level(MEDIA_ID, :safety_level => 1)
-      Flickrie.set_video_safety_level(MEDIA_ID, :safety_level => 1)
+      Flickrie.set_media_safety_level(MEDIA_ID, safety_level: 1)
+      Flickrie.set_photo_safety_level(MEDIA_ID, safety_level: 1)
+      Flickrie.set_video_safety_level(MEDIA_ID, safety_level: 1)
     end
 
     it "sets tags" do
@@ -312,11 +312,11 @@ describe :ApiMethods, :vcr do
     end
 
     it "edits meta" do
-      expect { Flickrie.edit_set_metadata(SET_ID, :title => "Speleologija") }.to_not raise_error
+      expect { Flickrie.edit_set_metadata(SET_ID, title: "Speleologija") }.to_not raise_error
     end
 
     it "edits media" do
-      expect { Flickrie.edit_set_media(72157630665363720, :primary_photo_id => 7093101501, :photo_ids => "7093101501,7316710626") }.to_not raise_error
+      expect { Flickrie.edit_set_media(72157630665363720, primary_photo_id: 7093101501, photo_ids: "7093101501,7316710626") }.to_not raise_error
     end
 
     it "gets media" do

@@ -11,10 +11,10 @@ module Flickrie
         Faraday.new(params) do |b|
           b.use Middleware::Retry
           b.use FaradayMiddleware::OAuth,
-            :consumer_key => Flickrie.api_key,
-            :consumer_secret => Flickrie.shared_secret,
-            :token => request_token.to_a.first,
-            :token_secret => request_token.to_a.last
+            consumer_key: Flickrie.api_key,
+            consumer_secret: Flickrie.shared_secret,
+            token: request_token.to_a.first,
+            token_secret: request_token.to_a.last
 
           b.use Middleware::ParseOAuthParams
           b.use Middleware::OAuthCheck
@@ -25,10 +25,10 @@ module Flickrie
 
       def self.params
         {
-          :url => URL,
-          :request => {
-            :open_timeout => Flickrie.open_timeout || DEFAULTS[:open_timeout],
-            :timeout => Flickrie.timeout || DEFAULTS[:timeout]
+          url: URL,
+          request: {
+            open_timeout: Flickrie.open_timeout || DEFAULTS[:open_timeout],
+            timeout: Flickrie.timeout || DEFAULTS[:timeout]
           }
         }
       end
@@ -73,7 +73,7 @@ module Flickrie
         require 'uri'
         url = URI.parse(URL)
         url.path += '/authorize'
-        query_params = {:oauth_token => token}.merge(params)
+        query_params = {oauth_token: token}.merge(params)
         url.query = query_params.map { |k,v| "#{k}=#{v}" }.join('&')
         url.to_s
       end

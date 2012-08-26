@@ -5,20 +5,13 @@ module Flickrie
     def upload(media, params = {})
       file = get_file(media, params[:content_type])
       title = file.original_filename.match(/\.\w{3,4}$/).pre_match
-      post "upload", {
-        :photo => file,
-        :title => title
-      }.merge(params)
+      post "upload", {photo: file, title: title}.merge(params)
     end
 
     def replace(media, media_id, params = {})
       file = get_file(media, params[:content_type])
       title = file.original_filename.match(/\.\w{3,4}$/).pre_match
-      post "replace", {
-        :photo => file,
-        :photo_id => media_id,
-        :title => title
-      }.merge(params)
+      post "replace", {photo: file, photo_id: media_id, title: title}.merge(params)
     end
 
     private
@@ -66,7 +59,7 @@ module Flickrie
       content_type = CONTENT_TYPES.find { |k,v| k.include?(extension) }.last
 
     rescue NoMethodError
-      raise Error, "Don't know the content type for this extension (#{extension})"
+      raise Error, "Content type for this extension (#{extension}) is not known"
     end
   end
 end

@@ -163,7 +163,7 @@ module Flickrie
     "flickr.photosets.editPhotos"                 => "edit_set_(photos|videos|media)",
     "flickr.photosets.getContext"                 => "get_set_context",
     "flickr.photosets.getInfo"                    => "get_set_info",
-    "flickr.photosets.getList"                    => "get_set_from_user",
+    "flickr.photosets.getList"                    => "get_sets_from_user",
     "flickr.photosets.getPhotos"                  => "get_(photos|videos|media)_from_set",
     "flickr.photosets.orderSets"                  => "order_sets",
     "flickr.photosets.removePhoto"                => "remove_(photos|videos|media)_from_set",
@@ -204,7 +204,7 @@ module Flickrie
     "flickr.push.unsubscribe"                     => NOT_IMPLEMENTED,
 
     "flickr.reflection.getMethodInfo"             => NOT_IMPLEMENTED,
-    "flickr.reflection.getMethods"                => NOT_IMPLEMENTED,
+    "flickr.reflection.getMethods"                => "get_methods",
 
     "flickr.stats.getCollectionDomains"           => NOT_IMPLEMENTED,
     "flickr.stats.getCollectionReferrers"         => NOT_IMPLEMENTED,
