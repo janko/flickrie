@@ -715,7 +715,7 @@ module Flickrie
 
     # Sets tags for a photo/video.
     #
-    # @param media_id [String, Fixnum]
+    # @param tags [String] A space-delimited string with tags
     # @return [nil]
     # @api_method [flickr.photos.setTags](http://www.flickr.com/services/api/flickr.photos.setTags.html)
     #
