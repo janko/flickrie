@@ -117,11 +117,11 @@ module Flickrie
     "flickr.photos.setSafetyLevel"                => "set_(photo|video|media)_safety_level",
     "flickr.photos.setTags"                       => "set_(photo|video|media)_tags",
 
-    "flickr.photos.comments.addComment"           => NOT_IMPLEMENTED,
-    "flickr.photos.comments.deleteComment"        => NOT_IMPLEMENTED,
-    "flickr.photos.comments.editComment"          => NOT_IMPLEMENTED,
-    "flickr.photos.comments.getList"              => NOT_IMPLEMENTED,
-    "flickr.photos.comments.getRecentForContacts" => NOT_IMPLEMENTED,
+    "flickr.photos.comments.addComment"           => "comment_(photo|video|media)",
+    "flickr.photos.comments.deleteComment"        => "delete_(photo|video|media)_comment",
+    "flickr.photos.comments.editComment"          => "edit_(photo|video|media)_comment",
+    "flickr.photos.comments.getList"              => "get_(photo|video|media)_comments",
+    "flickr.photos.comments.getRecentForContacts" => "get_recently_commented_(photos|videos|media)_from_contacts",
 
     "flickr.photos.geo.batchCorrectLocation"      => NOT_IMPLEMENTED,
     "flickr.photos.geo.correctLocation"           => NOT_IMPLEMENTED,

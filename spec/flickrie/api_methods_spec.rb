@@ -61,18 +61,20 @@ describe :ApiMethods, :vcr do
   # Here I test the media/photo/video aliases of the API methods (because I don't test them elsewhere)
   context "photos" do
     it "adds and remove tags" do
-      %w[media photo video].each do |word|
-        id = eval "#{word.upcase}_ID"
-        media = Flickrie.send("get_#{word}_info", id)
-        tags_before_change = media.tags.join(' ')
-        Flickrie.send("add_#{word}_tags", id, "janko")
-        media.get_info
-        media.tags.join(' ').should eq([tags_before_change, "janko"].join(' '))
-        tag_id = media.tags.find { |tag| tag.content == "janko" }.id
-        Flickrie.send("remove_#{word}_tag", tag_id)
-        media.get_info
-        media.tags.join(' ').should eq(tags_before_change)
-      end
+      media = Flickrie.get_media_info(MEDIA_ID)
+      tags_before_change = media.tags.join(' ')
+      Flickrie.tag_media(MEDIA_ID, "janko")
+      media.get_info
+      media.tags.join(' ').should eq([tags_before_change, "janko"].join(' '))
+      tag_id = media.tags.find { |tag| tag.content == "janko" }.id
+      Flickrie.remove_media_tag(tag_id)
+      media.get_info
+      media.tags.join(' ').should eq(tags_before_change)
+
+      Flickrie.should respond_to(:tag_photo)
+      Flickrie.should respond_to(:tag_video)
+      Flickrie.should respond_to(:remove_photo_tag)
+      Flickrie.should respond_to(:remove_video_tag)
     end
 
     it "gets from contacts" do
@@ -108,9 +110,9 @@ describe :ApiMethods, :vcr do
     end
 
     it "gets context" do
-      Flickrie.get_media_context(MEDIA_ID).count.should_not be_nil
-      Flickrie.get_photo_context(PHOTO_ID).count.should_not be_nil
-      Flickrie.get_photo_context(VIDEO_ID).count.should_not be_nil
+      Flickrie.get_media_context(MEDIA_ID).count.should be_a(Fixnum)
+      Flickrie.should respond_to(:get_photo_context)
+      Flickrie.should respond_to(:get_video_context)
     end
 
     it "gets counts" do
@@ -299,6 +301,30 @@ describe :ApiMethods, :vcr do
       Flickrie.rotate_media(MEDIA_ID, 90)
       Flickrie.rotate_photo(MEDIA_ID, 90)
       Flickrie.rotate_video(MEDIA_ID, 180)
+    end
+
+    it "manipulates with comments" do
+      id = Flickrie.comment_media(MEDIA_ID, "foo")
+      Flickrie.should respond_to(:comment_photo)
+      Flickrie.should respond_to(:comment_video)
+
+      Flickrie.edit_media_comment(id, "foo")
+      Flickrie.should respond_to(:edit_photo_comment)
+      Flickrie.should respond_to(:edit_video_comment)
+
+      comments = Flickrie.get_media_comments(MEDIA_ID)
+      comments.last.content.should == "foo"
+      Flickrie.should respond_to(:get_photo_comments)
+      Flickrie.should respond_to(:get_video_comments)
+
+      Flickrie.delete_media_comment(id)
+      Flickrie.should respond_to(:delete_photo_comment)
+      Flickrie.should respond_to(:delete_video_comment)
+
+      media = Flickrie.get_recently_commented_media_from_contacts
+      media.should be_empty
+      Flickrie.should respond_to(:get_recently_commented_photos_from_contacts)
+      Flickrie.should respond_to(:get_recently_commented_videos_from_contacts)
     end
   end
 

@@ -11,144 +11,166 @@ module Flickrie
 
       # Ugly, just normalizing the data
       def fix_flickr_data!(response)
-        data = response.env[:body]
         query = CGI.parse(response.env[:url].query)
         flickr_method = query['method'].first
 
         case flickr_method
-        # people
-        when 'flickr.people.findByUsername'
-          data['user']['username'] = data['user']['username']['_content'] rescue nil
-        when 'flickr.people.findByEmail'
-          data['user']['username'] = data['user']['username']['_content'] rescue nil
-        when 'flickr.people.getInfo'
-          %w[username realname location description profileurl mobileurl photosurl].each do |attribute|
-            data['person'][attribute] = data['person'][attribute]['_content'] rescue nil
-          end
-          %w[count firstdatetaken firstdate].each do |photo_attribute|
-            data['person']['photos'][photo_attribute] = data['person']['photos'][photo_attribute]['_content'] rescue nil
-          end
-        when 'flickr.test.login'
-          data['user']['username'] = data['user']['username']['_content'] rescue nil
-        when 'flickr.people.getUploadStatus'
-          data['user']['username'] = data['user']['username']['_content'] rescue nil
-          data['user']['upload_status'] = {
-            'bandwidth' => data['user'].delete('bandwidth'),
-            'filesize' => data['user'].delete('filesize'),
-            'sets' => data['user'].delete('sets'),
-            'videosize' => data['user'].delete('videosize'),
-            'videos' => data['user'].delete('videos')
-          }
-
-        # photos
-        when 'flickr.people.getPhotos'
-          fix_common!(data)
-        when 'flickr.people.getPublicPhotos'
-          fix_common!(data)
-        when 'flickr.photos.getInfo'
-          data['photo']['title'] = data['photo']['title']['_content'] rescue nil
-          data['photo']['description'] = data['photo']['description']['_content'] rescue nil
-          data['photo']['comments_count'] = data['photo'].delete('comments')['_content'] rescue nil
-          data['photo']['dates']['uploaded'] = data['photo'].delete('dateuploaded') rescue nil
-          data['photo']['tags'] = data['photo']['tags']['tag']
-        when 'flickr.photosets.getPhotos'
-          data['photoset']['photo'].map! do |media_hash|
-            media_hash['owner'] = {
-              'id' => data['photoset']['owner'],
-              'nsid' => data['photoset']['owner'],
-              'username' => data['photoset']['ownername'],
-            }
-            fix_extras!(media_hash)
-            media_hash
-          end
-        when 'flickr.photos.getSizes'
-          data['sizes']['usage'] = {
-            'canblog'     => data['sizes']['canblog'],
-            'canprint'    => data['sizes']['canprint'],
-            'candownload' => data['sizes']['candownload']
-          }
-          data['sizes']['id'] = query['photo_id'].first
-          if data['sizes']['size'].find { |hash| hash['label'] == 'Video Player' }
-            # Video
-            data['sizes']['video'] ||= {}
-            data['sizes']['size'].each do |info|
-              case info['label']
-              when 'Video Player' then data['sizes']['video']['source_url'] = info['source']
-              when 'Site MP4'     then data['sizes']['video']['download_url'] = info['source']
-              when 'Mobile MP4'   then data['sizes']['video']['mobile_download_url'] = info['source']
-              end
-            end
-          else
-            flickr_sizes = {
-              'Square'       => Photo::FLICKR_SIZES['Square 75'],
-              'Large Square' => Photo::FLICKR_SIZES['Square 150'],
-              'Thumbnail'    => Photo::FLICKR_SIZES['Thumbnail'],
-              'Small'        => Photo::FLICKR_SIZES['Small 240'],
-              'Small 320'    => Photo::FLICKR_SIZES['Small 320'],
-              'Medium'       => Photo::FLICKR_SIZES['Medium 500'],
-              'Medium 640'   => Photo::FLICKR_SIZES['Medium 640'],
-              'Medium 800'   => Photo::FLICKR_SIZES['Medium 800'],
-              'Large'        => Photo::FLICKR_SIZES['Large 1024'],
-              'Large 1600'   => Photo::FLICKR_SIZES['Large 1600'],
-              'Large 2048'   => Photo::FLICKR_SIZES['Large 2048'],
-              'Original'     => Photo::FLICKR_SIZES['Original']
-            }
-            data['sizes']['size'].each do |size_info|
-              size_abbr = flickr_sizes[size_info['label']]
-              data['sizes']["width_#{size_abbr}"] = size_info['width']
-              data['sizes']["height_#{size_abbr}"] = size_info['height']
-              data['sizes']["url_#{size_abbr}"] = size_info['source']
-            end
-          end
-        when 'flickr.photos.search'
-          fix_common!(data)
-        when 'flickr.photos.getContactsPhotos'
-          data['photos']['photo'].each do |media_hash|
-            media_hash['ownername'] = media_hash.delete('username')
-          end
-          fix_common!(data)
-        when 'flickr.photos.getContactsPublicPhotos'
-          data['photos']['photo'].each do |media_hash|
-            media_hash['ownername'] = media_hash.delete('username')
-          end
-          fix_common!(data)
-        when 'flickr.photos.getNotInSet'
-          fix_common!(data)
-        when 'flickr.people.getPhotosOf'
-          fix_common!(data)
-        when 'flickr.photos.getPerms'
-          fix_visibility!(data['perms'])
-          data['perms']['permissions'] = {
-            'permcomment' => data['perms'].delete('permcomment'),
-            'permaddmeta' => data['perms'].delete('permaddmeta')
-          }
-        when 'flickr.photos.getRecent'
-          fix_common!(data)
-        when 'flickr.photos.getUntagged'
-          fix_common!(data)
-        when 'flickr.photos.getWithGeoData'
-          fix_common!(data)
-        when 'flickr.photos.getWithoutGeoData'
-          fix_common!(data)
-        when 'flickr.photos.recentlyUpdated'
-          fix_common!(data)
-
-        # photosets
-        when 'flickr.photosets.getInfo'
-          data['photoset']['title'] = data['photoset']['title']['_content'] rescue nil
-          data['photoset']['description'] = data['photoset']['description']['_content'] rescue nil
-        when 'flickr.photosets.getList'
-          data['photosets']['photoset'].map! do |set_hash|
-            set_hash['count_photos'] = set_hash.delete('photos')
-            set_hash['count_videos'] = set_hash.delete('videos')
-            set_hash['title'] = set_hash['title']['_content'] rescue nil
-            set_hash['description'] = set_hash['description']['_content'] rescue nil
+        when "flickr.photos.getSizes"
+          response.env[:body]['sizes']['id'] = query['photo_id'].first
+        when "flickr.photosets.getList"
+          response.env[:body]['photosets']['photoset'].map! do |set_hash|
             set_hash['owner'] = query['user_id'].first
             set_hash
           end
+        end
 
-        when 'flickr.reflection.getMethods'
-          data['methods']['method'].map! { |hash| hash["_content"] }
+        response.env[:body] = cleanup_content(response.env[:body])
+        action = actions[flickr_method]
+        action.call(response.env[:body]) if action
+      end
+
+      def actions
+        @actions ||= {
+          "flickr.people.findByUsername" => lambda { |data| },
+          "flickr.people.findByEmail" => lambda { |data| },
+          "flickr.people.getInfo" => lambda { |data| },
+          "flickr.people.getUploadStatus" => lambda { |data|
+            data['user']['upload_status'] = {
+              'bandwidth' => data['user'].delete('bandwidth'),
+              'filesize' => data['user'].delete('filesize'),
+              'sets' => data['user'].delete('sets'),
+              'videosize' => data['user'].delete('videosize'),
+              'videos' => data['user'].delete('videos')
+            }
+          },
+          "flickr.people.getPhotos" => lambda { |data| fix_common!(data) },
+          "flickr.people.getPhotosOf" => lambda { |data| fix_common!(data) },
+          "flickr.people.getPublicPhotos" => lambda { |data| fix_common!(data) },
+
+          "flickr.photos.getInfo" => lambda { |data|
+            data['photo']['comments_count'] = data['photo'].delete('comments')
+            data['photo']['dates']['uploaded'] = data['photo'].delete('dateuploaded') rescue nil
+            data['photo']['tags'] = data['photo']['tags']['tag'] rescue nil
+          },
+
+          "flickr.photos.getSizes" => lambda { |data|
+            data['sizes']['usage'] = {
+              'canblog'     => data['sizes']['canblog'],
+              'canprint'    => data['sizes']['canprint'],
+              'candownload' => data['sizes']['candownload']
+            }
+            if data['sizes']['size'].find { |hash| hash['label'] == 'Video Player' }
+              # Video
+              data['sizes']['video'] ||= {}
+              data['sizes']['size'].each do |info|
+                case info['label']
+                when 'Video Player' then data['sizes']['video']['source_url'] = info['source']
+                when 'Site MP4'     then data['sizes']['video']['download_url'] = info['source']
+                when 'Mobile MP4'   then data['sizes']['video']['mobile_download_url'] = info['source']
+                end
+              end
+            else
+              flickr_sizes = {
+                'Square'       => Photo::FLICKR_SIZES['Square 75'],
+                'Large Square' => Photo::FLICKR_SIZES['Square 150'],
+                'Thumbnail'    => Photo::FLICKR_SIZES['Thumbnail'],
+                'Small'        => Photo::FLICKR_SIZES['Small 240'],
+                'Small 320'    => Photo::FLICKR_SIZES['Small 320'],
+                'Medium'       => Photo::FLICKR_SIZES['Medium 500'],
+                'Medium 640'   => Photo::FLICKR_SIZES['Medium 640'],
+                'Medium 800'   => Photo::FLICKR_SIZES['Medium 800'],
+                'Large'        => Photo::FLICKR_SIZES['Large 1024'],
+                'Large 1600'   => Photo::FLICKR_SIZES['Large 1600'],
+                'Large 2048'   => Photo::FLICKR_SIZES['Large 2048'],
+                'Original'     => Photo::FLICKR_SIZES['Original']
+              }
+              data['sizes']['size'].each do |size_info|
+                size_abbr = flickr_sizes[size_info['label']]
+                data['sizes']["width_#{size_abbr}"] = size_info['width']
+                data['sizes']["height_#{size_abbr}"] = size_info['height']
+                data['sizes']["url_#{size_abbr}"] = size_info['source']
+              end
+            end
+          },
+          "flickr.photos.search" => lambda { |data| fix_common!(data) },
+          "flickr.photos.getContactsPhotos" => lambda { |data|
+            data['photos']['photo'].each do |media_hash|
+              media_hash['ownername'] = media_hash.delete('username')
+            end
+            fix_common!(data)
+          },
+          "flickr.photos.getContactsPublicPhotos" => lambda { |data|
+            data['photos']['photo'].each do |media_hash|
+              media_hash['ownername'] = media_hash.delete('username')
+            end
+            fix_common!(data)
+          },
+          "flickr.photos.getNotInSet" => lambda { |data| fix_common!(data) },
+          "flickr.photos.getPerms" => lambda { |data|
+            fix_visibility!(data['perms'])
+            data['perms']['permissions'] = {
+              'permcomment' => data['perms'].delete('permcomment'),
+              'permaddmeta' => data['perms'].delete('permaddmeta')
+            }
+          },
+          "flickr.photos.getRecent" => lambda { |data| fix_common!(data) },
+          "flickr.photos.getUntagged" => lambda { |data| fix_common!(data) },
+          "flickr.photos.getWithGeoData" => lambda { |data| fix_common!(data) },
+          "flickr.photos.getWithoutGeoData" => lambda { |data| fix_common!(data) },
+          "flickr.photos.recentlyUpdated" => lambda { |data| fix_common!(data) },
+
+          "flickr.photos.comments.getList" => lambda { |data|
+            data["comments"]["comment"].map! do |comment_hash|
+              comment_hash["photo_id"] = data["comments"]["photo_id"]
+              comment_hash["author"] = {
+                "id"         => comment_hash["author"],
+                "nsid"       => comment_hash.delete("author"),
+                "username"   => comment_hash.delete("authorname"),
+                "iconserver" => comment_hash.delete("iconserver"),
+                "iconfarm"   => comment_hash.delete("iconfarm")
+              }
+              comment_hash
+            end
+          },
+          "flickr.photos.comments.getRecentForContacts" => lambda { |data| fix_common!(data) },
+
+          "flickr.photosets.getPhotos" => lambda { |data|
+            data['photoset']['photo'].map! do |media_hash|
+              media_hash['owner'] = {
+                'id' => data['photoset']['owner'],
+                'nsid' => data['photoset']['owner'],
+                'username' => data['photoset']['ownername'],
+              }
+              fix_extras!(media_hash)
+              media_hash
+            end
+          },
+          "flickr.photosets.getInfo" => lambda { |data| },
+          "flickr.photosets.getList" => lambda { |data|
+            data['photosets']['photoset'].map! do |set_hash|
+              set_hash['count_photos'] = set_hash.delete('photos')
+              set_hash['count_videos'] = set_hash.delete('videos')
+              set_hash['title'] = set_hash['title']['_content'] rescue nil
+              set_hash['description'] = set_hash['description']['_content'] rescue nil
+              set_hash
+            end
+          },
+          "flickr.reflection.getMethods" => lambda { |data|
+            data['methods']['method'].map! { |hash| hash["_content"] }
+          },
+          "flickr.test.login" => lambda { |data| }
+        }
+      end
+
+      def cleanup_content(data)
+        data.inject({}) do |hash, (key, value)|
+          hash[key] =
+            if value.is_a?(Hash)
+              value.count == 1 ? (value["_content"] || cleanup_content(value)) : cleanup_content(value)
+            else
+              value
+            end
+          hash
         end
       end
 

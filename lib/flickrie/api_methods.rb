@@ -727,6 +727,88 @@ module Flickrie
     alias set_photo_tags set_media_tags
     alias set_video_tags set_media_tags
 
+    # Comment on a photo/video.
+    #
+    # @return [String] Comment's ID
+    # @api_method [flickr.photos.comments.addComment](http://www.flickr.com/services/api/flickr.photos.comments.addComment.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def comment_media(media_id, comment, params = {})
+      response = make_request(media_id, comment, params)
+      response.body["comment"]["id"]
+    end
+    alias comment_photo comment_media
+    alias comment_video comment_media
+
+    # Delete a comment.
+    #
+    # @return [nil]
+    # @api_method [flickr.photos.comments.deleteComment](http://www.flickr.com/services/api/flickr.photos.comments.deleteComment.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def delete_media_comment(comment_id, params = {})
+      make_request(comment_id, params)
+      nil
+    end
+    alias delete_photo_comment delete_media_comment
+    alias delete_video_comment delete_media_comment
+
+    # Edit a specific comment.
+    #
+    # @return [nil]
+    # @api_method [flickr.photos.comments.editComment](http://www.flickr.com/services/api/flickr.photos.comments.editComment.html)
+    #
+    # @note This method requires authentication with "write" permissions.
+    def edit_media_comment(comment_id, comment, params = {})
+      make_request(comment_id, comment, params)
+      nil
+    end
+    alias edit_photo_comment edit_media_comment
+    alias edit_video_comment edit_media_comment
+
+    # Get list of comments of a photo/video.
+    #
+    # @return [Array<Flickrie::Comment>]
+    # @api_method [flickr.photos.comments.getList](http://www.flickr.com/services/api/flickr.photos.comments.getList.html)
+    def get_media_comments(media_id, params = {})
+      response = make_request(media_id, params)
+      response.body["comments"]["comment"].map { |hash| Flickrie::Comment.new(hash, self) }
+    end
+    alias get_photo_comments get_media_comments
+    alias get_video_comments get_media_comments
+
+    # Get list of photos/videos that have been recently commented by
+    # the contacts of the authenticated user.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo, Flickrie::Video>]
+    # @api_method [flickr.photos.comments.getRecentForContacts](http://www.flickr.com/services/api/flickr.photos.comments.getRecentForContacts.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_recently_commented_media_from_contacts(params = {})
+      response = make_request(params)
+      Media.new_collection(response.body["photos"], self)
+    end
+    # Get list of photos that have been recently commented by
+    # the contacts of the authenticated user.
+    #
+    # @return [Flickrie::Collection<Flickrie::Photo>]
+    # @api_method [flickr.photos.comments.getRecentForContacts](http://www.flickr.com/services/api/flickr.photos.comments.getRecentForContacts.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_recently_commented_photos_from_contacts(params = {})
+      get_recently_commented_media_from_contacts(params).select { |media| media.is_a?(Photo) }
+    end
+    # Get list of videos that have been recently commented by
+    # the contacts of the authenticated user.
+    #
+    # @return [Flickrie::Collection<Flickrie::Video>]
+    # @api_method [flickr.photos.comments.getRecentForContacts](http://www.flickr.com/services/api/flickr.photos.comments.getRecentForContacts.html)
+    #
+    # @note This method requires authentication with "read" permissions.
+    def get_recently_commented_videos_from_contacts(params = {})
+      get_recently_commented_media_from_contacts(params).select { |media| media.is_a?(Video) }
+    end
+
     # Fetches all available types of licenses.
     #
     # @return [Array<Flickrie::License>]

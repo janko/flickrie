@@ -106,6 +106,7 @@ module Flickrie
   autoload :License,      'flickrie/objects/license'
   autoload :User,         'flickrie/objects/user'
   autoload :Media,        'flickrie/objects/media'
+  autoload :Comment,      'flickrie/objects/comment'
   autoload :Photo,        'flickrie/objects/photo'
   autoload :Video,        'flickrie/objects/video'
   autoload :Set,          'flickrie/objects/set'

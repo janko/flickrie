@@ -1,0 +1,178 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.comments.addComment&photo_id=6946979188&comment_text=foo
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="7736c206642987450803830847b259d7", oauth_signature="tpWhPod2C4KRkXNn3%2BYhCpwzW6o%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1346059721", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 27 Aug 2012 09:28:41 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www226.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "71"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"comment\":{\"id\":\"67099213-6946979188-72157631259292798\"}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 27 Aug 2012 09:28:42 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.comments.editComment&comment_id=67099213-6946979188-72157631259292798&comment_text=foo
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="416b281a82f0e9bb79c052d2c36892fa", oauth_signature="unyFiwVXYbHtdy9KNMuEXDWlrPk%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1346059722", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 27 Aug 2012 09:28:41 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www135.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 27 Aug 2012 09:28:42 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.comments.getList&photo_id=6946979188
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="1d1b7d7272aa99f43a1bbab221d8ad65", oauth_signature="6AYGF%2B1xdgVCVguboR0IiVtxqLM%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1346059722", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 27 Aug 2012 09:28:42 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www164.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "281"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"comments\":{\"photo_id\":\"6946979188\", \"comment\":[{\"id\":\"67099213-6946979188-72157629852219939\", \"author\":\"67131352@N04\", \"authorname\":\"Janko Marohni\\u0107\", \"iconserver\":\"5464\", \"iconfarm\":6, \"datecreate\":\"1334836152\", \"permalink\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/#comment72157629852219939\", \"_content\":\"Test\"}, {\"id\":\"67099213-6946979188-72157631259292798\", \"author\":\"67131352@N04\", \"authorname\":\"Janko Marohni\\u0107\", \"iconserver\":\"5464\", \"iconfarm\":6, \"datecreate\":\"1346015914\", \"permalink\":\"http:\\/\\/www.flickr.com\\/photos\\/67131352@N04\\/6946979188\\/#comment72157631259292798\", \"_content\":\"foo\"}]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 27 Aug 2012 09:28:42 GMT
+- request: 
+    method: post
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.comments.deleteComment&comment_id=67099213-6946979188-72157631259292798
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="4779c172dcf3470f83c204a9af82fc1f", oauth_signature="dB6uTviI3LhajQfoINb4hhlRKBc%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1346059722", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 27 Aug 2012 09:28:42 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www224.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "13"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: US-ASCII
+      string: "{\"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 27 Aug 2012 09:28:43 GMT
+- request: 
+    method: get
+    uri: http://api.flickr.com/services/rest?format=json&nojsoncallback=1&api_key=API_KEY&method=flickr.photos.comments.getRecentForContacts&extras=media
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="API_KEY", oauth_nonce="c9cb5ecbb3a2b2d7a33e529bdc70089e", oauth_signature="SwYW2Vk3EZGSyXu3qlUUP0EwOp8%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1346059723", oauth_token="ACCESS_TOKEN", oauth_version="1.0"
+  response: 
+    status: 
+      code: 200
+      message: 
+    headers: 
+      date: 
+      - Mon, 27 Aug 2012 09:28:42 GMT
+      p3p: 
+      - policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+      cache-control: 
+      - private
+      x-served-by: 
+      - www173.flickr.mud.yahoo.com
+      vary: 
+      - Accept-Encoding
+      content-length: 
+      - "84"
+      connection: 
+      - close
+      content-type: 
+      - application/json
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"photos\":{\"page\":1, \"pages\":0, \"perpage\":100, \"total\":\"0\", \"photo\":[]}, \"stat\":\"ok\"}"
+    http_version: 
+  recorded_at: Mon, 27 Aug 2012 09:28:44 GMT
+recorded_with: VCR 2.2.4

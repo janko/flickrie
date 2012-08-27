@@ -60,7 +60,7 @@ module Flickrie
     def geo_permissions() Visibility.new(@hash['geoperms']) rescue nil end
 
     # @return [Array<Flickrie::Media::Tag>]
-    def tags() @hash['tags'].map { |info| Tag.new(info, @api_caller) }     rescue nil end
+    def tags() @hash['tags'].map { |h| Tag.new(h, @api_caller) } rescue nil end
     # @return [Array<Flickrie::Media::Tag>]
     def machine_tags() tags.select { |tag| tag.machine_tag? } rescue nil end
 
@@ -68,18 +68,18 @@ module Flickrie
     def license() License.new(@hash['license']) rescue nil end
 
     # @return [Time]
-    def posted_at()   Time.at(Integer(@hash['dates']['posted']))           rescue nil end
+    def posted_at() Time.at(Integer(@hash['dates']['posted'])) rescue nil end
     # @return [Time]
-    def uploaded_at() Time.at(Integer(@hash['dates']['uploaded']))         rescue nil end
+    def uploaded_at() Time.at(Integer(@hash['dates']['uploaded'])) rescue nil end
     # @return [Time]
-    def updated_at()  Time.at(Integer(@hash['dates']['lastupdate']))       rescue nil end
+    def updated_at() Time.at(Integer(@hash['dates']['lastupdate'])) rescue nil end
     # @return [Time]
-    def taken_at()    DateTime.parse(@hash['dates']['taken']).to_time      rescue nil end
+    def taken_at() DateTime.parse(@hash['dates']['taken']).to_time rescue nil end
     # @return [Fixnum]
     def taken_at_granularity() Integer(@hash['dates']['takengranularity']) rescue nil end
 
     # @return [Flickrie::User]
-    def owner() User.new(@hash['owner'], @api_caller) if @hash['owner'] end
+    def owner() @user ||= User.new(@hash['owner'], @api_caller) if @hash['owner'] end
 
     # @return [Fixnum]
     def safety_level() Integer(@hash['safety_level']) rescue nil end
