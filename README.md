@@ -1,5 +1,10 @@
 # Flickrie
 
+**NOTICE: This gem is deprecated. You should switch to the
+[flickr-objects](https://github.com/janko-m/flickr-objects) gem instead.**
+
+---
+
 This gem is a nice wrapper for the Flickr API with an object-oriented interface.
 
 - Homepage: [http://janko-m.github.com/flickrie/](http://janko-m.github.com/flickrie/)
