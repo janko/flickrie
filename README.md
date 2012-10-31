@@ -1,7 +1,7 @@
 # Flickrie
 
 **NOTICE: This gem is deprecated. You should switch to the
-[flickr-objects](https://github.com/janko-m/flickr-objects) gem instead.**
+[flickr-objects](https://github.com/janko-m/flickr-objects) gem.**
 
 ---
 
