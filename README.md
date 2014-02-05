@@ -222,7 +222,7 @@ You can see the changelog [here](https://github.com/janko-m/flickrie/blob/master
 
 ## Social
 
-You can follow me on Twitter, I'm [@m_janko](https://twitter.com/m_janko).
+You can follow me on Twitter, I'm [@jankomarohnic](https://twitter.com/jankomarohnic).
 
 ## License
 
