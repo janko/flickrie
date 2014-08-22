@@ -19,7 +19,7 @@ module Flickrie
     # @return [HTTP response] A Faraday HTTP response
     def client
       params = {
-        url: 'http://api.flickr.com/services/rest',
+        url: 'https://api.flickr.com/services/rest',
         params: {
           format: 'json',
           nojsoncallback: '1',
@@ -51,7 +51,7 @@ module Flickrie
 
     def upload_client
       params = {
-        url: 'http://api.flickr.com/services',
+        url: 'https://api.flickr.com/services',
         request: {
           open_timeout: open_timeout || DEFAULTS[:open_timeout]
         }
