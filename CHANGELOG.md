@@ -1,5 +1,9 @@
 # Flickrie changelog
 
+## Version 1.6.1
+
+- Update to SSL endpoint (Flickr deprecated "http").
+
 ## Version 1.6.0
 
 - Cover some more API methods, finishing the part with sets:
